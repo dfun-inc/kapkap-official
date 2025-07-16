@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+@font-face {
+  font-family: "UniviaPro-Regular";
+  src: url('/fonts/UniviaPro-Regular.otf');
+}
+
+@font-face {
+  font-family: "Ethnocentric-rg";
+  src: url('/fonts/Ethnocentric-rg.ttf');
+}
+
+.font-ethnocentric-rg {
+  font-family: "Ethnocentric-rg", sans-serif;
+}
+
+.btn-common:active .btn-common-box {
+  transform: translateY(4px);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "UniviaPro-Regular", Arial, Helvetica, sans-serif;
+}
+
+.main-section{
+  background-image: url('/images/bg_main.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.roadmap-section {
+  background-image: url('/images/bg_roadmap.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.bottom-section {
+  background-image: url('/images/bg_bottom.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.future-item {
+  background-size: cover;
+  background-position: right bottom;
+}
+
+.future-item-1 {
+  background-image: url('/images/bg_future1.jpg');
+}
+
+.future-item-2 {
+  background-image: url('/images/bg_future2.jpg');
+}
+
+.future-item-3 {
+  background-image: url('/images/bg_future3.jpg');
+}
+
+.future-item-4 {
+  background-image: url('/images/bg_future4.jpg');
+}
+
+.roadmap-top-box {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+}
+
+@media (max-width: 768px) {
+  .main-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('/images/bg_main.jpg') 80% bottom;
+  }
+
+  .roadmap-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('/images/bg_roadmap.jpg') center top;
+  }
+}
