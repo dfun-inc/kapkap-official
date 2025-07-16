@@ -6,10 +6,8 @@ import Future from '@/components/Home/future';
 import Main from '@/components/Home/main';
 import Other from '@/components/Home/other';
 import Roadmap from '@/components/Home/roadmap';
-import { useTranslations } from 'next-intl';
 
 export default function Home() {
-  const t = useTranslations();
 
   return (
     <main className="">
