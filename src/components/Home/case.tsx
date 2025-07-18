@@ -3,13 +3,18 @@
 import { useTranslations } from 'next-intl';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Case() {
   const t = useTranslations();
   const list = ["Genki Miner", "Mars 2049", "TT Hero"];
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const swiperRef = useRef<any>(null);
+  const [aniClass, setAniClass] = useState<string>("opacity-0");
 
   const handleSlideChange = (swiper: any) => {
     setActiveIdx(swiper.activeIndex);
@@ -19,20 +24,37 @@ export default function Case() {
     swiperRef.current?.slideTo(index);
   };
 
+  useEffect(() => {
+    const winW = window.innerWidth;
+    if (winW < 768) {
+      setAniClass(_c => '')
+    }
+    else {
+      ScrollTrigger.create({
+        trigger: ".case-section",
+        start: "top 60%",
+        once: true,
+        onEnter: () => {
+          setAniClass(_c => 'animate__fadeInUp')
+        },
+      }); 
+    }
+  }, []);
+
   return (
-    <section id="home-section-2" className="home-section-2 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-10 lg:px-24 py-16">
-        <div className="text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight">
+    <section id="home-section-2" className="home-section-2 case-section bg-[#121212]">
+      <div className="max-w-[1920px] mx-auto px-10 lg:px-18 2xl:px-24 py-16">
+        <div className={aniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
           {t('case.title')}
         </div>
-        <div className="rounded-full mt-11 bg-[#201E2A] p-1 flex">
+        <div className={aniClass + " animate__animated rounded-full mt-11 bg-[#201E2A] p-1 flex"}>
           {list.map((item, idx) => (
             <div key={item} className={"lg:text-xl px-3 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (activeIdx == idx ? "bg-[#121212]" : "")} onClick={() => goToSlide(idx)}>
               {item}
             </div>
           ))}
         </div>
-        <Swiper className="mt-5" onSlideChange={handleSlideChange} onSwiper={(swiper) => (swiperRef.current = swiper)}>
+        <Swiper className={aniClass + " animate__animated mt-5"} onSlideChange={handleSlideChange} onSwiper={(swiper) => (swiperRef.current = swiper)}>
           {Array.from({ length: 3 }).map((_, index) => (
           <SwiperSlide key={index} className="overflow-hidden rounded-xl bg-[#201E2A]">
             <div className="relative">

@@ -2,6 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Future() {
   const t = useTranslations();
@@ -18,6 +22,9 @@ export default function Future() {
   const [curTypeIdx, setCurTypeIdx] = useState(0);
   const listTypes = [t('qa.all'), t('qa.contact'), t('qa.support'), t('qa.revenue'), t('qa.integratedSystem')];
   const [openIdx, setOpenIdx] = useState<number[]>([]);
+  const [gpAniClass, setGpAniClass] = useState('opacity-0');
+  const [apAniClass, setApAniClass] = useState('opacity-0');
+  const [qaAniClass, setQaAniClass] = useState('opacity-0');
 
   const handleToggleOpen = (id: number) => {
     if(openIdx.includes(id)) {
@@ -36,15 +43,55 @@ export default function Future() {
       setCurQuestionList(questionList);
     }
     setOpenIdx([]);
+
   }, [curTypeIdx]);
 
+
+  useEffect(() => {
+    const winW = window.innerWidth;
+    if (winW < 768) {
+      setGpAniClass('');
+      setApAniClass('');
+      setQaAniClass('');
+    }
+    else {
+      ScrollTrigger.create({
+        trigger: ".other-section",
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          console.log('gpAniClass');
+          setGpAniClass(_c => 'animate__fadeInUp')
+        },
+      }); 
+      ScrollTrigger.create({
+        trigger: ".other-section",
+        start: "top 50%",
+        once: true,
+        onEnter: () => {
+          console.log('apAniClass');
+          setApAniClass(_c => 'animate__fadeInUp')
+        },
+      }); 
+      ScrollTrigger.create({
+        trigger: ".other-section",
+        start: "top 20%",
+        once: true,
+        onEnter: () => {
+          console.log('qaAniClass');
+          setQaAniClass(_c => 'animate__fadeInUp')
+        },
+      }); 
+    }
+  }, []);
+
   return (
-    <section id="home-section-4" className="home-section-4 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-10 lg:px-24 py-20">
-        <div className="text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight">
+    <section id="home-section-4" className="other-section home-section-4 bg-[#121212]">
+      <div className="max-w-[1920px] mx-auto px-10 lg:px-18 2xl:px-24 py-20">
+        <div className={gpAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
           {t('other.gamePartners')}
         </div>
-        <div className="flex flex-wrap gap-x-2 items-center mt-15">
+        <div className={gpAniClass + " animate__animated flex flex-wrap gap-x-2 items-center mt-15"}>
         {Array.from({ length: 6 }).map((_, idx) => (
           <div key={idx} className="flex w-[60px] md:w-[80px] 2xl:w-[100px] mt-1">
             <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
@@ -71,28 +118,28 @@ export default function Future() {
           </div>
         ))}
         </div>
-        <div className="text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40">
+        <div className={apAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
           {t('other.adPartners')}
         </div>
-        <div className="flex flex-wrap gap-x-2 justify-between items-center mt-12">
-          <img className="w-[40%] md:w-auto h-auto md:h-8 mt-3" src="/images/ad_partners/gigapub.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-9 mt-3" src="/images/ad_partners/gram.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/sonar.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-9 mt-3" src="/images/ad_partners/monetag.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-14 mt-3" src="/images/ad_partners/onclicka.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-4 mt-3" src="/images/ad_partners/richads.png" />
+        <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
+          <img className="w-[40%] md:w-auto h-auto md:h-6 xl:h-8 mt-3" src="/images/ad_partners/gigapub.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-7 xl:h-9 mt-3" src="/images/ad_partners/gram.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-8 xl:h-10 mt-3" src="/images/ad_partners/sonar.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-7 xl:h-9 mt-3" src="/images/ad_partners/monetag.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-12 xl:h-14 mt-3" src="/images/ad_partners/onclicka.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-3 xl:h-4 mt-3" src="/images/ad_partners/richads.png" />
         </div>
-        <div className="text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40">
+        <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
           {t('qa.title')}
         </div>
-        <div className="rounded-full mt-15 bg-[#201E2A] p-1 flex items-center">
+        <div className={qaAniClass + " animate__animated rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
           {listTypes.map((item, idx) => (
             <div key={item} className={"text-xs lg:text-xl px-2 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
               {item}
             </div>
           ))}
         </div>
-        <div className="mt-6 md:px-3">
+        <div className={qaAniClass + " animate__animated mt-6 md:px-3"}>
           {curQuestionList.map((item, idx) => (
             <div key={item} className="border-b border-[#373447] py-2">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => handleToggleOpen(item)}>
