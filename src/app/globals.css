@@ -50,25 +50,25 @@ body {
   background-repeat: no-repeat;
 }
 
-.future-item {
+.feature-item {
   background-size: cover;
   background-position: right bottom;
 }
 
-.future-item-1 {
-  background-image: url('/images/bg_future1.jpg');
+.feature-item-1 {
+  background-image: url('/images/bg_feature1.jpg');
 }
 
-.future-item-2 {
-  background-image: url('/images/bg_future2.jpg');
+.feature-item-2 {
+  background-image: url('/images/bg_feature2.jpg');
 }
 
-.future-item-3 {
-  background-image: url('/images/bg_future3.jpg');
+.feature-item-3 {
+  background-image: url('/images/bg_feature3.jpg');
 }
 
-.future-item-4 {
-  background-image: url('/images/bg_future4.jpg');
+.feature-item-4 {
+  background-image: url('/images/bg_feature4.jpg');
 }
 
 .roadmap-top-box {

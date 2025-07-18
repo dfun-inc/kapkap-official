@@ -75,12 +75,12 @@ export default function Future() {
           {t('other.adPartners')}
         </div>
         <div className="flex flex-wrap gap-x-2 justify-between items-center mt-12">
-          <img className="w-[48%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/gram.png" />
-          <img className="w-[48%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/sonar.png" />
-          <img className="w-[48%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/gigapub.png" />
-          <img className="w-[48%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/monetag.png" />
-          <img className="w-[48%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/onclicka.png" />
-          <img className="w-[48%] md:w-auto h-auto md:h-4 mt-3" src="/images/ad_partners/richads.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-8 mt-3" src="/images/ad_partners/gigapub.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-9 mt-3" src="/images/ad_partners/gram.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-10 mt-3" src="/images/ad_partners/sonar.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-9 mt-3" src="/images/ad_partners/monetag.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-14 mt-3" src="/images/ad_partners/onclicka.png" />
+          <img className="w-[40%] md:w-auto h-auto md:h-4 mt-3" src="/images/ad_partners/richads.png" />
         </div>
         <div className="text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40">
           {t('qa.title')}

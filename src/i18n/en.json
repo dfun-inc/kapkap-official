@@ -1,7 +1,7 @@
 {
   "menu": {
     "main": "Main",
-    "future": "Future",
+    "feature": "Feature",
     "case": "Case",
     "roadmap": "Roadmap",
     "other": "Other"
@@ -16,8 +16,8 @@
     "getSupport": "Get Support"
   },
 
-  "future": {
-    "title": "Future",
+  "feature": {
+    "title": "Feature",
     "item1title": "Perceive game potential, precise diagnosis",
     "item1content": "We take you through the game's DNA - from category tracks, user profiles, gameplay cores to LTV predictions, providing free in-depth diagnosis. For potential projects, we will launch customized cooperation plans to lay the foundation for the birth of explosive products",
     "item2title": "Customized release strategy, accurately igniting hot topics",

@@ -16,7 +16,7 @@ export default function Header(props:Props) {
   const screenHeight = useRef<number>(0);
 
   const menu:string[] = [
-    t('menu.main'), t('menu.future'), t('menu.case'), t('menu.roadmap'), t('menu.other'),
+    t('menu.main'), t('menu.feature'), t('menu.case'), t('menu.roadmap'), t('menu.other'),
   ];
   const [activeIdx, setActiveIdx] = useState<number>(0);
 

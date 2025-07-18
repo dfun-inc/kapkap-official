@@ -1,7 +1,7 @@
 {
   "menu": {
     "main": "首页",
-    "future": "远景",
+    "feature": "远景",
     "case": "案例",
     "roadmap": "路线图",
     "other": "其他"
@@ -16,8 +16,8 @@
     "getSupport": "获取支持"
   },
 
-  "future": {
-    "title": "远景",
+  "feature": {
+    "title": "特色",
     "item1title": "游戏潜力透视，精准把脉",
     "item1content": "我们带您拆解游戏基因——从品类赛道、用户画像、玩法内核到LTV预测，提供无偿深度诊断。针对潜力项目，我们将启动定制化合作方案，为爆款诞生铺就基石。",
     "item2title": "发行策略定制，精准引爆",
