@@ -92,42 +92,59 @@ export default function Future() {
           {t('other.gamePartners')}
         </div>
         <div className={gpAniClass + " animate__animated flex flex-wrap gap-x-2 items-center mt-15"}>
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={idx} className="flex w-[60px] md:w-[80px] 2xl:w-[100px] mt-1">
-            <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+          <div className="overflow-x-hidden">
+            <div className="game-partner-list w-max flex flex-nowrap items-center justify-between">
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
+                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+              </div>
+            ))}
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
+                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+              </div>
+            ))}
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
+                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+              </div>
+            ))}
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
+                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+              </div>
+            ))}
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
+                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+              </div>
+            ))}
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
+                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+              </div>
+            ))}
+            </div>
           </div>
-        ))}
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={idx} className="flex w-[60px] md:w-[80px] 2xl:w-[100px] mt-1">
-            <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-          </div>
-        ))}
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={idx} className="flex w-[60px] md:w-[80px] 2xl:w-[100px] mt-1">
-            <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-          </div>
-        ))}
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={idx} className="flex w-[60px] md:w-[80px] 2xl:w-[100px] mt-1">
-            <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-          </div>
-        ))}
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={idx} className="flex w-[60px] md:w-[80px] 2xl:w-[100px] mt-1">
-            <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-          </div>
-        ))}
         </div>
         <div className={apAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
           {t('other.adPartners')}
         </div>
         <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
-          <img className="w-[40%] md:w-auto h-auto md:h-6 xl:h-8 mt-3" src="/images/ad_partners/gigapub.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-7 xl:h-9 mt-3" src="/images/ad_partners/gram.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-8 xl:h-10 mt-3" src="/images/ad_partners/sonar.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-7 xl:h-9 mt-3" src="/images/ad_partners/monetag.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-12 xl:h-14 mt-3" src="/images/ad_partners/onclicka.png" />
-          <img className="w-[40%] md:w-auto h-auto md:h-3 xl:h-4 mt-3" src="/images/ad_partners/richads.png" />
+          <div className="overflow-x-hidden">
+            <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
+              {Array.from({ length: 4 }).map((_, idx) => (
+                <div className="flex" key={idx}>
+                  <img className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
         <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
           {t('qa.title')}

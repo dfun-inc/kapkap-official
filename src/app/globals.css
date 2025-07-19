@@ -115,6 +115,33 @@ body {
 }
 .animate__fadeInRight{-webkit-animation-name:fadeInRight;animation-name:fadeInRight}
 
+@keyframes scrollToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.game-partner-list {
+  animation: scrollToLeft 8s linear infinite;
+}
+
+@keyframes scrollToRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.ad-partner-list {
+  animation: scrollToRight 10s linear infinite;
+}
+
+
 
 @media (max-width: 768px) {
   .main-section {
