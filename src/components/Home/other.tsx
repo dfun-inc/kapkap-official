@@ -132,14 +132,14 @@ export default function Future() {
         <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
           {t('qa.title')}
         </div>
-        <div className={qaAniClass + " animate__animated rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
+        <div className={qaAniClass + " animate__animated animate__delay-500 rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
           {listTypes.map((item, idx) => (
             <div key={item} className={"text-xs lg:text-xl px-2 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
               {item}
             </div>
           ))}
         </div>
-        <div className={qaAniClass + " animate__animated mt-6 md:px-3"}>
+        <div className={qaAniClass + " animate__animated animate__delay-1000 mt-6 md:px-3"}>
           {curQuestionList.map((item, idx) => (
             <div key={item} className="border-b border-[#373447] py-2">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => handleToggleOpen(item)}>

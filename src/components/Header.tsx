@@ -90,7 +90,7 @@ export default function Header(props:Props) {
   return (
     <header className="w-full fixed top-0 left-0 right-0 z-[10]">
       <div className="mx-auto max-w-[1920px] flex justify-between items-center px-6 md:px-12 py-3 md:py-6">
-        <img className="w-[91px] md:w-[182px]" src="/images/logo.png" />
+        <img className="w-[120px] md:w-[182px]" src="/images/logo.png" />
         <div className="flex items-center">
           <menu className="hidden lg:flex">
             {menu.map((item, i:number) => (

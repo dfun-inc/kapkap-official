@@ -35,7 +35,7 @@ export default function Bottom() {
             <Button href="/" className="text-xl font-light text-white px-10 md:px-15 py-3 md:py-4 mt-10 lg:mt-0" target="_blank">{t('bottom.getSupport')}</Button>
           </div>
         </div>
-        <div className={aniClass + " animate__animated mt-10 md:mt-20 flex flex-wrap justify-center lg:justify-end"}>
+        <div className={aniClass + " animate__animated animate__delay-500 mt-10 md:mt-20 flex flex-wrap justify-center lg:justify-end"}>
           <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/ins.png" alt="ins" />
           </a>

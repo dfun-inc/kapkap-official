@@ -76,6 +76,15 @@ body {
 }
 
 .animate__animated{-webkit-animation-duration:0.75s;animation-duration:0.75s;-webkit-animation-fill-mode:both;animation-fill-mode:both}
+.animate__delay-250{-webkit-animation-delay:0.25ss;animation-delay:0.25s;}
+.animate__delay-500{-webkit-animation-delay:0.5s;animation-delay:0.5s;}
+.animate__delay-750{-webkit-animation-delay:0.75s;animation-delay:0.75s;}
+.animate__delay-1000{-webkit-animation-delay:1s;animation-delay:1s;}
+.animate__delay-1250{-webkit-animation-delay:1.25s;animation-delay:1.25s;}
+.animate__delay-1500{-webkit-animation-delay:1.5s;animation-delay:1.5s;}
+.animate__delay-1750{-webkit-animation-delay:1.75s;animation-delay:1.75s;}
+.animate__delay-2000{-webkit-animation-delay:2s;animation-delay:2s;}
+
 @-webkit-keyframes fadeInUp{
   0%{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}
   to{opacity:1;-webkit-transform:translateZ(0);transform:translateZ(0)}

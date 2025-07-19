@@ -47,14 +47,14 @@ export default function Case() {
         <div className={aniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
           {t('case.title')}
         </div>
-        <div className={aniClass + " animate__animated rounded-full mt-11 bg-[#201E2A] p-1 flex"}>
+        <div className={aniClass + " animate__animated animate__delay-500 rounded-full mt-11 bg-[#201E2A] p-1 flex"}>
           {list.map((item, idx) => (
             <div key={item} className={"lg:text-xl px-3 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (activeIdx == idx ? "bg-[#121212]" : "")} onClick={() => goToSlide(idx)}>
               {item}
             </div>
           ))}
         </div>
-        <Swiper className={aniClass + " animate__animated mt-5"} onSlideChange={handleSlideChange} onSwiper={(swiper) => (swiperRef.current = swiper)}>
+        <Swiper className={aniClass + " animate__animated animate__delay-1000 mt-5"} onSlideChange={handleSlideChange} onSwiper={(swiper) => (swiperRef.current = swiper)}>
           {Array.from({ length: 3 }).map((_, index) => (
           <SwiperSlide key={index} className="overflow-hidden rounded-xl bg-[#201E2A]">
             <div className="relative">
