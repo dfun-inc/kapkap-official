@@ -3,20 +3,20 @@
 
 export default function Button({
   className,
-  href = '',
-  target = '',
+  onClick,
+  type,
   ...props
 }: React.ComponentProps<"button"> & {
     href?: string,
     target?: string,
   }) {
-  const Comp:any = href ? 'a' : 'button';
+  const Comp:any = 'button';
   return (
     <Comp
       data-slot="button"
       className="btn-common cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block"
-      href={href}
-      target={target}
+      onClick={onClick}
+      type={type?type:"button"}
     >
       <div className={"btn-common-box relative bg-[#6E4DFF] rounded-lg z-1 transition-all duration-200 " + className}>
         {props.children}

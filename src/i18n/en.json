@@ -84,5 +84,20 @@
     "text1": "Need to get in touch?",
     "text2": "Don't be shy to reach out to us",
     "getSupport": "Get Support"
+  },
+
+  "support": {
+    "prev": "prev",
+    "next": "next",
+    "submit": "submit",
+    "q1": "What's your name?",
+    "q2": "What's your email address?",
+    "q3": "Please briefly describe your game.",
+    "q4": "What platforms do you expect your game to operate on?",
+    "q5": "What form of return on investment (ROI) does your project anticipate from this game?",
+    "q6": "What kind of support or assistance do you expect the Gamix team to obtain in order to maximize the profitability of your game?",
+    "q7": "Please provide a method to access your game so that we can evaluate it.",
+    "successHint": "Thank you for your submission. We’ll get back to you as soon as possible!",
+    "erorHint": "Submission failed. Please try again later."
   }
 }

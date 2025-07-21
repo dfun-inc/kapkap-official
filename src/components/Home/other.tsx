@@ -10,6 +10,12 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Future() {
   const t = useTranslations();
 
+  const gamePartners = ['fomo_hash.jpg', 'Mine XRP.jpg', 'BabyDoge PAWS.jpg', 'Beetz.jpg', 'bitsolara.jpg', 'bitsolara.jpg', 'Bounty Hash.jpg',
+    'Boxing Star X.jpg', 'Bums.jpg', 'CapsGame.jpg', 'Cattea.jpg', 'cityhold.jpg', 'Dogiators.jpg', 'Dragonz Land.jpg', 'DRFT Party.jpg', 'Dropster.jpg', 'duck.jpg', 
+    'Duckygram.jpg', 'Fight Me.jpg', 'GILF.jpg', 'Gold Striker.jpg', 'labrador.jpg', 'League of Llamas.jpg', 'LuckyGo.jpg', 'Majestic.jpg', 'Major.jpg', 'Memgift.jpg', 
+    'MemHustle.jpg', 'Nuts Farm.jpg', 'PandaFiT.jpg', 'Planet X.jpg', 'pokergram.jpg', 'Prison.jpg', 'Puparty.jpg', 'Rich Dog.jpg', 'Spin the Bottle.jpg', 'Squad Game.jpg', 
+    'TAPX.jpg', 'TON Kombat.jpg', 'TonDating.jpg', 'Trump\'s Empire.jpg', 'TTHero.jpg', 'Uni Jump.jpg', 'VIRUS.jpg', 'VOXEL.jpg', 'Your Waifu.jpg', 'ZarGates.jpg'
+  ]
   const questionList = [1,2,3,4];
   const questionMap:any = {
     1: [1],
@@ -87,41 +93,18 @@ export default function Future() {
 
   return (
     <section id="home-section-4" className="other-section home-section-4 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-10 lg:px-18 2xl:px-24 py-20">
+      <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 py-20">
         <div className={gpAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
           {t('other.gamePartners')}
         </div>
         <div className={gpAniClass + " animate__animated flex flex-wrap gap-x-2 items-center mt-15"}>
           <div className="overflow-x-hidden">
-            <div className="game-partner-list w-max flex flex-nowrap items-center justify-between">
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
-                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-              </div>
-            ))}
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
-                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-              </div>
-            ))}
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
-                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-              </div>
-            ))}
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
-                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-              </div>
-            ))}
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
-                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
-              </div>
-            ))}
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="flex w-[60px] lg:w-[90px] mx-1">
-                <img className="w-full opacity-70 hover:opacity-100" src={"/images/game_partners/" + (idx + 1) + ".png"} alt={"partner-" + (idx + 1)} />
+            <div className="game-partner-list w-max flex flex-nowrap items-center">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div key={i} className="flex items-center">
+                {gamePartners.map((item, j) => (
+                  <img key={j} className="w-[60px] lg:w-[90px] mx-1 opacity-70 hover:opacity-100 rounded-lg mx-3 opacity-90 hover:opacity-100" src={"/images/game_partners/" + item} alt={item} />
+                ))}
               </div>
             ))}
             </div>
@@ -134,7 +117,7 @@ export default function Future() {
           <div className="overflow-x-hidden">
             <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
               {Array.from({ length: 4 }).map((_, idx) => (
-                <div className="flex" key={idx}>
+                <div className="flex items-center" key={idx}>
                   <img className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
                   <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
                   <img className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />

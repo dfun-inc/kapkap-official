@@ -1,11 +1,13 @@
 'use client';
 
-import "@/app/globals.css";
-import Header from "@/components/Header";
-import { messages, Locale } from '@/lib/i18n';
 import { NextIntlClientProvider } from 'next-intl';
 import { useEffect, useState } from "react";
 import { ReactLenis } from 'lenis/react'
+
+import "@/app/globals.css";
+import Header from "@/components/Header";
+import { messages, Locale } from '@/lib/i18n';
+import { AppProvider } from '@/context/AppContext'
 
 export default function RootLayout({
   children,
@@ -31,12 +33,14 @@ export default function RootLayout({
     <html lang={locale == 'en' ? 'en' : 'zh-CN'}>
       <title>Gamix - Find hits fast profit</title>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
-          <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
-            <Header locale={locale} handleChangeLang={handleChangeLanguage} />
-            {children}
-          </ReactLenis>
-        </NextIntlClientProvider> 
+        <AppProvider>
+          <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
+            <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
+              <Header locale={locale} handleChangeLang={handleChangeLanguage} />
+              {children}
+            </ReactLenis>
+          </NextIntlClientProvider> 
+        </AppProvider>
       </body>
     </html>
   );
