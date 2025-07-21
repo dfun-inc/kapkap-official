@@ -28,16 +28,38 @@ export default function Roadmap() {
           setAniItemClass(_c => 'animate__fadeInRight')
         },
       }); 
+
+      gsap.to('.roadmap-title', {
+        opacity: 0.2,
+        y: -60,
+        scrollTrigger: {
+          trigger:".roadmap-section",
+          start: 'top-=100 top',
+          end: 'top+=100 top',
+          scrub: true,
+        },
+      })
+
+      gsap.to('.roadmap-list', {
+        opacity: 0.2,
+        y: -60,
+        scrollTrigger: {
+          trigger:".roadmap-section",
+          start: 'toptop top',
+          end: 'top+=300 top',
+          scrub: true,
+        },
+      })
     }
   }, []);
   
   return (
     <section id="home-section-3" className="roadmap-section home-section-3 bg-[##060608] relative">
       <div className="max-w-[1920px] mx-auto px-10 lg:px-18 2xl:px-24 pt-6 pb-12">
-        <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
-          {t('roadmap.title')}
+        <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white leading-tight"}>
+          <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('roadmap.title')}</div>
         </div>
-        <div className="mt-15 text-lg">
+        <div className="roadmap-list mt-15 text-lg">
           <div className="relative text-[#DDD5FF]">
             <div className="absolute top-0 left-[9px] w-[2px] h-full bg-[#8D73FF] z-0"></div>
             <div className="flex items-start relative z-1">

@@ -32,7 +32,7 @@ export default function RootLayout({
       <title>Gamix - Find hits fast profit</title>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
-          <ReactLenis className="" root options={{ lerp: 0.1, smoothWheel: true }}>
+          <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
             <Header locale={locale} handleChangeLang={handleChangeLanguage} />
             {children}
           </ReactLenis>

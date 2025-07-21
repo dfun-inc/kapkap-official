@@ -29,7 +29,7 @@ export default function Main() {
       scrollTrigger: {
         trigger:".main-section",
         start: '10% top',
-        end: '35% top',
+        end: '40% top',
         scrub: true,
       },
     })
