@@ -77,6 +77,7 @@ export default function Support() {
     .catch((err) => {
       console.log(err);
       setErrorStatus(0);
+      setShowResult(true);
     })
     */
 
