@@ -65,10 +65,10 @@ export default function Main() {
 
   return (
     <section id="home-section-0" className="main-section home-section-0 bg-[#070709] h-screen min-h-[720px]">
-      <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 h-full flex items-center">
+      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 h-full flex items-center">
         <div className="w-full">
-          <div className="text-[32px] lg:text-[80px] font-ethnocentric-rg leading-tight">
-            <div className="title-text-top"><span className="inline-block animate__animated animate__fadeInUp">{t('main.title1')}</span> <span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32]">{t('main.title2')}</span></div>
+          <div className="text-[32px] lg:text-[68px] xl:text-[76px] 2xl:text-[80px] font-ethnocentric-rg leading-tight uppercase">
+            <div className="title-text-top"><span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32]">{t('main.title1')}</span> <span className="inline-block animate__animated animate__fadeInUp">{t('main.title2')}</span></div>
             <div className="title-text-bottom"><span className="inline-block animate__animated animate__fadeInUp">{t('main.title3')}</span> <span className="inline-block animate__animated animate__fadeInUp text-[#6E4DFF]">{t('main.title4')}</span></div>
           </div>
           <div className="main-desc mt-5 lg:w-[876px] lg:max-w-[55%] ">

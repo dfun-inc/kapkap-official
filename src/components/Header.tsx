@@ -28,7 +28,12 @@ export default function Header(props:Props) {
   const handleClick = (idx: number) => {
     setActiveIdx(idx);
     const elmnt = document.getElementById('home-section-' + idx);
-    elmnt?.scrollIntoView({behavior:'smooth', block:'start'});
+    const elementPosition = elmnt?.getBoundingClientRect().top
+    const offsetPosition = elementPosition! + window.pageYOffset - 100
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
   };
 
   const handleScroll = () => {

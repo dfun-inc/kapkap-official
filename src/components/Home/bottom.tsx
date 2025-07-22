@@ -19,14 +19,20 @@ export default function Bottom() {
   }
 
   useEffect(() => {
-    ScrollTrigger.create({
-      trigger: ".bottom-section",
-      start: "top 90%",
-      once: true,
-      onEnter: () => {
-        setAniClass('animate__fadeInUp');
-      },
-    }); 
+    const winW = window.innerWidth;
+    if(winW >= 768) {
+      ScrollTrigger.create({
+        trigger: ".bottom-section",
+        start: "top 90%",
+        once: true,
+        onEnter: () => {
+          setAniClass('animate__fadeInUp');
+        },
+      }); 
+    }
+    else {
+      setAniClass(_c => '')
+    }
   }, [])
 
   return (
@@ -42,22 +48,22 @@ export default function Bottom() {
           </div>
         </div>
         <div className={aniClass + " animate__animated animate__delay-500 mt-10 md:mt-20 flex flex-wrap justify-center lg:justify-end"}>
-          <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
+          <a className="block opacity-80 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/ins.png" alt="ins" />
           </a>
-          <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
+          <a className="block opacity-80 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/tg.png" alt="tg" />
           </a>
-          <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
+          <a className="block opacity-80 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/x.png" alt="x" />
           </a>
-          <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
+          <a className="block opacity-80 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/youtube.png" alt="youtube" />
           </a>
-          <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
+          <a className="block opacity-80 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/fb.png" alt="fb" />
           </a>
-          <a className="block opacity-60 hover:opacity-100 mx-1 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
+          <a className="block opacity-80 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
             <img className="w-11 md:w-12" src="/images/social/threads.png" alt="threads" />
           </a>
         </div>

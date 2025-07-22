@@ -31,7 +31,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale == 'en' ? 'en' : 'zh-CN'}>
-      <title>Gamix - Find hits fast profit</title>
+      <title>Gamix - Attention is all you earn</title>
       <body>
         <AppProvider>
           <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">

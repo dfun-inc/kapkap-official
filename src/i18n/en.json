@@ -8,30 +8,24 @@
   },
 
   "main": {
-    "title1": "FIND",
-    "title2": "HITS",
-    "title3": "FAST",
-    "title4": "PROFIT",
-    "desc": "Gamix is the premier game accelerator and publishing partner, discovering exceptional games and propelling them to rapid profitability. We provide full-stack support including game tuning, traffic, data, and revenue optimization, powered by our integrated payment and AD demand aggregation tools.",
+    "title1": "Attention",
+    "title2": "is",
+    "title3": "all you",
+    "title4": "earn",
+    "desc": "Gamix is the first Attention layer between Games, Players, and New worlds.",
     "getSupport": "Get Support"
   },
 
   "feature": {
     "title": "Feature",
-    "item1title": "Perceive game potential, precise diagnosis",
-    "item1content": "We take you through the game's DNA - from category tracks, user profiles, gameplay cores to LTV predictions, providing free in-depth diagnosis. For potential projects, we will launch customized cooperation plans to lay the foundation for the birth of explosive products",
-    "item2title": "Customized release strategy, accurately igniting hot topics",
-    "item2content": "Based on a validated global traffic matrix (including multiple channels such as wine cover social media, internet celebrities, and purchase volume), match the optimal distribution combination for your project. Reject generic templates and use data-driven precision outreach to activate target user groups.",
-    "item3title": "Aggregate realization path, rising profits",
-    "item3content": "Based on a validated global traffic matrix (including multiple channels such as wine cover social media, internet celebrities, and purchase volume), match the optimal distribution combination for your project. Reject generic templates and use data-driven precision outreach to activate target user groups.",
-    "item4title": "Full-Cycle-Growth Engine, with full power",
-    "item4content": "In deep cooperation, the Gamix team will accompany you throughout the process:",
-    "item4sub1title": "Senior technical support: ",
-    "item4sub1content": "With 10 years of experience, our gaming team can solve all technical problems you encounter in your game",
-    "item4sub2title": "Free traffic support: ",
-    "item4sub2content": "No cost required for cold start, receive your first bucket of gold in the game",
-    "item4sub3title": "Profit climbing optimization: ",
-    "item4sub3content": "Professional game planning can double your daily income through data analysis"
+    "item1title": "Attention Matching: Accurate Reach of High-Value Users",
+    "item1content": "Gamix reconstructs the logic of traffic distribution: AI assists in building three-dimensional portraits integrating social, behavioral and consumption data, quantifies the attention value of players, and enables advertising budgets to accurately target high-value user groups.",
+    "item2title": "AI Smart Engine: Zero Trial and Error in Growth",
+    "item2content": "Based on massive data and testing cases, Gamix has built an AI smart growth engine that conducts full-cycle diagnostics on product initiation, delivery, and operation, while providing professional product solutions and operation plans.",
+    "item3title": "One-Click Global Access, Focus on Polishing Your Product",
+    "item3content": "Gamix's mature SDK integrates global payment, deposit & withdrawal, and ad aggregation links, with built-in AI multilingual support and a data analysis backend. Developers only need to focus on the game itself—we clear all localization and commercialization obstacles for you.",
+    "item4title": "AI-Driven Efficiency, Endless Content Production",
+    "item4content": "Gamix offers a variety of AI tools, enabling everyone to develop and promote game products with low barriers. Based on the growth flywheel of \"attention value + content production\", it builds an infinitely expandable ecological moat."
   },
 
   "case": {
@@ -49,13 +43,11 @@
 
   "roadmap": {
     "title": "Roadmap",
-    "step1": "Initial project debugging, validation of minimum feasible model, establishment of core benchmark.",
-    "step2": "Multi category project testing, expanding game adaptability, and determining advantageous tracks.",
-    "step3": "Building a data analysis center and constructing an intelligent decision-making center.",
-    "step4": "Aggregation of payment and advertising systems to create a monetization enhancement engine.",
-    "step5": "Establish a process based issuance model to achieve standardized scale operation.",
-    "step6": "Expand the issuance scale and build a growth flywheel.",
-    "step7": "Deepen risk control and ecology, ensure large-scale safety, and lock in the leading position in the industry."
+    "step1": "Precise User Portraits and Efficient Traffic Distribution: Build an AI-driven multi-dimensional user portrait system, launch an \"attention value\" matching market, and achieve accurate traffic allocation.",
+    "step2": "AI Intelligent Growth Engine: Launch the AI intelligent growth engine to provide professional product and operation services.",
+    "step3": "One-Click Publishing SDK System: Aggregate multi-platform payment, advertising, and other functions.",
+    "step4": "Data and Intelligent Decision-Making Hub: Establish a data analysis center and intelligent decision-making system, integrate AI functions, and optimize automated operations.",
+    "step5": "Standardized Publishing and Scaling: Build a standardized publishing system, expand AIGC and creator economy globally, and reach 5 million DAU."
   },
 
   "other": {
@@ -98,6 +90,7 @@
     "q6": "What kind of support or assistance do you expect the Gamix team to obtain in order to maximize the profitability of your game?",
     "q7": "Please provide a method to access your game so that we can evaluate it.",
     "successHint": "Thank you for your submission. We’ll get back to you as soon as possible!",
-    "erorHint": "Submission failed. Please try again later."
+    "errorHint": "Submission failed. Please try again later",
+    "placeholder": "Type your answer here..."
   }
 }
