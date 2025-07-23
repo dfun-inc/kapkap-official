@@ -111,8 +111,10 @@ body {
 }
 
 .feature-item {
-  background-size: cover;
-  background-position: right bottom;
+  background-size: 100% auto;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-color: #201e2a;
 }
 
 .feature-item-1 {
@@ -129,6 +131,14 @@ body {
 
 .feature-item-4 {
   background-image: url('/images/bg_feature4.jpg');
+}
+
+.case-left-shape {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.case-right-shape {
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
 }
 
 .roadmap-top-box {

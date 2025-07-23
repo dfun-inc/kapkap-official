@@ -2,6 +2,8 @@
 
 import { Locale } from "@/lib/i18n";
 import { useTranslations } from 'next-intl';
+import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
@@ -14,6 +16,8 @@ export default function Header(props:Props) {
   const [dropdown, setDropdown] = useState(false);
   const screenWidth = useRef<number>(0);
   const screenHeight = useRef<number>(0);
+  const pathname = usePathname();
+
 
   const menu:string[] = [
     t('menu.main'), t('menu.feature'), t('menu.case'), t('menu.roadmap'), t('menu.other'),
@@ -95,45 +99,53 @@ export default function Header(props:Props) {
   return (
     <header className="w-full fixed top-0 left-0 right-0 z-[10]">
       <div className="mx-auto max-w-[1920px] flex justify-between items-center px-6 md:px-12 py-3 md:py-6">
-        <img className="w-[120px] md:w-[182px]" src="/images/logo.png" />
-        <div className="flex items-center">
-          <menu className="hidden lg:flex">
-            {menu.map((item, i:number) => (
-              <div key={i} onClick={() => handleClick(i)} className={'text-xl mr-8 cursor-pointer ' + (activeIdx == i ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
-                <span className="text-xl">{item}</span>
-              </div>
-            ))}
-          </menu>
-          <div className="relative ml-3" onMouseOver={() => setDropdown(true)} onMouseOut={() => setDropdown(false)}>
-            <button className="btn-common block p-1 h-8 md:h-9 flex items-center justify-center bg-white/10 rounded-[10px]">
-              <div className="w-5 md:w-6 ml-1 md:ml-2 mr-[7px] flex items-center justify-between text-sm md:text-base">
-                {props.locale == 'en' ?
-                (
-                  <>
-                    <span className="font-light">EN</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="font-light">CN</span>
-                  </>
-                )}
-              </div>
-              <span className="bg-[#6E4DFF]/50 w-5 md:w-6 h-5 md:h-6 rounded-[8px] flex items-center justify-center">
-                <svg className={"scale-[0.9] md:scale-none mt-[1px] md:mt-[3px] origin-center duration-200 " + (dropdown ? "rotate-180" : "")} width="11" height="7" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M5.88212 7.14717L0.225124 1.49017L1.63912 0.0761714L6.58912 5.02617L11.5391 0.0761718L12.9531 1.49017L7.29612 7.14717C7.1086 7.33464 6.85429 7.43996 6.58912 7.43996C6.32396 7.43996 6.06965 7.33464 5.88212 7.14717Z" fill="#ffffff"/>
-                </svg>
-              </span>
-            </button>
-            <div className={"absolute left-0 top-9 w-full py-1 shadow-lg bg-white/10 rounded-[10px] " + (dropdown ? 'block' : "hidden")}>
-              <button className="w-full px-3 py-2 text-center hover:bg-white/10 flex items-center" onClick={() => handleChangeLand('en')}>
-                <span className="text-sm md:text-base font-medium mr-2">EN</span>
+        {pathname == '/' ?
+        <>
+          <img className="w-[120px] md:w-[182px]" src="/images/logo.png" />
+          <div className="flex items-center">
+            <menu className="hidden lg:flex">
+              {menu.map((item, i:number) => (
+                <div key={i} onClick={() => handleClick(i)} className={'text-xl mr-8 cursor-pointer ' + (activeIdx == i ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
+                  <span className="text-xl">{item}</span>
+                </div>
+              ))}
+            </menu>
+            <div className="relative ml-3" onMouseOver={() => setDropdown(true)} onMouseOut={() => setDropdown(false)}>
+              <button className="btn-common block p-1 h-8 md:h-9 flex items-center justify-center bg-white/10 rounded-[10px]">
+                <div className="w-5 md:w-6 ml-1 md:ml-2 mr-[7px] flex items-center justify-between text-sm md:text-base">
+                  {props.locale == 'en' ?
+                  (
+                    <>
+                      <span className="font-light">EN</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-light">CN</span>
+                    </>
+                  )}
+                </div>
+                <span className="bg-[#6E4DFF]/50 w-5 md:w-6 h-5 md:h-6 rounded-[8px] flex items-center justify-center">
+                  <svg className={"scale-[0.9] md:scale-none mt-[1px] md:mt-[3px] origin-center duration-200 " + (dropdown ? "rotate-180" : "")} width="11" height="7" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M5.88212 7.14717L0.225124 1.49017L1.63912 0.0761714L6.58912 5.02617L11.5391 0.0761718L12.9531 1.49017L7.29612 7.14717C7.1086 7.33464 6.85429 7.43996 6.58912 7.43996C6.32396 7.43996 6.06965 7.33464 5.88212 7.14717Z" fill="#ffffff"/>
+                  </svg>
+                </span>
               </button>
-              <button className="w-full px-3 py-2 text-center hover:bg-white/10 flex items-center" onClick={() => handleChangeLand('zh')}>
-                <span className="text-sm md:text-base font-medium mr-2">CN</span>
-              </button>
+              <div className={"absolute left-0 top-9 w-full py-1 shadow-lg bg-white/10 rounded-[10px] " + (dropdown ? 'block' : "hidden")}>
+                <button className="w-full px-3 py-2 text-center hover:bg-white/10 flex items-center" onClick={() => handleChangeLand('en')}>
+                  <span className="text-sm md:text-base font-medium mr-2">EN</span>
+                </button>
+                <button className="w-full px-3 py-2 text-center hover:bg-white/10 flex items-center" onClick={() => handleChangeLand('zh')}>
+                  <span className="text-sm md:text-base font-medium mr-2">CN</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
+        :
+        <Link className="" href="/">
+          <img className="w-[120px] md:w-[182px]" src="/images/logo.png" />
+        </Link>
+        }
       </div>
     </header>
   );

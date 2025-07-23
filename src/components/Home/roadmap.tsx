@@ -74,7 +74,7 @@ export default function Roadmap() {
               </div>
               <div className={aniItemClass + " animate__animated animate__delay-500 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step2')}</div>
             </div>
-            <div className="flex items-start relative z-1 mt-6 pb-6">
+            <div className="flex items-start relative z-1 mt-6">
               <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
                 <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
               </div>
@@ -88,7 +88,7 @@ export default function Roadmap() {
             </div>
           </div>
           <div className="relative text-[#DDD5FF]">
-            <div className="flex items-start relative z-1 text-[#8A84A3]">
+            <div className="flex items-start relative z-1">
               <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
                 <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
               </div>

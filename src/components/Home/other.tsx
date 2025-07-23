@@ -103,7 +103,7 @@ export default function Future() {
             {Array.from({ length: 2 }).map((_, i) => (
               <div key={i} className="flex items-center">
                 {gamePartners.map((item, j) => (
-                  <img key={j} className="w-[60px] lg:w-[90px] mx-1 opacity-70 hover:opacity-100 rounded-lg mx-3 opacity-90 hover:opacity-100" src={"/images/game_partners/" + item} alt={item} />
+                  <img loading="lazy" key={j} className="w-[60px] lg:w-[90px] mx-1 opacity-70 hover:opacity-100 rounded-lg mx-3 opacity-90 hover:opacity-100" src={"/images/game_partners/" + item} alt={item} />
                 ))}
               </div>
             ))}
@@ -118,18 +118,18 @@ export default function Future() {
             <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
               {Array.from({ length: 2 }).map((_, idx) => (
                 <div className="flex items-center" key={idx}>
-                  <img className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/meta.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/google.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-6 mx-6" src="/images/ad_partners/applovin.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/unity.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/csj.png" />
-                  <img className="w-[40%] md:w-auto h-auto lg:h-5 mx-6" src="/images/ad_partners/tiktok.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/meta.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/google.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-6 mx-6" src="/images/ad_partners/applovin.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/unity.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/csj.png" />
+                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-5 mx-6" src="/images/ad_partners/tiktok.png" />
                 </div>
               ))}
             </div>

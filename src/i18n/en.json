@@ -9,10 +9,14 @@
 
   "main": {
     "title1": "Attention",
-    "title2": "is",
-    "title3": "all you",
-    "title4": "earn",
-    "desc": "Gamix is the first Attention layer between Games, Players, and New worlds.",
+    "title2": "is all you ",
+    "title3": "earn",
+    "desc1": "Gamix is the first Attention layer between ",
+    "desc2": "and",
+    "desc3": "",
+    "descWord1": "Games",
+    "descWord2": "Players",
+    "descWord3": "New worlds",
     "getSupport": "Get Support"
   },
 

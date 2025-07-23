@@ -9,11 +9,15 @@
 
   "main": {
     "title1": "Attention",
-    "title2": "is",
-    "title3": "all you",
-    "title4": "earn",
+    "title2": "is all you ",
+    "title3": "earn",
     "desc": "Gamix作为首个在大量游戏、玩家及UGC世界之间的注意力中间层。",
-    "getSupport": "获取支持"
+    "desc1": "Gamix作为首个在大量",
+    "desc2": "及",
+    "desc3": "之间的注意力中间层。",
+    "descWord1": "游戏",
+    "descWord2": "玩家",
+    "descWord3": "UGC世界"
   },
 
   "feature": {

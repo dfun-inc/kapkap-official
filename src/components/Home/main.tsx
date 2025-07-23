@@ -1,21 +1,16 @@
 'use client';
 
 import Button from '@/components/ui/Button';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import { useAppContext } from '@/context/AppContext';
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Main() {
   const t = useTranslations();
-  const { triggerModalOpen } = useAppContext();
-
-  const handleOpenModal = () => {
-    triggerModalOpen();
-  }
+  const locale = useLocale();
 
   useEffect(() => {
     gsap.to('.title-text-top', {
@@ -67,16 +62,39 @@ export default function Main() {
     <section id="home-section-0" className="main-section home-section-0 bg-[#070709] h-screen min-h-[720px]">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 h-full flex items-center">
         <div className="w-full">
-          <div className="text-[32px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] font-ethnocentric-rg leading-tight uppercase">
-            <div className="title-text-top"><span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32]">{t('main.title1')}</span> <span className="inline-block animate__animated animate__fadeInUp">{t('main.title2')}</span></div>
-            <div className="title-text-bottom"><span className="inline-block animate__animated animate__fadeInUp">{t('main.title3')}</span> <span className="inline-block animate__animated animate__fadeInUp text-[#6E4DFF]">{t('main.title4')}</span></div>
+          <div className="font-ethnocentric-rg uppercase">
+            <div className="title-text-top text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] tracking-widest"><span className="inline-block animate__animated animate__fadeInUp text-[#6E4DFF]">{t('main.title1')}</span></div>
+            <div className="title-text-bottom">
+              <span className="inline-block animate__animated animate__fadeInUp text-[19px] lg:text-[34px] xl:text-[40px] 2xl:text-[45px]">{t('main.title2')}</span>
+              <span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32] text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] ml-[18px]"> {t('main.title3')}</span></div>
           </div>
-          <div className="main-desc mt-5 lg:w-[876px] lg:max-w-[55%] ">
-            <div className="animate__animated animate__fadeInUp text-[#8A84A3]">{t('main.desc')}</div>
-          </div>
-          <div className="main-btn-box mt-30">
-            <div className="inline-block animate__animated animate__fadeInUp">
-              <Button onClick={handleOpenModal} className="text-xl font-light text-white px-10 md:px-15 py-3 md:py-4">{t('main.getSupport')}</Button>
+          <div className="main-desc mt-5">
+            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-lg md:text-[24px]">
+              {
+                locale == "en" ?
+                <>
+                  <div>{t('main.desc1')} </div>
+                  <div className="">
+                    <span className="text-[#6E4DFF]">{t('main.descWord1')}</span><span>, </span>
+                    <span className="text-[#6E4DFF]">{t('main.descWord2')}</span><span>, </span>
+                    <span>{t('main.desc2')} </span>
+                    <span className="text-[#6E4DFF]">{t('main.descWord3')}</span><span>.</span>
+                  </div>
+                </>
+                :
+                <>
+                  <div>
+                    <span>{t('main.desc1')}</span>
+                    <span className="text-[#6E4DFF]">{t('main.descWord1')}</span><span>、</span>
+                    <span className="text-[#6E4DFF]">{t('main.descWord2')}</span><span></span>
+                    <span>{t('main.desc2')} </span>
+                  </div>
+                  <div className="">
+                    <span className="text-[#6E4DFF]">{t('main.descWord3')}</span>
+                    <span>{t('main.desc3')}</span>
+                  </div>
+                </>
+              }
             </div>
           </div>
         </div>
