@@ -76,9 +76,10 @@ export default function Pool() {
   }, [])
 
   return (
-    <div className="relative w-full h-[800px] md:h-[600px] lg:h-[500px] xl:h-[400px] 2xl:h-[300px]">
+    <div className="relative w-full h-[800px] md:h-[600px] lg:h-[480px] xl:h-[360px] 2xl:h-[300px] relative">
+      <div className="game-partner-bg absolute w-full h-full z-0 rounded-full"></div>
       {allowLoading ?
-      <Canvas id="main-canvas" orthographic camera={{ position: [0, 0, 200], zoom: 10 }}>
+      <Canvas id="partner-canvas relative z-1" orthographic camera={{ position: [0, 0, 200], zoom: 10 }}>
         <Physics /*debug*/ interpolate={false} timeStep={1 / 30} gravity={[0, 0, 0]}>
           <Wall />
           {data.length != 0 && (
@@ -91,7 +92,7 @@ export default function Pool() {
         </Physics>
       </Canvas>
       :
-      <div className="h-full w-full flex items-center justify-center">
+      <div className="h-full w-full flex items-center justify-center relative z-1">
         <span className="animate-spin w-12 h-12 border-[8px]"></span>
       </div>
       }

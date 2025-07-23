@@ -222,6 +222,15 @@ body {
   animation: spin 1s linear infinite;
 }
 
+.game-partner-bg {
+  background: radial-gradient(
+  ellipse at center,
+  rgba(50, 10, 38, 1) 0%,    /* 中心颜色（不透明） */
+  rgba(50, 10, 38, 0.2) 50%,   /* 中间过渡 */
+  rgba(50, 10, 38, 0) 100%     /* 边缘完全透明 */
+);
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

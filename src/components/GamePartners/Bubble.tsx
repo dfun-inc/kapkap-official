@@ -8,7 +8,7 @@ import { RigidBody, BallCollider } from '@react-three/rapier'
 import { easing } from 'maath'
 
 export default function Bubble({ ...props }) {
-  const scaleBasis = (props.amount + 10) / (props.amount - 10) * 2.5;
+  const [scaleBasis, setScaleBasis] = useState((props.amount + 10) / (props.amount - 10) * 2.5);
   const api:any = useRef(null)
   const [initialPos]:any[] = useState([THREE.MathUtils.randFloatSpread(50), THREE.MathUtils.randFloatSpread(10), 0])
   const [position] = useState(new THREE.Vector3())
@@ -67,8 +67,24 @@ export default function Bubble({ ...props }) {
     props.addCompleteNum();
   }
 
+  const handleResize = () => {
+    const winW = window.innerWidth;
+    if(winW < 768) {
+      setScaleBasis((props.amount + 10) / (props.amount - 10) * 2)
+    }
+    else {
+      setScaleBasis((props.amount + 10) / (props.amount - 10) * 2.5)
+    }
+  }
+
   useEffect(() => {
     init();
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
   }, [])
 
   return (
