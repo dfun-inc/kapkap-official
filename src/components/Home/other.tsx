@@ -116,7 +116,7 @@ export default function Future() {
         <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
           <div className="overflow-x-hidden">
             <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
-              {Array.from({ length: 4 }).map((_, idx) => (
+              {Array.from({ length: 2 }).map((_, idx) => (
                 <div className="flex items-center" key={idx}>
                   <img className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
                   <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
@@ -124,6 +124,12 @@ export default function Future() {
                   <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
                   <img className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
                   <img className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/meta.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/google.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-6 mx-6" src="/images/ad_partners/applovin.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/unity.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/csj.png" />
+                  <img className="w-[40%] md:w-auto h-auto lg:h-5 mx-6" src="/images/ad_partners/tiktok.png" />
                 </div>
               ))}
             </div>
