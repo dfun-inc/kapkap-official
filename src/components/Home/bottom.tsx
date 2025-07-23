@@ -32,13 +32,13 @@ export default function Bottom() {
 
   return (
     <section id="home-section-6" className="bottom-section home-section-6 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 py-20">
+      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-20">
         <div className="flex flex-wrap items-end justify-between">
-          <div className={aniClass + " animate__animated w-full lg:w-auto text-[30px] lg:text-[46px] xl:text-[60px]"}>
+          <div className={aniClass + " animate__animated w-full md:w-auto text-[26px] lg:text-[46px] xl:text-[60px]"}>
             <div>{t('bottom.text1')}</div>
             <div className="">{t('bottom.text2')}</div>
           </div>
-          <div className={aniClass + " animate__animated w-full lg:w-auto text-center lg:text-start mb-4"}>
+          <div className={aniClass + " animate__animated w-full md:w-auto text-center md:text-start my-3 lg:my-4"}>
             <Link href="/support" target="_blank" className="text-xl font-light text-white opacity-90 hover:opacity-100 border-b border-white uppercase">{t('bottom.getSupport')}</Link>
           </div>
         </div>

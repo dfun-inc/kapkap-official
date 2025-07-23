@@ -119,7 +119,7 @@ export default function Case() {
         <div className={aniClass + " animate__animated animate__delay-500"}>
           <div className="case-menu rounded-full mt-11 bg-[#201E2A] p-1 flex">
             {list.map((item, idx) => (
-              <div key={idx} className={"lg:text-xl px-3 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (activeIdx == idx ? "bg-[#121212]" : "")} onClick={() => goToSlide(idx)}>
+              <div key={idx} className={"lg:text-xl px-3 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (activeIdx == idx ? "bg-[#121212] text-[#FEBD32]" : "")} onClick={() => goToSlide(idx)}>
                 {item.title}
               </div>
             ))}

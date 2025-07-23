@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Pool from '@/components/GamePartners/Pool';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -92,77 +93,87 @@ export default function Future() {
   }, []);
 
   return (
-    <section id="home-section-4" className="other-section home-section-4 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 py-20">
-        <div className={gpAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
-          {t('other.gamePartners')}
+    <section id="home-section-4" className="other-section home-section-4 relative">
+      <div className="w-full bg-[#151213] relative">
+        <div className="absolute bottom-full left-0 w-2/3 pr-[30px] lg:pr-[40px]">
+          <div className="w-full h-[30px] lg:h-[40px] bg-[#151213]"></div>
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#151213] border-r-transparent border-b-[30px] border-r-[30px] lg:border-b-[40px] lg:border-r-[40px]"></div>
         </div>
-        <div className={gpAniClass + " animate__animated flex flex-wrap gap-x-2 items-center mt-15"}>
-          <div className="overflow-x-hidden">
-            <div className="game-partner-list w-max flex flex-nowrap items-center">
-            {Array.from({ length: 2 }).map((_, i) => (
-              <div key={i} className="flex items-center">
-                {gamePartners.map((item, j) => (
-                  <img loading="lazy" key={j} className="w-[60px] lg:w-[90px] mx-1 opacity-70 hover:opacity-100 rounded-lg mx-3 opacity-90 hover:opacity-100" src={"/images/game_partners/" + item} alt={item} />
+        <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-20">
+          <div className={gpAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+            {t('other.gamePartners')}
+          </div>
+          <Pool />
+        </div>
+      </div>
+      <div className="w-full bg-[#090909] relative">
+        <div className="absolute bottom-full left-0 w-2/3 pr-[30px] lg:pr-[40px]">
+          <div className="w-full h-[30px] lg:h-[40px] bg-[#090909]"></div>
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#090909] border-r-transparent border-b-[30px] border-r-[30px] lg:border-b-[40px] lg:border-r-[40px]"></div>
+        </div>
+        <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-30">
+          <div className={apAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+            {t('other.adPartners')}
+          </div>
+          <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
+            <div className="overflow-x-hidden">
+              <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <div className="flex items-center" key={idx}>
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/meta.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/google.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-6 mx-6" src="/images/ad_partners/applovin.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/unity.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/csj.png" />
+                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-5 mx-6" src="/images/ad_partners/tiktok.png" />
+                  </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full bg-[#121212] relative">
+        <div className="absolute bottom-full left-0 w-2/3 pr-[30px] lg:pr-[40px]">
+          <div className="w-full h-[30px] lg:h-[40px] bg-[#121212]"></div>
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#121212] border-r-transparent border-b-[30px] border-r-[30px] lg:border-b-[40px] lg:border-r-[40px]"></div>
+        </div>
+        <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-20">
+          <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-3 md:mt-6"}>
+            {t('qa.title')}
+          </div>
+          <div className={qaAniClass + " animate__animated animate__delay-500 rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
+            {listTypes.map((item, idx) => (
+              <div key={item} className={"text-xs lg:text-xl px-2 lg:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
+                {item}
+              </div>
             ))}
-            </div>
           </div>
-        </div>
-        <div className={apAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
-          {t('other.adPartners')}
-        </div>
-        <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
-          <div className="overflow-x-hidden">
-            <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
-              {Array.from({ length: 2 }).map((_, idx) => (
-                <div className="flex items-center" key={idx}>
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/meta.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/google.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-6 mx-6" src="/images/ad_partners/applovin.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/unity.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/csj.png" />
-                  <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-5 mx-6" src="/images/ad_partners/tiktok.png" />
+          <div className={qaAniClass + " animate__animated animate__delay-1000 mt-6 md:px-3"}>
+            {curQuestionList.map((item, idx) => (
+              <div key={item} className="border-b border-[#373447] py-2">
+                <div className="flex justify-between items-center cursor-pointer" onClick={() => handleToggleOpen(item)}>
+                  <div className={"flex-1 text-[18px] lg:text-[24px] " + (openIdx.includes(item) ? "text-[#8D73FF]" : "text-[#DDD5FF]")}>
+                    {t('qa.q' + item)}
+                  </div>
+                  <div className="w-10 h-10 bg-[#352F52] rounded flex items-center justify-center">
+                    <svg className={"scale-[0.9] md:scale-none mt-[1px] md:mt-[3px] origin-center duration-200 " + (openIdx.includes(item) ? "rotate-180" : "")} width="14" height="9" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M5.88212 7.14717L0.225124 1.49017L1.63912 0.0761714L6.58912 5.02617L11.5391 0.0761718L12.9531 1.49017L7.29612 7.14717C7.1086 7.33464 6.85429 7.43996 6.58912 7.43996C6.32396 7.43996 6.06965 7.33464 5.88212 7.14717Z" fill="#ffffff"/>
+                    </svg>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-20 md:mt-40"}>
-          {t('qa.title')}
-        </div>
-        <div className={qaAniClass + " animate__animated animate__delay-500 rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
-          {listTypes.map((item, idx) => (
-            <div key={item} className={"text-xs lg:text-xl px-2 md:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
-              {item}
-            </div>
-          ))}
-        </div>
-        <div className={qaAniClass + " animate__animated animate__delay-1000 mt-6 md:px-3"}>
-          {curQuestionList.map((item, idx) => (
-            <div key={item} className="border-b border-[#373447] py-2">
-              <div className="flex justify-between items-center cursor-pointer" onClick={() => handleToggleOpen(item)}>
-                <div className={"flex-1 text-[18px] lg:text-[24px] " + (openIdx.includes(item) ? "text-[#8D73FF]" : "text-[#DDD5FF]")}>
-                  {t('qa.q' + item)}
-                </div>
-                <div className="w-10 h-10 bg-[#352F52] rounded flex items-center justify-center">
-                  <svg className={"scale-[0.9] md:scale-none mt-[1px] md:mt-[3px] origin-center duration-200 " + (openIdx.includes(item) ? "rotate-180" : "")} width="14" height="9" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M5.88212 7.14717L0.225124 1.49017L1.63912 0.0761714L6.58912 5.02617L11.5391 0.0761718L12.9531 1.49017L7.29612 7.14717C7.1086 7.33464 6.85429 7.43996 6.58912 7.43996C6.32396 7.43996 6.06965 7.33464 5.88212 7.14717Z" fill="#ffffff"/>
-                  </svg>
+                <div className={"text-[18px] lg:text-[24px] mt-[14px] md:mt-[9px] transition-[max-height] duration-300 overflow-hidden " + (openIdx.includes(item) ? 'max-h-[1200px]' : 'max-h-0')}>
+                  {t('qa.a' + item)}
                 </div>
               </div>
-              <div className={"text-[18px] lg:text-[24px] mt-[14px] md:mt-[9px] transition-[max-height] duration-300 overflow-hidden " + (openIdx.includes(item) ? 'max-h-[1200px]' : 'max-h-0')}>
-                {t('qa.a' + item)}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

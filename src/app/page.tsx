@@ -6,7 +6,6 @@ import Feature from '@/components/Home/feature';
 import Main from '@/components/Home/main';
 import Other from '@/components/Home/other';
 import Roadmap from '@/components/Home/roadmap';
-import Support from '@/components/Support';
 
 export default function Home() {
 
@@ -18,7 +17,6 @@ export default function Home() {
       <Roadmap />
       <Other />
       <Bottom />
-      <Support />
     </main>
   );
 }

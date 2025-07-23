@@ -45,17 +45,6 @@ export default function Main() {
         scrub: true,
       },
     })
-
-    gsap.to('.main-btn-box', {
-      opacity: 0.2,
-      y: -80,
-      scrollTrigger: {
-        trigger:".main-section",
-        start: '20% top',
-        end: '50% top',
-        scrub: true,
-      },
-    })
   })
 
   return (

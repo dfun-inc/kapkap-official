@@ -55,7 +55,7 @@ export default function Roadmap() {
   
   return (
     <section id="home-section-3" className="roadmap-section home-section-3 bg-[##060608] relative">
-      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 pt-6 pb-12">
+      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 pt-6 pb-24">
         <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white leading-tight"}>
           <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('roadmap.title')}</div>
         </div>
