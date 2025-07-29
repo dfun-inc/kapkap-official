@@ -68,7 +68,7 @@ export default function Header(props:Props) {
   const changeHeaderBg = () => {
     const header = document.getElementsByTagName('header');
     const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const progress = Math.min(scrollY / 800 + 0.2, 1);
+    const progress = Math.min(scrollY / 800, 0.8);
   
     header[0].style.backgroundColor = `rgba(0, 0, 0, ${progress * 0.8})`;
     header[0].style.backdropFilter = `blur(${progress * 10}px)`;

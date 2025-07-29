@@ -95,9 +95,9 @@ export default function Future() {
   return (
     <section id="home-section-4" className="other-section home-section-4 relative">
       <div className="w-full bg-[#151213] relative">
-        <div className="absolute bottom-full left-0 w-2/3 pr-[30px] lg:pr-[40px]">
-          <div className="w-full h-[30px] lg:h-[40px] bg-[#151213]"></div>
-          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#151213] border-r-transparent border-b-[30px] border-r-[30px] lg:border-b-[40px] lg:border-r-[40px]"></div>
+        <div className="absolute bottom-full left-0 w-2/3 pr-[45px] lg:pr-[60px]">
+          <div className="w-full h-[33px] lg:h-[44px] bg-[#151213]"></div>
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#151213] border-r-transparent border-b-[33px] border-r-[45px] lg:border-b-[44px] lg:border-r-[60px]"></div>
         </div>
         <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-20">
           <div className={gpAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
@@ -107,9 +107,9 @@ export default function Future() {
         </div>
       </div>
       <div className="w-full bg-[#090909] relative">
-        <div className="absolute bottom-full left-0 w-2/3 pr-[30px] lg:pr-[40px]">
-          <div className="w-full h-[30px] lg:h-[40px] bg-[#090909]"></div>
-          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#090909] border-r-transparent border-b-[30px] border-r-[30px] lg:border-b-[40px] lg:border-r-[40px]"></div>
+        <div className="absolute bottom-full left-0 w-2/3 pr-[45px] lg:pr-[60px]">
+          <div className="w-full h-[33px] lg:h-[44px] bg-[#090909]"></div>
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#090909] border-r-transparent border-b-[33px] border-r-[45px] lg:border-b-[44px] lg:border-r-[60px]"></div>
         </div>
         <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-30">
           <div className={apAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
@@ -140,9 +140,9 @@ export default function Future() {
         </div>
       </div>
       <div className="w-full bg-[#121212] relative">
-        <div className="absolute bottom-full left-0 w-2/3 pr-[30px] lg:pr-[40px]">
-          <div className="w-full h-[30px] lg:h-[40px] bg-[#121212]"></div>
-          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#121212] border-r-transparent border-b-[30px] border-r-[30px] lg:border-b-[40px] lg:border-r-[40px]"></div>
+        <div className="absolute bottom-full left-0 w-2/3 pr-[45px] lg:pr-[60px]">
+          <div className="w-full h-[33px] lg:h-[44px] bg-[#121212]"></div>
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#121212] border-r-transparent border-b-[33px] border-r-[45px] lg:border-b-[44px] lg:border-r-[60px]"></div>
         </div>
         <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-20">
           <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-3 md:mt-6"}>

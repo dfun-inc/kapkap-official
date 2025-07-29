@@ -72,7 +72,7 @@ export default function Pool() {
   useEffect(() => {
     setTimeout(() => {
       setAllowLoading(true)
-    }, 2000);
+    }, 3000);
   }, [])
 
   return (

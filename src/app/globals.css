@@ -89,13 +89,6 @@ body {
   font-family: "UniviaPro-Regular", Arial, Helvetica, sans-serif;
 }
 
-.main-section{
-  background-image: url('/images/bg_main.jpg');
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-}
-
 .roadmap-section {
   background-image: url('/images/bg_roadmap.jpg');
   background-size: cover;
@@ -243,10 +236,6 @@ body {
 
 
 @media (max-width: 768px) {
-  .main-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('/images/bg_main.jpg') 80% bottom;
-  }
 
   .roadmap-section {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
