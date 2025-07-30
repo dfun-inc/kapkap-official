@@ -117,21 +117,45 @@ export default function Future() {
           </div>
           <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
             <div className="overflow-x-hidden">
-              <div className="ad-partner-list w-max flex flex-nowrap items-center justify-between">
+              <div className="ad-partner-list w-[3600px] md:w-[4000px] lg:w-[5000px] flex flex-nowrap items-center">
                 {Array.from({ length: 2 }).map((_, idx) => (
-                  <div className="flex items-center" key={idx}>
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/gigapub.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/gram.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-9 mx-6" src="/images/ad_partners/sonar.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/monetag.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/onclicka.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-4 mx-6" src="/images/ad_partners/richads.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/meta.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-8 mx-6" src="/images/ad_partners/google.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-6 mx-6" src="/images/ad_partners/applovin.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-13 mx-6" src="/images/ad_partners/unity.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-7 mx-6" src="/images/ad_partners/csj.png" />
-                    <img loading="lazy" className="w-[40%] md:w-auto h-auto lg:h-5 mx-6" src="/images/ad_partners/tiktok.png" />
+                  <div className="w-1/2 flex items-center" key={idx}>
+                    <div className="w-[9%] text-center">
+                      <img className="w-auto h-5 md:h-6 lg:h-7 mx-auto" src="/images/ad_partners/gigapub.png" />
+                    </div>
+                    <div className="w-[9%] text-center">
+                      <img className="w-auto h-6 md:h-7 lg:h-8 mx-auto" src="/images/ad_partners/gram.png" />
+                    </div>
+                    <div className="w-[9%] text-center">
+                      <img className="w-auto h-7 md:h-8 lg:h-9 mx-auto" src="/images/ad_partners/sonar.png" />
+                    </div>
+                    <div className="w-[9%] text-center">
+                      <img className="w-auto h-6 md:h-7 lg:h-8 mx-auto" src="/images/ad_partners/monetag.png" />
+                    </div>
+                    <div className="w-[9%] text-center">
+                      <img className="w-auto h-11 md:h-12 lg:h-13 mx-auto" src="/images/ad_partners/onclicka.png" />
+                    </div>
+                    <div className="w-[13%] text-center">
+                      <img className="w-auto h-2 md:h-3 lg:h-4 mx-auto" src="/images/ad_partners/richads.png" />
+                    </div>
+                    <div className="w-[8%] text-center">
+                      <img className="w-auto h-6 md:h-7 lg:h-8 mx-auto" src="/images/ad_partners/meta.png" />
+                    </div>
+                    <div className="w-[8%] text-center">
+                      <img className="w-auto h-6 md:h-7 lg:h-8 mx-auto" src="/images/ad_partners/google.png" />
+                    </div>
+                    <div className="w-[9%] text-center">
+                      <img className="w-auto h-4 md:h-5 lg:h-6 mx-auto" src="/images/ad_partners/applovin.png" />
+                    </div>
+                    <div className="w-[6%] text-center">
+                      <img className="w-auto h-11 md:h-12 lg:h-13 mx-auto" src="/images/ad_partners/unity.png" />
+                    </div>
+                    <div className="w-[8%] text-center">
+                      <img className="w-auto h-5 md:h-6 lg:h-7 mx-auto" src="/images/ad_partners/csj.png" />
+                    </div>
+                    <div className="w-[13%] text-center">
+                      <img className="w-auto h-3 md:h-4 lg:h-5 mx-auto" src="/images/ad_partners/tiktok.png" />
+                    </div>
                   </div>
                 ))}
               </div>
