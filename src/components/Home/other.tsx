@@ -11,18 +11,13 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Future() {
   const t = useTranslations();
 
-  const gamePartners = ['fomo_hash.jpg', 'Mine XRP.jpg', 'BabyDoge PAWS.jpg', 'Beetz.jpg', 'bitsolara.jpg', 'bitsolara.jpg', 'Bounty Hash.jpg',
-    'Boxing Star X.jpg', 'Bums.jpg', 'CapsGame.jpg', 'Cattea.jpg', 'cityhold.jpg', 'Dogiators.jpg', 'Dragonz Land.jpg', 'DRFT Party.jpg', 'Dropster.jpg', 'duck.jpg', 
-    'Duckygram.jpg', 'Fight Me.jpg', 'GILF.jpg', 'Gold Striker.jpg', 'labrador.jpg', 'League of Llamas.jpg', 'LuckyGo.jpg', 'Majestic.jpg', 'Major.jpg', 'Memgift.jpg', 
-    'MemHustle.jpg', 'Nuts Farm.jpg', 'PandaFiT.jpg', 'Planet X.jpg', 'pokergram.jpg', 'Prison.jpg', 'Puparty.jpg', 'Rich Dog.jpg', 'Spin the Bottle.jpg', 'Squad Game.jpg', 
-    'TAPX.jpg', 'TON Kombat.jpg', 'TonDating.jpg', 'Trump\'s Empire.jpg', 'TTHero.jpg', 'Uni Jump.jpg', 'VIRUS.jpg', 'VOXEL.jpg', 'Your Waifu.jpg', 'ZarGates.jpg'
-  ]
-  const questionList = [1,2,3,4];
+  const [qaPage, setQaPage] = useState(0);
+  const questionList = [1,2,3,4,5,6,7,8,9,10];
   const questionMap:any = {
-    1: [1],
-    2: [2],
-    3: [3],
-    4: [4],
+    1: [1,3],
+    2: [2,4,6,7,10],
+    3: [8],
+    4: [5,9],
   };
 
   const [curQuestionList, setCurQuestionList] = useState(questionList);
@@ -42,12 +37,24 @@ export default function Future() {
     }
   }
 
+  const handleChangeQaPage = (page:number) => {
+    if(page == 0) {
+      setCurQuestionList([1,2,3,4,5]);
+    }
+    else {
+      setCurQuestionList([6,7,8,9,10]);
+    }
+    setOpenIdx([]);
+    setQaPage(page);
+  } 
+
   useEffect(() => {
+    setQaPage(0);
     if(curTypeIdx) {
       setCurQuestionList(questionMap[curTypeIdx]);
     }
     else {
-      setCurQuestionList(questionList);
+      setCurQuestionList([1,2,3,4,5]);
     }
     setOpenIdx([]);
 
@@ -67,7 +74,6 @@ export default function Future() {
         start: "top 80%",
         once: true,
         onEnter: () => {
-          console.log('gpAniClass');
           setGpAniClass(_c => 'animate__fadeInUp')
         },
       }); 
@@ -76,7 +82,6 @@ export default function Future() {
         start: "top 50%",
         once: true,
         onEnter: () => {
-          console.log('apAniClass');
           setApAniClass(_c => 'animate__fadeInUp')
         },
       }); 
@@ -85,7 +90,6 @@ export default function Future() {
         start: "top 20%",
         once: true,
         onEnter: () => {
-          console.log('qaAniClass');
           setQaAniClass(_c => 'animate__fadeInUp')
         },
       }); 
@@ -174,14 +178,14 @@ export default function Future() {
           </div>
           <div className={qaAniClass + " animate__animated animate__delay-500 rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
             {listTypes.map((item, idx) => (
-              <div key={item} className={"text-xs lg:text-xl px-2 lg:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
+              <div key={item} className={"text-xs lg:text-xl px-2 md:px-6 xl:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
                 {item}
               </div>
             ))}
           </div>
           <div className={qaAniClass + " animate__animated animate__delay-1000 mt-6 md:px-3"}>
             {curQuestionList.map((item, idx) => (
-              <div key={item} className="border-b border-[#373447] py-2">
+              <div key={idx} className="border-b border-[#373447] py-3">
                 <div className="flex justify-between items-center cursor-pointer" onClick={() => handleToggleOpen(item)}>
                   <div className={"flex-1 text-[18px] lg:text-[24px] " + (openIdx.includes(item) ? "text-[#8D73FF]" : "text-[#DDD5FF]")}>
                     {t('qa.q' + item)}
@@ -192,12 +196,23 @@ export default function Future() {
                     </svg>
                   </div>
                 </div>
-                <div className={"text-[18px] lg:text-[24px] mt-[14px] md:mt-[9px] transition-[max-height] duration-300 overflow-hidden " + (openIdx.includes(item) ? 'max-h-[1200px]' : 'max-h-0')}>
-                  {t('qa.a' + item)}
+                <div className={"lg:text-[20px] mt-[14px] text-[#8A84A3] md:mt-[9px] transition-[max-height] duration-300 overflow-hidden " + (openIdx.includes(item) ? 'max-h-[1200px]' : 'max-h-0')}>
+                  <div dangerouslySetInnerHTML={{ __html: t('qa.a' + item)}}></div>
                 </div>
               </div>
             ))}
           </div>
+          {curTypeIdx == 0 && (
+            <div className={qaAniClass + " animate__animated animate__delay-1250 flex justify-center mt-3"}>
+              <div className="bg-[#060608] rounded-full p-2 flex justify-between items-center w-28">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <div key={idx} className={"text-lg text-white h-10 w-10 flex items-center justify-center rounded-full cursor-pointer " + (qaPage == idx ? "bg-[#201E2A]" : "")} onClick={() => handleChangeQaPage(idx)}>
+                    <span>{idx + 1}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

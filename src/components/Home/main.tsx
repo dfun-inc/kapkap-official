@@ -49,7 +49,7 @@ export default function Main() {
   return (
     <section id="home-section-0" className="main-section relative home-section-0 bg-[#070709] h-screen min-h-[720px] overflow-hidden">
       <div className="w-full h-screen min-h-[720px] overflow-hidden absolute z-0 opacity-80 md:opacity-100">
-        <div className="aspect-video md:aspect-auto w-auto md:w-full h-full absolute top-0 left-0 z-0 -translate-x-1/2 md:translate-x-0 overflow-hidden">
+        <div className="aspect-video lg:aspect-auto w-auto lg:w-full h-full absolute top-0 left-0 z-0 -translate-x-1/2 md:-translate-x-1/3 lg:translate-x-0 overflow-hidden">
           <video className="w-full h-full object-cover pointer-events-none" src="/videos/bg_main.mp4" autoPlay muted playsInline loop preload="auto"></video>
         </div>
       </div>

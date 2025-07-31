@@ -64,7 +64,6 @@ export default function Pool() {
   const handleAddCompleteNum = () => {
     completeNum.current += 1;
     if(completeNum.current >= data.length) {
-      console.log(completeNum.current)
       setFinishLoadAll(_l => true);
     }
   }
