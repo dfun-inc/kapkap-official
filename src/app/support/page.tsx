@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Modal from 'react-modal'
 import Button from '@/components/ui/Button';
 import axios from 'axios';
+import Footer from '@/components/Footer';
 
 export default function Support() {
   const t = useTranslations();
@@ -108,6 +109,11 @@ export default function Support() {
             <div className="absolute top-0 left-0 w-0 h-0 border-b-0 border-r-0 border-t-[#070709] border-l-transparent border-t-[30px] border-l-[30px] lg:border-t-[60px] lg:border-l-[60px]"></div>
           </div>
           <img className="absolute bottom-0 md:translate-y-1/2 z-0 w-full" src="/images/bg_roadmap.jpg" />
+          <div className="absolute bottom-6 left-0 w-full">
+            <div className="mx-auto max-w-[1920px] px-6 md:px-12 py-3 md:py-6">
+              <Footer />
+            </div>
+          </div>
           <div className="flex py-10 justify-center items-center w-full relative z-[2] -mt-10">
             <div className="w-full xl:w-[1000px] 2xl:w-[1200px] px-3 xl:px-0">
               <div className="flex items-center text-white">

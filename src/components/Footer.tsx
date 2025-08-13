@@ -3,8 +3,8 @@
 export default function Footer() {
 
   return (
-    <footer className="absolute w-full bottom-6">
-      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16 text-center md:text-left">2024 KapKap. All rights reserved.</div>
-    </footer>
+    <div className="mt-5 md:mt-0 order-2 md:order-1">
+      <div className="text-center md:text-left">2024 KapKap. All rights reserved.</div>
+    </div>
   );
 }

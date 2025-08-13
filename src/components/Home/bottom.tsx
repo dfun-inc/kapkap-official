@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useEffect, useState } from 'react';
-import { useAppContext } from '@/context/AppContext';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -32,7 +32,7 @@ export default function Bottom() {
 
   return (
     <section id="home-section-6" className="bottom-section home-section-6 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 pt-20 pb-40 md:pb-20">
+      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-20">
         <div className="flex flex-wrap items-end justify-between">
           <div className={aniClass + " animate__animated w-full md:w-auto text-[26px] lg:text-[46px] xl:text-[60px]"}>
             <div>{t('bottom.text1')}</div>
@@ -42,25 +42,22 @@ export default function Bottom() {
             <Link href="/support" target="_blank" className="text-xl font-light text-white opacity-90 hover:opacity-100 border-b border-white uppercase">{t('bottom.getSupport')}</Link>
           </div>
         </div>
-        <div className={aniClass + " animate__animated animate__delay-500 mt-10 md:mt-20 flex flex-wrap justify-center lg:justify-end"}>
-          <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
-            <img loading="lazy" className="w-11 md:w-12" src="/images/social/ins.png" alt="ins" />
-          </a>
-          <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
-            <img loading="lazy" className="w-11 md:w-12" src="/images/social/tg.png" alt="tg" />
-          </a>
-          <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
-            <img loading="lazy" className="w-11 md:w-12" src="/images/social/x.png" alt="x" />
-          </a>
-          <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
-            <img loading="lazy" className="w-11 md:w-12" src="/images/social/youtube.png" alt="youtube" />
-          </a>
-          <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
-            <img loading="lazy" className="w-11 md:w-12" src="/images/social/fb.png" alt="fb" />
-          </a>
-          <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://twitter.com/GemixOfficial" target="_blank">
-            <img loading="lazy" className="w-11 md:w-12" src="/images/social/threads.png" alt="threads" />
-          </a>
+        <div className={aniClass + " animate__animated animate__delay-500 mt-10 md:mt-20 flex flex-wrap items-end justify-center lg:justify-between"}>
+          <Footer />
+          <div className="w-full lg:w-auto flex justify-center lg:justify-end order-1 md:order-2">
+            <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://x.com/Kapkap_Hub" target="_blank">
+              <img loading="lazy" className="w-11 md:w-12" src="/images/social/x.png" alt="x" />
+            </a>
+            <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://t.me/Kapkap_Hub" target="_blank">
+              <img loading="lazy" className="w-11 md:w-12" src="/images/social/tg.png" alt="tg" />
+            </a>
+            <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://t.me/KapkapHub_ann" target="_blank">
+              <img loading="lazy" className="w-11 md:w-12" src="/images/social/tg.png" alt="tg" />
+            </a>
+            <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://www.youtube.com/@KapKap_Hub" target="_blank">
+              <img loading="lazy" className="w-11 md:w-12" src="/images/social/youtube.png" alt="youtube" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

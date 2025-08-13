@@ -8,7 +8,6 @@ import "@/app/globals.css";
 import Header from "@/components/Header";
 import { messages, Locale } from '@/lib/i18n';
 import { AppProvider } from '@/context/AppContext'
-import Footer from '@/components/Footer';
 
 export default function RootLayout({
   children,
@@ -40,7 +39,6 @@ export default function RootLayout({
               <div className="relative">
                 <Header locale={locale} handleChangeLang={handleChangeLanguage} />
                 {children}
-                <Footer />
               </div>
             </ReactLenis>
           </NextIntlClientProvider> 
