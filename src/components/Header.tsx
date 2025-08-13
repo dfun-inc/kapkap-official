@@ -19,8 +19,12 @@ export default function Header(props:Props) {
   const pathname = usePathname();
 
 
-  const menu:string[] = [
-    t('menu.main'), t('menu.feature'), t('menu.case'), t('menu.roadmap'), t('menu.other'),
+  const menu:any[] = [
+    {name: t('menu.main'), idx: 0},
+    {name: t('menu.feature'), idx: 1},
+    //{name: t('menu.case'), idx: 2},
+    {name: t('menu.roadmap'), idx: 3},
+    {name: t('menu.other'), idx: 4},
   ];
   const [activeIdx, setActiveIdx] = useState<number>(0);
 
@@ -42,7 +46,7 @@ export default function Header(props:Props) {
 
   const handleScroll = () => {
     const sec1Rect = document.getElementsByClassName('home-section-1')[0]?.getBoundingClientRect();
-    const sec2Rect = document.getElementsByClassName('home-section-2')[0]?.getBoundingClientRect();
+    //const sec2Rect = document.getElementsByClassName('home-section-2')[0]?.getBoundingClientRect();
     const sec3Rect = document.getElementsByClassName('home-section-3')[0]?.getBoundingClientRect();
     const sec4Rect = document.getElementsByClassName('home-section-4')[0]?.getBoundingClientRect();
 
@@ -52,9 +56,11 @@ export default function Header(props:Props) {
     else if(sec3Rect?.top < screenHeight.current / 1.5) {
       setActiveIdx(3);
     }
+    /*
     else if(sec2Rect?.top < screenHeight.current / 1.5){
       setActiveIdx(2);
     }
+    */
     else if(sec1Rect?.top < screenHeight.current / 1.5){
       setActiveIdx(1);
     }
@@ -105,11 +111,12 @@ export default function Header(props:Props) {
           <div className="flex items-center">
             <menu className="hidden lg:flex">
               {menu.map((item, i:number) => (
-                <div key={i} onClick={() => handleClick(i)} className={'text-xl mr-8 cursor-pointer ' + (activeIdx == i ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
-                  <span className="text-xl">{item}</span>
+                <div key={i} onClick={() => handleClick(item.idx)} className={'text-xl mr-8 cursor-pointer ' + (activeIdx == item.idx ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
+                  <span className="text-xl">{item.name}</span>
                 </div>
               ))}
             </menu>
+            {/*
             <div className="relative ml-3" onMouseOver={() => setDropdown(true)} onMouseOut={() => setDropdown(false)}>
               <button className="btn-common block p-1 h-8 md:h-9 flex items-center justify-center bg-white/10 rounded-[10px]">
                 <div className="w-5 md:w-6 ml-1 md:ml-2 mr-[7px] flex items-center justify-between text-sm md:text-base">
@@ -139,6 +146,7 @@ export default function Header(props:Props) {
                 </button>
               </div>
             </div>
+            */}
           </div>
         </>
         :

@@ -32,7 +32,7 @@ export default function Bottom() {
 
   return (
     <section id="home-section-6" className="bottom-section home-section-6 bg-[#121212]">
-      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-20">
+      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 pt-20 pb-40 md:pb-20">
         <div className="flex flex-wrap items-end justify-between">
           <div className={aniClass + " animate__animated w-full md:w-auto text-[26px] lg:text-[46px] xl:text-[60px]"}>
             <div>{t('bottom.text1')}</div>

@@ -22,14 +22,14 @@
 
   "feature": {
     "title": "Feature",
-    "item1title": "Attention Matching: Accurate Reach of High-Value Users",
-    "item1content": "KapKap reconstructs the logic of traffic distribution: AI assists in building three-dimensional portraits integrating social, behavioral and consumption data, quantifies the attention value of players, and enables advertising budgets to accurately target high-value user groups.",
-    "item2title": "AI Smart Engine: Zero Trial and Error in Growth",
-    "item2content": "Based on massive data and testing cases, KapKap has built an AI smart growth engine that conducts full-cycle diagnostics on product initiation, delivery, and operation, while providing professional product solutions and operation plans.",
-    "item3title": "One-Click Global Access, Focus on Polishing Your Product",
-    "item3content": "KapKap's mature SDK integrates global payment, deposit & withdrawal, and ad aggregation links, with built-in AI multilingual support and a data analysis backend. Developers only need to focus on the game itself—we clear all localization and commercialization obstacles for you.",
-    "item4title": "AI-Driven Efficiency, Endless Content Production",
-    "item4content": "KapKap offers a variety of AI tools, enabling everyone to develop and promote game products with low barriers. Based on the growth flywheel of \"attention value + content production\", it builds an infinitely expandable ecological moat."
+    "item1title": "Attention Matching: Precisely Reach High-Value Users",
+    "item1content": "KAPKAP reconstructs the logic of traffic distribution: AI-assisted construction of three-dimensional portraits of social interactions, behaviors, and consumption, quantifying the attention value of players, so that advertising budgets can accurately target high-value user groups.",
+    "item2title": "AI Intelligent Engine, Enabling Zero-Trial-and-Error Growth",
+    "item2content": "Based on massive data and testing cases, KAPKAP builds an AI intelligent growth engine, which conducts full-cycle diagnosis of product approval, launch, operation, etc., and provides professional product plans and operation schemes.",
+    "item3title": "One-Click Access to the Global Market, Focus on Polishing Products",
+    "item3content": "KAPKAP's mature SDK integrates global payment, deposit and withdrawal, and advertising aggregation links, with built-in AI multi-language support and data analysis background. Developers only need to focus on the game itself, and we will clear all localization and commercialization obstacles for you.",
+    "item4title": "AI Improves Efficiency, Making Content Production Never Exhausted",
+    "item4content": "KAPKAP provides a variety of AI tools, allowing everyone to develop and promote game products with low thresholds. Based on the growth flywheel of \"attention value + content production\", an infinitely expanding ecological moat is built."
   },
 
   "case": {
@@ -51,7 +51,8 @@
     "step2": "AI Intelligent Growth Engine: Launch the AI intelligent growth engine to provide professional product and operation services.",
     "step3": "One-Click Publishing SDK System: Aggregate multi-platform payment, advertising, and other functions.",
     "step4": "Data and Intelligent Decision-Making Hub: Establish a data analysis center and intelligent decision-making system, integrate AI functions, and optimize automated operations.",
-    "step5": "Standardized Publishing and Scaling: Build a standardized publishing system, expand AIGC and creator economy globally, and reach 5 million DAU."
+    "step5": "Mini Game Generation AI Tool: Launch an AI-generated mini game tool and promotion platform to realize the commercialization of users' creative value.",
+    "step6": "Standardized Publishing and Scaling: Build a standardized publishing system, expand AIGC and creator economy globally, and reach 5 million DAU."
   },
 
   "other": {

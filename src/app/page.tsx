@@ -13,7 +13,6 @@ export default function Home() {
     <main className="">
       <Main />
       <Feature />
-      <Case />
       <Roadmap />
       <Other />
       <Bottom />
