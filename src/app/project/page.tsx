@@ -2,19 +2,18 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
+import { getUrlParamsByName } from "@/utils/url";
 
 export default function ProductPage() {
   const t = useTranslations();
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
   const [projectData, setProjectData] = useState<any>(null);
 
   const { appData, configData } = useAppContext();
 
   useEffect(() => {
+    const id = getUrlParamsByName('id');
     if(appData && id) {
       if(appData[id]) {
         setProjectData({
@@ -23,11 +22,7 @@ export default function ProductPage() {
         });
       }
     }
-  }, [appData, id]);
-
-  useEffect(() => {
-    console.log(id)
-  }, []);
+  }, [appData]);
 
   return (
     <main className="min-h-screen overflow-hidden">
