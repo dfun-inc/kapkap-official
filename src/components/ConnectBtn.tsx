@@ -86,6 +86,7 @@ export default function ConnectBtn() {
   }
 
   const handleShowBscModal = async() => {
+    console.log('handleShowBscModal')
     openConnectModal?.();
   }
 
