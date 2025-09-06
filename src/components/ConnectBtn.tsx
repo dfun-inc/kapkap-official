@@ -203,16 +203,16 @@ export default function ConnectBtn() {
         </div>
       </div>
       <div className={"absolute left-0 top-8 w-full pt-3 block " + (walletDropdown ? '' : "md:hidden")}>
-        <div className="w-full py-1 shadow-lg md:bg-white/10 rounded-[10px]">
+        <div className="w-full py-1 shadow-lg md:bg-black/50 rounded-[10px]">
           <div className="w-full mt-6 md:mt-0">
             <div className="text-white/60 md:hidden mb-6">{t('menu.myAccount')}</div>
             {walletAddr && (
               <>
-                <Link href="/profile" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white">
+                <Link href="/profile" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/30 flex items-center md:text-white">
                   <div className="w-full flex items-center justify-center">{t('menu.yourKapILE')}</div>
                 </Link>
                 
-                <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleDisconnect()}>
+                <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/30 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleDisconnect()}>
                   <div className="w-full flex items-center justify-center">{t('menu.disconnect')}</div>
                 </button>
               </>
