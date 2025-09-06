@@ -4,7 +4,13 @@ import { createContext, useContext, useState, ReactNode } from 'react'
 
 interface AppContextType {
   triggerModalOpen: () => void
-  modalTrigger: number
+  modalTrigger: number,
+  userInfo: any,
+  handleSetUserInfo: (info: any) => void,
+  userInfoLoading: boolean,
+  handleSetUserInfoLoading: (loading: boolean) => void,
+  configData: any,
+  handleSetConfigData: (data: any) => void,
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -17,9 +23,24 @@ export const useAppContext = () => {
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [modalTrigger, setModerTrigger] = useState(0);
+  const [userInfo, setUserInfo] = useState<any>(null);
+  const [userInfoLoading, setUserInfoLoading] = useState<boolean>(false);
+  const [configData, setConfigData] = useState<any>(null);
 
   const triggerModalOpen = () => {
     setModerTrigger(prev => prev + 1);
+  }
+
+  const handleSetUserInfo = (info: any) => {
+    setUserInfo(info);
+  }
+
+  const handleSetUserInfoLoading = (loading: boolean) => {
+    setUserInfoLoading(loading);
+  }
+
+  const handleSetConfigData = (data: any) => {
+    setConfigData(data);
   }
 
   return (
@@ -27,6 +48,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       value={{
         modalTrigger,
         triggerModalOpen,
+        userInfo,
+        handleSetUserInfo,
+        userInfoLoading,
+        handleSetUserInfoLoading,
+        configData,
+        handleSetConfigData,
       }}
     >
       {children}

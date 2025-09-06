@@ -1,10 +1,13 @@
 'use client';
 
 import { Locale } from "@/lib/i18n";
+import { getConfig } from "@/services/apis/config";
 import { useTranslations } from 'next-intl';
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from "react";
+import { useAppContext } from "@/context/AppContext";
+import ConnectBtn from "@/components/ConnectBtn";
 
 type Props = {
   locale: Locale;
@@ -17,16 +20,11 @@ export default function Header(props:Props) {
   const screenWidth = useRef<number>(0);
   const screenHeight = useRef<number>(0);
   const pathname = usePathname();
+  const [showHeader, setShowHeader] = useState(false);
 
-
-  const menu:any[] = [
-    {name: t('menu.main'), idx: 0},
-    {name: t('menu.feature'), idx: 1},
-    //{name: t('menu.case'), idx: 2},
-    {name: t('menu.roadmap'), idx: 3},
-    {name: t('menu.other'), idx: 4},
-  ];
   const [activeIdx, setActiveIdx] = useState<number>(0);
+
+  const { handleSetConfigData } = useAppContext();
 
   const handleChangeLand = (lang:Locale) => {
     setDropdown(false);
@@ -45,15 +43,12 @@ export default function Header(props:Props) {
   };
 
   const handleScroll = () => {
-    const sec1Rect = document.getElementsByClassName('home-section-1')[0]?.getBoundingClientRect();
-    //const sec2Rect = document.getElementsByClassName('home-section-2')[0]?.getBoundingClientRect();
+    // const sec1Rect = document.getElementsByClassName('home-section-1')[0]?.getBoundingClientRect();
+    // const sec2Rect = document.getElementsByClassName('home-section-2')[0]?.getBoundingClientRect();
     const sec3Rect = document.getElementsByClassName('home-section-3')[0]?.getBoundingClientRect();
-    const sec4Rect = document.getElementsByClassName('home-section-4')[0]?.getBoundingClientRect();
+    // const sec4Rect = document.getElementsByClassName('home-section-4')[0]?.getBoundingClientRect();
 
-    if(sec4Rect?.top < screenHeight.current / 1.5) {
-      setActiveIdx(4);
-    }
-    else if(sec3Rect?.top < screenHeight.current / 1.5) {
+    if(sec3Rect?.top < screenHeight.current / 1.5) {
       setActiveIdx(3);
     }
     /*
@@ -61,9 +56,6 @@ export default function Header(props:Props) {
       setActiveIdx(2);
     }
     */
-    else if(sec1Rect?.top < screenHeight.current / 1.5){
-      setActiveIdx(1);
-    }
     else {
       setActiveIdx(0);
     }
@@ -73,12 +65,24 @@ export default function Header(props:Props) {
 
   const changeHeaderBg = () => {
     const header = document.getElementsByTagName('header');
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const progress = Math.min(scrollY / 800, 0.8);
-  
-    header[0].style.backgroundColor = `rgba(0, 0, 0, ${progress * 0.8})`;
-    header[0].style.backdropFilter = `blur(${progress * 10}px)`;
-    (header[0].style as any).WebkitBackdropFilter = `blur(${progress * 10}px)`;
+    if (screenWidth.current < 768) {
+      header[0].style.backgroundColor = `rgba(0, 0, 0, 0)`;
+    }
+    else {
+      if(pathname == '/') {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        const progress = Math.min(scrollY / 800, 0.8);
+      
+        header[0].style.backgroundColor = `rgba(0, 0, 0, ${progress * 0.8})`;
+        header[0].style.backdropFilter = `blur(${progress * 10}px)`;
+        (header[0].style as any).WebkitBackdropFilter = `blur(${progress * 10}px)`;
+      }
+      else {
+        header[0].style.backgroundColor = `rgba(0, 0, 0, 0.2)`;
+        header[0].style.backdropFilter = `blur(10px)`;
+        (header[0].style as any).WebkitBackdropFilter = `blur(10px)`;
+      }
+    }
   }
 
   const handleResize = () => {
@@ -88,6 +92,30 @@ export default function Header(props:Props) {
     screenWidth.current = _width;
     screenHeight.current = _height;
     handleScroll();
+
+    if (screenWidth.current >= 768) {
+      setDropdown(false);
+      setShowHeader(true);
+    }
+    else {
+      setShowHeader(false);
+    }
+  }
+
+  const handleGetConfig = async () => {
+    await getConfig()
+    .then((res) => {
+      const data = res?.data;
+      if(data?.status == 10000) {
+        handleSetConfigData(data?.data);
+      }
+      else {
+        handleSetConfigData({ cdn: "https://cdn.kapkap.io/ile/" });
+      }
+    })
+    .catch(() => {
+      handleSetConfigData({ cdn: "https://cdn.kapkap.io/ile/" });
+    })
   }
 
   useEffect(() => {
@@ -96,64 +124,54 @@ export default function Header(props:Props) {
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
 
+    handleGetConfig();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.addEventListener("resize", handleResize);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <header className="w-full fixed top-0 left-0 right-0 z-[10]">
-      <div className="mx-auto max-w-[1920px] flex justify-between items-center px-6 md:px-12 py-3 md:py-6">
-        {pathname == '/' ?
-        <>
-          <img className="w-[120px] md:w-[182px]" src="/images/logo.png" />
-          <div className="flex items-center">
-            <menu className="hidden lg:flex">
-              {menu.map((item, i:number) => (
-                <div key={i} onClick={() => handleClick(item.idx)} className={'text-xl mr-8 cursor-pointer ' + (activeIdx == item.idx ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
-                  <span className="text-xl">{item.name}</span>
+      <div className={"flex justify-between items-center py-3 px-3 md:hidden " + (showHeader ? 'w-16 absolute z-[3] top-0 right-0' : 'w-full')}>
+        <img className={"w-40 " + (showHeader ? 'hidden' : 'block')} src="/images/logo.png" alt="logo" />
+        <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#6E4DFF]" onClick={() => setShowHeader(!showHeader)}>
+          { showHeader ? 
+            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22"><path d="M914.45248 881.11104l-344.38144-344.39168 344.52992-344.52992a52.26496 52.26496 0 0 0 14.76608-36.51584c0-28.97408-23.57248-52.54144-52.55168-52.54144-13.70624 0-26.6752 5.248-36.66432 14.91968L495.7696 462.41792 151.22944 117.888a52.25984 52.25984 0 0 0-36.51072-14.76096c-28.96896 0-52.54144 23.57248-52.54144 52.54144 0 13.70112 5.24288 26.67008 14.91456 36.67456l344.37632 344.37632-344.53504 344.54528a52.2496 52.2496 0 0 0-14.75584 36.49536c0 28.9792 23.57248 52.5568 52.54144 52.5568 13.71136 0 26.68032-5.248 36.66944-14.9248l344.37632-344.3712 344.36096 344.35072a52.03456 52.03456 0 0 0 37.17632 15.47264c14.0544 0 27.25376-5.49376 37.13536-15.44192a52.1728 52.1728 0 0 0 15.40096-37.15072c0-14.02368-5.46304-27.2128-15.3856-37.14048z" p-id="9742" fill="#ffffff"></path></svg>
+            : 
+            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M128 469.333333m40.533333 0l686.933334 0q40.533333 0 40.533333 40.533334l0 4.266666q0 40.533333-40.533333 40.533334l-686.933334 0q-40.533333 0-40.533333-40.533334l0-4.266666q0-40.533333 40.533333-40.533334Z" p-id="11280" fill="#ffffff"></path><path d="M128 682.666667m40.533333 0l686.933334 0q40.533333 0 40.533333 40.533333l0 4.266667q0 40.533333-40.533333 40.533333l-686.933334 0q-40.533333 0-40.533333-40.533333l0-4.266667q0-40.533333 40.533333-40.533333Z" p-id="11281" fill="#ffffff"></path><path d="M128 256m40.533333 0l686.933334 0q40.533333 0 40.533333 40.533333l0 4.266667q0 40.533333-40.533333 40.533333l-686.933334 0q-40.533333 0-40.533333-40.533333l0-4.266667q0-40.533333 40.533333-40.533333Z" p-id="11282" fill="#ffffff"></path></svg>
+          }
+        </button>
+      </div>
+      <div className={"w-full md:h-auto md:bg-transparent relative z-[2] overflow-hidden md:overflow-visible " + (showHeader ? 'bg-black/50 h-screen ' : '')}>
+        <div className={"absolute md:relative mx-auto w-[300px] bg-[#181818] h-full md:h-auto md:bg-transpaent md:w-auto md:max-w-[1920px] flex flex-wrap justify-between md:items-center px-12 py-6 md:bg-transparent transition-all duration-300 md:duration-0 " + (showHeader ? 'left-0' : '-left-[300px] md:left-0')}>
+          <img className="w-[182px] hidden md:block" src="/images/logo.png" alt="logo" />
+          <div className="w-full md:w-auto flex md:items-center flex-wrap">
+            <menu className="w-full md:w-auto md:flex items-center my-20 md:my-0 ">
+              {pathname != "/" ? (
+                <Link href="/" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+                  <span className="text-xl">{t('menu.main')}</span>
+                </Link>
+              ) : 
+              <>
+                <div onClick={() => handleClick(0)} className={'block md:inline text-xl mr-8 cursor-pointer mt-6 md:mt-0 ' + (activeIdx == 0 ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
+                  <span className="text-xl">{t('menu.introduce')}</span>
                 </div>
-              ))}
+                <div onClick={() => handleClick(3)} className={'block md:inline text-xl mr-8 cursor-pointer mt-6 md:mt-0 ' + (activeIdx == 3 ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
+                  <span className="text-xl">{t('menu.roadmap')}</span>
+                </div>
+              </>}
+              <Link href="/explore" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+                  <span className="text-xl">{t('menu.explore')}</span>
+              </Link>
+              <a href="/" target="_blank" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+                <span className="text-xl">{t('menu.doc')}</span>
+              </a>
             </menu>
-            {/*
-            <div className="relative ml-3" onMouseOver={() => setDropdown(true)} onMouseOut={() => setDropdown(false)}>
-              <button className="btn-common block p-1 h-8 md:h-9 flex items-center justify-center bg-white/10 rounded-[10px]">
-                <div className="w-5 md:w-6 ml-1 md:ml-2 mr-[7px] flex items-center justify-between text-sm md:text-base">
-                  {props.locale == 'en' ?
-                  (
-                    <>
-                      <span className="font-light">EN</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="font-light">CN</span>
-                    </>
-                  )}
-                </div>
-                <span className="bg-[#6E4DFF]/50 w-5 md:w-6 h-5 md:h-6 rounded-[8px] flex items-center justify-center">
-                  <svg className={"scale-[0.9] md:scale-none mt-[1px] md:mt-[3px] origin-center duration-200 " + (dropdown ? "rotate-180" : "")} width="11" height="7" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M5.88212 7.14717L0.225124 1.49017L1.63912 0.0761714L6.58912 5.02617L11.5391 0.0761718L12.9531 1.49017L7.29612 7.14717C7.1086 7.33464 6.85429 7.43996 6.58912 7.43996C6.32396 7.43996 6.06965 7.33464 5.88212 7.14717Z" fill="#ffffff"/>
-                  </svg>
-                </span>
-              </button>
-              <div className={"absolute left-0 top-9 w-full py-1 shadow-lg bg-white/10 rounded-[10px] " + (dropdown ? 'block' : "hidden")}>
-                <button className="w-full px-3 py-2 text-center hover:bg-white/10 flex items-center" onClick={() => handleChangeLand('en')}>
-                  <span className="text-sm md:text-base font-medium mr-2">EN</span>
-                </button>
-                <button className="w-full px-3 py-2 text-center hover:bg-white/10 flex items-center" onClick={() => handleChangeLand('zh')}>
-                  <span className="text-sm md:text-base font-medium mr-2">CN</span>
-                </button>
-              </div>
-            </div>
-            */}
+            <ConnectBtn />
           </div>
-        </>
-        :
-        <Link className="" href="/">
-          <img className="w-[120px] md:w-[182px]" src="/images/logo.png" />
-        </Link>
-        }
+        </div>
       </div>
     </header>
   );

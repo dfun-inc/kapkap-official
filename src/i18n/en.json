@@ -1,35 +1,45 @@
 {
+  "common": {
+    "loading": "Loading",
+    "getFailed": "Get Data Failed, Please Try Later",
+    "submitFailed": "Submit Failed, Please Try Later",
+    "submitSuccess": "Submit Success",
+    "error": "Something went wrong, please try later"
+  },
+
   "menu": {
-    "main": "Main",
+    "main": "Home",
+    "introduce": "Introduce",
     "feature": "Feature",
     "case": "Case",
     "roadmap": "Roadmap",
-    "other": "Other"
+    "other": "Other",
+    "explore": "Kap ILE",
+    "doc": "DOC",
+    "login": "Log in",
+    "yourKapILE": "Your Kap ILE",
+    "disconnect": "Disconnect",
+    "myAccount": "My Account"
   },
 
   "main": {
     "title1": "Attention",
     "title2": "is all you ",
     "title3": "earn",
-    "desc1": "KapKap is the first Attention layer between ",
-    "desc2": "and",
-    "desc3": "",
-    "descWord1": "Games",
-    "descWord2": "Players",
-    "descWord3": "New worlds",
+    "desc": "KapKap — the world’s first attention middle layer, building a Web3 entertainment and creation ecosystem with AI, AIGC, and on-chain payments. Here, every interaction and creation holds real value: players get personalized experiences, creators monetize effortlessly, and brands reach audiences precisely. No matter who you are, you’ll find your value here. Join us!",
     "getSupport": "Get Support"
   },
 
   "feature": {
     "title": "Feature",
-    "item1title": "Attention Matching: Precisely Reach High-Value Users",
-    "item1content": "KAPKAP reconstructs the logic of traffic distribution: AI-assisted construction of three-dimensional portraits of social interactions, behaviors, and consumption, quantifying the attention value of players, so that advertising budgets can accurately target high-value user groups.",
-    "item2title": "AI Intelligent Engine, Enabling Zero-Trial-and-Error Growth",
-    "item2content": "Based on massive data and testing cases, KAPKAP builds an AI intelligent growth engine, which conducts full-cycle diagnosis of product approval, launch, operation, etc., and provides professional product plans and operation schemes.",
-    "item3title": "One-Click Access to the Global Market, Focus on Polishing Products",
-    "item3content": "KAPKAP's mature SDK integrates global payment, deposit and withdrawal, and advertising aggregation links, with built-in AI multi-language support and data analysis background. Developers only need to focus on the game itself, and we will clear all localization and commercialization obstacles for you.",
-    "item4title": "AI Improves Efficiency, Making Content Production Never Exhausted",
-    "item4content": "KAPKAP provides a variety of AI tools, allowing everyone to develop and promote game products with low thresholds. Based on the growth flywheel of \"attention value + content production\", an infinitely expanding ecological moat is built."
+    "item1title": "The world’s first attention value hub, redefining the Web3 creation & entertainment ecosystem",
+    "item1content": "KapKap’s breakthrough lies in building an \"attention middle layer\"—not just a platform, but the first ecosystem hub that deeply connects user attention, creators’ content, and brand needs through Web3 technologies (AI + AIGC + on-chain payments). It breaks the one-way traffic model of traditional platforms, turning behaviors like browsing, interacting, creating, and sharing into \"quantifiable value carriers,\" enabling symbiosis among users, creators, and brands within the same ecosystem, rather than a simple supply-demand relationship.",
+    "item2title": "AI + AIGC: More than tools, a \"two-way empowerment\" growth engine",
+    "item2content": "Unlike basic generative tools on the market, KapKap’s AI and AIGC form a \"deeply integrated system\": For creators, it analyzes user behavior and predicts trends to assist in low-cost content generation, optimization, and even promotion strategies—making \"high-efficiency creation accessible to everyone, regardless of experience.\" For users, it dynamically adjusts content recommendations based on interest profiles, community relationships, and on-chain assets, ensuring every interaction connects to \"highly relevant, valuable content.\" This two-way empowerment—reducing costs for creators while enhancing user experience— is its core technological edge.",
+    "item3title": "Attention as \"circulable assets,\" forming a transparent value loop",
+    "item3content": "KapKap innovatively quantifies user attention into \"redeemable value\": Interactions like likes, comments, and shares are no longer meaningless actions but \"asset contributions\" that earn rewards. Creators, via cross-chain payment systems, receive transparent, real-time earnings while building creative reputation. Brands, through AI-powered precision matching, turn marketing costs into \"direct investments in target users’ attention.\" These three parties drive each other, forming a positive cycle of \"attention input → value output → re-investment.\"",
+    "item4title": "A global on-chain ecosystem with \"self-sustaining\" unlimited expansion",
+    "item4content": "Powered by AI-driven global user matching and on-chain infrastructure, KapKap breaks geographical and platform barriers: Creators’ content reaches globally matched audiences without relying on traffic monopolies; users’ personalized experiences evolve as ecosystem data grows; brands’ collaborations quickly penetrate precise communities. Critically, the ecosystem thrives without external reliance—users contribute attention, creators produce content, brands inject resources, and together they fuel self-sustaining growth, enabling \"boundaryless expansion\" with long-term vitality."
   },
 
   "case": {
@@ -43,6 +53,24 @@
     "2dRet": "2D Ret",
     "wRet": "W Ret",
     "mRet": "M Ret"
+  },
+
+  "ecosystem": {
+    "title": "Explore the Kap ILE Ecosystem",
+    "content": "How to contact us and what kind of projects will receive support contact us How to contact us and what kind of projects will receive support contact us How to contact us and what kind of projects will receive support contact us How to contact us and what kind of projects will receive support contact us ",
+    "exploreNow": "Explore Now",
+    "user": "User",
+    "playForce": "Play & Forge <br/>Attention Points",
+    "obtainApp": "Obtain App Token <br/>equal to the Attention Points",
+    "dictribute": "Distribute dividends <br/>based on Attention Points",
+    "allApps": "All kinds of Apps",
+    "online": "Online",
+    "increaseAttention": "Increase Attention",
+    "kapkapCoin": "KapKap Coin",
+    "attentionPoints": "Attention Points",
+    "injectliquidity": "Inject liquidity",
+    "allTokens": "All kinds of App Tokens",
+    "fullFilled": "Full filled Attention <br/>to achieve Token on chain"
   },
 
   "roadmap": {
@@ -67,26 +95,22 @@
     "support": "Support",
     "revenue": "Revenue",
     "integratedSystem": "Integrated System",
-    "q1": "How can we contact you, and what types of projects are eligible for support?",
-    "a1": "You can reach out to us through the following channels: <br/><br/>Website: Visit www.kapkap.io and submit your project details via the contact form at the bottom of the page. <br/>Social Media: Follow us on Instagram, Twitter, YouTube, Facebook, or Threads, and send us a direct message or comment.<br/>Support Email: Email support@kapkap.io, and we’ll respond within 24 hours.<br/>Developer Hotline: Schedule an online meeting through our website to discuss project details directly with our business team.<br/><br/>Eligible Projects for Support:We prioritize innovative, high-growth-potential projects with clear target audiences, particularly in:<br/><br/>Indie games with unique gameplay or narrative experiences; <br/>Mobile or cross-platform casual or mid-core games;<br/>Games with global market potential, especially in emerging markets;<br/>Projects leveraging AI technology or data-driven growth strategies.When submitting, please include a detailed project plan, market positioning, and team background. We evaluate projects based on feasibility and market potential. Supported projects receive tailored technical support, resources, and marketing assistance.",
-    "q2": "What are the project evaluation criteria, and how do they relate to the level of support provided?",
-    "a2": "Evaluation Criteria:KapKap assesses projects based on the following dimensions:<br/><br/>Innovation: Unique gameplay, themes, or technological advancements;<br/>Market Potential: Size, spending willingness, and growth potential of the target audience;<br/>Team Capability: Technical expertise, past projects, and execution strength;<br/>Data Performance: Existing metrics (e.g., DAU, retention rates, monetization) if available;<br/>Platform Fit: Alignment with KapKap’s AI tools, SDK, and global support capabilities.<br/><br/>Relation to Support Levels:<br/><br/>S-Tier (High-Potential Projects): Full support, including priority access to the AI Smart Growth Engine, customized operational plans, global payment and ad integration, and dedicated data analytics.<br/>A-Tier (Promising Projects): Standard SDK integration, access to AI tools, and partial marketing resources.<br/>B-Tier (Growing Projects): Basic technical support and data analytics tools to optimize performance.The tier determines the priority and depth of resource allocation, with S-tier projects achieving faster global launches and user growth.",
-    "q3": "What are KapKap’s upcoming milestones and plans?",
-    "a3": "KapKap’s roadmap includes the following milestones:<br/><br/>Q1-Q2 2025: Enhance the AI-driven multi-dimensional user profiling system and launch the “Attention Value” matching market for precise traffic allocation and improved ad efficiency.<br/>Q3 2025: Roll out the AI Smart Growth Engine, providing end-to-end professional product and operational services to reduce trial-and-error costs.<br/>Q4 2025: Introduce the “One-Click Publishing” SDK, integrating multi-platform payment, advertising, and localization features to streamline developer workflows.<br/>Q1 2026: Establish a Data and Intelligent Decision-Making Hub, integrating advanced AI functionalities to optimize automated operations and real-time strategy adjustments.<br/>2026 and Beyond: Build a standardized publishing system, expand AIGC (AI-Generated Content) and the creator economy globally, targeting 5 million daily active users (DAU).",
-    "q4": "What are the advantages of choosing KapKap?",
-    "a4": "Choosing KapKap offers the following benefits:<br/><br/>Precise User Targeting: AI-driven Attention Matching uses social, behavioral, and consumption data to create user profiles, enabling precise targeting of high-value users and optimizing ad budgets.<br/>AI Smart Growth Engine: Built on extensive data and testing, it provides full-cycle diagnostics and professional operational solutions for rapid iteration and growth.<br/>One-Click Globalization: A mature SDK integrates global payments, deposits/withdrawals, ad aggregation, and AI-powered multilingual support, allowing developers to focus solely on game development.<br/>Low-Barrier Content Creation: AI tools enable easy game content and marketing material production, reducing development and promotion costs.<br/>Data-Driven Decisions: Built-in analytics dashboard for real-time monitoring of user behavior and game performance, optimizing retention and revenue.<br/>Proven Success: Projects like Genki Miner, Mars 2049, and TT Hero achieved high retention and growth (e.g., TT Hero’s 34.9% 2-day retention during its rising phase).",
-    "q5": "How do I integrate KapKap’s SDK?",
-    "a5": "Integrating KapKap’s SDK is straightforward:<br/><br/>Register a developer account at www.kapkap.io.<br/>Download the latest SDK package, which includes detailed documentation and sample code.<br/>Follow the documentation to integrate the SDK into your project, typically completed in a few hours.<br/>Once integrated, access global payments, ad aggregation, multilingual support, and analytics.<br/><br/>For technical assistance, contact support@kapkap.io for one-on-one guidance.",
-    "q6": "Does KapKap support small indie developers?",
-    "a6": "Yes, KapKap warmly welcomes small indie developers! We offer:<br/><br/>Free AI Tools: Content generation, user profiling, and basic analytics to reduce development costs.<br/>Flexible Support Plans: Indie teams can apply for A- or B-tier support, gaining access to technical resources and partial marketing assistance.<br/>Community Support: Join KapKap’s developer community (e.g., Discord) to connect with peers and stay updated on platform news.<br/>Low-Cost Globalization: The one-click publishing system enables indie teams to enter global markets without localization challenges.<br/><br/>We encourage indie developers to submit creative projects, and KapKap will provide tailored support based on project potential.",
-    "q7": "How does KapKap ensure data security and privacy?",
-    "a7": "KapKap adheres to strict data security and privacy standards:<br/><br/>Compliance Certifications: The platform is SOC II Type II certified, ensuring data handling meets international security standards.<br/>Data Encryption: All user data and transactions are protected with end-to-end encryption to prevent unauthorized access.<br/>Privacy First: We collect only essential data for user profiling and analytics, fully complying with GDPR and other global privacy regulations.<br/>Transparent Policies: Developers can monitor data usage and control sharing settings via the dashboard.<br/><br/>For further details, contact support@kapkap.io to request our privacy policy.",
-    "q8": "What is KapKap’s revenue model and profit-sharing mechanism?",
-    "a8": "KapKap offers a transparent and flexible revenue-sharing model:<br/><br/>Ad Revenue: Through KapKap’s ad aggregation system, developers access global ad networks (e.g., AdMob, Unity Ads), with KapKap taking a service fee (contact support@kapkap.io for specific rates).<br/>In-App Purchases: Via KapKap’s global payment system, developers receive a high revenue share, with the platform charging a minimal transaction fee.<br/>Subscription Models: For games with subscriptions, KapKap provides flexible management tools, with revenue splits based on project tier and performance.<br/>Transparent Settlements: Revenue data is updated in real-time on the developer dashboard, with detailed monthly financial reports.<br/><br/>For detailed terms, submit your project and connect with our business team.",
-    "q9": "What systems can be integrated with KapKap?",
-    "a9": "KapKap’s SDK and platform support the following integrations:<br/><br/>Payment Systems: Global payment methods, including credit cards, PayPal, Apple Pay, Google Pay, and regional options like Alipay and WeChat Pay.<br/>Ad Networks: Integration with platforms like AdMob, IronSource, Unity Ads, and AppLovin, supporting interstitial, rewarded video, and native ads.<br/>Analytics Tools: Built-in modules for user behavior tracking, retention analysis, and LTV calculations, compatible with third-party tools like Firebase Analytics.<br/>Localization Support: AI-driven multilingual system covering 50+ languages, automatically adapting to regional cultural and linguistic nuances.<br/>Social Features: Player engagement tools like leaderboards, friend invites, and sharing, compatible with platforms like Facebook and Twitter.<br/>Cloud Services: Cloud saves and cross-device synchronization for secure, seamless player experiences.<br/><br/>Developers can select modules based on project needs, with comprehensive documentation and support for quick integration.",
-    "q10": "How do I apply for KapKap’s support program?",
-    "a10": "To apply for KapKap’s support program, follow these steps:<br/><br/>Submit Project: Upload a project brief via the developer portal at www.kapkap.io, including game type, target market, team background, and existing data (if any).<br/>Initial Review: The KapKap team will evaluate within 5 business days and provide feedback via email.<br/>Detailed Discussion: Engage with our business team via online meetings or email to finalize project details and support plans.<br/>Agreement Signing: Sign a support agreement outlining resources and revenue-sharing terms.<br/>Support Rollout: Integrate SDK, access AI tools, and leverage marketing resources to kickstart growth.<br/><br/>We recommend submitting a detailed project plan (PDF format) to expedite the review process. For assistance, contact support@kapkap.io."
+    "q1": "What is KapKap?",
+    "a1": "KapKap is the world’s first \"attention middle layer,\" connecting players, creators, and brands through AI, AIGC, and on-chain payment technologies to build a Web3 entertainment and creation ecosystem. Its core is to quantify every browse, interaction, creation, or share by users into tangible value, ultimately forming a self-sustaining, continuously expanding on-chain ecosystem.",
+    "q2": "What can I do on KapKap?",
+    "a2": "Players can accumulate attention and redeem rewards by using platform apps and engaging in interactions (e.g., browsing, liking, sharing), while enjoying personalized experiences. Creators can leverage AI tools to efficiently generate content, reach audiences precisely, monetize works easily, and build community influence. Brands can target audiences accurately via user profiles for effective marketing and content collaboration.",
+    "q3": "How does attention convert into tangible value?",
+    "a3": "Users’ attention behaviors (e.g., browsing duration, likes, comments, shares, payments) are quantified by the system using behavioral data and on-chain records, converted into transferable rewards (such as digital assets or benefits). These actions not only bring users real returns but also boost ecosystem activity, benefiting creators and brands.",
+    "q4": "What specific roles do AI and AIGC play in KapKap?",
+    "a4": "AI analyzes user interests, community relationships, and on-chain behaviors to generate multi-dimensional profiles, recommending the most relevant content to users and helping creators target audiences precisely. AIGC assists creators in quickly generating/iterating content, optimizing release strategies, reducing trial-and-error costs, and improving creation and promotion efficiency.",
+    "q5": "What are the advantages of on-chain payments? How secure are they?",
+    "a5": "On-chain payments support cross-chain and multi-chain, adapting to different users’ asset types. Earnings arrive in real-time with transparent, traceable records, avoiding intermediate interference. Backed by blockchain technology, transactions are fully encrypted and traceable, ensuring security and giving creators peace of mind when monetizing.",
+    "q6": "Who is KapKap suitable for?",
+    "a6": "It suits players seeking tangible value from daily interactions; creators aiming to create efficiently and monetize precisely; and brands/communities needing to reach target users and improve marketing efficiency. Every role finds matching value in the ecosystem.",
+    "q7": "How does KapKap’s ecosystem operate cyclically?",
+    "a7": "Players contribute attention and behavioral data to drive ecosystem activity; creators produce content based on these needs to gain earnings and influence; brands collaborate to meet user needs and drive content commercialization. The three form a closed loop with circulating, growing value, enabling the ecosystem to self-sustain.",
+    "q8": "How to start using KapKap?",
+    "a8": "If you’re a player, log in to access apps and games on the KapKap platform directly. If you’re a project party (e.g., creator or brand), submit an application, and we’ll contact you via email promptly."
   },
 
   "bottom": {
@@ -99,15 +123,27 @@
     "prev": "prev",
     "next": "next",
     "submit": "submit",
-    "q1": "What's your name?",
-    "q2": "What's your email address?",
-    "q3": "Please briefly describe your game.",
-    "q4": "What platforms do you expect your game to operate on?",
-    "q5": "What form of return on investment (ROI) does your project anticipate from this game?",
-    "q6": "What kind of support or assistance do you expect the KapKap team to obtain in order to maximize the profitability of your game?",
-    "q7": "Please provide a method to access your game so that we can evaluate it.",
+    "q1": "What should we call you?",
+    "q2": "What is your email address?",
+    "q3": "Please briefly describe your project.",
+    "q4": "On which platforms is your game project operating?",
+    "q5": "What kind of revenue does your project expect to achieve?",
+    "q6": "What kind of support do you hope to get from the KapKap team?",
+    "q7": "Please provide a way to access your project so that we can learn more about it.",
     "successHint": "Thank you for your submission. We’ll get back to you as soon as possible!",
     "errorHint": "Submission failed. Please try again later",
     "placeholder": "Type your answer here..."
+  },
+
+  "explore": {
+    "title": "Explore Your New World",
+    "live": "Live",
+    "liveDesc": "Live Games and Apps",
+    "game": "Game",
+    "playEarn": "Play-Earn",
+    "upcoming": "Upcoming",
+    "upcomingDesc": "Preview upcoming Games and Apps",
+    "preLaunch": "Pre-Launch",
+    "preLaunchDesc": "Pre-Launch Games and Apps"
   }
 }

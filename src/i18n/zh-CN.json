@@ -1,10 +1,13 @@
 {
   "menu": {
-    "main": "首页",
-    "feature": "远景",
-    "case": "案例",
-    "roadmap": "路线图",
-    "other": "其他"
+    "main": "Home",
+    "introduce": "Introduce",
+    "feature": "Feature",
+    "case": "Case",
+    "roadmap": "Roadmap",
+    "other": "Other",
+    "explore": "Kap ILE",
+    "doc": "DOC"
   },
 
   "main": {
@@ -43,6 +46,24 @@
     "2dRet": "次留",
     "wRet": "7留",
     "mRet": "30留"
+  },
+
+  "ecosystem": {
+    "title": "探索 Kap ILE 生态系统",
+    "content": "如何联系我们，什么样的项目会获得扶持？ 如何联系我们，什么样的项目会获得扶持？ 如何联系我们，什么样的项目会获得扶持？ 如何联系我们，什么样的项目会获得扶持？ ",
+    "exploreNow": "现在探索",
+    "user": "用户",
+    "playForce": "游戏与 Forge 注意力点",
+    "obtainApp": "获得与注意力点相等的 App Token",
+    "dictribute": "根据注意力点分发奖励",
+    "allApps": "所有应用",
+    "online": "在线",
+    "increaseAttention": "增加注意力",
+    "kapkapCoin": "KapKap 币",
+    "attentionPoints": "注意力点",
+    "injectliquidity": "注入流动性",
+    "allTokens": "所有应用代币",
+    "fullFilled": "完成注意力以实现代币上链"
   },
 
   "roadmap": {
@@ -109,5 +130,17 @@
     "successHint": "感谢您的提交，我们会尽快与您取得联系！",
     "errorHint": "提交失败，请稍后重试",
     "placeholder": "在这里输入你的答案"
+  },
+
+  "explore": {
+    "title": "探索新的世界",
+    "live": "Live",
+    "liveDesc": "Live Games and Apps",
+    "game": "Game",
+    "playEarn": "Play-Earn",
+    "upcoming": "Upcoming",
+    "upcomingDesc": "Preview upcoming Games and Apps",
+    "launched": "Launched",
+    "launchedDesc": "Launched Games and Apps"
   }
 }

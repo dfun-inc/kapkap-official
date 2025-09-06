@@ -16,6 +16,15 @@ textarea {
 }
 
 @font-face {
+  font-family: "UniviaPro-Bold";
+  src: url('/fonts/UniviaPro-Bold.otf');
+}
+
+.font-univia-pro-bold {
+  font-family: "UniviaPro-Bold", sans-serif;
+}
+
+@font-face {
   font-family: "Ethnocentric-rg";
   src: url('/fonts/Ethnocentric-rg.ttf');
 }
@@ -81,6 +90,15 @@ textarea {
 .ReactModal__Content .modal-content {
   margin-left: auto;
   margin-right: auto;
+}
+
+.custom-toast {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: #fc5d8b 2px solid;
+  padding: 15px;
+  background: #18141e;
+  width: 350px;
 }
 
 body {
@@ -219,7 +237,6 @@ body {
     transform: rotate(360deg);
   }
 }
-
 
 
 @media (max-width: 768px) {

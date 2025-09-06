@@ -1,0 +1,23 @@
+// wagmi.ts
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { bsc, bscTestnet } from 'wagmi/chains'
+
+export const projectId = 'e29dd843efef3adfe3d1cbda24d21e51'
+
+export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
+
+/*
+export const config = createConfig({
+  chains: [tgtChain],
+  transports: {
+    [tgtChain.id]: http()
+  },
+})
+*/
+
+export const config = getDefaultConfig({
+  appName: 'KapKap',
+  projectId: projectId,
+  chains: [tgtChain],
+});
+

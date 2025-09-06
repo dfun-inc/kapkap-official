@@ -1,7 +1,7 @@
 'use client';
 
 import Bottom from '@/components/Home/bottom';
-import Case from '@/components/Home/case';
+import Ecosystem from '@/components/Home/ecosystem';
 import Feature from '@/components/Home/feature';
 import Main from '@/components/Home/main';
 import Other from '@/components/Home/other';
@@ -13,6 +13,7 @@ export default function Home() {
     <main className="">
       <Main />
       <Feature />
+      <Ecosystem />
       <Roadmap />
       <Other />
       <Bottom />

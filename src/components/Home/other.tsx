@@ -12,7 +12,7 @@ export default function Future() {
   const t = useTranslations();
 
   const [qaPage, setQaPage] = useState(0);
-  const questionList = [1,2,3,4,5,6,7,8,9,10];
+  const questionList = [1,2,3,4,5,6,7,8];
   const questionMap:any = {
     1: [1,3],
     2: [2,4,6,7,10],
@@ -42,7 +42,7 @@ export default function Future() {
       setCurQuestionList([1,2,3,4,5]);
     }
     else {
-      setCurQuestionList([6,7,8,9,10]);
+      setCurQuestionList([6,7,8]);
     }
     setOpenIdx([]);
     setQaPage(page);
@@ -176,6 +176,7 @@ export default function Future() {
           <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-3 md:mt-6"}>
             {t('qa.title')}
           </div>
+          {/*
           <div className={qaAniClass + " animate__animated animate__delay-500 rounded-full mt-15 bg-[#201E2A] p-1 flex items-center"}>
             {listTypes.map((item, idx) => (
               <div key={item} className={"text-xs lg:text-xl px-2 md:px-6 xl:px-16 py-2 md:py-3 cursor-pointer rounded-full mr-2 " + (curTypeIdx == idx ? "bg-[#121212]" : "")} onClick={() => setCurTypeIdx(idx)}>
@@ -183,6 +184,7 @@ export default function Future() {
               </div>
             ))}
           </div>
+          */}
           <div className={qaAniClass + " animate__animated animate__delay-1000 mt-6 md:px-3"}>
             {curQuestionList.map((item, idx) => (
               <div key={idx} className="border-b border-[#373447] py-3">

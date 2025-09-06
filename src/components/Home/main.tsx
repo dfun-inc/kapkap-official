@@ -49,8 +49,8 @@ export default function Main() {
   return (
     <section id="home-section-0" className="main-section relative home-section-0 bg-[#070709] h-screen min-h-[720px] overflow-hidden">
       <div className="w-full h-screen min-h-[720px] overflow-hidden absolute z-0 opacity-80 md:opacity-100">
-        <div className="aspect-video lg:aspect-auto w-auto lg:w-full h-full absolute top-0 left-0 z-0 -translate-x-1/2 md:-translate-x-1/3 lg:translate-x-0 overflow-hidden">
-          <video className="w-full h-full object-cover pointer-events-none" src="/videos/bg_main.mp4" autoPlay muted playsInline loop preload="auto"></video>
+        <div className="aspect-video lg:aspect-auto w-auto lg:w-full h-full inset-0 absolute top-0 left-0 z-0 -translate-x-1/2 md:-translate-x-1/3 lg:translate-x-0 overflow-hidden">
+          <video id="bg-video" data-role="background" className="w-full h-full object-cover pointer-events-none" src="/videos/bg_main.mp4" autoPlay muted playsInline loop preload="auto"></video>
         </div>
       </div>
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 h-full flex items-center relative z-2 border-b border-[#201e2a]">
@@ -62,17 +62,11 @@ export default function Main() {
               <span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32] text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] ml-[18px]"> {t('main.title3')}</span></div>
           </div>
           <div className="main-desc mt-5">
-            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-lg md:text-[24px]">
+            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-lg md:text-[24px] w-full md:w-3/5 2xl:w-1/2">
               {
                 locale == "en" ?
                 <>
-                  <div>{t('main.desc1')} </div>
-                  <div className="">
-                    <span className="text-[#6E4DFF]">{t('main.descWord1')}</span><span>, </span>
-                    <span className="text-[#6E4DFF]">{t('main.descWord2')}</span><span>, </span>
-                    <span>{t('main.desc2')} </span>
-                    <span className="text-[#6E4DFF]">{t('main.descWord3')}</span><span>.</span>
-                  </div>
+                  <div>{t('main.desc')} </div>
                 </>
                 :
                 <>
