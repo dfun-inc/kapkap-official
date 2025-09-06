@@ -8,6 +8,8 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import ConnectBtn from "@/components/ConnectBtn";
+import { getAppList } from "@/services/apis/app";
+import { toast } from "react-toastify";
 
 type Props = {
   locale: Locale;
@@ -24,7 +26,7 @@ export default function Header(props:Props) {
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
 
-  const { handleSetConfigData } = useAppContext();
+  const { handleSetConfigData, handleSetAppData } = useAppContext();
 
   const handleChangeLand = (lang:Locale) => {
     setDropdown(false);
@@ -118,6 +120,23 @@ export default function Header(props:Props) {
     })
   }
 
+  const handleGetAppData = async () => {
+    await getAppList()
+    .then((res) => {
+      const data = res?.data;
+      if(data?.status == 10000) {
+        handleSetAppData(data?.data);
+      }
+      else {
+        toast(t('common.getFailed') + ": " + data.status);
+        handleSetAppData(null);
+      }
+    })
+    .catch(() => {
+      handleSetAppData({});
+    })
+  }
+
   useEffect(() => {
     handleScroll();
     handleResize();
@@ -125,6 +144,7 @@ export default function Header(props:Props) {
     window.addEventListener("resize", handleResize);
 
     handleGetConfig();
+    handleGetAppData();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -150,7 +170,7 @@ export default function Header(props:Props) {
           <div className="w-full md:w-auto flex md:items-center flex-wrap">
             <menu className="w-full md:w-auto md:flex items-center my-20 md:my-0 ">
               {pathname != "/" ? (
-                <Link href="/" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+                <Link href="/" className='block md:inline text-xl md:mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
                   <span className="text-xl">{t('menu.main')}</span>
                 </Link>
               ) : 

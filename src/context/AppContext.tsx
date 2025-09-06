@@ -11,6 +11,8 @@ interface AppContextType {
   handleSetUserInfoLoading: (loading: boolean) => void,
   configData: any,
   handleSetConfigData: (data: any) => void,
+  appData: any,
+  handleSetAppData: (data: any) => void,
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -26,6 +28,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [userInfoLoading, setUserInfoLoading] = useState<boolean>(false);
   const [configData, setConfigData] = useState<any>(null);
+  const [appData, setAppData] = useState<any>(null);
 
   const triggerModalOpen = () => {
     setModerTrigger(prev => prev + 1);
@@ -43,6 +46,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setConfigData(data);
   }
 
+  const handleSetAppData = (data: any) => {
+    setAppData(data);
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -54,6 +61,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         handleSetUserInfoLoading,
         configData,
         handleSetConfigData,
+        appData,
+        handleSetAppData,
       }}
     >
       {children}

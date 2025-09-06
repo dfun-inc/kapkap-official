@@ -16,7 +16,7 @@ export default function Explore() {
   const [appList, setAppList] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const { configData } = useAppContext();
+  const { configData, appData } = useAppContext();
 
   const [pageLimit, setPageLimit] = useState(6);
 
@@ -70,49 +70,39 @@ export default function Explore() {
     }
   }
 
-  const handleGetAppList = async () => {
-    setLoading(true);
-    await getAppList()
-    .then((res) => {
-      const data = res?.data;
-      if(data?.status == 10000) {
-        let temp:any = {
-          'upcoming': [],
-          'live': []
-        };
-        for (const key in data?.data) {
-          if(data.data[key].process == 'upcomming') {
-            temp['upcoming'].push({
-              id: key,
-              tagArr: data.data[key].tag.split(' '),
-              ...data.data[key],
-            })
-          }
-          else if(data.data[key].process == 'launch' || data.data[key].process == 'pre-launch') {
-            temp['live'].push({
-              id: key,
-              tagArr: data.data[key].tag.split(' '),
-              ...data.data[key],
-            })
-          }
+  useEffect(() => {
+    if(appData) {
+      let temp:any = {
+        'upcoming': [],
+        'live': []
+      };
+      for (const key in appData) {
+        if(appData[key].process == 'upcomming' || appData[key].process == 'upcoming') {
+          temp['upcoming'].push({
+            id: key,
+            tagArr: appData[key].tag.split(' '),
+            ...appData[key],
+          })
         }
-        setAppList({
-          'upcoming': temp['upcomming'],
-          'live': temp['live']
-        });
+        else if(appData[key].process == 'launch' || appData[key].process == 'pre-launch') {
+          temp['live'].push({
+            id: key,
+            tagArr: appData[key].tag.split(' '),
+            ...appData[key],
+          })
+        }
       }
-      else {
-        toast(t('common.getFailed') + ": " + data.status);
-      }
-    })
-    setLoading(false);
-  }
+      setAppList({
+        'upcoming': temp['upcoming'],
+        'live': temp['live']
+      });
+      setLoading(false);
+    }
+  }, [appData])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
     handleResize();
-
-    handleGetAppList();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -159,10 +149,10 @@ export default function Explore() {
                 {Array.from({ length: Math.ceil(appList['live'].length / pageLimit) }).map((_, i) => (
                   <SwiperSlide key={i} className="!h-auto">
                       {Array.from({ length: 2 }).map((_, j) => (
-                        <div key={j} className="grid gap-8 mt-8 md:grid-cols-2 xl:grid-cols-3">
+                        <div key={j} className="grid gap-[30px] mt-8 md:grid-cols-2 xl:grid-cols-3">
                           {Array.from({ length: pageLimit / 2 }).map((_, k) => (
                             appList['live'][i * pageLimit + j * pageLimit / 2 + k] != undefined && 
-                            <Link href={'/product?id=' + appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id} key={k} className="group block flex-1 rounded-[20px] overflow-hidden bg-black hover:bg-[#201e2a] cursor-pointer">
+                            <Link href={'/project?id=' + appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id} key={k} className="group block flex-1 rounded-[20px] overflow-hidden bg-black hover:bg-[#201e2a] cursor-pointer">
                               <div className="aspect-[7/4] w-full relative overflow-hidden">
                                 {configData != null && <img className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110" src={configData.cdn + appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.banner} />}
                                 <div className="absolute top-3 left-2 rounded-full bg-black/70 text-right pl-14 pr-3 pt-[10px] pb-[6px]">
@@ -182,8 +172,8 @@ export default function Explore() {
                               </div>
                               <div className="px-[20px] py-[10px]">
                                 <div className="flex flex-wrap">
-                                  { appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.tagArr.map((tagItem: any, tagIdx: number) => (
-                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[16px] py-[6px] rounded-[10px] ' + tagIdx % 2 ? "bg-[#452C7A]" : "bg-[#6D4F0E]"}>{tagItem.name}</div>
+                                  { appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.tagArr.map((tagItem: string, tagIdx: number) => (
+                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[16px] py-[6px] rounded-[10px] mb-[10px] ' + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{tagItem}</div>
                                   ))}
                                 </div>
                                 <div className="mt-[10px] text-[#A6A6A6] " dangerouslySetInnerHTML={{__html:  appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.desc}}></div>
@@ -229,15 +219,15 @@ export default function Explore() {
               <>
               <Swiper
                 className="live-swiper explore-swiper !h-auto"
-                onSwiper={(swiper) => (liveSwiperRef.current = swiper)}
+                onSwiper={(swiper) => (upcomingSwiperRef.current = swiper)}
               >
                 {Array.from({ length: Math.ceil(appList['upcoming'].length / pageLimit) }).map((_, i) => (
                   <SwiperSlide key={i} className="!h-auto">
                       {Array.from({ length: 2 }).map((_, j) => (
-                        <div key={j} className="grid gap-8 mt-8 md:grid-cols-2 xl:grid-cols-3">
+                        <div key={j} className="grid gap-[30px] mt-8 md:grid-cols-2 xl:grid-cols-3">
                           {Array.from({ length: pageLimit / 2 }).map((_, k) => (
                             appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k] != undefined && 
-                            <Link href={'/product?id=' + appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.id} key={k} className="group block flex-1 rounded-[20px] overflow-hidden bg-black hover:bg-[#201e2a] cursor-pointer">
+                            <Link href={'/project?id=' + appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.id} key={k} className="group block flex-1 rounded-[20px] overflow-hidden bg-black hover:bg-[#201e2a] cursor-pointer">
                               <div className="aspect-[7/4] w-full relative overflow-hidden">
                                 {configData != null && <img className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110" src={configData.cdn + appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.banner} />}
                                 <div className="absolute top-3 left-2 rounded-full bg-black/70 text-right pl-14 pr-3 pt-[10px] pb-[6px]">
@@ -257,8 +247,8 @@ export default function Explore() {
                               </div>
                               <div className="px-[20px] py-[10px]">
                                 <div className="flex flex-wrap">
-                                  { appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.tagArr.map((tagItem: any, tagIdx: number) => (
-                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[16px] py-[6px] rounded-[10px] ' + tagIdx % 2 ? "bg-[#452C7A]" : "bg-[#6D4F0E]"}>{tagItem.name}</div>
+                                  { appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.tagArr.map((tagItem: string, tagIdx: number) => (
+                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[16px] py-[6px] rounded-[10px] mb-[10px] ' + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{tagItem}</div>
                                   ))}
                                 </div>
                                 <div className="mt-[10px] text-[#A6A6A6] " dangerouslySetInnerHTML={{__html:  appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.desc}}></div>
