@@ -203,7 +203,7 @@ export default function ConnectBtn() {
         </div>
       </div>
       <div className={"absolute left-0 top-8 w-full pt-3 block " + (walletDropdown ? '' : "md:hidden")}>
-        <div className="w-full py-1 shadow-lg md:bg-black/50 rounded-[10px]">
+        <div className="w-full py-1 shadow-lg md:bg-black/50 rounded-[10px] overflow-hidden">
           <div className="w-full mt-6 md:mt-0">
             <div className="text-white/60 md:hidden mb-6">{t('menu.myAccount')}</div>
             {walletAddr && (

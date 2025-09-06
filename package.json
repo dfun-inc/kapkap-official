@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "dotenv -e .env.dev next dev --turbopack",
     "dev:prod": "dotenv -e .env.prod next dev",
-    "build": "dotenv -e .env.prod next build",
+    "build": "dotenv -e .env.dev next build",
     "build:dev": "dotenv -e .env.dev  next build",
     "build:prod": "dotenv -e .env.prod next build",
     "start": "next start",
