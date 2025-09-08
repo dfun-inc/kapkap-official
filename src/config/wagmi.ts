@@ -4,7 +4,8 @@ import { bsc, bscTestnet } from 'wagmi/chains'
 
 export const projectId = 'e29dd843efef3adfe3d1cbda24d21e51'
 
-export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
+// export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
+const tgtChain:any = bsc;
 
 /*
 export const config = createConfig({

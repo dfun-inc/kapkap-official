@@ -145,5 +145,15 @@
     "upcomingDesc": "Preview upcoming Games and Apps",
     "preLaunch": "Pre-Launch",
     "preLaunchDesc": "Pre-Launch Games and Apps"
+  },
+
+  "project": {
+    "totalAmount": "Token release total amount",
+    "task": "task",
+    "go": "Go",
+    "completed": "Completed",
+    "claim": "Claim",
+    "claimed": "Claimed",
+    "claimSuccess": "Claim Success"
   }
 }

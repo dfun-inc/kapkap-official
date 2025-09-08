@@ -36,8 +36,8 @@ export default function RootLayout({
     <html lang={locale == 'en' ? 'en' : 'zh-CN'}>
       <title>KapKap - Attention is all you earn</title>
       <body>
-        <AppProvider>
-          <EvmProvider>
+        <EvmProvider>
+          <AppProvider>
             <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
               <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
                 <ToastContainer
@@ -60,8 +60,8 @@ export default function RootLayout({
                 </div>
               </ReactLenis>
             </NextIntlClientProvider> 
-          </EvmProvider>
-        </AppProvider>
+          </AppProvider>
+        </EvmProvider>
       </body>
     </html>
   );
