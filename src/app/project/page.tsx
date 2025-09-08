@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
 import { getUrlParamsByName } from "@/utils/url";
-import { getILEData } from "@/services/apis/app";
+import { getCurSeasonReward, getILEData } from "@/services/apis/app";
 import { useErrCode } from "@/datas/errCode";
 import Button from "@/components/ui/Button";
 import { formatNumberWithCommas } from "@/utils/number";
@@ -27,6 +27,7 @@ export default function ProductPage() {
   const [checkingMission, setCheckingMission] = useState<boolean>(false);
   const [claimLoading, setClaimLoading] = useState<boolean>(false);
   const [ileState, setIleState] = useState<number>(0);
+  const [curSeasonReward, setCurSeasonReward] = useState<string>('');
 
   const { errCodeHandler } = useErrCode();
 
@@ -217,6 +218,20 @@ export default function ProductPage() {
     })
   }
 
+  const handleGetCurSeasonReward = async() => {
+    const id = getUrlParamsByName('id');
+    await getCurSeasonReward(id)
+    .then((res) => {
+      const data = res?.data
+      if(data.status == 10000) {
+        setCurSeasonReward(data.data);
+      }
+      else {
+        errCodeHandler(data.status);
+      }
+    })
+  }
+
   useEffect(() => {
     const id = getUrlParamsByName('id');
     if(appData && id) {
@@ -234,6 +249,7 @@ export default function ProductPage() {
       handleGetILEData();
       handleGetMissionConfig();
       handleGetMissionProcess();
+      handleGetCurSeasonReward();
     }
   }, [projectData,userInfo]);
 
@@ -268,8 +284,8 @@ export default function ProductPage() {
             </div>
           </div>
           <div className="max-w-[1920px] mx-auto relative z-1">
-            <div className="px-5 lg:px-18 2xl:px-24 mt-10 md:mt-32">
-              <div className="bg-black/50 rounded-[20px] pb-12">
+            <div className="px-5 lg:px-18 2xl:px-24 mt-10 md:mt-20">
+              <div className="bg-black/50 rounded-[20px] overflow-hidden">
                 <div className="flex flex-wrap">
                   <div className="relative md:-left-3 md:-top-5 w-full md:w-[480px] xl:w-[520px] 2xl:w-[560px] bg-black rounded-[20px] overflow-hidden">
                     <div className="w-full aspect-[16/9] animate-pulse bg-gray-500/50 rounded-[20px]"></div>
@@ -321,8 +337,8 @@ export default function ProductPage() {
               </div>
             </div>
 
-            <div className="px-5 lg:px-18 2xl:px-24 mt-10 md:mt-32">
-              <div className="bg-black/50 rounded-[20px] pb-12">
+            <div className="px-5 lg:px-18 2xl:px-24 mt-10 md:mt-20">
+              <div className="bg-black/50 rounded-[20px]">
                 <div className="flex flex-wrap">
                   <div className="relative md:-left-3 md:-top-5 w-full md:w-[480px] xl:w-[520px] 2xl:w-[560px] bg-black rounded-[20px] overflow-hidden">
                     {configData && <img className="w-full" src={configData.cdn + projectData.banner} />}
@@ -330,7 +346,7 @@ export default function ProductPage() {
                       <div className="flex items-center">
                         {ileData && <>
                           <div className="flex-1 bg-[#5125B4] rounded-full h-10 relative">
-                            <img className="h-18 absolute -top-3" style={{left: Math.floor(ileData.claimedAmount / ileData.allAmount)}} src="/images/icon_launch.png" />
+                            <img className="h-18 absolute -top-3" style={{left: Math.floor(ileData.claimedAmount / ileData.allAmount)}} src="/images/icon_attentionPoints.png" />
                           </div>
                           <div className="min-w-[100px] w-[15%] text-center text-[20px] text-white">{Math.floor(ileData.claimedAmount / ileData.allAmount * 10000) / 100}%</div>
                         </>}
@@ -368,8 +384,8 @@ export default function ProductPage() {
                 </div>
 
                 {projectData != null && projectData?.process == 'launch' && (
-                  <>
-                    <div className="mx-6 md:mx-12 bg-black mt-12 px-3 md:px-8 py-3 md:py-6">
+                  <div className="bg-black mt-9 py-9 rounded-b-[20px] overflow-hidden">
+                    <div className="mx-6 md:mx-12 px-3 md:px-8 py-3 md:py-6">
                       { (ileDataLoading || ileData) &&<div className="text-[22px] md:text-[30px] text-[#8D73FF] text-center border-b border-[#8D73FF] pb-2">
                         {t('project.totalAmount')}
                       </div>
@@ -424,61 +440,82 @@ export default function ProductPage() {
                           </div>
                           :
                           <div className="mt-9">
-                            {missionConfig != null && missionConfig.map((item:any, idx:number) => (
-                              <>
-                              <div key={idx} className="mt-6 flex flex-wrap justify-between items-center border-b md:border-none border-[#38334a] pb-1 md:pb-0">
-                                <div className="w-full md:w-auto md:flex-1 flex items-center md:pb-1 md:border-b md:border-[#38334a] text-[#DDD5FF] text-[18px] md:text-[24px] pb-1 md:pb-0">
-                                  <div className="flex-1">{item.desc}</div>
-                                  <div className="w-[300px] hidden md:flex items-center">
-                                    <img className="w-10 mr-2" src="/images/icon_kkAppToke.png" />
-                                    <div className="text-[#DDD5FF] text-[24px]">
-                                      {item.finishCount}
-                                    </div>
+                            <div className="md:px-6">
+                              {missionConfig != null && missionConfig.map((item:any, idx:number) => (
+                                <div key={idx} className="mt-6 flex flex-wrap justify-between items-center border-b border-[#38334a] pb-1 md:pb-0">
+                                  <div className="w-full md:w-auto md:flex-1 flex items-center md:pb-1 text-[#DDD5FF] text-[18px] md:text-[24px] pb-1 md:pb-0">
+                                    <div className={"flex-1 " + (curProcessIdx > idx ? 'text-[#96C03C]' : 'text-[#DDD5FF]')}>{item.desc}</div>
+                                  </div> 
+                                  {!missionProcessLoading && <div className="w-full md:w-36 md:pl-6 text-right pb-1">
+                                    {curProcessIdx == idx && 
+                                      <Button className="text-lg font-light text-white w-18 md:w-26 text-center py-1" onClick={() => handleToTask(item)}>
+                                        {checkingMission && <span className="animate-spin mr-2 w-4 h-4 border-[3px]"></span>}
+                                        <span>{t('project.go')}</span>
+                                      </Button>
+                                    }
+                                    {curProcessIdx < idx && 
+                                      <div className="inline-block text-lg font-light text-white w-18 md:w-26 text-center py-1 cursor-not-allowed opacity-50 rounded-lg bg-[#6e4cfe]">
+                                        {t('project.go')}
+                                      </div>
+                                    }
+                                    {curProcessIdx > idx && 
+                                      <div className="text-xl font-light text-white/60 w-full flex items-center justify-end py-1">
+                                        <svg className="rounded-xl" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3156" width="32" height="32"><path d="M859.115184 62.365396 161.97658 62.365396c-54.775534 0-99.590206 44.814672-99.590206 99.590206l0 697.139627c0 54.781674 44.814672 99.590206 99.590206 99.590206l697.138604 0c54.781674 0 99.590206-44.808532 99.590206-99.590206L958.70539 161.955602C958.70539 107.180068 913.896858 62.365396 859.115184 62.365396L859.115184 62.365396zM410.957211 759.505024l-248.980631-248.980631 69.710688-69.706595 179.269943 179.269943 378.452401-378.453425 69.705572 69.711711L410.957211 759.505024 410.957211 759.505024zM410.957211 759.505024" fill="#affe30" p-id="3157"></path></svg>
+                                      </div>
+                                    }
                                   </div>
-                                </div> 
-                                <div className="md:hidden flex w-1/2 items-center">
-                                  <img className="w-10 mr-2" src="/images/icon_kkAppToke.png" />
-                                  <div className="text-[#DDD5FF] text-[18px]">
-                                    {item.finishCount}
-                                  </div>
-                                </div>
-                                {!missionProcessLoading && <div className="w-1/2 md:w-36 md:pl-6 text-right">
-                                  {curProcessIdx == idx && 
-                                    <Button className="text-xl font-light text-white w-22 md:w-30 text-center py-1" onClick={() => handleToTask(item)}>
-                                      {checkingMission && <span className="animate-spin mr-2 w-4 h-4 border-[3px]"></span>}
-                                      <span>{t('project.go')}</span>
-                                    </Button>
-                                  }
-                                  {curProcessIdx < idx && 
-                                    <Button className="text-xl font-light text-white w-22 md:w-30 text-center py-1 cursor-not-allowed opacity-50" disabled>
-                                      {t('project.go')}
-                                    </Button>
-                                  }
-                                  {curProcessIdx > idx && 
-                                    <div className="text-xl font-light text-white/60 w-full md:w-36 flex items-center justify-endmd:justify-center py-1">
-                                      <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M416.832 798.08C400.64 798.08 384.512 791.872 372.16 779.52L119.424 525.76C94.784 500.992 94.784 460.8 119.424 436.032 144.128 411.264 184.128 411.264 208.768 436.032L416.832 644.928 814.4 245.76C839.04 220.928 879.04 220.928 903.744 245.76 928.384 270.528 928.384 310.656 903.744 335.424L461.504 779.52C449.152 791.872 432.96 798.08 416.832 798.08Z" fill="#ffba3e"></path></svg>
-                                      <span className="ml-2">{t('project.completed')}</span>
-                                    </div>
                                   }
                                 </div>
-                                }
+                              ))}
+                            </div>
+                            {missionConfig != null && 
+                              <div className="mt-6 flex items-center rounded-[20px] overflow-hidden">
+                                <div className="bg-[#240E46] w-40 md:w-80 h-24 flex justify-center items-center">
+                                  <div className="text-center">
+                                    <div className="font-ethnocentric-rg text-[14px] md:text-[26px] text-[#F2CA9E]">
+                                      {t('project.taskBonus')}
+                                    </div>
+                                    <div className="text-[12px] md:text-[18px] text-[#8D73FF]">
+                                      {t('project.taskBonusDesc')}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="w-0 h-0 border-r-transparent border-r-[48px] border-t-[#240E46] border-t-[96px]"></div>
+                                <div className="flex-1 flex flex-wrap justify-end items-center">
+                                  <div className="w-full md:w-auto flex items-center justify-center mr-6 mb-3 md:mb-0">
+                                    <img className="w-10 md:w-14 mr-2 inline-block" src="/images/icon_kkAppToke.png" />
+                                    <span className="text-[14px] md:text-[26px] text-[#F2CA9E]">{curSeasonReward}</span>    
+                                  </div>
+                                  <div className="w-full md:w-auto min-w-40">
+                                    {curProcessIdx < missionConfig.length ?
+                                    <div className="text-center">
+                                      <div className="flex justify-center items-end text-[#8D73FF]">
+                                        <span className="text-2xl text-[#affe30]">{curProcessIdx}</span>
+                                        <span className="mx-[2px]"> / </span>
+                                        <span>{missionConfig.length}</span>
+                                      </div>
+                                      <div className="text-sm text-[#8D73FF]">{t('project.accomplished')}</div>
+                                    </div>
+                                    :
+                                    <>
+                                    {ileState == 1 &&
+                                      <Button className="text-xl font-light text-white w-30 md:w-40 text-center py-2 md:py-3" onClick={() => handleClaim()}>
+                                        {claimLoading && <span className="animate-spin mr-2 w-4 h-4 border-3"></span>}
+                                        <span>{t('project.claim')}</span>
+                                      </Button>
+                                    }
+                                    {ileState == 2 &&
+                                      <div className="flex justify-center items-center">
+                                        <svg className="inline-block" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6494" width="36" height="36"><path d="M731.733333 294.4L450.133333 631.466667l-134.4-134.4-53.333333 53.333333 194.133333 194.133333L789.333333 345.6l-57.6-51.2zM512 992C247.466667 992 32 776.533333 32 512S247.466667 32 512 32 992 247.466667 992 512 776.533333 992 512 992z" p-id="6495" fill="#636363"></path></svg>
+                                        <span className="ml-2 text-[20px] md:text-[28px] text-[#636363]">{t('project.claimed')}</span>
+                                      </div>
+                                    }
+                                    </>
+                                    }
+                                  </div>
+                                </div>
                               </div>
-                              </>
-                            ))}
-                            {curProcessIdx == missionConfig.length && <div className="mt-9 flex justify-center">
-                              {ileState == 1 &&
-                                <Button className="text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4" onClick={() => handleClaim()}>
-                                  {claimLoading && <span className="animate-spin mr-2 w-4 h-4 border-3"></span>}
-                                  <span>{t('project.claim')}</span>
-                                </Button>
-                              }
-                              {ileState == 2 &&
-                                <>
-                                  <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6494" width="40" height="40"><path d="M731.733333 294.4L450.133333 631.466667l-134.4-134.4-53.333333 53.333333 194.133333 194.133333L789.333333 345.6l-57.6-51.2zM512 992C247.466667 992 32 776.533333 32 512S247.466667 32 512 32 992 247.466667 992 512 776.533333 992 512 992z" p-id="6495" fill="#ffba3e"></path></svg>
-                                  <span className="ml-2 text-[20px] md:text-[30px]">{t('project.claimed')}</span>
-                                </>
-                              }
-                            </div>} 
+                            }
                           </div>
                         }
                       </div>
@@ -489,7 +526,7 @@ export default function ProductPage() {
                         </Button>
                       </div>
                     }
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -497,7 +534,7 @@ export default function ProductPage() {
         </div>
       )}
         
-      <div className="bg-[#090909] py-6 mt-10">
+      <div className="bg-[#090909] py-6">
         <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24">
           <Footer />
         </div>

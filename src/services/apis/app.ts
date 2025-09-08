@@ -45,3 +45,29 @@ export async function getILEState(projectId: string, season: number) {
     },
   });
 }
+
+export async function getCurSeasonReward(projectId: string) {
+  return request({
+    method: 'get',
+    url: '/api/v1/user/getKScore',
+    params: {
+      projectId: projectId
+    },
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}
+
+export async function getIleClaimedReward(projectId: string) {
+  return request({
+    method: 'get',
+    url: '/api/v1/ile/getILEClaimedAmount',
+    params: {
+      projectId: projectId
+    },
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}

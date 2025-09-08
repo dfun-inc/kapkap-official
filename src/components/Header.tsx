@@ -185,7 +185,7 @@ export default function Header(props:Props) {
               <Link href="/explore" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
                   <span className="text-xl">{t('menu.explore')}</span>
               </Link>
-              <a href="/" target="_blank" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+              <a href="https://kapkap.gitbook.io/about" target="_blank" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
                 <span className="text-xl">{t('menu.doc')}</span>
               </a>
             </menu>

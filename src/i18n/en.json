@@ -154,6 +154,15 @@
     "completed": "Completed",
     "claim": "Claim",
     "claimed": "Claimed",
-    "claimSuccess": "Claim Success"
+    "claimSuccess": "Claim Success",
+    "taskBonus": "Task Bonus",
+    "taskBonusDesc": "Complete all tasks to claim",
+    "accomplished": "Accomplished"
+  },
+
+  "profile": {
+    "title": "Your Kap ILE",
+    "attentionPoints": "Attention Points",
+    "appTokens": "App Tokens"
   }
 }

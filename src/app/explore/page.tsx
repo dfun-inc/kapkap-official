@@ -15,9 +15,8 @@ export default function Explore() {
   const t = useTranslations();
   const [appList, setAppList] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [ileData, setIleData] = useState<any>(null);
 
-  const { configData, appData, userInfo } = useAppContext();
+  const { configData, appData, ileData, handleSetIleData } = useAppContext();
 
   const [pageLimit, setPageLimit] = useState(6);
 
@@ -84,7 +83,7 @@ export default function Explore() {
           })
         }
       }));
-      setIleData(temp);
+      handleSetIleData(temp);
     }
   }
 
@@ -119,10 +118,10 @@ export default function Explore() {
   }, [appData])
 
   useEffect(() => {
-    if(appList?.live && userInfo) {
+    if(appList?.live && !ileData) {
       handleGetIleData();
     }
-  }, [appList, userInfo])
+  }, [appList, ileData])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
@@ -182,7 +181,7 @@ export default function Explore() {
                                 {ileData && ileData[appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id] && <div className="absolute top-3 left-2 rounded-full bg-black/70 text-right pl-13 pr-3 pt-[10px] pb-[6px]">
                                   <img className="absolute w-13 -top-3 -left-1" src="/images/icon_launch.png" />
                                   <span className="text-white text-[18px] md:text-[20px] leading-[16px] md:leading-[18px]">
-                                    {Math.floor(ileData[appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id].claimedAmount / ileData[Math.floor(appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id)].allAmount * 10000) / 100}%
+                                    {Math.floor(ileData[appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id]?.claimedAmount / ileData[Math.floor(appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.id)]?.allAmount * 10000) / 100}%
                                   </span>
                                 </div>}
                                 <div className="absolute left-0 bottom-0 flex items-end w-full">

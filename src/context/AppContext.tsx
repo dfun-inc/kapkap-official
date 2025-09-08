@@ -13,6 +13,8 @@ interface AppContextType {
   handleSetConfigData: (data: any) => void,
   appData: any,
   handleSetAppData: (data: any) => void,
+  ileData: any,
+  handleSetIleData: (data: any) => void,
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -29,6 +31,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [userInfoLoading, setUserInfoLoading] = useState<boolean>(false);
   const [configData, setConfigData] = useState<any>(null);
   const [appData, setAppData] = useState<any>(null);
+  const [ileData, setIleData] = useState<any>(null);
 
   const triggerModalOpen = () => {
     setModerTrigger(prev => prev + 1);
@@ -50,6 +53,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setAppData(data);
   }
 
+  const handleSetIleData = (data: any) => {
+    setIleData(data);
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -63,6 +70,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         handleSetConfigData,
         appData,
         handleSetAppData,
+        ileData,
+        handleSetIleData,
       }}
     >
       {children}

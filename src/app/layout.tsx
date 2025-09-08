@@ -38,7 +38,7 @@ export default function RootLayout({
       <body>
         <EvmProvider>
           <AppProvider>
-            <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
+            <NextIntlClientProvider locale={'en'} messages={messages['en']} timeZone="America/New_York">
               <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
                 <ToastContainer
                     position="top-center"
