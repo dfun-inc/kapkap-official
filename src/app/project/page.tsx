@@ -245,13 +245,19 @@ export default function ProductPage() {
   }, [appData]);
 
   useEffect(() => {
+    if(projectData?.process == 'launch') {
+      handleGetILEData();
+    }
+  }, [projectData]);
+
+  useEffect(() => {
     if(userInfo && projectData?.process == 'launch') {
       handleGetILEData();
       handleGetMissionConfig();
       handleGetMissionProcess();
       handleGetCurSeasonReward();
     }
-  }, [projectData,userInfo]);
+  }, [projectData, userInfo]);
 
   useEffect(() => {
     if(missionConfig && ileData) {
