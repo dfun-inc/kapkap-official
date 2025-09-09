@@ -51,11 +51,31 @@ export default function Pool() {
     {imgData: '/images/game_partners/TonDating.jpg'},
     {imgData: '/images/game_partners/Trumps Empire.jpg'},
     {imgData: '/images/game_partners/TTHero.jpg'},
+    /*
     {imgData: '/images/game_partners/Uni Jump.jpg'},
     {imgData: '/images/game_partners/VIRUS.jpg'},
     {imgData: '/images/game_partners/VOXEL.jpg'},
     {imgData: '/images/game_partners/Your Waifu.jpg'},
     {imgData: '/images/game_partners/ZarGates.jpg'},
+    */
+
+    {imgData: '/images/app_partners/4aec3ddf.jpg'},
+    {imgData: '/images/app_partners/8ae19a57.jpg'},
+    {imgData: '/images/app_partners/58b30926.jpg'},
+    {imgData: '/images/app_partners/80db9b27.jpg'},
+    {imgData: '/images/app_partners/55699b23.jpg'},
+    {imgData: '/images/app_partners/BioCalls.jpg'},
+    {imgData: '/images/app_partners/c6ff8f6a.jpg'},
+    {imgData: '/images/app_partners/CatDoes.jpg'},
+    {imgData: '/images/app_partners/d2cea244.jpg'},
+    {imgData: '/images/app_partners/e2501758.jpg'},
+    {imgData: '/images/app_partners/f28377c1.jpg'},
+    {imgData: '/images/app_partners/IndyAi.jpg'},
+    {imgData: '/images/app_partners/Surf.jpg'},
+    {imgData: '/images/app_partners/tfh.jpg'},
+    {imgData: '/images/app_partners/Trace.jpg'},
+    {imgData: '/images/app_partners/vidau.jpg'},
+    {imgData: '/images/app_partners/Wanderboat2.0.jpg'},
   ];
   const [finishLoadAll, setFinishLoadAll] = useState(false);
   const completeNum = useRef(0);
@@ -75,7 +95,7 @@ export default function Pool() {
   }, [])
 
   return (
-    <div className="relative w-full h-[800px] md:h-[600px] lg:h-[480px] xl:h-[360px] 2xl:h-[300px] relative">
+    <div className="relative w-full h-[800px] md:h-[680px] lg:h-[520px] xl:h-[400px] 2xl:h-[360px] relative">
       <div className="game-partner-bg absolute w-full h-full z-0 rounded-full"></div>
       {allowLoading ?
       <Canvas id="partner-canvas relative z-1" orthographic camera={{ position: [0, 0, 200], zoom: 10 }}>

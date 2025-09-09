@@ -33,8 +33,8 @@ export default function feature() {
         y: -60,
         scrollTrigger: {
           trigger:".feature-section",
-          start: 'top-=100 top',
-          end: 'top+=100 top',
+          start: 'top top',
+          end: 'top+=20% top',
           scrub: true,
         },
       })
@@ -44,8 +44,8 @@ export default function feature() {
         y: -60,
         scrollTrigger: {
           trigger:".feature-section",
-          start: 'top top',
-          end: 'top+=300 top',
+          start: 'top+=30% top',
+          end: 'top+=50% top',
           scrub: true,
         },
       })
@@ -55,8 +55,8 @@ export default function feature() {
         y: -60,
         scrollTrigger: {
           trigger:".feature-section",
-          start: 'top+=200 top',
-          end: 'top+=400 top',
+          start: 'top+=60% top',
+          end: 'top+=80% top',
           scrub: true,
         },
       })

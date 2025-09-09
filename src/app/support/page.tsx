@@ -4,8 +4,9 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from "react";
 import Modal from 'react-modal'
 import Button from '@/components/ui/Button';
-import axios from 'axios';
 import Footer from '@/components/Footer';
+import { submitMsg } from '@/services/apis/user';
+import { useErrCode } from "@/datas/errCode";
 
 export default function Support() {
   const t = useTranslations();
@@ -25,7 +26,8 @@ export default function Support() {
     visitType: ''
   }
 
-  const [form, setForm] = useState<any>(initialForm)
+  const [form, setForm] = useState<any>(initialForm);
+  const { errCodeHandler } = useErrCode();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -56,18 +58,14 @@ export default function Support() {
     e.preventDefault()
     console.log('提交数据:', form);
 
-    /*
-    await axios({
-      method: "post",
-      url: "",
-      data: form
-    })
+    await submitMsg({email:form.email ,message:form})
     .then((res) => {
       const data = res?.data;
       if(data.status == 10000) {
         setErrorStatus(-1);
       }
       else {
+        errCodeHandler(data.status);
         setErrorStatus(data.status);
       }
       setShowResult(true);
@@ -77,7 +75,6 @@ export default function Support() {
       setErrorStatus(0);
       setShowResult(true);
     })
-    */
 
     setSubmitLoading(false);
     setShowResult(true);

@@ -39,8 +39,8 @@ export default function Main() {
       y: -50,
       scrollTrigger: {
         trigger:".main-section",
-        start: '15% top',
-        end: '45% top',
+        start: '30% top',
+        end: '60% top',
         scrub: true,
       },
     })
@@ -62,7 +62,7 @@ export default function Main() {
               <span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32] text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] ml-[18px]"> {t('main.title3')}</span></div>
           </div>
           <div className="main-desc mt-5">
-            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-lg md:text-[24px] w-full md:w-3/5 2xl:w-1/2">
+            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-lg md:text-[22px] 2xl:text-[24px] w-full md:w-3/5 2xl:w-1/2">
               {
                 locale == "en" ?
                 <>

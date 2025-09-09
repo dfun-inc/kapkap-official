@@ -255,7 +255,10 @@ export default function ProductPage() {
       handleGetILEData();
       handleGetMissionConfig();
       handleGetMissionProcess();
-      handleGetCurSeasonReward();
+
+      if(userInfo?.tgAccount) {
+        handleGetCurSeasonReward();
+      }
     }
   }, [projectData, userInfo]);
 
@@ -380,7 +383,7 @@ export default function ProductPage() {
                         <div className="text-white text-[24px] 2xl:text-[30px] leading-[1.1]">{projectData.name}</div>
                         <div className="flex mt-2">
                           {projectData.tagArr?.map((name:string, tagIdx:number) => (
-                            <div key={tagIdx} className={"text-[12px] mr-2 md:text-[14px] px-4 py-[6px] rounded-full " + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{name}</div>
+                            <div key={tagIdx} className={"text-[12px] mr-2 md:text-[14px] px-4 py-[6px] rounded-full capitalize " + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{name}</div>
                           ))}
                         </div>
                       </div>
@@ -488,10 +491,14 @@ export default function ProductPage() {
                                 </div>
                                 <div className="w-0 h-0 border-r-transparent border-r-[48px] border-t-[#240E46] border-t-[96px]"></div>
                                 <div className="flex-1 flex flex-wrap justify-end items-center">
+                                  {userInfo?.tgAccount ?  
                                   <div className="w-full md:w-auto flex items-center justify-center mr-6 mb-3 md:mb-0">
                                     <img className="w-10 md:w-14 mr-2 inline-block" src="/images/icon_kkAppToke.png" />
                                     <span className="text-[14px] md:text-[26px] text-[#F2CA9E]">{curSeasonReward}</span>    
                                   </div>
+                                  :
+                                  <div className="text-[12px] md:text-[18px] text-[#8D73FF]">{t('project.bindTgHint')}</div>
+                                  }
                                   <div className="w-full md:w-auto min-w-40">
                                     {curProcessIdx < missionConfig.length ?
                                     <div className="text-center">

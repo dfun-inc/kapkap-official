@@ -12,7 +12,35 @@ export default function Roadmap() {
   const [aniTitleClass, setAniTitleClass] = useState<string>("opacity-0");
   const [aniItemClass, setAniItemClass] = useState<string>("opacity-0");
 
+  const [roadMapData, setRoadMapData] = useState<any>(null);
+  const currentProcess = [1, 1];
+
+  const handleInit = () => {
+    const raws:string[] = Object.keys(t.raw('roadmap'));
+    let temp:any = {};
+    
+    raws.forEach((item) => {
+      if(item.indexOf('step') >= 0 ) {
+        const name = item.split('_');
+        if(!temp[name[0]]) {
+          temp[name[0]] = {sub: [], title: ''};
+        }
+
+        if(name.length == 1) {
+          temp[name[0]]['title'] = t('roadmap.' + item);
+        }
+        else {
+          temp[name[0]]['sub'].push(t('roadmap.' + item))
+        }
+      }
+    })
+
+    setRoadMapData(temp);
+  }
+
   useEffect(() => {
+    handleInit();
+
     const winW = window.innerWidth;
     if (winW < 768) {
       setAniTitleClass(_c => '')
@@ -34,8 +62,8 @@ export default function Roadmap() {
         y: -60,
         scrollTrigger: {
           trigger:".roadmap-section",
-          start: 'top-=100 top',
-          end: 'top+=100 top',
+          start: 'top-=10% top',
+          end: 'top+=10% top',
           scrub: true,
         },
       })
@@ -45,8 +73,8 @@ export default function Roadmap() {
         y: -60,
         scrollTrigger: {
           trigger:".roadmap-section",
-          start: 'toptop top',
-          end: 'top+=300 top',
+          start: 'top+=50% top',
+          end: 'top+=70% top',
           scrub: true,
         },
       })
@@ -55,52 +83,32 @@ export default function Roadmap() {
   
   return (
     <section id="home-section-3" className="roadmap-section home-section-3 bg-[##060608] relative">
-      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 pt-6 pb-24">
+      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 pt-9 pb-24">
         <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white leading-tight"}>
           <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('roadmap.title')}</div>
         </div>
-        <div className="roadmap-list mt-15 text-lg">
-          <div className="relative text-[#DDD5FF]">
-            <div className="absolute top-0 left-[9px] w-[2px] h-full bg-[#8D73FF] z-0"></div>
-            <div className="flex items-start relative z-1">
-              <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
-                <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
+        <div className="roadmap-list mt-15 md:text-lg">
+          {roadMapData != null && Object.keys(roadMapData).map((key:string, i) => (
+            <div key={i} className="relative z-1 pb-6">
+              {i < (Object.keys(roadMapData).length - 1) && <div className={"absolute top-0 left-[9px] w-[2px] h-full z-0 " + 
+                (currentProcess[0] > i || (currentProcess[0] == i && currentProcess[1] == (roadMapData[key]['sub'].length - 1)) ? 'bg-[#8D73FF]' : 'bg-[#4B436F]')}></div>}
+              <div className="flex items-center">
+                <div className={"relative z-1 border-[2px] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center " + (currentProcess[0] >= i ? 'border-[#8D73FF]' : 'border-[#4B436F]')}>
+                  {currentProcess[0] >= i && <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>}
+                </div>
+                <div className={aniItemClass + " animate__animated ml-2 md:ml-4 leading-none flex-1 " + (currentProcess[0] >= i ? 'text-[#DDD5FF]' : 'text-[#8A84A3]')}
+                  style={{animationDelay: i * 0.5 + 's'}}>{roadMapData[key].title}</div>
               </div>
-              <div className={aniItemClass + " animate__animated animate__delay-250 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step1')}</div>
-            </div>
-            <div className="flex items-start relative z-1 mt-6">
-              <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
-                <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
+              <div className={aniItemClass + " pl-6 animate__animated "} style={{animationDelay: i * 0.5 + 's'}}>
+                {roadMapData[key]['sub'].map((sub: string, j: number) => (
+                  <div key={j} className="ml-3 md:ml-6 leading-none flex items-center mt-3">
+                    <div className={"w-[10px] h-[10px] rounded-full " + (currentProcess[0] > i || (currentProcess[0] == i && currentProcess[1] >= j) ? 'bg-[#ffbd2f]' : 'bg-[#4B436F]')}></div>
+                    <div className={'flex-1 ml-3 ' + (currentProcess[0] > i || (currentProcess[0] == i && currentProcess[1] >= j) ? 'text-[#DDD5FF]' : 'text-[#8A84A3]')}>{sub}</div>
+                  </div>
+                ))}
               </div>
-              <div className={aniItemClass + " animate__animated animate__delay-500 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step2')}</div>
             </div>
-            <div className="flex items-start relative z-1 mt-6">
-              <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
-                <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
-              </div>
-              <div className={aniItemClass + " animate__animated animate__delay-750 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step3')}</div>
-            </div>
-            <div className="flex items-start relative z-1 text-[#DDD5FF] mt-6">
-              <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
-                <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
-              </div>
-              <div className={aniItemClass + " animate__animated animate__delay-1000 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step4')}</div>
-            </div>
-            <div className="flex items-start relative z-1 text-[#DDD5FF] mt-6 pb-6">
-              <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
-                <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
-              </div>
-              <div className={aniItemClass + " animate__animated animate__delay-1000 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step5')}</div>
-            </div>
-          </div>
-          <div className="relative text-[#DDD5FF]">
-            <div className="flex items-start relative z-1">
-              <div className="border-[2px] border-[#8D73FF] bg-[#312a4d] rounded-full w-5 h-5 flex items-center justify-center">
-                <div className="w-[10px] h-[10px] bg-[#ffbd2f] rounded-full"></div>
-              </div>
-              <div className={aniItemClass + " animate__animated animate__delay-1250 ml-2 md:ml-4 leading-none flex-1"}>{t('roadmap.step6')}</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

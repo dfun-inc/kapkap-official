@@ -40,16 +40,16 @@ export default function ProductPage() {
           await getIleClaimedReward(appData[key].projectId).then((res) => {
             const data = res?.data;
             if(data.status == 10000 && data.data) {
-              claimedAmount = data.data;
+              claimedAmount = Number(data.data);
             }
           })
           await getCurSeasonReward(appData[key].projectId).then((res) => {
             const data = res?.data;
             if(data.status == 10000 && data.data) {
-              if(data.data && claimedAmount) {
+              if(Number(data.data) || Number(claimedAmount)) {
                 temp.push({
                   ...appData[key],
-                  curSeasonAmount: data.data,
+                  curSeasonAmount: Number(data.data),
                   claimedAmount
                 })
               }

@@ -165,8 +165,8 @@ export default function Header(props:Props) {
         </button>
       </div>
       <div className={"w-full md:h-auto md:bg-transparent relative z-[2] overflow-hidden md:overflow-visible " + (showHeader ? 'bg-black/50 h-screen ' : '')}>
-        <div className={"absolute md:relative mx-auto w-[300px] bg-[#181818] h-full md:h-auto md:bg-transpaent md:w-auto md:max-w-[1920px] flex flex-wrap justify-between md:items-center px-12 py-6 md:bg-transparent transition-all duration-300 md:duration-0 " + (showHeader ? 'left-0' : '-left-[300px] md:left-0')}>
-          <img className="w-[182px] hidden md:block" src="/images/logo.png" alt="logo" />
+        <div className={"absolute md:relative mx-auto w-[300px] bg-[#181818] h-full md:h-auto md:bg-transpaent md:w-auto md:max-w-[1920px] flex flex-wrap justify-between md:items-center px-12 py-4 md:bg-transparent transition-all duration-300 md:duration-0 " + (showHeader ? 'left-0' : '-left-[300px] md:left-0')}>
+          <Link href="/"><img className="w-[182px] hidden md:block" src="/images/logo.png" alt="logo" /></Link>
           <div className="w-full md:w-auto flex md:items-center flex-wrap">
             <menu className="w-full md:w-auto md:flex items-center my-20 md:my-0 ">
               {pathname != "/" ? (

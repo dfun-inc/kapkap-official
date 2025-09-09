@@ -1,7 +1,7 @@
 'use client'
 
 import * as THREE from 'three'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Float, Image as ImageTpl, Text } from '@react-three/drei'
 import { RigidBody, BallCollider } from '@react-three/rapier'

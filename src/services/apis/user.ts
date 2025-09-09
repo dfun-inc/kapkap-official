@@ -18,3 +18,22 @@ export async function tgLogin(data: any) {
     data
   });
 }
+
+export async function getUserInfo() {
+  return request({
+    method: 'get',
+    url: '/api/v1/user/getUserInfo',
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}
+
+export async function submitMsg(data: any) {
+  return request({
+    method: 'post',
+    url: '/api/v1/public/submitMessage',
+    data
+  });
+}
+

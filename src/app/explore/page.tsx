@@ -7,7 +7,6 @@ import Link from 'next/link';
 import 'swiper/css';
 import { useEffect, useRef, useState } from 'react';
 import Footer from '@/components/Footer';
-import { toast } from 'react-toastify';
 import { useAppContext } from '@/context/AppContext';
 import { getILEData } from '@/services/apis/app';
 
@@ -199,7 +198,7 @@ export default function Explore() {
                               <div className="px-[20px] py-[10px]">
                                 <div className="flex flex-wrap">
                                   { appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.tagArr.map((tagItem: string, tagIdx: number) => (
-                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[14px] py-[6px] rounded-[10px] mb-[10px] ' + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{tagItem}</div>
+                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[14px] py-[6px] rounded-[10px] mb-[10px] capitalize ' + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{tagItem}</div>
                                   ))}
                                 </div>
                                 <div className="mt-[10px] text-[#A6A6A6] " dangerouslySetInnerHTML={{__html:  appList['live'][i * pageLimit + j * pageLimit / 2 + k]?.desc}}></div>
@@ -271,7 +270,7 @@ export default function Explore() {
                               <div className="px-[20px] py-[10px]">
                                 <div className="flex flex-wrap">
                                   { appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.tagArr.map((tagItem: string, tagIdx: number) => (
-                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[14px] py-[6px] rounded-[10px] mb-[10px] ' + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{tagItem}</div>
+                                    <div key={tagIdx} className={'text-white mr-2 text-[14px] xl:text-[18px] px-[14px] py-[6px] rounded-[10px] mb-[10px] capitalize ' + (tagIdx % 2 == 0 ? "bg-[#452C7A]" : "bg-[#6D4F0E]")}>{tagItem}</div>
                                   ))}
                                 </div>
                                 <div className="mt-[10px] text-[#A6A6A6] " dangerouslySetInnerHTML={{__html:  appList['upcoming'][i * pageLimit + j * pageLimit / 2 + k]?.desc}}></div>

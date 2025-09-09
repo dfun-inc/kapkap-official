@@ -14,10 +14,10 @@
     "case": "Case",
     "roadmap": "Roadmap",
     "other": "Other",
-    "explore": "Kap ILE",
+    "explore": "KapKap ILE",
     "doc": "DOC",
     "login": "Log in",
-    "yourKapILE": "Your Kap ILE",
+    "yourKapILE": "Your KapKap ILE",
     "disconnect": "Disconnect",
     "myAccount": "My Account"
   },
@@ -70,21 +70,38 @@
     "attentionPoints": "Attention Points",
     "injectliquidity": "Inject liquidity",
     "allTokens": "All kinds of App Tokens",
-    "fullFilled": "Full filled Attention <br/>to achieve Token on chain"
+    "fullFilled": "Full filled Attention <br/>to achieve Token on chain",
+    "sTokens": "S - Tokens",
+    "aTokens": "A - Token"
   },
 
   "roadmap": {
     "title": "Roadmap",
-    "step1": "Precise User Portraits and Efficient Traffic Distribution: Build an AI-driven multi-dimensional user portrait system, launch an \"attention value\" matching market, and achieve accurate traffic allocation.",
-    "step2": "AI Intelligent Growth Engine: Launch the AI intelligent growth engine to provide professional product and operation services.",
-    "step3": "One-Click Publishing SDK System: Aggregate multi-platform payment, advertising, and other functions.",
-    "step4": "Data and Intelligent Decision-Making Hub: Establish a data analysis center and intelligent decision-making system, integrate AI functions, and optimize automated operations.",
-    "step5": "Mini Game Generation AI Tool: Launch an AI-generated mini game tool and promotion platform to realize the commercialization of users' creative value.",
-    "step6": "Standardized Publishing and Scaling: Build a standardized publishing system, expand AIGC and creator economy globally, and reach 5 million DAU."
+    "step1": "Phase 1: Off-Chain Community Ignition",
+    "step1_1": "AI-driven Wallet & Data Analytics Integration",
+    "step1_2": "Launch KAPKAP Off-Chain Pilot System (KAPS Off-Chain Pilot System)",
+    "step1_3": "Launch off-chain s-Assets / c-Assets of the first batch of projects and conduct trial operations",
+    "step1_4": "Initiate early marketing promotion and community building",
+    "step1_5": "Potential TGE on Binance Alpha",
+    "step2": "Phase 2: Mainnet Launch & Growth",
+    "step2_1": "Release of tokenomics details",
+    "step2_2": "KAPS core protocol launches on BNB Mainnet and completes smart contract security audit",
+    "step2_3": "Launch of the first-phase community incentives and attention growth program",
+    "step2_4": "Onboarding of more partners and new projects",
+    "step3": "Phase 3: Open Attention Market",
+    "step3_1": "Launch of KAPKAP official Attention Trading Market",
+    "step3_2": "Establishment of initial liquidity pools for eligible s-Assets / c-Assets",
+    "step3_3": "Opening of the attention asset issuance protocol with standardized services",
+    "step3_4": "Cross-Chain Integration",
+    "step4": "Phase 4: The Ultimate Attention Layer for Web3",
+    "step4_1": "Launch of KAPKAP protocol revenue sharing program",
+    "step4_2": "Introduction of structured derivatives based on standard attention assets",
+    "step4_3": "Launch of KAPKAP DAO to realize community governance and value capture",
+    "step4_4": "Eventually becoming the underlying attention value protocol integrable by all Web3 applications"
   },
 
   "other": {
-    "gamePartners": "GAME PARTNERS",
+    "gamePartners": "PARTNERS",
     "adPartners": "AD PARTNERS"
   },
 
@@ -126,7 +143,7 @@
     "q1": "What should we call you?",
     "q2": "What is your email address?",
     "q3": "Please briefly describe your project.",
-    "q4": "On which platforms is your game project operating?",
+    "q4": "On which platforms is your project operating?",
     "q5": "What kind of revenue does your project expect to achieve?",
     "q6": "What kind of support do you hope to get from the KapKap team?",
     "q7": "Please provide a way to access your project so that we can learn more about it.",
@@ -157,11 +174,12 @@
     "claimSuccess": "Claim Success",
     "taskBonus": "Task Bonus",
     "taskBonusDesc": "Complete all tasks to claim",
-    "accomplished": "Accomplished"
+    "accomplished": "Accomplished",
+    "bindTgHint": "Binding Telegram account, view rewards."
   },
 
   "profile": {
-    "title": "Your Kap ILE",
+    "title": "Your KapKap ILE",
     "attentionPoints": "Attention Points",
     "appTokens": "App Tokens"
   }

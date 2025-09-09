@@ -34,8 +34,8 @@ export default function Ecosystem() {
         y: -60,
         scrollTrigger: {
           trigger:".eco-section",
-          start: 'top+=200 top',
-          end: 'top+=400 top',
+          start: 'top+=20% top',
+          end: 'top+=40% top',
           scrub: true,
         },
       })
@@ -45,8 +45,8 @@ export default function Ecosystem() {
         y: -60,
         scrollTrigger: {
           trigger:".eco-section",
-          start: 'top+=400 top',
-          end: 'top+=600 top',
+          start: 'top+=50% top',
+          end: 'top+=70% top',
           scrub: true,
         },
       })
@@ -56,8 +56,8 @@ export default function Ecosystem() {
         y: -60,
         scrollTrigger: {
           trigger:".eco-section",
-          start: 'top+=500 top',
-          end: 'top+=700 top',
+          start: 'top+=60% top',
+          end: 'top+=80% top',
           scrub: true,
         },
       })
@@ -75,22 +75,13 @@ export default function Ecosystem() {
     <section className="eco-section bg-[#121212]">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16">
         <div className={aniImg + " animate__animated relative"}>
-          <div className="eco-img-box">
-            <img className="eco-img w-full hidden md:block" src="/images/eco_illus.jpg" alt="" />
-            <img className="w-full md:hidden" src="/images/eco_illus_m.jpg" alt="" />
+          <div className="eco-img-box max-w-[1280px] mx-auto relative">
+            <img className="eco-img w-full block" src="/images/eco_illus.jpg" alt="" />
             
-            <div className="font-univia-pro-bold absolute top-[22%] left-[6.5%] md:top-[59%] md:left-[4.75%] text-[#CCA6FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[15%] md:w-[10%] text-center">{t('ecosystem.user')}</div>
-            <div className="absolute top-[16.5%] left-[21.5%] md:top-[52%] md:left-[10%] text-[#4DE4FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[120px] md:w-[22%] text-center leading-[1.05]" dangerouslySetInnerHTML={{ __html: t('ecosystem.playForce') }}></div>
-            <div className="absolute top-[26%] left-[5%] md:top-[75.5%] md:left-[6%] text-[#4DE4FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[120px] md:w-[22%] text-center leading-[1.05]" dangerouslySetInnerHTML={{ __html: t('ecosystem.obtainApp') }}></div>
-            <div className="absolute top-[16.5%] left-[51%] md:top-[26%] md:left-[14%] text-[#CCA6FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[180px] md:w-[22%] md:text-right leading-[1.05]" dangerouslySetInnerHTML={{ __html: t('ecosystem.dictribute') }}></div>
-            <div className="font-univia-pro-bold absolute top-[42%] left-[35%] md:top-[90%] md:left-[29.3%] text-[#FEBD32] text-[14px] md:text-[20px] 2xl:text-[24px] w-[160px] md:w-[15%] text-center">{t('ecosystem.allApps')}</div>
-            <div className="absolute top-[40%] left-[81%] md:top-[10%] md:left-[48.5%] text-[#CCA6FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[60px] md:w-[10%] text-center">{t('ecosystem.online')}</div>
-            <div className="absolute top-[46.5%] left-[10%] md:top-[58%] md:left-[44.5%] text-[#CCA6FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[150px] md:w-[18%] text-right md:text-center">{t('ecosystem.increaseAttention')}</div>
-            <div className="font-univia-pro-bold absolute top-[61%] left-[67%] md:top-[27%] md:left-[59%] text-[#FEBD32] text-[14px] md:text-[20px] 2xl:text-[24px] w-[110px] md:w-[12%] text-center">{t('ecosystem.kapkapCoin')}</div>
-            <div className="font-univia-pro-bold absolute top-[61%] left-[32%] md:top-[75%] md:left-[58.5%] text-[#FEBD32] text-[14px] md:text-[20px] 2xl:text-[24px] w-[130px] md:w-[13%] text-center">{t('ecosystem.attentionPoints')}</div>
-            <div className="absolute top-[76%] left-[73%] md:top-[15%] md:left-[70%] text-[#CCA6FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[110px] md:w-[13%] text-center">{t('ecosystem.injectliquidity')}</div>
-            <div className="absolute top-[67%] left-[2%] md:top-[68%] md:left-[71%] text-[#CCA6FF] text-[14px] md:text-[20px] 2xl:text-[24px] w-[180px] md:w-[20%] text-right md:text-center" dangerouslySetInnerHTML={{ __html: t('ecosystem.fullFilled') }}></div>
-            <div className="font-univia-pro-bold absolute top-[88%] left-[28%] md:top-[55%] md:left-[76%] text-[#FEBD32] text-[14px] md:text-[20px] 2xl:text-[24px] w-[50%] md:w-[20%] text-center">{t('ecosystem.allTokens')}</div>
+            <div className="font-univia-pro-bold absolute top-[20%] left-[40%] md:top-[20%] md:left-[45%] text-[#CCA6FF] text-[12px] md:text-[20px] 2xl:text-[24px] w-[20%] md:w-[10%] text-center">{t('ecosystem.user')}</div>
+            <div className="font-univia-pro-bold absolute top-[63%] left-[61.5%] md:top-[63%] md:left-[71.5%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.allApps')}</div>
+            <div className="font-univia-pro-bold absolute top-[63%] left-[3.5%] md:top-[63%] md:left-[7.5%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.sTokens')}</div>
+            <div className="font-univia-pro-bold absolute top-[92%] left-[32.5%] md:top-[90%] md:left-[40%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.aTokens')}</div>
           </div>
         </div>
         <div className={aniTitle + " animate__animated mt-11"}>

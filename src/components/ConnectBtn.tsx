@@ -11,7 +11,7 @@ import { walletConnect } from 'wagmi/connectors'
 import { signMessage } from '@wagmi/core'
 import { config, projectId } from "@/config/wagmi"
 import { useAppContext } from '@/context/AppContext';
-import { evmLogin, tgLogin } from '@/services/apis/user';
+import { evmLogin, getUserInfo, tgLogin } from '@/services/apis/user';
 import { useErrCode } from '@/datas/errCode';
 
 export default function ConnectBtn() {
@@ -28,7 +28,7 @@ export default function ConnectBtn() {
   const chainId = useChainId();
   const { openConnectModal } = useConnectModal();
 
-  const { userInfo, handleSetUserInfo, modalTrigger } = useAppContext();  
+  const { handleSetUserInfo, modalTrigger } = useAppContext();  
   const reLoginTimeout = useRef<any>(null);
 
   const handleConnectWallet = async() => {
@@ -56,8 +56,7 @@ export default function ConnectBtn() {
           await localStorage.setItem('kkLoginType', 'bsc');
           await localStorage.setItem('kkGuid', data?.data.guid);
           setWalletAddr((_a: any) => address)
-          handleSetUserInfo(address);
-          // handleGetUserInfo();
+          handleGetUserInfo();
           isConnect = true;
         }
         else {
@@ -144,22 +143,17 @@ export default function ConnectBtn() {
     }
   }
 
-  /*
   const handleGetUserInfo = async() => {
-    handleSetUserInfoLoading(true);
     await getUserInfo().then((res) => {
       const data = res?.data;
-      if(data.code == '200') {
+      if(data.status == 10000) {
         handleSetUserInfo(data?.data);
-        setWalletAddr(data?.data.account);
       }
       else {
-        errCodeHandler(data.code)
+        errCodeHandler(data.status)
       }
     })
-    handleSetUserInfoLoading(false);
   }
-  */
 
   useEffect(() => {
     if (isConnected && address) {
@@ -186,8 +180,7 @@ export default function ConnectBtn() {
     console.log(addr)
     if(addr) {
       setWalletAddr(addr);
-      handleSetUserInfo(addr);
-      // handleGetUserInfo();
+      handleGetUserInfo();
     }
     else {
       handleDisconnect();
@@ -206,7 +199,7 @@ export default function ConnectBtn() {
     <>
     {walletAddr ? (
     <div className="group w-full md:w-auto relative md:ml-6" onMouseOver={() => setWalletDropdown(true)} onMouseOut={() => setWalletDropdown(false)}>
-      <div className="bg-black relative rounded-full w-46 px-1 py-[6px] cursor-pointer">
+      <div className="bg-black relative rounded-full w-full md:w-46 px-1 py-[6px] cursor-pointer">
         <div className="w-31 flex items-center justify-center md:text-lg">
           {walletAddr.length > 4 ? walletAddr?.substring(0, 4) + '...' + walletAddr?.substring(walletAddr?.length - 4, walletAddr?.length) : walletAddr}
         </div>
@@ -235,7 +228,7 @@ export default function ConnectBtn() {
     </div>
     ) : (
     <div className="w-full md:w-auto relative md:ml-6 mr-2" >
-      <button className="bg-black relative rounded-full w-46 px-1 py-[6px] cursor-pointer" onClick={() => handleShowBscModal()}>
+      <button className="bg-black relative rounded-full w-full md:w-46 px-1 py-[6px] cursor-pointer" onClick={() => handleShowBscModal()}>
         <div className="w-31 flex items-center justify-center md:text-lg">
           {t('menu.login')} <>{connecting && <span className="ml-2 animate-spin w-4 h-4 border-[3px] border-gray-400 rounded-full relative z-1"></span>}</>
         </div>
