@@ -62,19 +62,19 @@ export default function Roadmap() {
         y: -60,
         scrollTrigger: {
           trigger:".roadmap-section",
-          start: 'top-=10% top',
-          end: 'top+=10% top',
+          start: 'top-=20% top',
+          end: 'top+=20% top',
           scrub: true,
         },
       })
 
       gsap.to('.roadmap-list', {
         opacity: 0.2,
-        y: -60,
+        y: -80,
         scrollTrigger: {
           trigger:".roadmap-section",
-          start: 'top+=50% top',
-          end: 'top+=70% top',
+          start: 'bottom-=10% center',
+          end: 'bottom+=10% top',
           scrub: true,
         },
       })
@@ -84,10 +84,10 @@ export default function Roadmap() {
   return (
     <section id="home-section-3" className="roadmap-section home-section-3 bg-[##060608] relative">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 pt-9 pb-24">
-        <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white leading-tight"}>
+        <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
           <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('roadmap.title')}</div>
         </div>
-        <div className="roadmap-list mt-15 md:text-lg">
+        <div className="roadmap-list mt-15 text-[16px]">
           {roadMapData != null && Object.keys(roadMapData).map((key:string, i) => (
             <div key={i} className="relative z-1 pb-6">
               {i < (Object.keys(roadMapData).length - 1) && <div className={"absolute top-0 left-[9px] w-[2px] h-full z-0 " + 

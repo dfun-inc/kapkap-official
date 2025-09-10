@@ -114,10 +114,24 @@ body {
   background-repeat: no-repeat;
 }
 
+.eco-section .eco-img-box {
+  background-image: url('/images/bg_eco.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.partner-section {
+  background-image: url('/images/bg_partner.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 .bottom-section {
   background-image: url('/images/bg_bottom.jpg');
   background-size: cover;
-  background-position: center top;
+  background-position: center bottom;
   background-repeat: no-repeat;
 }
 

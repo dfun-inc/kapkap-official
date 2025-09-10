@@ -48,7 +48,7 @@ export default function Main() {
 
   return (
     <section id="home-section-0" className="main-section relative home-section-0 bg-[#070709] h-screen min-h-[720px] overflow-hidden">
-      <div className="w-full h-screen min-h-[720px] overflow-hidden absolute z-0 opacity-80 md:opacity-100">
+      <div className="w-full h-screen min-h-[720px] overflow-hidden absolute z-0 opacity-60 md:opacity-100">
         <div className="aspect-video lg:aspect-auto w-auto lg:w-full h-full inset-0 absolute top-0 left-0 z-0 -translate-x-1/2 md:-translate-x-1/3 lg:translate-x-0 overflow-hidden">
           <video id="bg-video" data-role="background" className="w-full h-full object-cover pointer-events-none" src="/videos/bg_main.mp4" autoPlay muted playsInline loop preload="auto"></video>
         </div>
@@ -62,26 +62,8 @@ export default function Main() {
               <span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32] text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] ml-[18px]"> {t('main.title3')}</span></div>
           </div>
           <div className="main-desc mt-5">
-            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-lg md:text-[22px] 2xl:text-[24px] w-full md:w-3/5 2xl:w-1/2">
-              {
-                locale == "en" ?
-                <>
-                  <div>{t('main.desc')} </div>
-                </>
-                :
-                <>
-                  <div>
-                    <span>{t('main.desc1')}</span>
-                    <span className="text-[#6E4DFF]">{t('main.descWord1')}</span><span>、</span>
-                    <span className="text-[#6E4DFF]">{t('main.descWord2')}</span><span></span>
-                    <span>{t('main.desc2')} </span>
-                  </div>
-                  <div className="">
-                    <span className="text-[#6E4DFF]">{t('main.descWord3')}</span>
-                    <span>{t('main.desc3')}</span>
-                  </div>
-                </>
-              }
+            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-[16px] md:text-[18px] w-full md:w-3/5 2xl:w-1/2 leading-[1.75]">
+              {t('main.desc')}
             </div>
           </div>
         </div>

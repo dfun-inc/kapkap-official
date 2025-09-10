@@ -99,15 +99,15 @@ export default function Future() {
   return (
     <section id="home-section-4" className="other-section home-section-4 relative">
       <div className="w-full bg-[#151213] relative">
-        <div className="absolute bottom-full left-0 w-2/3 pr-[45px] lg:pr-[60px]">
-          <div className="w-full h-[33px] lg:h-[44px] bg-[#151213]"></div>
-          <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#151213] border-r-transparent border-b-[33px] border-r-[45px] lg:border-b-[44px] lg:border-r-[60px]"></div>
-        </div>
-        <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-20">
-          <div className={gpAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
-            {t('other.gamePartners')}
+        <div className="max-w-[1920px] mx-auto pb-20">
+          <div className="px-3 lg:px-18 2xl:px-24 py-12">
+            <div className={gpAniClass + " animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+              {t('other.gamePartners')}
+            </div>
           </div>
-          <Pool />
+          <div className="partner-section px-3 lg:px-18 2xl:px-24">
+            <Pool />
+          </div>
         </div>
       </div>
       <div className="w-full bg-[#090909] relative">
@@ -116,7 +116,7 @@ export default function Future() {
           <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#090909] border-r-transparent border-b-[33px] border-r-[45px] lg:border-b-[44px] lg:border-r-[60px]"></div>
         </div>
         <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-30">
-          <div className={apAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={apAniClass + " animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('other.adPartners')}
           </div>
           <div className={apAniClass + " animate__animated flex flex-wrap gap-x-2 justify-between items-center mt-12"}>
@@ -173,7 +173,7 @@ export default function Future() {
           <div className="absolute top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#121212] border-r-transparent border-b-[33px] border-r-[45px] lg:border-b-[44px] lg:border-r-[60px]"></div>
         </div>
         <div className="max-w-[1920px] mx-auto px-3 lg:px-18 2xl:px-24 pb-20">
-          <div className={qaAniClass + " animate__animated text-[20px] lg:text-[40px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-3 md:mt-6"}>
+          <div className={qaAniClass + " animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight mt-3 md:mt-6"}>
             {t('qa.title')}
           </div>
           {/*
@@ -189,7 +189,7 @@ export default function Future() {
             {curQuestionList.map((item, idx) => (
               <div key={idx} className="border-b border-[#373447] py-3">
                 <div className="flex justify-between items-center cursor-pointer" onClick={() => handleToggleOpen(item)}>
-                  <div className={"flex-1 text-[18px] lg:text-[24px] " + (openIdx.includes(item) ? "text-[#8D73FF]" : "text-[#DDD5FF]")}>
+                  <div className={"flex-1 lg:text-[18px] " + (openIdx.includes(item) ? "text-[#8D73FF]" : "text-[#DDD5FF]")}>
                     {t('qa.q' + item)}
                   </div>
                   <div className="w-10 h-10 bg-[#352F52] rounded flex items-center justify-center">
@@ -198,7 +198,7 @@ export default function Future() {
                     </svg>
                   </div>
                 </div>
-                <div className={"lg:text-[20px] mt-[14px] text-[#8A84A3] md:mt-[9px] transition-[max-height] duration-300 overflow-hidden " + (openIdx.includes(item) ? 'max-h-[1200px]' : 'max-h-0')}>
+                <div className={"mt-[14px] text-[#8A84A3] md:mt-[9px] transition-[max-height] duration-300 overflow-hidden " + (openIdx.includes(item) ? 'max-h-[1200px]' : 'max-h-0')}>
                   <div dangerouslySetInnerHTML={{ __html: t('qa.a' + item)}}></div>
                 </div>
               </div>

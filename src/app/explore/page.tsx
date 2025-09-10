@@ -149,8 +149,8 @@ export default function Explore() {
         <div className="px-3 lg:px-18 2xl:px-24">
           <div className="py-12">
             <div className="pb-6">
-              <div className="font-ethnocentric-rg text-white text-[22px] md:text-[36px] 2xl:text-[40px]">{t('explore.live')}</div>
-              <div className="mt-4 text-[#8D73FF] text-[18px] md:text-[24px] leading-0">{t('explore.liveDesc')}</div>
+              <div className="inline-block font-ethnocentric-rg text-white text-[22px] md:text-[36px] 2xl:text-[40px] border-b border-[#FEBD32]">{t('explore.live')}</div>
+              <div className="mt-3 text-[#8D73FF] text-[18px] md:text-[24px]">{t('explore.liveDesc')}</div>
             </div>
             {loading ? 
               Array.from({ length: 2 }).map((_, i) => (
