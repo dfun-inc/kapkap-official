@@ -227,8 +227,8 @@ export default function Explore() {
           
           <div className="py-12">
             <div className="pb-6">
-              <div className="font-ethnocentric-rg text-white text-[22px] md:text-[36px] 2xl:text-[40px]">{t('explore.upcoming')}</div>
-              <div className="mt-4 text-[#8D73FF] text-[18px] md:text-[24px] leading-0">{t('explore.upcomingDesc')}</div>
+              <div className="inline-block font-ethnocentric-rg text-white text-[22px] md:text-[36px] 2xl:text-[40px] border-b border-[#FEBD32]">{t('explore.upcoming')}</div>
+              <div className="mt-3 text-[#8D73FF] text-[18px] md:text-[24px]">{t('explore.upcomingDesc')}</div>
             </div>
             {loading ? 
               Array.from({ length: 2 }).map((_, i) => (
@@ -243,7 +243,7 @@ export default function Explore() {
               { appList != null && appList['upcoming']?.length && (
               <>
               <Swiper
-                className="live-swiper explore-swiper !h-auto"
+                className="upcoming-swiper explore-swiper !h-auto"
                 onSwiper={(swiper) => (upcomingSwiperRef.current = swiper)}
               >
                 {Array.from({ length: Math.ceil(appList['upcoming'].length / pageLimit) }).map((_, i) => (

@@ -87,10 +87,10 @@ export default function Ecosystem() {
             <div className="max-w-[860px] mx-auto relative">
               <img className="eco-img w-full block" src="/images/eco_illus.png" alt="" />
               
-              <div className="font-univia-pro-bold absolute top-[20%] left-[40%] md:top-[20%] md:left-[45%] text-[#CCA6FF] text-[12px] md:text-[20px] 2xl:text-[24px] w-[20%] md:w-[10%] text-center">{t('ecosystem.user')}</div>
-              <div className="font-univia-pro-bold absolute top-[63%] left-[61.5%] md:top-[63%] md:left-[71.5%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.allApps')}</div>
-              <div className="font-univia-pro-bold absolute top-[63%] left-[3.5%] md:top-[63%] md:left-[7.5%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.sTokens')}</div>
-              <div className="font-univia-pro-bold absolute top-[92%] left-[32.5%] md:top-[90%] md:left-[40%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.aTokens')}</div>
+              <div className="font-univia-pro-bold absolute top-[60%] left-[10%] md:top-[60%] md:left-[15.5%] text-[#CCA6FF] text-[12px] md:text-[20px] 2xl:text-[24px] w-[20%] md:w-[10%] text-center">{t('ecosystem.user')}</div>
+              <div className="font-univia-pro-bold absolute top-[64%] left-[60%] md:top-[63%] md:left-[67%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.allApps')}</div>
+              <div className="font-univia-pro-bold absolute top-[25%] left-[56%] md:top-[25%] md:left-[61.5%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.sTokens')}</div>
+              <div className="font-univia-pro-bold absolute top-[88%] left-[13%] md:top-[88%] md:left-[21%] text-[#FEBD32] text-[12px] md:text-[20px] 2xl:text-[24px] w-[35%] md:w-[20%] text-center">{t('ecosystem.aTokens')}</div>
             </div>
           </div>
         </div>

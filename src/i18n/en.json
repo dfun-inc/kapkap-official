@@ -83,7 +83,7 @@
     "step1_2": "User Task System: User behaviors such as registration, interaction, and content forwarding trigger s-token unlocking and a-token minting.",
     "step1_3": "Initial Landing Event (ILE): Projects can initiate ILE to realize user growth-driven issuance of attention assets.",
     "step1_4": "Community and Telegram Bot: Users complete tasks and claim rewards via the Bot to enhance interaction and activity.",
-    "step1_5": "k-score System (initial version): Used to measure users' attention value across various projects; the basic algorithm is launched to lay the foundation for subsequent iterations.",
+    "step1_5": "K-score System (initial version): Used to measure users' attention value across various projects; the basic algorithm is launched to lay the foundation for subsequent iterations.",
     "step2": "Phase 2: Market Mechanisms and Attention Price Discovery (Q1 & Q2 2026)",
     "step2_1": "Initial Liquidity Pools: s-tokens and a-tokens can be traded on the platform to enable the circulation of attention assets. ",
     "step2_2": "Upgrade of the k-score System: Conduct refined evaluation of user behavior value, serving as the basis for advertising revenue distribution.",
