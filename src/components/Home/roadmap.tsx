@@ -13,7 +13,7 @@ export default function Roadmap() {
   const [aniItemClass, setAniItemClass] = useState<string>("opacity-0");
 
   const [roadMapData, setRoadMapData] = useState<any>(null);
-  const currentProcess = [1, 1];
+  const currentProcess = [0, 5];
 
   const handleInit = () => {
     const raws:string[] = Object.keys(t.raw('roadmap'));
