@@ -107,13 +107,6 @@ body {
   font-family: "UniviaPro-Regular", Arial, Helvetica, sans-serif;
 }
 
-.roadmap-section {
-  background-image: url('/images/bg_roadmap.jpg');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-
 .eco-section .eco-img-box {
   background-image: url('/images/bg_eco.jpg');
   background-size: cover;

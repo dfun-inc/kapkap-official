@@ -169,19 +169,18 @@ export default function Header(props:Props) {
           <Link href="/"><img className="w-[182px] hidden md:block" src="/images/logo.png" alt="logo" /></Link>
           <div className="w-full md:w-auto flex md:items-center flex-wrap">
             <menu className="w-full md:w-auto md:flex items-center my-20 md:my-0 ">
-              {pathname != "/" ? (
-                <Link href="/" className='block md:inline text-xl md:mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
-                  <span className="text-xl">{t('menu.main')}</span>
-                </Link>
-              ) : 
-              <>
+              <Link href="/" className='block md:inline text-xl md:mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+                <span className="text-xl">{t('menu.main')}</span>
+              </Link>
+              {/*
                 <div onClick={() => handleClick(0)} className={'block md:inline text-xl mr-8 cursor-pointer mt-6 md:mt-0 ' + (activeIdx == 0 ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
                   <span className="text-xl">{t('menu.introduce')}</span>
                 </div>
                 <div onClick={() => handleClick(3)} className={'block md:inline text-xl mr-8 cursor-pointer mt-6 md:mt-0 ' + (activeIdx == 3 ? ' active-menu text-[#8D73FF]' : ' text-white hover:text-[#8D73FF]')}>
                   <span className="text-xl">{t('menu.roadmap')}</span>
                 </div>
-              </>}
+              </>
+              */}
               <Link href="/explore" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
                   <span className="text-xl">{t('menu.explore')}</span>
               </Link>
