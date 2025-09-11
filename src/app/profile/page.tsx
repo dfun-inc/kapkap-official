@@ -85,7 +85,7 @@ export default function ProductPage() {
       </div>
       <div className="mt-9 relative z-2">
         <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24">
-          <div className="inline font-ethnocentric-rg text-[26px] md:text-[40px] text-white text-center border-b border-[#FEBD32]">
+          <div className="inline font-ethnocentric-rg text-[26px] md:text-[30px] text-white text-center border-b border-[#FEBD32]">
             {t('profile.title')}
           </div>
           {userInfo ?
