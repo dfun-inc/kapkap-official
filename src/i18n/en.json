@@ -170,7 +170,7 @@
 
   "project": {
     "totalAmount": "Token release total amount",
-    "task": "task",
+    "task": "task list",
     "go": "Go",
     "completed": "Completed",
     "claim": "Claim",
@@ -179,7 +179,8 @@
     "taskBonus": "Task Bonus",
     "taskBonusDesc": "Complete all tasks to claim",
     "accomplished": "Accomplished",
-    "bindTgHint": "Binding Telegram account, view rewards."
+    "bindTgHint": "Binding Telegram account, view rewards.",
+    "play": "Play"
   },
 
   "profile": {
