@@ -9,10 +9,9 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Main() {
   const t = useTranslations();
-  const locale = useLocale();
 
   useEffect(() => {
-    gsap.to('.title-text-top', {
+    gsap.to('.main-logo', {
       opacity: 0.2,
       y: -50,
       scrollTrigger: {
@@ -53,17 +52,34 @@ export default function Main() {
           <video id="bg-video" data-role="background" className="w-full h-full object-cover pointer-events-none" src="/videos/bg_main.mp4" autoPlay muted playsInline loop preload="auto"></video>
         </div>
       </div>
-      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 h-full flex items-center relative z-2 border-b border-[#201e2a]">
-        <div className="w-full">
-          <div className="font-ethnocentric-rg uppercase">
-            <div className="title-text-top text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] tracking-widest"><span className="inline-block animate__animated animate__fadeInUp text-[#6E4DFF]">{t('main.title1')}</span></div>
-            <div className="title-text-bottom">
-              <span className="inline-block animate__animated animate__fadeInUp text-[19px] lg:text-[34px] xl:text-[40px] 2xl:text-[45px]">{t('main.title2')}</span>
-              <span className="inline-block animate__animated animate__fadeInUp text-[#FEBD32] text-[36px] lg:text-[62px] xl:text-[72px] 2xl:text-[80px] ml-[18px]"> {t('main.title3')}</span></div>
+      <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 h-full relative z-2 border-b border-[#201e2a]">
+        <div className="w-full flex flex-col h-full">
+          <div className="w-full flex-1 min-h-[300px] flex items-center">
+            <div className="w-full pt-12">
+              <div className="main-logo">
+                <img className="w-100 md:w-[560px] animate__animated animate__fadeInUp text-[#6E4DFF]" src="/images/logo.png" alt="" />
+              </div>
+              <div className="title-text-bottom mt-7">
+                <span className="inline-block animate__animated animate__fadeInUp text-[#8A84A3] text-[16px] md:text-[18px]">{t('main.desc')}</span>
+              </div>
+            </div>
           </div>
-          <div className="main-desc mt-5">
-            <div className="animate__animated animate__fadeInUp text-[#8A84A3] text-[16px] md:text-[18px] w-full md:w-3/5 2xl:w-1/2 leading-[1.75]">
-              {t('main.desc')}
+          <div className="main-desc pb-[10vh] md:pb-[16vh] flex">
+            <div className="animate__animated animate__fadeInUp flex flex-wrap flex-col w-full md:w-auto">
+              <div className="flex items-center space-x-3 md:space-x-6 justify-start md:justify-between">
+                <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.investors')}</div>
+                <img className="w-auto h-[18px] md:h-[32px]" src="/images/main_investors.png" alt="" />
+              </div>
+              <div className="w-full flex items-center space-x-6 justify-start md:justify-between mt-6">
+                <div className="flex items-center space-x-3 md:space-x-6">
+                  <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.partners')}</div>
+                  <img className="w-auto h-[18px] md:h-[32px]" src="/images/main_partners.png" alt="" />
+                </div>
+                <div className="flex items-center space-x-3 md:space-x-6">
+                  <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.kol')}</div>
+                  <div className="text-[#8A84A3] text-[16px]">Beanie</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

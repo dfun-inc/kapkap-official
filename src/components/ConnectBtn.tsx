@@ -64,7 +64,8 @@ export default function ConnectBtn() {
         }
       })
     }
-    catch {
+    catch(err) {
+      console.log('err', err)
       setConnecting(false);
       handleDisconnect();
     }
@@ -199,13 +200,16 @@ export default function ConnectBtn() {
     <>
     {walletAddr ? (
     <div className="group w-full md:w-auto relative md:ml-6" onMouseOver={() => setWalletDropdown(true)} onMouseOut={() => setWalletDropdown(false)}>
-      <div className="bg-black relative rounded-full w-full md:w-46 px-1 py-[6px] cursor-pointer">
+      <div className="bg-black relative rounded-full w-full md:w-50 flex items-center justify-center px-1 py-[6px] cursor-pointer">
         <div className="w-31 flex items-center justify-center md:text-lg">
           {walletAddr.length > 4 ? walletAddr?.substring(0, 4) + '...' + walletAddr?.substring(walletAddr?.length - 4, walletAddr?.length) : walletAddr}
         </div>
+        {/*
         <div className="bg-black absolute -top-2 -right-3 p-2 rounded-full">
           <img className="group-hover:w-10 w-16 rounded-full transition-all duration-300" src="/images/logo_big.png" /> 
         </div>
+        */}
+        <img className="w-6 rounded-full transition-all duration-300 ml-2" src="/images/logo_big.png" /> 
       </div>
       <div className={"absolute left-0 top-8 w-full pt-3 block " + (walletDropdown ? '' : "md:hidden")}>
         <div className="w-full py-1 shadow-lg md:bg-black/50 rounded-[10px] overflow-hidden">
@@ -213,11 +217,11 @@ export default function ConnectBtn() {
             <div className="text-white/60 md:hidden mb-6">{t('menu.myAccount')}</div>
             {walletAddr && (
               <>
-                <Link href="/profile" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/30 flex items-center md:text-white">
+                <Link href="/profile" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/20 flex items-center md:text-white">
                   <div className="w-full flex items-center justify-center">{t('menu.yourKapILE')}</div>
                 </Link>
                 
-                <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/30 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleDisconnect()}>
+                <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/20 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleDisconnect()}>
                   <div className="w-full flex items-center justify-center">{t('menu.disconnect')}</div>
                 </button>
               </>
@@ -228,14 +232,20 @@ export default function ConnectBtn() {
     </div>
     ) : (
     <div className="w-full md:w-auto relative md:ml-6 mr-2" >
-      <button className="bg-black relative rounded-full w-full md:w-46 px-1 py-[6px] cursor-pointer" onClick={() => handleShowBscModal()}>
+      <button className="bg-black relative rounded-full w-full md:w-50 flex items-center justify-center px-1 py-[6px] cursor-pointer" onClick={() => handleShowBscModal()}>
         <div className="w-31 flex items-center justify-center md:text-lg">
-          {t('menu.login')} <>{connecting && <span className="ml-2 animate-spin w-4 h-4 border-[3px] border-gray-400 rounded-full relative z-1"></span>}</>
+          {t('menu.connectWallet')}
         </div>
+        {/*
         <div className="bg-black absolute -top-2 -right-3 p-2 rounded-full">
           <div className="bg-[#5e5e5e] p-2 rounded-full">
             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5357" width="48" height="48"><path d="M621.714286 490.057143C694.857143 446.171429 738.742857 373.028571 738.742857 292.571429c0-124.342857-102.4-219.428571-226.742857-219.428572-124.342857 0-226.742857 102.4-226.742857 219.428572 0 80.457143 36.571429 153.6 109.714286 190.171428C234.057143 533.942857 109.714286 694.857143 109.714286 870.4c0 36.571429 0 80.457143 80.457143 80.457143h636.342857c65.828571 0 80.457143-36.571429 80.457143-80.457143 7.314286-175.542857-117.028571-336.457143-285.257143-380.342857z" fill="#8f8f8f" p-id="5358"></path></svg>
           </div>
+        </div>
+        */}
+        <div className="relative w-[26px] h-[26px] ml-2">
+          {connecting && <span className="absolute top-1 left-1 animate-spin w-4 h-4 border-[3px] border-gray-400 rounded-full z-1 opacity-80"></span>}
+          <img className="w-full" src="/images/icon_wallet.png" />
         </div>
       </button>
     </div>

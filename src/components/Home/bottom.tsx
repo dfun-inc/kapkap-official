@@ -31,19 +31,22 @@ export default function Bottom() {
   }, [])
 
   return (
-    <section id="home-section-6" className="bottom-section home-section-6 bg-[#121212] -mb-12 relative z-1">
-      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-20">
-        <div className="flex flex-wrap items-end justify-between">
-          <div className={aniClass + " animate__animated w-full md:w-auto text-[26px] lg:text-[46px] xl:text-[60px]"}>
-            <div>{t('bottom.text1')}</div>
-            <div className="">{t('bottom.text2')}</div>
-          </div>
-          <div className={aniClass + " animate__animated w-full md:w-auto text-center md:text-start my-3 lg:my-4"}>
-            <Link href="/support" className="text-xl font-light text-white opacity-90 hover:opacity-100 border-b border-white uppercase">{t('bottom.getSupport')}</Link>
-          </div>
-        </div>
-        <div className={aniClass + " animate__animated animate__delay-500 mt-10 md:mt-20 flex flex-wrap items-end justify-center lg:justify-between"}>
-          <Footer />
+    <>
+    <div className="relative w-full z-2">
+      <div className="absolute bottom-0 left-0 w-3/5">
+        <div className="w-full h-[44px] lg:h-[55px] bg-[#121212]"></div>
+        <div className="absolute z-1 top-0 left-full w-0 h-0 border-t-0 border-l-0 border-b-[#121212] border-r-transparent border-b-[44px] border-r-[60px] lg:border-b-[55px] lg:border-r-[75px]"></div>
+      </div>
+      {/*
+      <div className="absolute top-0 right-0 w-1/2">
+        <div className="w-full h-[22px] lg:h-[33px] bg-[#121212]"></div>
+        <div className="absolute z-1 top-0 right-full w-0 h-0 border-b-0 border-r-0 border-t-[#121212] border-l-transparent border-t-[22px] border-l-[30px] lg:border-t-[33px] lg:border-l-[40px]"></div>
+      </div>
+      */}
+    </div>
+    <section id="home-section-6" className="bottom-section home-section-6 bg-[#121212] relative z-1">
+      <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 pt-25 pb-9">
+        <div className={aniClass + " animate__animated animate__delay-500 flex flex-wrap items-center justify-end"}>
           <div className="w-full lg:w-auto flex justify-center lg:justify-end order-1 md:order-2">
             <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://x.com/Kapkap_Hub" target="_blank">
               <img loading="lazy" className="w-11 md:w-12" src="/images/social/x.png" alt="x" />
@@ -61,5 +64,6 @@ export default function Bottom() {
         </div>
       </div>
     </section>
+    </>
   );
 }

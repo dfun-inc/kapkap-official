@@ -107,9 +107,9 @@ body {
   font-family: "UniviaPro-Regular", Arial, Helvetica, sans-serif;
 }
 
-.eco-section .eco-img-box {
+.eco-section .eco-container {
   background-image: url('/images/bg_eco.jpg');
-  background-size: cover;
+  background-size: 100% auto;
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -128,27 +128,40 @@ body {
   background-repeat: no-repeat;
 }
 
-.feature-item {
+.model-section .model-section-container {
+  background-image: url('/images/bg_model.jpg');
   background-size: 100% auto;
   background-position: center bottom;
   background-repeat: no-repeat;
-  background-color: #201e2a;
 }
 
-.feature-item-1 {
-  background-image: url('/images/bg_feature1.jpg');
+.revenue-item {
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-image: url('/images/bg_revenue.png');
 }
 
-.feature-item-2 {
-  background-image: url('/images/bg_feature2.jpg');
+.summary-item {
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
-.feature-item-3 {
-  background-image: url('/images/bg_feature3.jpg');
+.summary-item-1 {
+  background-image: url('/images/bg_summary1.png');
 }
 
-.feature-item-4 {
-  background-image: url('/images/bg_feature4.jpg');
+.summary-item-2 {
+  background-image: url('/images/bg_summary2.png');
+}
+
+.summary-item-3 {
+  background-image: url('/images/bg_summary3.png');
+}
+
+.summary-item-4 {
+  background-image: url('/images/bg_summary4.png');
 }
 
 .case-left-shape {
@@ -243,6 +256,13 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.k-score-page {
+  background-image: url('/images/bg_kscore_page.png');
+  background-size: 100% auto;
+  background-position: top center;
+  background-repeat: no-repeat;
 }
 
 

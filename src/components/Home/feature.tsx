@@ -49,17 +49,6 @@ export default function feature() {
           scrub: true,
         },
       })
-
-      gsap.to('.feature-item-bottom', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".feature-section",
-          start: 'top+=60% top',
-          end: 'top+=80% top',
-          scrub: true,
-        },
-      })
     }
     else {
       setAniClassLeft("animate__fadeInLeft");
@@ -73,27 +62,23 @@ export default function feature() {
   return (
     <section id="home-section-1" className="home-section-1 feature-section bg-[#121212]">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16">
-        <div className={aniTitle + " animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
+        <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
           <div className="feature-title mx-auto inline-block border-b border-[#FEBD32]">{t('feature.title')}</div>
         </div>
-        <div className="md:flex gap-x-5 items-stretch justify-between mt-12 feature-item-top">
-          <div className={aniClassLeft + " animate__animated animate__delay-500 flex-1 w-full feature-item feature-item-1 px-5 lg:px-8 2xl:px-10 py-3 lg:py-5 2xl:py-7 overflow-hidden rounded-3xl mt-5"}>
-            <div className="text-[18px] 2xl:text-[22px] text-[#8D73FF]">{t('feature.item1title')}</div>
-            <div className="mt-4 text-[16px] md:w-4/5 text-[#CFC4FF]">{t('feature.item1content')}</div>
+        <div className="flex flex-wrap items-center justify-between mt-12 feature-item-top">
+          <div className={aniClassLeft + " animate__animated animate__delay-500 w-full md:w-3/5 md:max-w-[820px] md:w-2/3"}>
+            <div className="text-[18px] xl:text-[24px] text-[#8D73FF]">{t('feature.subTitle')}</div>
+            <div className="text-[16px] text-[#DDD5FF] mt-10 leading-[30px]">{t('feature.desc1')}</div>
+            <div className="text-[16px] text-[#DDD5FF] leading-[30px]">{t('feature.desc2')}</div>
+            <div className="text-[16px] text-[#DDD5FF] leading-[30px]">{t('feature.desc3')}</div>
           </div>
-          <div className={aniClassRight + " animate__animated animate__delay-500 flex-1 w-full feature-item feature-item-2 px-5 lg:px-8 2xl:px-10 py-3 lg:py-5 2xl:py-7 overflow-hidden rounded-3xl mt-5"}>
-            <div className="text-[18px] 2xl:text-[22px] text-[#8D73FF]">{t('feature.item2title')}</div>
-            <div className="mt-4 text-[16px] md:w-4/5 text-[#CFC4FF]">{t('feature.item2content')}</div>
-          </div>
-        </div>
-        <div className="md:flex gap-x-5 items-stretch justify-between feature-item-bottom">
-          <div className={aniClassLeft + " animate__animated animate__delay-1000 flex-1 w-full feature-item feature-item-3 px-5 lg:px-8 2xl:px-10 py-3 lg:py-5 2xl:py-7 overflow-hidden rounded-3xl mt-5"}>
-            <div className="text-[18px] 2xl:text-[22px] text-[#8D73FF]">{t('feature.item3title')}</div>
-            <div className="mt-4 text-[16px] md:w-4/5 text-[#CFC4FF]">{t('feature.item3content')}</div>
-          </div>
-          <div className={aniClassRight + " animate__animated animate__delay-1000 flex-1 w-full feature-item feature-item-4 px-5 lg:px-8 2xl:px-10 py-3 lg:py-5 2xl:py-7 overflow-hidden rounded-3xl mt-5"}>
-            <div className="text-[18px] 2xl:text-[22px] text-[#8D73FF]">{t('feature.item4title')}</div>
-            <div className="mt-4 text-[16px] md:w-4/5 text-[#CFC4FF]">{t('feature.item4content')}</div>
+          <div className={aniClassRight + " animate__animated animate__delay-500 mt-12 md:mt-0 md:flex-1 w-full md:w-auto relative"}>
+            <div className="relative w-3/5 max-w-[376px] mx-auto">
+              <img className="w-full" src="./images/feature_illus.png" alt="" />
+              <div className="absolute -top-7 xl:-top-8 left-1/2 -translate-x-1/2 text-[18px] xl:text-[24px] text-white font-univia-pro-bold">{t('feature.user')}</div>
+              <div className="absolute top-2/5 right-3/4 text-[18px] xl:text-[24px] text-[#FEBD32] font-univia-pro-bold whitespace-nowrap">{t('feature.valueRewards')}</div>
+              <div className="absolute top-2/5 left-3/4 text-[18px] xl:text-[24px] text-[#FEBD32] font-univia-pro-bold whitespace-nowrap">{t('feature.attention')}</div>
+            </div>
           </div>
         </div>
       </div>
