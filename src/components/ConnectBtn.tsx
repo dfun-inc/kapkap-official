@@ -6,9 +6,9 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from "react";
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
-import { useAccount, useConnect, useDisconnect, useChainId } from 'wagmi';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { walletConnect } from 'wagmi/connectors'
-import { getConnectorClient, signMessage, switchChain, watchAccount } from '@wagmi/core'
+import { getConnectorClient, getWalletClient, signMessage, switchChain, watchAccount } from '@wagmi/core'
 import { config, projectId, tgtChain } from "@/config/wagmi"
 import { useAppContext } from '@/context/AppContext';
 import { evmLogin, getUserInfo, tgLogin } from '@/services/apis/user';
@@ -25,7 +25,7 @@ export default function ConnectBtn() {
   const [connectors, setConnecotrs] = useState<any[]>([])
   const [walletAddr, setWalletAddr] = useState<any>(null);
   const [connecting, setConnecting] = useState(false);
-  const chainId = useChainId();
+  const { chain } = useAccount();
   const { openConnectModal } = useConnectModal();
 
   const { handleSetUserInfo, modalTrigger } = useAppContext();  
@@ -37,15 +37,16 @@ export default function ConnectBtn() {
     setConnecting(true);
     
     try {
-      const signMsgStr = 'address=' + address + ',chain_id=' + chainId;
+      const signMsgStr = 'address=' + address + ',chain_id=' + chain?.id;
       const refCode = localStorage.getItem('kkRefCode') ? localStorage.getItem('kkRefCode') : '';
-      // await switchChain(config, { chainId: tgtChain?.id });
+      await switchChain(config, { chainId: tgtChain?.id });
+      await new Promise(resolve => setTimeout(resolve, 2000));
       const signedMessage = await signMessage(config, {message: signMsgStr});
 
       await evmLogin({
         address: address,
         sign: signedMessage.replace(/['"]+/g, ''),
-        chain_id: chainId,
+        chain_id: chain?.id,
         chain: 'evm',
         refCode: refCode,
       })
