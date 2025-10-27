@@ -139,7 +139,35 @@ body {
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
-  background-image: url('/images/bg_revenue.png');
+  background-image: url('/images/revenue/card1.jpg');
+}
+
+.revenue-item-2 {
+  background-image: url('/images/revenue/card2.jpg');
+}
+
+.revenue-item-3 {
+  background-image: url('/images/revenue/card3.jpg');
+}
+
+.revenue-item-4 {
+  background-image: url('/images/revenue/card4.jpg');
+}
+
+.revenue-item-5 {
+  background-image: url('/images/revenue/card5.jpg');
+}
+
+.social-data-item-box .bg-box {
+  mask-image: url('/images/bg_light.png'); /* 你的白色图标路径 */
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: url('/images/bg_light.png');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  background-color: #7b37af;
 }
 
 .summary-item {

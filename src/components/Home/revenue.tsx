@@ -66,31 +66,31 @@ export default function Revenue() {
         </div>
         <div className="revenue-content-box md:mt-5">
           <div className={aniItem + " animate__animated animate__delay-500 flex flex-wrap items-stretch justify-center md:space-x-15 2xl:space-x-20"}>
-            <div className="revenue-item aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
+            <div className="revenue-item revenue-item-1 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle1')}</div>
                 <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent1')}</div>
               </div>
             </div>
-            <div className="revenue-item aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
+            <div className="revenue-item revenue-item-2 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle2')}</div>
                 <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent2')}</div>
               </div>
             </div>
-            <div className="revenue-item aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
+            <div className="revenue-item revenue-item-3 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle3')}</div>
                 <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent3')}</div>
               </div>
             </div>
-            <div className="revenue-item aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
+            <div className="revenue-item revenue-item-4 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle4')}</div>
                 <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent4')}</div>
               </div>
             </div>
-            <div className="revenue-item aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
+            <div className="revenue-item revenue-item-5 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle5')}</div>
                 <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent5')}</div>

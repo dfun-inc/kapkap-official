@@ -8,8 +8,8 @@ import { useConnectModal } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { useAccount, useConnect, useDisconnect, useChainId } from 'wagmi';
 import { walletConnect } from 'wagmi/connectors'
-import { signMessage } from '@wagmi/core'
-import { config, projectId } from "@/config/wagmi"
+import { getConnectorClient, signMessage, switchChain, watchAccount } from '@wagmi/core'
+import { config, projectId, tgtChain } from "@/config/wagmi"
 import { useAppContext } from '@/context/AppContext';
 import { evmLogin, getUserInfo, tgLogin } from '@/services/apis/user';
 import { useErrCode } from '@/datas/errCode';
@@ -39,6 +39,7 @@ export default function ConnectBtn() {
     try {
       const signMsgStr = 'address=' + address + ',chain_id=' + chainId;
       const refCode = localStorage.getItem('kkRefCode') ? localStorage.getItem('kkRefCode') : '';
+      // await switchChain(config, { chainId: tgtChain?.id });
       const signedMessage = await signMessage(config, {message: signMsgStr});
 
       await evmLogin({
