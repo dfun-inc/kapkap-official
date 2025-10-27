@@ -57,7 +57,38 @@ export default function Main() {
           <div className="w-full flex-1 min-h-[300px] flex items-center">
             <div className="w-full pt-12">
               <div className="main-logo">
-                <img className="w-100 md:w-[560px] animate__animated animate__fadeInUp text-[#6E4DFF]" src="/images/logo.png" alt="" />
+                <svg version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="73 89 355 43"
+                  width="568"
+                  height="68"
+                  xmlSpace="preserve"
+                >
+                  <style type="text/css">{`
+                    .st0 { fill-rule:evenodd; clip-rule:evenodd; fill:#FEBD32; }
+                    .st1 { fill:#FFFFFF; }
+                    .st2 { fill-rule:evenodd; clip-rule:evenodd; fill:#FFFFFF; }
+                  `}</style>
+                  <g>
+                    <rect x="73" y="91" className="st0" width="12" height="40" />
+                    <polygon className="st0" points="106,91 123,91 103,111 123,131 106,131 86,111" />
+                    <rect x="253" y="91" className="st0" width="12" height="40" />
+                    <polygon className="st0" points="286,91 303,91 283,111 303,131 286,131 266,111" />
+                    <path
+                      className="st1"
+                      d="M230,91h-29l-6,10h35c4,0,6,2,6,5s-2,5-6,5h-35v20h12v-10h23c13,0,18-8,18-15S243,91,230,91z"
+                    />
+                    <path
+                      className="st1"
+                      d="M410,91h-29l-6,10h35c4,0,6,2,6,5s-2,5-6,5h-35v20h12v-10h23c13,0,18-8,18-15S423,91,410,91z"
+                    />
+                    <polygon className="st2" points="356,131 339,110 322,131 305,131 339,89 373,131" />
+                    <polygon className="st2" points="159,110 142,131 125,131 159,89 193,131 176,131" />
+                  </g>
+                </svg>
               </div>
               <div className="title-text-bottom mt-7">
                 <span className="inline-block animate__animated animate__fadeInUp text-[#8A84A3] text-[16px] md:text-[18px]">{t('main.desc')}</span>

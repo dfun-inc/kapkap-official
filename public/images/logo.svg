@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 220" style="enable-background:new 0 0 500 220;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FEBD32;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+</style>
+<g id="KapKap">
+	<rect id="K_3_" x="73" y="91" class="st0" width="12" height="40"/>
+	<polygon id="K_2_" class="st0" points="106,91 123,91 103,111 123,131 106,131 86,111 	"/>
+	<rect id="K_1_" x="253" y="91" class="st0" width="12" height="40"/>
+	<polygon id="K" class="st0" points="286,91 303,91 283,111 303,131 286,131 266,111 	"/>
+	<path id="P_1_" class="st1" d="M230,91h-29l-6,10h35c4,0,6,2,6,5s-2,5-6,5h-35v20h12v-10h23c13,0,18-8,18-15S243,91,230,91z"/>
+	<path id="P" class="st1" d="M410,91h-29l-6,10h35c4,0,6,2,6,5s-2,5-6,5h-35v20h12v-10h23c13,0,18-8,18-15S423,91,410,91z"/>
+	<polygon id="A_1_" class="st2" points="356,131 339,110 322,131 305,131 339,89 373,131 	"/>
+	<polygon id="A" class="st2" points="159,110 142,131 125,131 159,89 193,131 176,131 	"/>
+</g>
+</svg>
