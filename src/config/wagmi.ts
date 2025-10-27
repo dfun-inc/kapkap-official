@@ -1,11 +1,11 @@
 // wagmi.ts
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { bsc, bscTestnet } from 'wagmi/chains'
+import { mainnet } from 'wagmi/chains'
 
 export const projectId = 'e29dd843efef3adfe3d1cbda24d21e51'
 
 // export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
-const tgtChain:any = bsc;
+const tgtChain:any = mainnet;
 
 /*
 export const config = createConfig({

@@ -1,4 +1,12 @@
 {
+  "common": {
+    "loading": "加载中",
+    "getFailed": "获取数据失败，请稍后重试",
+    "submitFailed": "提交失败，请稍后重试",
+    "submitSuccess": "提交成功",
+    "error": "发生未知错误，请稍后重试"
+  },
+
   "menu": {
     "main": "Home",
     "introduce": "Introduce",
@@ -7,7 +15,9 @@
     "roadmap": "Roadmap",
     "other": "Other",
     "explore": "Kap ILE",
-    "doc": "DOC"
+    "doc": "DOC",
+    "login": "Log in",
+    "connectWallet": "Connect Wallet"
   },
 
   "main": {
