@@ -97,47 +97,53 @@ export default function SocialData() {
         <div className="social-data-item-box md:px-5">
           <div className={aniItem + " animate__animated animate__delay-500"}>
             <div className="flex flex-wrap justify-between items-stretch leading-none">
-              <div className="w-full md:w-2/5 xl:w-2/7 pt-6 pb-18 mt-12 md:mt-20 bg-black rounded-[20px]">
-                <div className="text-[24px] text-[#FEBD32] text-center">{t('socialData.mau')}</div>
-                <div className="flex items-end justify-center text-white font-univia-pro-bold mt-8">
+              <div className="w-full md:w-2/5 xl:w-2/7 mt-12 md:mt-20 bg-[#0b0916] rounded-[20px] relative overflow-hidden">
+                <div className="text-[24px] text-[#FEBD32] text-center pt-4 pb-3 leading-none bg-[#1a1630] relative z-2">{t('socialData.mau')}</div>
+                <div className="flex items-end justify-center text-white font-univia-pro-bold py-12 relative z-2">
                   <div id="mau-num" className="text-[60px]"></div>
                   <div className="text-[30px] ml-2 pb-1">M+</div>
                 </div>
+                <div className="bg-box absolute block z-1 select-none w-[200%] aspect-square top-1/3 left-1/2 -translate-x-1/2"></div>
               </div>
-              <div className="w-full md:w-2/5 xl:w-2/7 pt-6 pb-18 mt-12 md:mt-20 bg-black rounded-[20px]">
-                <div className="text-[24px] text-[#FEBD32] text-center">{t('socialData.dau')}</div>
-                <div className="flex items-end justify-center text-white font-univia-pro-bold mt-8">
+              <div className="w-full md:w-2/5 xl:w-2/7 mt-12 md:mt-20 bg-[#0b0916] rounded-[20px] relative overflow-hidden">
+                <div className="text-[24px] text-[#FEBD32] text-center pt-4 pb-3 leading-none bg-[#1a1630] relative z-2">{t('socialData.dau')}</div>
+                <div className="flex items-end justify-center text-white font-univia-pro-bold py-12 relative z-2">
                   <div id="dau-num" className="text-[60px]"></div>
                   <div className="text-[30px] ml-2 pb-1">K+</div>
                 </div>
+                <div className="bg-box absolute block z-1 select-none w-[200%] aspect-square top-1/3 left-1/2 -translate-x-1/2"></div>
               </div>
-              <div className="w-full md:w-2/5 xl:w-2/7 pt-6 pb-18 mt-12 md:mt-20 bg-black rounded-[20px]">
-                <div className="text-[24px] text-[#FEBD32] text-center">{t('socialData.user')}</div>
-                <div className="flex items-end justify-center text-white font-univia-pro-bold mt-8">
+              <div className="w-full md:w-2/5 xl:w-2/7 mt-12 md:mt-20 bg-[#0b0916] rounded-[20px] relative overflow-hidden">
+                <div className="text-[24px] text-[#FEBD32] text-center pt-4 pb-3 leading-none bg-[#1a1630] relative z-2">{t('socialData.user')}</div>
+                <div className="flex items-end justify-center text-white font-univia-pro-bold py-12 relative z-2">
                   <div id="user-num" className="text-[60px]"></div>
                   <div className="text-[30px] ml-2 pb-1">M+</div>
                 </div>
+                <div className="bg-box absolute block z-1 select-none w-[200%] aspect-square top-1/3 left-1/2 -translate-x-1/2"></div>
               </div>
-              <div className="w-full md:w-2/5 xl:w-2/7 pt-6 pb-18 mt-12 md:mt-20 bg-black rounded-[20px]">
-                <div className="text-[24px] text-[#FEBD32] text-center">{t('socialData.communityMembers')}</div>
-                <div className="flex items-end justify-center text-white font-univia-pro-bold mt-8">
+              <div className="w-full md:w-2/5 xl:w-2/7 mt-12 md:mt-20 bg-[#0b0916] rounded-[20px] relative overflow-hidden">
+                <div className="text-[24px] text-[#FEBD32] text-center pt-4 pb-3 leading-none bg-[#1a1630] relative z-2">{t('socialData.communityMembers')}</div>
+                <div className="flex items-end justify-center text-white font-univia-pro-bold py-12 relative z-2">
                   <div id="cm-num" className="text-[60px]"></div>
                   <div className="text-[30px] ml-2 pb-1">K</div>
                 </div>
+                <div className="bg-box absolute block z-1 select-none w-[200%] aspect-square top-1/3 left-1/2 -translate-x-1/2"></div>
               </div>
-              <div className="w-full md:w-2/5 xl:w-2/7 pt-6 pb-18 mt-12 md:mt-20 bg-black rounded-[20px]">
-                <div className="text-[24px] text-[#FEBD32] text-center">{t('socialData.channelSubscribers')}</div>
-                <div className="flex items-end justify-center text-white font-univia-pro-bold mt-8">
+              <div className="w-full md:w-2/5 xl:w-2/7 mt-12 md:mt-20 bg-[#0b0916] rounded-[20px] relative overflow-hidden">
+                <div className="text-[24px] text-[#FEBD32] text-center pt-4 pb-3 leading-none bg-[#1a1630] relative z-2">{t('socialData.channelSubscribers')}</div>
+                <div className="flex items-end justify-center text-white font-univia-pro-bold py-12 relative z-2">
                   <div id="cs-num" className="text-[60px]"></div>
                   <div className="text-[30px] ml-2 pb-1">K</div>
                 </div>
+                <div className="bg-box absolute block z-1 select-none w-[200%] aspect-square top-1/3 left-1/2 -translate-x-1/2"></div>
               </div>
-              <div className="w-full md:w-2/5 xl:w-2/7 pt-6 pb-18 mt-12 md:mt-20 bg-black rounded-[20px]">
-                <div className="text-[24px] text-[#FEBD32] text-center">{t('socialData.twitterFollowers')}</div>
-                <div className="flex items-end justify-center text-white font-univia-pro-bold mt-8">
+              <div className="w-full md:w-2/5 xl:w-2/7 mt-12 md:mt-20 bg-[#0b0916] rounded-[20px] relative overflow-hidden">
+                <div className="text-[24px] text-[#FEBD32] text-center pt-4 pb-3 leading-none bg-[#1a1630] relative z-2">{t('socialData.twitterFollowers')}</div>
+                <div className="flex items-end justify-center text-white font-univia-pro-bold py-12 relative z-2">
                   <div id="tf-num" className="text-[60px]"></div>
                   <div className="text-[30px] ml-2 pb-1">K</div>
                 </div>
+                <div className="bg-box absolute block z-1 select-none w-[200%] aspect-square top-1/3 left-1/2 -translate-x-1/2"></div>
               </div>
             </div>
           </div>
