@@ -47,7 +47,7 @@ export default function Bottom() {
     <section id="home-section-6" className="bottom-section home-section-6 bg-[#121212] relative z-1">
       <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 pt-25 pb-9">
         <div className={aniClass + " animate__animated animate__delay-500 flex flex-wrap items-center justify-end"}>
-          <div className="w-full lg:w-auto flex justify-center lg:justify-end order-1 md:order-2">
+          <div className="w-full lg:w-auto flex justify-center lg:justify-end order-1 md:order-2 items-center">
             <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://x.com/Kapkap_Hub" target="_blank">
               <img loading="lazy" className="w-11 md:w-12" src="/images/social/x.png" alt="x" />
             </a>
@@ -59,6 +59,14 @@ export default function Bottom() {
             </a>
             <a className="block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="https://www.youtube.com/@KapKap_Hub" target="_blank">
               <img loading="lazy" className="w-11 md:w-12" src="/images/social/youtube.png" alt="youtube" />
+            </a>
+            <div className="w-[2px] bg-zinc-500 h-8 mx-2 md:mx-5"></div>
+            <a className="flex items-center block opacity-70 hover:opacity-100 mx-2 md:mx-5 mb-2" href="mailto:business@kapkap.io">
+              <img loading="lazy" className="w-11 md:w-12" src="/images/social/email.png" alt="mail" />
+              <div className="ml-2 text-gray-400 leading-none">
+                <div className="">business</div>
+                <div className="mt-1">@kapkap.io</div>
+              </div>
             </a>
           </div>
         </div>
