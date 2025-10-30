@@ -130,19 +130,30 @@ export default function Main() {
             </div>
           </div>
           <div className="main-desc pb-[10vh] md:pb-[16vh] flex">
-            <div className="animate__animated animate__fadeInUp flex flex-wrap flex-col w-full md:w-auto">
-              <div className="flex items-center space-x-3 md:space-x-6 justify-start md:justify-between">
-                <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.investors')}</div>
-                <img className="w-auto h-[18px] md:h-[32px]" src="/images/main_investors.png" alt="" />
-              </div>
-              <div className="w-full flex items-center space-x-6 justify-start md:justify-between mt-6">
-                <div className="flex items-center space-x-3 md:space-x-6">
+            <div className="animate__animated animate__fadeInUp w-full md:w-auto">
+              <div className="w-full flex flex-wrap items-center space-x-6 justify-start mt-6">
+                <div className="w-full md:w-auto">
                   <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.partners')}</div>
-                  <img className="w-auto h-[18px] md:h-[32px]" src="/images/main_partners.png" alt="" />
+                  <div className="flex items-center space-x-5 md:space-x-6 mt-2">
+                    <img className="w-auto h-[26px]" src="/images/investors/par_ApeCoin.png" alt="" />
+                    <img className="w-auto h-[34px]" src="/images/investors/par_BAYC.png" alt="" />
+                    <img className="w-auto h-[23px]" src="/images/investors/par_DAOMaker.png" alt="" />
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3 md:space-x-6">
+                <div className="w-full md:w-auto ml-0 md:ml-4 mt-6 md:mt-0">
                   <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.kol')}</div>
-                  <div className="text-[#8A84A3] text-[16px]">Beanie</div>
+                  <div className="text-[#8A84A3] text-[16px] mt-3">Beanie</div>
+                </div>
+              </div>
+              <div className="mt-6 md:mt-4">
+                <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.investors')}</div>
+                <div className="flex flex-wrap lg:flex-no-wrap items-center space-x-5 space-y-3 lg:space-y-0 lg:space-x-8 justify-start mt-2">
+                  <img className="w-auto h-[19px]" src="/images/investors/inv_ShiMa.png" alt="" />
+                  <img className="w-auto h-[33px]" src="/images/investors/inv_Animoca.png" alt="" />
+                  <img className="w-auto h-[32px]" src="/images/investors/inv_Mechanism.png" alt="" />
+                  <img className="w-auto h-[34px]" src="/images/investors/inv_BigBrain.png" alt="" />
+                  <img className="w-auto h-[22px]" src="/images/investors/inv_Klaytn.png" alt="" />
+                  <img className="w-auto h-[31px]" src="/images/investors/inv_UnionverseLabs.png" alt="" />
                 </div>
               </div>
             </div>

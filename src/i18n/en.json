@@ -21,7 +21,11 @@
     "connectWallet": "Connect Wallet",
     "yourKapILE": "Your KapKap ILE",
     "disconnect": "Disconnect",
-    "myAccount": "My Account"
+    "myAccount": "My Account",
+    "bscWallets": "BSC Wallets",
+    "tgLogin": "TG Login",
+    "profile": "Profile",
+    "yourNFTs": "Personal information"
   },
 
   "main": {
@@ -280,5 +284,32 @@
     "item3Type": "Blockchain-based Multiplayer Online Battle Arena (MOBA) Game",
     "item3Advantage": "Integrated multiple high-quality IP resources, including collaboration with Bored Ape Yacht Club (BAYC)",
     "item3Coop": "Precisely reach high-value users via KapKap (Customer Acquisition Cost Reduced by 30%)"
+  },
+
+  "mint": {
+    "mint": "Mint"
+  },
+
+  "yourNFTs": {
+    "title": "NFT Warehouse",
+    "viewHistory": "View History",
+    "yourTgAccount": "Your Telegram Account",
+    "yourWallet": "Your Wallet",
+    "none": "None",
+    "bindWallet": "Bind Wallet",
+    "bindTgAccount": "Bind Telegram Account",
+    "yourKScore": "Your K-Score"
+  },
+
+  "genkiMint": {
+    "title": "GENKIMINER EXCLUSIVE NFT MINTING",
+    "desc": "Minting requires corresponding K-score. Successfully minted NFTs will be directly deposited into your NFT Warehouse.",
+    "name": "Name",
+    "NFTPrivilege": "NFT Privilege",
+    "mintingCost": "Minting Cost",
+    "mint": "Mint",
+    "limit": "Limit",
+    "needKScore": "Need K-Score",
+    "costHint": "Minting multiple NFTs at onece can effectively help you save on gas fees"
   }
 }
