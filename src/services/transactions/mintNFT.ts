@@ -4,18 +4,35 @@ import { encodeFunctionData } from 'viem';
 
 import { tgtChain, config as wagmiConfig } from '@/config/wagmi';
 import FACTORYABI from '@/config/abis/NFTFactory.json';
-import { getMintData } from '@/services/apis/nft';
 
 export default async(mintData:any, account:any, chainConfig:any) => {
   return new Promise(async(resolve, reject) => {
     const chainId = tgtChain.id;
     console.log(chainId);
 
+    const target = account;
+    const ercType = '1155';
+
+    const conditionData = [
+      mintData.condition.costErc20,
+      mintData.condition.collect,
+      mintData.condition.maxMintAmount,
+      mintData.condition.userLimitAmount,
+      mintData.condition.batchNo,
+      mintData.condition.ids,
+      mintData.condition.prices,
+      mintData.condition.amounts,
+      mintData.condition.signCode,
+      mintData.condition.wlSignature
+    ];
+    const sig = mintData.dataSignature.signature;
+    console.log({target, ercType, conditionData, sig})
+
     let gas:any = 0;
     try {
       gas = await estimateGas(wagmiConfig, {
         to: chainConfig.NFTFactory,
-        data: encodeFunctionData({abi: FACTORYABI, functionName: 'mintNFTWithETH', args: [mintData]}),
+        data: encodeFunctionData({abi: FACTORYABI, functionName: 'mintNFTWithETH', args: [target, ercType, conditionData, sig]}),
         account: account,
       })
     }
@@ -36,7 +53,7 @@ export default async(mintData:any, account:any, chainConfig:any) => {
         abi: FACTORYABI,
         functionName: 'mintNFTWithETH',
         account: account,
-        args: [mintData],
+        args: [target, ercType, conditionData, sig],
         gas: BigInt(parseInt(String(Number(gas) * 1.2)))
       })
       .then((res:any) => {

@@ -173,7 +173,7 @@ export default function YourNFTs() {
             <>
               <div className="text-[20px] text-[#FEBD32]">{t('genkiMint.needKScore')}</div>
               <div className="text-center mt-12">
-                <Button className="text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4" onClick={() => triggerModalOpen()}>
+                <Button className="text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4" onClick={handleMint}>
                   {t('genkiMint.mint')}
                 </Button>
               </div>
