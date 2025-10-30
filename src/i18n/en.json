@@ -42,7 +42,7 @@
   "feature": {
     "title": "What is kapkap ?",
     "subTitle": "The world's first Web3 interaction & value distribution platform deeply integrating Al and attention economy",
-    "desc1": "Powered by the innovative KAPS Al Reputation System, we build an ecosystem engine driven by \"AlGC + Attention Economy + lssuance Services\".",
+    "desc1": "Powered by the innovative KAPs Al Reputation System, we build an ecosystem engine driven by \"AlGC + Attention Economy + lssuance Services\".",
     "desc2": "With games as the native entry point to support early user growth and incentive models, the platform gradually expands to broader Web3 fields, transforming multi-dimensional behaviors such as gaming, creation, tasks, and brand interactions into quantifiable and tradable attention and reputation assets.",
     "desc3": "Turn every game, interaction, and content consumption into valuable digital assets.",
     "user": "User",
@@ -66,7 +66,7 @@
   "core": {
     "title": "Core uses of k-score",
     "content1": "Enhance Benefits & Privileges: Holding NFTs minted via K-Score increases future platform airdrop benefits (e.g. token allocation weight) and unlocks exclusive in-game privileges (e.g., extra tasks, fast pass).",
-    "content2": "Stake for $KAPs: Stake reputation value corresponding to K-Score to earn $KAPs (platform ecosystem token) periodically. Longerstaking duration and higher K-Score level lead to higher revenue weight.",
+    "content2": "Stake for $KAPS: Stake reputation value corresponding to K-Score to earn $KAPS (platform ecosystem token) periodically. Longerstaking duration and higher K-Score level lead to higher revenue weight.",
     "content3": "Redeem ln-Game Resources: Consume K-Score to directly redeem core resources (e.g., in-game currency, stamina, rare materials) for multiple cooperative games. Resources arrive in real-time, supporting cross-game flexible use.",
     "k-score": "K-Score",
     "mint": "Mint",
@@ -109,7 +109,7 @@
     "itemTitle4": "Al Growth Engine SaaS Services",
     "itemContent4": "Provide SDK and data analysis services to developers.",
     "itemTitle5": "Platform Value-Added Services",
-    "itemContent5": "Such as staking $KAPs to obtain privileges,transaction fee discounts, etc."
+    "itemContent5": "Such as staking $KAPS to obtain privileges,transaction fee discounts, etc."
   },
 
   "socialData": {
@@ -122,7 +122,7 @@
     "twitterFollowers": "Twitter Followers",
     "bottomText1": "Beta Game Expected Data",
     "bottomItem1Name": "Idle Knights: ",
-    "bottomItem1Content": "Expected to reach 500K-lM registered players, forming a payment & fssion closed loop via $KAP",
+    "bottomItem1Content": "Expected to reach 500K-lM registered players, forming a payment & fssion closed loop via $KAPS",
     "bottomItem2Name": "Social Battle & UGC Creation Platform: ",
     "bottomItem2Content": "Expected to reach 100K users, verifying scenarios for the attention accumulation system.",
     "bottomText2": "Curent data solidifes the ecological foundation, and Beta games are expected to further expand user scale and verify attention value."
@@ -160,7 +160,7 @@
     "step1": "Phase l: Ecosystem Foundation(2025 Q4)",
     "step1_desc": "Launch the growth flywheel and build the core engine",
     "step1_1": "Expand the game matrix, integrate multiple cooperative games, and verify the platform's user acquisition capability.",
-    "step1_2": "Launch the core KAPS mechanism and K-Score system to realize attention quantification and incentive distribution.",
+    "step1_2": "Launch the core KAPs mechanism and K-Score system to realize attention quantification and incentive distribution.",
     "step1_3": "Open the Task Center to provide users with initial participation channels and reward access.",
     "step2": "Phase 2: Mechanism Construction(2026 Ql & Q2)",
     "step2_desc": "Establish market mechanisms and achieve value discovery",
@@ -170,13 +170,13 @@
     "step3": "Phase 3: Scale Expansion(2026 Q3 & Q4)",
     "step3_desc": "Expand ecosystem boundaries and deepen user incentives",
     "step3_1": "Launch the open beta of the MOBA game and social gaming companion system to enter medium-to-hardcore gaming scenarios.",
-    "step3_2": "Initiate the advertising revenue sharing mechanism, allowing $KAPs stakers and high-reputation users to share the platform's growth dividends.",
+    "step3_2": "Initiate the advertising revenue sharing mechanism, allowing $KAPS stakers and high-reputation users to share the platform's growth dividends.",
     "step3_3": "Use AlGC to realize personalized content and task recommendations, enhancing ecosystem activity.",
     "step4": "Phase 4: Future Outlook(2027)",
     "step4_desc": "Become an open infrastructure to drive cross-ecosystem growth",
     "step4_1": "Fuly open the Al growth engine and developer SDK to support third-party projects in quick integration.",
     "step4_2": "Establish a cross-project attention interconnection mechanism to realize ecosystem synergy effects.",
-    "step4_3": "Integrate $KAPs into all economic links to complete the construction of a closed-loop ecosystem."
+    "step4_3": "Integrate $KAPS into all economic links to complete the construction of a closed-loop ecosystem."
  },
 
   "other": {
