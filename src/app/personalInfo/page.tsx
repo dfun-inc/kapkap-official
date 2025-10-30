@@ -1,19 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { useErrCode } from "@/datas/errCode";
-import { getKScore } from "@/services/apis/user";
+import { bindTgAccount, getKScore, getUserInfo } from "@/services/apis/user";
 import { formatNumberWithCommas } from "@/utils/number";
 import { getNFTData } from "@/services/apis/nft";
 
 export default function YourNFTs() {
   const t = useTranslations();
-  const { userInfo, triggerModalOpen } = useAppContext();
+  const { userInfo, handleSetUserInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
   const [kscore, setKscore] = useState<number>(0);
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
@@ -21,15 +21,65 @@ export default function YourNFTs() {
   const [NFTlist, setNFTList] = useState<any[]>([]);
   const [NFTlistLoading, setNFTListLoading] = useState<boolean>(true);
 
+  const [bindEvmAccountLoading, setBindEvmAccountLoading] = useState<boolean>(false);
+  const [bindTgAccountLoading, setBindTgAccountLoading] = useState<boolean>(false);
+  const reBindTimeout = useRef<any>(null);
+
   const [NFTData, setNFTData] = useState<any>(null);
 
   const { errCodeHandler } = useErrCode();
 
-  const handleBindTgAccount = () => {
-    
+  const handleGetUserInfo = async() => {
+    await getUserInfo().then((res) => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        handleSetUserInfo(data?.data);
+      }
+      else {
+        errCodeHandler(data.status)
+      }
+    })
+  }
+
+  const handleBindTgAccount = async (tempToken = '', reqCount = 0) => {
+    setBindTgAccountLoading(true);
+    let reConnect = false;
+
+    const refCode = localStorage.getItem('kkRefCode') ? localStorage.getItem('kkRefCode') : '';
+    await bindTgAccount(tempToken)
+    .then(async(res) => {
+      const data = res?.data;
+      if(data.status == 10000 && data?.data.botUrl) {
+        window.open(data?.data.botUrl, '_blank');
+        reConnect = true;
+        reBindTimeout.current = setTimeout(() => {
+          handleBindTgAccount(data?.data.bindToken, reqCount + 1);
+        }, 5000);
+      }
+      else if(data?.data?.account) {
+        clearTimeout(reBindTimeout.current);
+        reBindTimeout.current = null;
+        handleGetUserInfo();
+      }
+      else if(reqCount < 10) {
+        reConnect = true;
+        
+        reBindTimeout.current = setTimeout(() => {
+          handleBindTgAccount(tempToken, reqCount + 1);
+        }, 5000);
+      }
+      else {
+        clearTimeout(reBindTimeout.current);
+        reBindTimeout.current = null;
+      }
+    })
+    if(!reConnect) {
+      setBindTgAccountLoading(false);
+    }
   }
 
   const handleBindEvmAccount = () => {
+    setBindEvmAccountLoading(true);
     
   }
 
@@ -71,6 +121,11 @@ export default function YourNFTs() {
     handleGetNFTData();
     const addr = localStorage.getItem('kkAddress');
     setAddr(addr || '');
+
+    return () => {
+      clearTimeout(reBindTimeout.current);
+      reBindTimeout.current = null;
+    }
   }, [])
 
   return (
@@ -93,7 +148,7 @@ export default function YourNFTs() {
                         {userInfo?.tgAccount ? 
                           <div className="text-[#FEBD32] text-[30px]">{userInfo?.tgAccount}</div>
                         :
-                          <button className="text-[#757895] flex items-end border-b border-b-transparent hover:border-b-[#757895]" onClick={handleBindTgAccount}>
+                          <button className="text-[#757895] flex items-end border-b border-b-transparent hover:border-b-[#757895]" onClick={() => handleBindTgAccount()}>
                             <div className="text-[30px]">{t('yourNFTs.none')}</div>
                             <div className="text-[20px] ml-1 pb-1">({t('yourNFTs.bindTgAccount')})&gt;</div>
                           </button>

@@ -278,10 +278,11 @@ export default function ConnectBtn() {
             {walletAddr ? (
               <>
                 {/*
-                <Link href="/yourNFTs" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white">
-                  <div className="w-full flex items-center justify-center">{t('menu.yourNFTs')}</div>
+                <Link href="/personalInfo" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white">
+                  <div className="w-full flex items-center justify-center">{t('menu.personalInfo')}</div>
                 </Link>
                 */}
+                
                 <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleDisconnect()}>
                   <div className="w-full flex items-center justify-center">{t('menu.disconnect')}</div>
                 </button>
