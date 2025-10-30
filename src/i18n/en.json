@@ -41,7 +41,7 @@
 
   "feature": {
     "title": "What is kapkap ?",
-    "subTitle": "The world's first Web3 interaction & value distribution platform deeply integrating Al intelligence and attention economy",
+    "subTitle": "The world's first Web3 interaction & value distribution platform deeply integrating Al and attention economy",
     "desc1": "Powered by the innovative KAPS Al Reputation System, we build an ecosystem engine driven by \"AlGC + Attention Economy + lssuance Services\".",
     "desc2": "With games as the native entry point to support early user growth and incentive models, the platform gradually expands to broader Web3 fields, transforming multi-dimensional behaviors such as gaming, creation, tasks, and brand interactions into quantifiable and tradable attention and reputation assets.",
     "desc3": "Turn every game, interaction, and content consumption into valuable digital assets.",
@@ -66,7 +66,7 @@
   "core": {
     "title": "Core uses of k-score",
     "content1": "Enhance Benefits & Privileges: Holding NFTs minted via K-Score increases future platform airdrop benefits (e.g. token allocation weight) and unlocks exclusive in-game privileges (e.g., extra tasks, fast pass).",
-    "content2": "Stake for KPT: Stake reputation value corresponding to K-Score to earn KPT (platform ecosystem token) periodically. Longerstaking duration and higher K-Score level lead to higher revenue weight.",
+    "content2": "Stake for KAPS: Stake reputation value corresponding to K-Score to earn KAPS (platform ecosystem token) periodically. Longerstaking duration and higher K-Score level lead to higher revenue weight.",
     "content3": "Redeem ln-Game Resources: Consume K-Score to directly redeem core resources (e.g., in-game currency, stamina, rare materials) for multiple cooperative games. Resources arrive in real-time, supporting cross-game flexible use.",
     "k-score": "K-Score",
     "mint": "Mint",
@@ -81,7 +81,7 @@
     "itemTitle1": "High-Potential Track",
     "itemContent1": "AI + Web3 + Attention Economy, flling the gap in high-quality blockchain game platforms within the BSC ecosystem.",
     "itemTitle2": "Innovative Solution",
-    "itemContent2": "Pioneer the Al-driven \"User Attention & Reputation System\"(KAPS) toreshape value distribution logic.",
+    "itemContent2": "Pioneer the Al-driven \"User Attention & Reputation System\"(KAPS) to reshape value distribution logic.",
     "itemTitle3": "Market Validation",
     "itemContent3": "Beta version launched, with 1.7M+ MAU, over 880K total communitymembers, and cooperation with high-quality projects like SOG &IdleKnights.",
     "itemTitle4": "AI-Driven Efficiency, Endless Content Production",
@@ -89,7 +89,7 @@
   },
 
   "model": {
-    "title": "ATTENTION SUPPLY ECONAMY MODEL",
+    "title": "ATTENTION SUPPLY ECONOMY MODEL",
     "uca": "Users Contribute Attention",
     "ppeg": "Project & Platform Ecosystem Growth",
     "uar": "Users' Attention Reproduction",
@@ -121,7 +121,7 @@
     "channelSubscribers": "Channel Subscribers",
     "twitterFollowers": "Twitter Followers",
     "bottomText1": "Beta Game Expected Data",
-    "bottomItem1Name": "idle Knights: ",
+    "bottomItem1Name": "Idle Knights: ",
     "bottomItem1Content": "Expected to reach 500K-lM registered players, forming a payment & fssion closed loop via $KAP",
     "bottomItem2Name": "Social Battle & UGC Creation Platform: ",
     "bottomItem2Content": "Expected to reach 100K users, verifying scenarios for the attention accumulation system.",

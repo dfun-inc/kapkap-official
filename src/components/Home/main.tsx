@@ -135,8 +135,8 @@ export default function Main() {
                 <div className="w-full md:w-auto">
                   <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.partners')}</div>
                   <div className="flex items-center space-x-5 md:space-x-6 mt-2">
-                    <img className="w-auto h-[26px]" src="/images/investors/par_ApeCoin.png" alt="" />
-                    <img className="w-auto h-[34px]" src="/images/investors/par_BAYC.png" alt="" />
+                    <img className="w-auto h-[26px]" src="/images/investors/par_BAYC.png" alt="" />
+                    <img className="w-auto h-[34px]" src="/images/investors/par_ApeCoin.png" alt="" />
                     <img className="w-auto h-[23px]" src="/images/investors/par_DAOMaker.png" alt="" />
                   </div>
                 </div>
@@ -153,7 +153,7 @@ export default function Main() {
                   <img className="w-auto h-[32px]" src="/images/investors/inv_Mechanism.png" alt="" />
                   <img className="w-auto h-[34px]" src="/images/investors/inv_BigBrain.png" alt="" />
                   <img className="w-auto h-[22px]" src="/images/investors/inv_Klaytn.png" alt="" />
-                  <img className="w-auto h-[31px]" src="/images/investors/inv_UnionverseLabs.png" alt="" />
+                  <img className="w-auto h-[31px]" src="/images/investors/inv_UnicornVerse.png" alt="" />
                 </div>
               </div>
             </div>
