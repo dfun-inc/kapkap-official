@@ -286,11 +286,14 @@ body {
   }
 }
 
-.k-score-page {
+.k-score-page,
+.your-nfts-page,
+.mint-page {
   background-image: url('/images/bg_kscore_page.png');
   background-size: 100% auto;
   background-position: top center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 

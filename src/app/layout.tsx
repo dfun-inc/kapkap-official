@@ -11,6 +11,7 @@ import Header from "@/components/Header";
 import { messages, Locale } from '@/lib/i18n';
 import { AppProvider } from '@/context/AppContext'
 import EvmProvider from '@/context/WalletProvider';
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
 export default function RootLayout({
   children,
@@ -37,32 +38,34 @@ export default function RootLayout({
     <html lang={locale == 'en' ? 'en' : 'zh-CN'}>
       <title>KapKap - Attention is all you earn</title>
       <body>
-        <EvmProvider>
-          <AppProvider>
-            <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
-              <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
-                <ToastContainer
-                    position="top-center"
-                    autoClose={5000}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable={false}
-                    pauseOnHover
-                    theme="dark"
-                    transition={Bounce}
-                    toastClassName="custom-toast"
-                />  
-                <div className="relative">
-                  <Header locale={locale} handleChangeLang={handleChangeLanguage} />
-                  {children}
-                </div>
-              </ReactLenis>
-            </NextIntlClientProvider> 
-          </AppProvider>
-        </EvmProvider>
+        <AppProvider>
+          <EvmProvider>
+            <TonConnectUIProvider manifestUrl="https://cdn.genkileague.com/file/mainifest.json">
+              <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
+                <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
+                  <ToastContainer
+                      position="top-center"
+                      autoClose={5000}
+                      hideProgressBar
+                      newestOnTop={false}
+                      closeOnClick={false}
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable={false}
+                      pauseOnHover
+                      theme="dark"
+                      transition={Bounce}
+                      toastClassName="custom-toast"
+                  />  
+                  <div className="relative">
+                    <Header locale={locale} handleChangeLang={handleChangeLanguage} />
+                    {children}
+                  </div>
+                </ReactLenis>
+              </NextIntlClientProvider> 
+            </TonConnectUIProvider>
+          </EvmProvider>
+        </AppProvider>
       </body>
     </html>
   );

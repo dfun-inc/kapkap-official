@@ -6,6 +6,7 @@ import 'swiper/css';
 import { useEffect } from 'react';
 import Footer from '@/components/Footer';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 
 export default function Kscore() {
   const t = useTranslations();
@@ -31,7 +32,12 @@ export default function Kscore() {
                 <div className="">{t('kscore.advantage')}: {t('kscore.item1Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item1Coop')}</div>
               </div>
-              <div className="text-right mt-6">
+              <div className="flex justify-end space-x-6 mt-6">
+                {/*
+                <Button href="/genkiMinerMint" className="px-10 py-4">
+                  {t('mint.mint')}
+                </Button>
+                */}
                 <Button className="px-10 py-4" target="_blank" href="https://t.me/GenkiMinerBot/GenkiMiner?startapp=tBkdxxEA">
                   {t('kscore.playGame')}
                 </Button>

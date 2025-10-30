@@ -71,19 +71,21 @@ export default function Header(props:Props) {
       header[0].style.backgroundColor = `rgba(0, 0, 0, 0)`;
     }
     else {
-      if(pathname == '/') {
+      //if(pathname == '/') {
         const scrollY = window.scrollY || document.documentElement.scrollTop;
         const progress = Math.min(scrollY / 800, 0.8);
       
         header[0].style.backgroundColor = `rgba(0, 0, 0, ${progress * 0.8})`;
         header[0].style.backdropFilter = `blur(${progress * 10}px)`;
         (header[0].style as any).WebkitBackdropFilter = `blur(${progress * 10}px)`;
+      /*
       }
       else {
         header[0].style.backgroundColor = `rgba(0, 0, 0, 0.2)`;
         header[0].style.backdropFilter = `blur(10px)`;
         (header[0].style as any).WebkitBackdropFilter = `blur(10px)`;
       }
+      */
     }
   }
 
