@@ -22,13 +22,13 @@ export default function Kscore() {
         </div>
         <div className="mt-12 animate__fadeInUp animate__animated animate__delay-500 bg-black/50 rounded-[20px] p-5">
           <div className="flex flex-wrap">
-            <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px] aspect-[7/4]">
-              <img className="w-full h-full object-cover rounded-[20px]" src="/images/games/genkiminer.jpg" alt="genkiminer" />
+            <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px]">
+              <img className="w-full rounded-[20px]" src="/images/games/genkiminer.jpg" alt="genkiminer" />
             </div>
             <div className="w-full md:flex-1 mt-6 md:mt-0 md:pl-5">
-              <div className="text-[30px] text-[#FEBD32]">{t('kscore.item1Name')}</div>
+              <div className="text-[24px] 2xl:text-[30px] text-[#FEBD32]">{t('kscore.item1Name')}</div>
               <div className="text-[18px] text-[#8D73FF] leading-tight">{t('kscore.item1Type')}</div>
-              <div className="mt-3 text-[18px] text-[#DDD5FF]">
+              <div className="mt-3 text-[16px] 2xl:text-[18px] text-[#DDD5FF]">
                 <div className="">{t('kscore.advantage')}: {t('kscore.item1Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item1Coop')}</div>
               </div>
@@ -48,13 +48,13 @@ export default function Kscore() {
 
         <div className="animate__fadeInUp animate__animated animate__delay-1000 bg-black/50 rounded-[20px] p-5 mt-8">
           <div className="flex flex-wrap">
-            <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px] aspect-[7/4]">
-              <img className="w-full h-full object-cover rounded-[20px]" src="/images/games/idle.jpg" alt="idle" />
+            <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px]">
+              <img className="w-full rounded-[20px]" src="/images/games/idle.jpg" alt="idle" />
             </div>
             <div className="w-full md:flex-1 mt-6 md:mt-0 md:pl-5">
-              <div className="text-[30px] text-[#FEBD32]">{t('kscore.item2Name')}</div>
+              <div className="text-[24px] 2xl:text-[30px] text-[#FEBD32]">{t('kscore.item2Name')}</div>
               <div className="text-[18px] text-[#8D73FF] leading-tight">{t('kscore.item2Type')}</div>
-              <div className="mt-3 text-[18px] text-[#DDD5FF]">
+              <div className="mt-3 text-[16px] 2xl:text-[18px] text-[#DDD5FF]">
                 <div className="">{t('kscore.advantage')}: {t('kscore.item2Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item2Coop')}</div>
               </div>
@@ -65,13 +65,13 @@ export default function Kscore() {
 
         <div className="animate__fadeInUp animate__animated animate__delay-1500 bg-black/50 rounded-[20px] p-5 mt-8">
           <div className="flex flex-wrap">
-            <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px] aspect-[7/4]">
+            <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px] aspect-[16/9]">
               <img className="w-full h-full object-cover rounded-[20px]" src="/images/games/SOG1.jpg" alt="SOG1" />
             </div>
             <div className="w-full md:flex-1 mt-6 md:mt-0 md:pl-5">
-              <div className="text-[30px] text-[#FEBD32]">{t('kscore.item3Name')}</div>
+              <div className="text-[24px] 2xl:text-[30px] text-[#FEBD32]">{t('kscore.item3Name')}</div>
               <div className="text-[18px] text-[#8D73FF] leading-tight">{t('kscore.item3Type')}</div>
-              <div className="mt-3 text-[18px] text-[#DDD5FF]">
+              <div className="mt-3 text-[16px] 2xl:text-[18px] text-[#DDD5FF]">
                 <div className="">{t('kscore.advantage')}: {t('kscore.item3Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item3Coop')}</div>
               </div>
