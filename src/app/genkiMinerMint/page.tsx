@@ -172,6 +172,7 @@ export default function YourNFTs() {
     }
     else {
       setAddr('');
+      setReMintArr([]);
       setKscore(0);
     }
   }, [userInfo])
