@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 export default function IP() {
   const t = useTranslations();
   const [aniTitle, setAniTitle] = useState<string>("opacity-0");
+  const [aniDesc, setAniDesc] = useState<string>("opacity-0");
 
   useEffect(() => {
     const winW = window.innerWidth;
@@ -21,6 +22,7 @@ export default function IP() {
         once: true,
         onEnter: () => {
           setAniTitle("animate__fadeInUp");
+          setAniDesc("animate__fadeInUp");
         },
       }); 
       
@@ -34,9 +36,21 @@ export default function IP() {
           scrub: true,
         },
       })
+
+      gsap.to('.ip-desc', {
+        opacity: 0.2,
+        y: -50,
+        scrollTrigger: {
+          trigger:".ip-section",
+          start: 'top+=60% top',
+          end: 'top+=90% top',
+          scrub: true,
+        },
+      })
     }
     else {
       setAniTitle("animate__fadeInUp");
+      setAniDesc("animate__fadeInUp");
     }
 
     return () => ctx?.revert();
@@ -56,6 +70,11 @@ export default function IP() {
         <div className="ip-title absolute top-2 md:top-12 left-3 md:left-18 z-1">
           <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('ip.title')}
+          </div>
+        </div>
+        <div className="ip-desc absolute bottom-5 md:bottom-20 2xl:bottom-26 left-0 z-1 w-full">
+          <div className={aniDesc + " animate__animated animate__delay-500 text-[22px] md:text-[30px] text-[#CFC4FF] text-center px-3"}>
+            {t('ip.desc')}
           </div>
         </div>
         <img className="w-full block select-none" src="/images/image_IPcharacters.jpg" />
