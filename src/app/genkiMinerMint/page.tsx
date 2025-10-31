@@ -222,11 +222,12 @@ export default function YourNFTs() {
           
           <div className="overflow-x-auto mt-10">
             <div className="min-w-[960px]">
-              <div className="flex">
-                <div className="flex bg-black/50 rounded-[20px] py-2">
+              <div className="flex justify-center">
+                <div className="flex bg-black/50 rounded-[20px] py-2 justify-center">
+                  
                 </div>
               </div>
-              <div className="flex bg-black/50 rounded-[20px] text-center text-[#DDD5FF] py-2 text-[20px] mt-2">
+              <div className="flex bg-black/50 rounded-[20px] text-center text-[#DDD5FF] py-2 text-[20px] mt-6">
                 <div className="w-[80px] md:w-[100px] border-r-[2px] border-zinc-600/30 py-2">NFT</div>
                 <div className="w-1/5 xl:min-w-[300px] border-r-[2px] border-zinc-600/30 py-2">{t('genkiMint.name')}</div>
                 <div className="flex-1 border-r-[2px] border-zinc-600/30 py-2">{t('genkiMint.NFTPrivilege')}</div>
