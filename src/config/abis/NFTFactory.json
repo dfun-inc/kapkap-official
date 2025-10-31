@@ -45,7 +45,7 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "blockNum",
+          "name": "timestamp",
           "type": "uint256"
         }
       ],
@@ -76,12 +76,6 @@
         {
           "indexed": false,
           "internalType": "address",
-          "name": "target",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
           "name": "author",
           "type": "address"
         },
@@ -100,7 +94,7 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "blockNum",
+          "name": "timestamp",
           "type": "uint256"
         }
       ],
@@ -131,7 +125,7 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "blockNum",
+          "name": "timestamp",
           "type": "uint256"
         }
       ],
@@ -162,12 +156,6 @@
         {
           "indexed": false,
           "internalType": "address",
-          "name": "target",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
           "name": "author",
           "type": "address"
         },
@@ -186,7 +174,7 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "blockNum",
+          "name": "timestamp",
           "type": "uint256"
         }
       ],
@@ -441,6 +429,40 @@
           "type": "address"
         },
         {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "ercType",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "getHistoryCount",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "historyCounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "nftContract",
+          "type": "address"
+        },
+        {
           "internalType": "uint256",
           "name": "batchNo",
           "type": "uint256"
@@ -650,11 +672,6 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "target",
-          "type": "address"
-        },
-        {
           "internalType": "uint64",
           "name": "ercType",
           "type": "uint64"
@@ -729,11 +746,6 @@
     },
     {
       "inputs": [
-        {
-          "internalType": "address",
-          "name": "target",
-          "type": "address"
-        },
         {
           "internalType": "uint64",
           "name": "ercType",
@@ -1114,4 +1126,4 @@
       "stateMutability": "view",
       "type": "function"
     }
-  ]
+]

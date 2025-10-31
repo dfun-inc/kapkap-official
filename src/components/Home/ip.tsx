@@ -73,7 +73,7 @@ export default function IP() {
           </div>
         </div>
         <div className="ip-desc absolute bottom-5 md:bottom-20 2xl:bottom-26 left-0 z-1 w-full">
-          <div className={aniDesc + " animate__animated animate__delay-500 text-[22px] md:text-[30px] text-[#CFC4FF] text-center px-3"}>
+          <div className={aniDesc + " animate__animated animate__delay-500 text-[16px] md:text-[20px] 2xl:text-[24px] text-[#CFC4FF] text-center px-3"}>
             {t('ip.desc')}
           </div>
         </div>

@@ -36,7 +36,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale == 'en' ? 'en' : 'zh-CN'}>
-      <title>KapKap - Attention is all you earn</title>
+      <title>KapKap - Al-driven Web3 Attention Economy and Value Distribution Platform</title>
       <body>
         <AppProvider>
           <EvmProvider>
