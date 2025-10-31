@@ -323,6 +323,7 @@
     "needKScore": "Need K-Score",
     "costHint": "Minting multiple NFTs at onece can effectively help you save on gas fees",
     "goToBind": "Go to Bind",
-    "minting": "Minting"
+    "minting": "Minting",
+    "mintSuccess": "Mint Success"
   }
 }

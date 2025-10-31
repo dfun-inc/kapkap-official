@@ -27,3 +27,24 @@ export async function getMintHistory() {
     },
   });
 }
+
+export async function getRemintList() {
+  return request({
+    method: 'get',
+    url: '/api/v1/nft/getReMintIdList',
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}
+
+export async function getRemintData(data:any) {
+  return request({
+    method: 'post',
+    url: '/api/v1/nft/remint',
+    data,
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}

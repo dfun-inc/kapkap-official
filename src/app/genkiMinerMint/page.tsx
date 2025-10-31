@@ -13,11 +13,11 @@ import Button from "@/components/ui/Button";
 import { useErrCode } from "@/datas/errCode";
 import { getKScore } from "@/services/apis/user";
 import { formatNumberWithCommas } from "@/utils/number";
-import { getMintData, getNFTData } from "@/services/apis/nft";
+import { getMintData, getNFTData, getRemintData, getRemintList } from "@/services/apis/nft";
 import { getChainConfig } from "@/services/apis/config";
 import mintNFT from "@/services/transactions/mintNFT";
 import {config as wagmiConfig} from "@/config/wagmi";
-import NFT1155ABI from "@/config/abis/NFT1155.json";
+import NFTFACTORYABI from "@/config/abis/NFTFactory.json";
 
 export default function YourNFTs() {
   const t = useTranslations();
@@ -33,7 +33,7 @@ export default function YourNFTs() {
   const [NFTListLoading, setNFTListLoading] = useState<boolean>(true);
 
   const [choosed, setChoosed] = useState<any[]>([]);
-  const [minted, setMinted] = useState<any[]>([]);
+  const [minted, setMinted] = useState<any>({});
   const [mintedLoading, setMintedLoading] = useState<boolean>(false);
   const [choosedScore, setChoosedScore] = useState<number>(0);
 
@@ -43,8 +43,9 @@ export default function YourNFTs() {
   const [bindType, setBindType] = useState<string>('evm');
 
   const [menuIdx, setMenuIdx] = useState<number>(0);
-  const [reMintArr, setReMintArr] = useState<any[]>([]);
+  const [reMintList, setReMintList] = useState<any>({});
 
+  const [mintLoading, setMintLoading] = useState<boolean>(false);
 
   const handleToggleChoose = (item:any) => {
     if(choosed.includes(item)) {
@@ -100,7 +101,10 @@ export default function YourNFTs() {
     setNFTListLoading(false);
   }
 
-  const handleMint = async () => {
+  const handleToMint = () => {
+    if(mintLoading) {
+      return;
+    }
     if(!userInfo) {
       triggerModalOpen();
       return;
@@ -118,6 +122,17 @@ export default function YourNFTs() {
       setShowBindModal(true);
       return;
     }
+
+    setMintLoading(true);
+    if(menuIdx == 0) {
+      handleMint();
+    }
+    else if(menuIdx == 1) {
+      handleRemint();
+    }
+  }
+
+  const handleMint = async () => {
 
     let mintData:any = null;
     await getMintData({tokenId:choosed, address, collect: chainConfig.NFT1155, mintContract: chainConfig.NFTFactory})
@@ -137,27 +152,91 @@ export default function YourNFTs() {
     if(!mintData) {
       return;
     }
-    mintNFT(mintData, address, chainConfig);
+    try{
+      await mintNFT(mintData, address, chainConfig)
+      .then((res) => {
+        toast.success(t('genkiMint.mintSuccess'));
+      });
+    }
+    catch(err) {
+      console.log(err)
+      return;
+    }
+
+    handleGetRemintList();
+    handleCheckMinted();
+    setMintLoading(false);
+  }
+
+  const handleRemint = async () => {
+    let mintData:any = null;
+    await getRemintData({tokenId:choosed, address, collect: chainConfig.NFT1155, mintContract: chainConfig.NFTFactory})
+    .then((res) => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        mintData = data?.data;
+      }
+      else {
+        errCodeHandler(data.status)
+      }
+    })
+    .catch((err) => {
+      toast.error(err?.message ? err.message : err);
+    })
+
+    if(!mintData) {
+      return;
+    }
+    try{
+      await mintNFT(mintData, address, chainConfig)
+      .then((res) => {
+        toast.success(t('genkiMint.mintSuccess'));
+      });
+    }
+    catch(err) {
+      console.log(err)
+      return;
+    }
+
+    handleGetRemintList();
+    handleCheckMinted();
+    setMintLoading(false);
+  }
+
+  const handleGetRemintList = async () => {
+    await getRemintList()
+    .then((res) => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        setReMintList(data?.data ? data.data : {});
+      }
+      else {
+        errCodeHandler(data.status)
+      }
+    })
+    .catch((err) => {
+      toast.error(err?.message ? err.message : err);
+    })
   }
 
   const handleCheckMinted = async () => {
+    let tempIds:string[] = [];
+    Object.entries(NFTData[10000]?.ids).map(([key]) => {
+      tempIds.push(key);
+    })
     setMintedLoading(true);
     await readContract(wagmiConfig, {
-      address: chainConfig.NFT1155,
-      abi: NFT1155ABI,
-      functionName: 'tokensOfOwner',
-      args: [userInfo?.account, 0, 50],
+      address: chainConfig.NFTFactory,
+      abi: NFTFACTORYABI,
+      functionName: 'getHistoryCount',
+      args: [chainConfig?.NFT1155, userInfo?.account, '1155', tempIds],
     })
     .then((res:any) => {
-      console.log(res)
-      let tempArr:any[] = [];
-      res.forEach((item:any) => {
-        if(item?.amount > 0) {
-          tempArr.push(Number(item?.id))
-        }
+      let tempObj:any = {};
+      res.forEach((item:any, index:number) => {
+        tempObj[tempIds[index]] = Number(item);
       })
-      console.log(tempArr)
-      setMinted(tempArr);
+      setMinted(tempObj);
     })
     setMintedLoading(false);
   }
@@ -169,19 +248,20 @@ export default function YourNFTs() {
   useEffect(() => {
     if(userInfo) {
       handleGetKscore();
+      handleGetRemintList();
     }
     else {
       setAddr('');
-      setReMintArr([]);
+      setReMintList({});
       setKscore(0);
     }
   }, [userInfo])
 
   useEffect(() => {
-    if(userInfo?.account && userInfo?.tgAccount && chainConfig) {
+    if(userInfo?.account && userInfo?.tgAccount && chainConfig && NFTData) {
       handleCheckMinted();
     }
-  }, [userInfo, chainConfig])
+  }, [userInfo, chainConfig, NFTData])
 
   useEffect(() => {
     if(NFTData) {
@@ -223,8 +303,13 @@ export default function YourNFTs() {
           <div className="overflow-x-auto mt-10">
             <div className="min-w-[960px]">
               <div className="flex justify-center">
-                <div className="flex bg-black/50 rounded-[20px] py-2 justify-center">
-                  
+                <div className="flex bg-black/50 rounded-[20px] p-3 justify-center space-x-3">
+                  <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (menuIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setMenuIdx(0)}>
+                    {t('genkiMint.mint')}
+                  </button>
+                  <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (menuIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]') + (userInfo == null ? ' cursor-not-allowed' : '')} onClick={userInfo ? () => setMenuIdx(1) : () => {}}>
+                    {t('genkiMint.minting')}
+                  </button>
                 </div>
               </div>
               <div className="flex bg-black/50 rounded-[20px] text-center text-[#DDD5FF] py-2 text-[20px] mt-6">
@@ -259,54 +344,56 @@ export default function YourNFTs() {
               :
               <>
               {Object.entries(NFTData[10000]?.ids)?.map(([key, value]:[string, any], index:number) => (
-              <div key={index} className="mt-5 flex items-center bg-black/50 rounded-[20px] text-[20px]">
-                <div className="w-[80px] md:w-[100px]">
-                  {chainConfig != null && <img className="w-full" src={chainConfig.IPFS.replace('token', 'image') + key + '.png'} alt="" />}
-                </div>
-                <div className="w-1/5 xl:min-w-[300px] text-[#DDD5FF] text-center p-3">{value?.name}</div>
-                <div className="flex-1 text-[#69FFD3] p-3">{value?.desc}</div>
-                <div className="w-1/5 flex justify-center items-center space-x-3">
-                  <img className="w-[40px]" src="/images/kscore.png" alt="kscore" />
-                  <div className="text-[#FEBD32]">{formatNumberWithCommas(value.kscore)}</div>
-                </div>
-                <div className="w-[160px] md:w-[200px] py-2">
-                  {userInfo != null ?
-                    mintedLoading ? 
-                      <div className="w-8 h-8 bg-gray-500 rounded-[10px] mx-auto"></div>
-                      :
-                      <>
-                      {minted.includes(Number(key)) ?
-                        <>
-                          <div className="w-8 mx-auto cursor-not-allowed opacity-50">
-                            <div className="w-full h-8 border-[2px] border-[#8D73FF] rounded-[10px]"></div>
-                          </div>
-                          <div className="text-[#FF4575] text-[14px] mt-2 text-center">{t('genkiMint.limit')}: 0/{value?.limit}</div>
-                        </>
+              <div key={index} className="">
+                {(menuIdx == 0 && (!reMintList[key] || Boolean(minted[key])) || menuIdx == 1 && Boolean(reMintList[key]) && !minted[key]) && <div key={index} className="mt-5 flex items-center bg-black/50 rounded-[20px] text-[20px]">
+                  <div className="w-[80px] md:w-[100px]">
+                    {chainConfig != null && <img className="w-full" src={chainConfig.IPFS.replace('token', 'image') + key + '.png'} alt="" />}
+                  </div>
+                  <div className="w-1/5 xl:min-w-[300px] text-[#DDD5FF] text-center p-3">{value?.name}</div>
+                  <div className="flex-1 text-[#69FFD3] p-3">{value?.desc}</div>
+                  <div className="w-1/5 flex justify-center items-center space-x-3">
+                    <img className="w-[40px]" src="/images/kscore.png" alt="kscore" />
+                    <div className="text-[#FEBD32]">{formatNumberWithCommas(value.kscore)}</div>
+                  </div>
+                  <div className="w-[160px] md:w-[200px] py-2">
+                    {userInfo != null ?
+                      mintedLoading ? 
+                        <div className="w-8 h-8 bg-gray-500 rounded-[10px] mx-auto"></div>
                         :
                         <>
-                          <div className="w-8 cursor-pointer mx-auto" onClick={() => handleToggleChoose(key)}>
-                          {
-                            choosed.includes(key) ?
-                              <div className="w-full h-8 bg-[#FEBD32] flex items-center justify-center rounded-[10px]">
-                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22"><path d="M954.843429 323.437714c0 14.299429-5.705143 28.562286-16.018286 38.838857L447.378286 853.723429c-10.276571 10.276571-24.576 16.018286-38.838857 16.018285s-28.562286-5.705143-38.838858-16.018285l-284.562285-284.562286c-10.276571-10.276571-16.018286-24.576-16.018286-38.838857s5.705143-28.562286 16.018286-38.838857l77.714285-77.714286c10.276571-10.276571 24.576-16.018286 38.838858-16.018286s28.562286 5.705143 38.838857 16.018286l168.009143 168.557714 374.857142-375.442286c10.276571-10.276571 24.576-16.018286 38.838858-16.018285s28.562286 5.705143 38.838857 16.018285l77.714285 77.714286c10.276571 10.276571 16.018286 24.576 16.018286 38.838857z" p-id="10474"></path></svg>
-                              </div>
-                              :
-                            <div className="w-full h-8 border-[2px] border-[#8D73FF] rounded-[10px]"></div>
-                          }
-                          </div>
-                          <div className="text-[#8D73FF] text-[14px] mt-2 text-center">{t('genkiMint.limit')}: {value?.limit}/{value?.limit}</div>
+                        {minted[key] >= 1 ?
+                          <>
+                            <div className="w-8 mx-auto cursor-not-allowed opacity-50">
+                              <div className="w-full h-8 border-[2px] border-[#8D73FF] rounded-[10px]"></div>
+                            </div>
+                            <div className="text-[#FF4575] text-[14px] mt-2 text-center">{t('genkiMint.limit')}: 0/{value?.limit}</div>
+                          </>
+                          :
+                          <>
+                            <div className="w-8 cursor-pointer mx-auto" onClick={() => handleToggleChoose(key)}>
+                            {
+                              choosed.includes(key) ?
+                                <div className="w-full h-8 bg-[#FEBD32] flex items-center justify-center rounded-[10px]">
+                                  <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22"><path d="M954.843429 323.437714c0 14.299429-5.705143 28.562286-16.018286 38.838857L447.378286 853.723429c-10.276571 10.276571-24.576 16.018286-38.838857 16.018285s-28.562286-5.705143-38.838858-16.018285l-284.562285-284.562286c-10.276571-10.276571-16.018286-24.576-16.018286-38.838857s5.705143-28.562286 16.018286-38.838857l77.714285-77.714286c10.276571-10.276571 24.576-16.018286 38.838858-16.018286s28.562286 5.705143 38.838857 16.018286l168.009143 168.557714 374.857142-375.442286c10.276571-10.276571 24.576-16.018286 38.838858-16.018285s28.562286 5.705143 38.838857 16.018285l77.714285 77.714286c10.276571 10.276571 16.018286 24.576 16.018286 38.838857z" p-id="10474"></path></svg>
+                                </div>
+                                :
+                              <div className="w-full h-8 border-[2px] border-[#8D73FF] rounded-[10px]"></div>
+                            }
+                            </div>
+                            <div className="text-[#8D73FF] text-[14px] mt-2 text-center">{t('genkiMint.limit')}: {value?.limit}/{value?.limit}</div>
+                          </>
+                        }
                         </>
-                      }
+                      :
+                      <>
+                        <div className="w-8 mx-auto cursor-not-allowed opacity-50">
+                          <div className="w-full h-8 border-[2px] border-[#8D73FF] rounded-[10px]"></div>
+                        </div>
+                        <div className="text-[#8D73FF] text-[14px] mt-2 text-center">{t('genkiMint.limit')}: {value?.limit}/{value?.limit}</div>
                       </>
-                    :
-                    <>
-                      <div className="w-8 mx-auto cursor-not-allowed opacity-50">
-                        <div className="w-full h-8 border-[2px] border-[#8D73FF] rounded-[10px]"></div>
-                      </div>
-                      <div className="text-[#8D73FF] text-[14px] mt-2 text-center">{t('genkiMint.limit')}: {value?.limit}/{value?.limit}</div>
-                    </>
-                  }
-                </div>
+                    }
+                  </div>
+                </div>}
               </div>
               ))}
               </>
@@ -326,8 +413,9 @@ export default function YourNFTs() {
                 style={{"width": (choosedScore/kscore > 1 ? 1 : choosedScore/kscore) * 100 + "%"}}></div>}
               </div>
               <div className="text-center mt-12">
-                <Button className={"text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 " + (choosed?.length > 0 ? '' : 'cursor-not-allowed')} onClick={choosed?.length > 0 ? handleMint : () => {}}>
+                <Button className={"text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 " + (choosed?.length > 0 ? '' : 'cursor-not-allowed')} onClick={choosed?.length > 0 ? handleToMint : () => {}}>
                   {t('genkiMint.mint')}
+                  {mintLoading && <span className="animate-spin inline-block w-5 h-5 border-2 border-t-white border-b-white/10 ml-2"></span>}
                 </Button>
               </div>
               <div className="text-right mt-12 text-[#4E436A]">{t('genkiMint.costHint')}</div>
