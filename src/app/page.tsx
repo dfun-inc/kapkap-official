@@ -4,6 +4,7 @@ import Bottom from '@/components/Home/bottom';
 import Core from '@/components/Home/core';
 import Ecosystem from '@/components/Home/ecosystem';
 import Feature from '@/components/Home/feature';
+import IP from '@/components/Home/ip';
 import Main from '@/components/Home/main';
 import Model from '@/components/Home/model';
 import Revenue from '@/components/Home/revenue';
@@ -26,6 +27,7 @@ export default function Home() {
       <Model />
       <Summary />
       <Revenue />
+      <IP />
       <SocialData />
       <Roadmap />
       <Bottom />

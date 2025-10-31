@@ -17,3 +17,13 @@ export async function getMintData(data:any) {
     },
   });
 }
+
+export async function getMintHistory() {
+  return request({
+    method: 'get',
+    url: '/api/v1/nft/getMint1155History',
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}

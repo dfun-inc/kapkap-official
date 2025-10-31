@@ -3,7 +3,7 @@ import { request } from "@/utils/request";
 export async function evmLogin(data: any) {
   return request({
     method: 'post',
-    url: '/api/v1/walletLogin/evmLogin',
+    url: '/api/v1/evmLogin',
     data
   });
 }
@@ -11,7 +11,7 @@ export async function evmLogin(data: any) {
 export async function tgLogin(data: any) {
   return request({
     method: 'post',
-    url: '/api/v1/walletLogin/tonLogin',
+    url: '/api/v1/tgLogin',
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
     },
@@ -29,13 +29,11 @@ export async function getUserInfo() {
   });
 }
 
-export async function bindEvmAccount(evmAddress: string) {
+export async function bindEvmAccount(data:any) {
   return request({
     method: 'post',
     url: '/api/v1/user/bindEvmAccount',
-    data: {
-      evmAddress
-    },
+    data,
     headers: {
       Authorization: localStorage.getItem('kkAuthToken')
     },

@@ -35,10 +35,14 @@ export default function ConnectBtn() {
   const [tonConnectUI] = useTonConnectUI();
   // const wallet = useTonWallet();
 
-  const { handleSetUserInfo, modalTrigger, handleSetUserInfoLoading } = useAppContext();  
+  const { userInfo, handleSetUserInfo, modalTrigger, handleSetUserInfoLoading } = useAppContext();  
   const reLoginTimeout = useRef<any>(null);
+  const loginForceRef = useRef<any>(false);
 
   const handleConnectBsc = async() => {
+    if(userInfo) {
+      return;
+    }
     setWalletAddr(null)
     let isConnect = false;
     setConnecting(true);
@@ -135,14 +139,14 @@ export default function ConnectBtn() {
           handleTgLogin(data?.data.webLoginToken, reqCount + 1);
         }, 5000);
       }
-      else if(data?.data?.account) {
+      else if(data?.data?.tgAccount) {
         clearTimeout(reLoginTimeout.current);
         reLoginTimeout.current = null;
         await localStorage.setItem('kkAuthToken', data?.data.token);
-        await localStorage.setItem('kkAddress', data?.data.account);
+        await localStorage.setItem('kkAddress', data?.data.tgAccount);
         await localStorage.setItem('kkLoginType', 'tg');
         await localStorage.setItem('kGuid', data?.data.guid);
-        setWalletAddr(data?.data.account);
+        setWalletAddr(data?.data.tgAccount);
         setShowLoginModal(false);
         handleGetUserInfo();
       }
@@ -169,7 +173,7 @@ export default function ConnectBtn() {
       const data = res?.data;
       if(data.status == 10000) {
         handleSetUserInfo(data?.data);
-        setWalletAddr(data?.data.account);
+        setWalletAddr(data?.data.account || data?.data.tgAccount);
       }
       else {
         errCodeHandler(data.status)
@@ -194,7 +198,8 @@ export default function ConnectBtn() {
 
   useEffect(() => {
     if (isDisconnected && address) {
-      handleDisconnect();
+      localStorage.removeItem('wagmi.wallet');
+      disconnect();
     }
   }, [isDisconnected, address]);
 
@@ -277,7 +282,7 @@ export default function ConnectBtn() {
             <div className="text-white/60 md:hidden mb-6">{walletAddr ? t('menu.myAccount') : t('menu.connectWallet')}</div>
             {walletAddr ? (
               <>
-                {/*
+              {/*
                 <Link href="/personalInfo" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white">
                   <div className="w-full flex items-center justify-center">{t('menu.personalInfo')}</div>
                 </Link>
