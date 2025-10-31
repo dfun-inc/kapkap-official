@@ -40,7 +40,7 @@ export default function RootLayout({
       <body>
         <AppProvider>
           <EvmProvider>
-            <TonConnectUIProvider manifestUrl="https://cdn.genkileague.com/file/mainifest.json">
+            <TonConnectUIProvider manifestUrl="https://cdn.kapkap.io/mainifest.json">
               <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
                 <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
                   <ToastContainer

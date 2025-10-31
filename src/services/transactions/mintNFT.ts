@@ -10,7 +10,6 @@ export default async(mintData:any, account:any, chainConfig:any) => {
     const chainId = tgtChain.id;
     console.log(chainId);
 
-    const target = account;
     const ercType = '1155';
 
     const conditionData = [
@@ -26,13 +25,13 @@ export default async(mintData:any, account:any, chainConfig:any) => {
       mintData.condition.wlSignature
     ];
     const sig = mintData.dataSignature.signature;
-    console.log({target, ercType, conditionData, sig})
+    console.log({ercType, conditionData, sig})
 
     let gas:any = 0;
     try {
       gas = await estimateGas(wagmiConfig, {
         to: chainConfig.NFTFactory,
-        data: encodeFunctionData({abi: FACTORYABI, functionName: 'mintNFTWithETH', args: [target, ercType, conditionData, sig]}),
+        data: encodeFunctionData({abi: FACTORYABI, functionName: 'mintNFTWithETH', args: [ercType, conditionData, sig]}),
         account: account,
       })
     }
@@ -53,7 +52,7 @@ export default async(mintData:any, account:any, chainConfig:any) => {
         abi: FACTORYABI,
         functionName: 'mintNFTWithETH',
         account: account,
-        args: [target, ercType, conditionData, sig],
+        args: [ercType, conditionData, sig],
         gas: BigInt(parseInt(String(Number(gas) * 1.2)))
       })
       .then((res:any) => {
