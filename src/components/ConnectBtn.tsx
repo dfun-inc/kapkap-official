@@ -69,6 +69,7 @@ export default function ConnectBtn() {
           await localStorage.setItem('kkLoginType', 'bsc');
           await localStorage.setItem('kkGuid', data?.data.guid);
           setWalletAddr((_a: any) => address)
+          await new Promise(resolve => setTimeout(resolve, 500));
           handleGetUserInfo();
           isConnect = true;
         }
@@ -148,6 +149,7 @@ export default function ConnectBtn() {
         await localStorage.setItem('kGuid', data?.data.guid);
         setWalletAddr(data?.data.tgAccount);
         setShowLoginModal(false);
+        await new Promise(resolve => setTimeout(resolve, 500));
         handleGetUserInfo();
       }
       else if(reqCount < 10) {

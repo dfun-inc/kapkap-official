@@ -17,3 +17,12 @@ export function formatDatetime(datetime: string) {
 
   return `${year}.${month}.${day} ${hour}:${minute}:${second}`;
 }
+
+export function formatDate(date: string) {
+  const datetime = new Date(date);
+  const year = datetime.getFullYear();
+  const month = datetime.getMonth() + 1 < 10 ? '0' + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+  const day = datetime.getDate() < 10 ? '0' + datetime.getDate() : datetime.getDate();
+
+  return `${year}.${month}.${day}`;
+}
