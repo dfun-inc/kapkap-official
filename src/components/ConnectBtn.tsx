@@ -74,7 +74,7 @@ export default function ConnectBtn() {
           isConnect = true;
         }
         else {
-          errCodeHandler(data.status);
+          errCodeHandler(data.status, data.msg);
         }
       })
     }
@@ -178,7 +178,7 @@ export default function ConnectBtn() {
         setWalletAddr(data?.data.account || data?.data.tgAccount);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     handleSetUserInfoLoading(false);

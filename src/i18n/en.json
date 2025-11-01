@@ -9,7 +9,9 @@
 
   "error": {
     "notBindEvmAccount": "Please bind your EVM account first",
-    "notBindTgAccount": "Please bind your Telegram account first"
+    "notBindTgAccount": "Please bind your Telegram account first",
+    "connectWalletFirst": "Please connect your wallet first",
+    "connectBindingWallet": "Please connect your bound wallet"
   },
 
   "menu": {

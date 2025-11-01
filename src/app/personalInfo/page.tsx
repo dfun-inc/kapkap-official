@@ -301,10 +301,13 @@ export default function personalInfo() {
   }, [userInfo])
 
   useEffect(() => {
-    if(bindEvmForce.current) {
-      if (isConnected && address) {
+    if (isConnected && address) {
+      if(bindEvmForce.current) {
         handleBindEvmAccount();
       }
+    }
+    else {
+      bindEvmForce.current = false;
     }
   }, [isConnected, address]);
 
@@ -317,6 +320,8 @@ export default function personalInfo() {
     return () => {
       clearTimeout(reBindTimeout.current);
       reBindTimeout.current = null;
+
+      bindEvmForce.current = false;
     }
   }, [])
 
@@ -454,9 +459,9 @@ export default function personalInfo() {
         isOpen={kscoreHistoryModal}
         onRequestClose={() => setKscoreHistoryModal(false)}
         shouldCloseOnOverlayClick={true}
-        className=""
+        className="w-9/10! lg:w-[800px]!"
       >
-        <div className="w-9/10 lg:w-[800px] text-center bg-[#101014] rounded-[20px] overflow-hidden">
+        <div className="w-full text-center bg-[#101014] rounded-[20px] overflow-hidden">
           <div className="bg-[#201E2A] relative py-3 text-center text-[22px] text-white">
             <span className="">{t('personalInfo.kscoreHistory')}</span>
             <button className="absolute top-1/2 right-6 -translate-y-1/2 cursor-pointer hover:opacity-80" onClick={() => setKscoreHistoryModal(false)}>
@@ -500,9 +505,9 @@ export default function personalInfo() {
         isOpen={mintHistoryModal}
         onRequestClose={() => setMintHistoryModal(false)}
         shouldCloseOnOverlayClick={true}
-        className=""
+        className="w-9/10! lg:w-[800px]!"
       >
-        <div className="w-9/10 lg:w-[800px] text-center bg-[#101014] rounded-[20px] overflow-hidden">
+        <div className="w-full text-center bg-[#101014] rounded-[20px] overflow-hidden">
           <div className="bg-[#201E2A] relative py-3 text-center text-[22px] text-white">
             <span className="">{t('personalInfo.mintHistory')}</span>
             <button className="absolute top-1/2 right-6 -translate-y-1/2 cursor-pointer hover:opacity-80" onClick={() => setMintHistoryModal(false)}>
