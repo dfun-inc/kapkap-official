@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useAccount } from "wagmi";
 import Modal from "react-modal";
@@ -18,11 +18,12 @@ import { getChainConfig } from "@/services/apis/config";
 import mintNFT from "@/services/transactions/mintNFT";
 import {config as wagmiConfig} from "@/config/wagmi";
 import NFTFACTORYABI from "@/config/abis/NFTFactory.json";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 export default function YourNFTs() {
   const t = useTranslations();
 
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const { userInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
   const [kscore, setKscore] = useState<number>(0);
@@ -47,6 +48,9 @@ export default function YourNFTs() {
 
   const [mintLoading, setMintLoading] = useState<boolean>(false);
 
+  const reconnectForce = useRef(false);
+  const { openConnectModal } = useConnectModal();
+
   const handleToggleChoose = (item:any) => {
     if(choosed.includes(item)) {
       setChoosed(choosed.filter((i:any) => i != item));
@@ -65,7 +69,7 @@ export default function YourNFTs() {
         setKscore(data?.data || 0);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     setKscoreLoading(false);
@@ -79,7 +83,7 @@ export default function YourNFTs() {
         setChainConfig(data?.data);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
   }
@@ -94,7 +98,7 @@ export default function YourNFTs() {
         setNFTData(data?.data);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
 
@@ -102,6 +106,13 @@ export default function YourNFTs() {
   }
 
   const handleToMint = () => {
+    reconnectForce.current = false;
+    if(!isConnected) {
+      openConnectModal?.();
+      toast.error(t('error.connectWalletFirst'));
+      reconnectForce.current = true;
+      return;
+    }
     if(mintLoading) {
       return;
     }
@@ -115,6 +126,10 @@ export default function YourNFTs() {
     if(!userInfo?.account) {
       setBindType('evm');
       setShowBindModal(true);
+      return;
+    }
+    if(userInfo?.account != address) {
+      toast.error(t('error.connectBindingWallet'));
       return;
     }
     if(!userInfo?.tgAccount) {
@@ -142,7 +157,7 @@ export default function YourNFTs() {
         mintData = data?.data;
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     .catch((err) => {
@@ -150,15 +165,20 @@ export default function YourNFTs() {
     })
 
     if(!mintData) {
+      setMintLoading(false);
       return;
     }
     try{
       await mintNFT(mintData, address, chainConfig)
       .then((res) => {
         toast.success(t('genkiMint.mintSuccess'));
+      })
+      .catch((err) => {
+        setMintLoading(false);
       });
     }
     catch(err) {
+      setMintLoading(false);
       console.log(err)
       return;
     }
@@ -177,7 +197,7 @@ export default function YourNFTs() {
         mintData = data?.data;
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     .catch((err) => {
@@ -185,12 +205,16 @@ export default function YourNFTs() {
     })
 
     if(!mintData) {
+      setMintLoading(false);
       return;
     }
     try{
       await mintNFT(mintData, address, chainConfig)
       .then((res) => {
         toast.success(t('genkiMint.mintSuccess'));
+      })
+      .catch((err) => {
+        setMintLoading(false);
       });
     }
     catch(err) {
@@ -211,7 +235,7 @@ export default function YourNFTs() {
         setReMintList(data?.data ? data.data : {});
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     .catch((err) => {
@@ -274,12 +298,29 @@ export default function YourNFTs() {
   }, [choosed, NFTData])
 
   useEffect(() => {
+    if (isConnected && address) {
+      if(reconnectForce.current) {
+        reconnectForce.current = false;
+        handleToMint();
+      }
+    }
+    else {
+      reconnectForce.current = false;
+    }
+  }, [isConnected, address]);
+
+  useEffect(() => {
     setMenuIdx(0)
     handleGetNFTData();
     handleGetChaninConfig();
     setChoosed([]);
     const addr = localStorage.getItem('kkAddress');
     setAddr(addr || '');
+
+    return () => {
+      reconnectForce.current = false;
+      setMintLoading(false);
+    }
   }, [])
 
   return (

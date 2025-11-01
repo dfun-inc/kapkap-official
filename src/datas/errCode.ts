@@ -10,7 +10,7 @@ export const useErrCode = () => {
   const t = useTranslations();
   const { disconnect } = useDisconnect();
 
-  const errCodeHandler = (code:any) => {
+  const errCodeHandler = (code:any, msg:string = '') => {
     if(errCode.hasOwnProperty(code)) {
       toast.error(t(errCode[code]))
   
@@ -23,7 +23,7 @@ export const useErrCode = () => {
       }
     }
     else {
-      toast.error(t('common.error') + ': ' + code);
+      toast.error(t('common.error') + ': ' + code + (msg ? ' - ' + msg : ''));
     }
   }
 
