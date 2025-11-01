@@ -281,7 +281,7 @@ export default function ConnectBtn() {
       <div className={"absolute left-0 top-9 w-full pt-2 block " + (walletDropdown ? '' : "md:hidden")}>
         <div className="w-full py-1 shadow-lg md:bg-black rounded-[10px] overflow-hidden">
           <div className="w-full">
-            <div className="text-white/60 md:hidden mb-6">{walletAddr ? t('menu.myAccount') : t('menu.connectWallet')}</div>
+            <div className="text-white/60 md:hidden mb-6">{walletAddr ? (walletAddr.length > 4 ? walletAddr?.substring(0, 4) + '...' + walletAddr?.substring(walletAddr?.length - 4, walletAddr?.length) : walletAddr) : t('menu.connectWallet')}</div>
             {walletAddr ? (
               <>
                 <Link href="/personalInfo" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white">
