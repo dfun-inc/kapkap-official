@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Main() {
   const t = useTranslations();
+  const [videoClass, setVideoClass] = useState('md:-translate-x-1/3 ');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -49,13 +50,29 @@ export default function Main() {
       })
     });
 
-    return () => ctx?.revert();
+
+    const handleResize = () => {
+      const winWidth = window.innerWidth;
+      const winHeight = window.innerHeight;
+      if (winWidth < winHeight * 0.8) {
+        setVideoClass('md:-translate-x-1/3 ');
+      } else {
+        setVideoClass('md:translate-x-0 ');
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      ctx?.revert();
+      window.removeEventListener('resize', handleResize)
+    }
   })
 
   return (
     <section id="home-section-0" className="main-section relative home-section-0 bg-[#070709] h-screen min-h-[720px] overflow-hidden">
       <div className="w-full h-screen min-h-[720px] overflow-hidden absolute z-0 opacity-60 md:opacity-100">
-        <div className="aspect-video lg:aspect-auto w-auto lg:w-full h-full inset-0 absolute top-0 left-0 z-0 -translate-x-1/2 md:-translate-x-1/3 lg:translate-x-0 overflow-hidden">
+        <div className={"aspect-video lg:aspect-auto w-auto lg:w-full h-full inset-0 absolute top-0 left-0 z-0 -translate-x-1/2 lg:translate-x-0 overflow-hidden " + videoClass}>
           <video id="bg-video" data-role="background" className="w-full h-full object-cover pointer-events-none" src="/videos/bg_main.mp4" autoPlay muted playsInline loop preload="auto"></video>
         </div>
       </div>
