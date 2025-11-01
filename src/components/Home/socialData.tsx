@@ -81,6 +81,21 @@ export default function SocialData() {
       setAniTitle("animate__fadeInUp");
       setAniItem("animate__fadeInUp");
       setAniBottom("animate__fadeInUp");
+      
+      setTimeout(() => {
+        const mauNum = new CountUp('mau-num', 1.7);
+        mauNum.start();
+        const dauNum = new CountUp('dau-num', 25);
+        dauNum.start();
+        const userNum = new CountUp('user-num', 3);
+        userNum.start();
+        const cmNum = new CountUp('cm-num', 185);
+        cmNum.start();
+        const csNum = new CountUp('cs-num', 572);
+        csNum.start();
+        const tfNum = new CountUp('tf-num', 130);
+        tfNum.start();
+      }, 1000);
     }
 
     return () => ctx?.revert();

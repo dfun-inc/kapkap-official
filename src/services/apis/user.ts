@@ -76,3 +76,23 @@ export async function getKScore(projectId: number) {
     },
   });
 }
+
+export async function getKScoreHistory() {
+  return request({
+    method: 'get',
+    url: '/api/v1/user/getKScoreHistory',
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}
+
+export async function getMintHistory() {
+  return request({
+    method: 'get',
+    url: '/api/v1/nft/getMint1155History',
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}

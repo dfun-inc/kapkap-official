@@ -300,7 +300,7 @@
     "desc": "Featuring collaborations with global IPs, creators, and original characters across genres to build a connected and evolving KapKap universe."
   },
 
-  "yourNFTs": {
+  "personalInfo": {
     "title": "NFT Warehouse",
     "viewHistory": "View History",
     "yourTgAccount": "Your Telegram Account",
@@ -309,7 +309,15 @@
     "bindWallet": "Bind Wallet",
     "bindTgAccount": "Bind Telegram Account",
     "yourKScore": "Your K-Score",
-    "goToMint": "Go to Mint"
+    "goToMint": "Go to Mint",
+    "kscoreHistory": "K-Score History",
+    "minthistory": "Mint History",
+    "date": "Date",
+    "count": "Count",
+    "type": "Type",
+    "mint": "Mint",
+    "mintHistory": "Mint History",
+    "cost": "Cost"
   },
 
   "genkiMint": {
