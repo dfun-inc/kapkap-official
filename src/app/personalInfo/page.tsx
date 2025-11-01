@@ -243,7 +243,24 @@ export default function personalInfo() {
     .then((res) => {
       const data = res?.data;
       if(data.status == 10000) {
-        setMintHistory(data?.data || []);
+        let temp:any[]= [];
+        data?.data.forEach((item:any) => {
+          let itemArr = item.ids.split(',');
+          let tempItemArr:any[] = [];
+          let tempCost = 0;
+          itemArr.forEach((id:any) => {
+            Object.entries(NFTData).find(([key, value]:any) => {
+              Object.entries(value?.ids)?.map(([key2, value2]:any) => {
+                if(key2 == id) {
+                  tempItemArr.push({id: key2, ...value2});
+                  tempCost += Number(value2?.kscore)
+                }
+              })
+            });
+          })
+          temp.push({...item, item: tempItemArr, cost: tempCost});
+        })
+        setMintHistory(temp);
       }
       else {
         errCodeHandler(data.status)
@@ -259,10 +276,10 @@ export default function personalInfo() {
   }, [kscoreHistoryModal])
 
   useEffect(() => {
-    if(mintHistoryModal) {
+    if(mintHistoryModal && NFTData) {
       handleGetMintHistory();
     }
-  }, [mintHistoryModal])
+  }, [mintHistoryModal, NFTData])
 
   useEffect(() => {
     if(userInfo?.account && chainConfig) {
@@ -439,7 +456,7 @@ export default function personalInfo() {
         shouldCloseOnOverlayClick={true}
         className=""
       >
-        <div className="w-9/10 md:w-[600px] text-center bg-[#101014] rounded-[20px] overflow-hidden">
+        <div className="w-9/10 lg:w-[800px] text-center bg-[#101014] rounded-[20px] overflow-hidden">
           <div className="bg-[#201E2A] relative py-3 text-center text-[22px] text-white">
             <span className="">{t('personalInfo.kscoreHistory')}</span>
             <button className="absolute top-1/2 right-6 -translate-y-1/2 cursor-pointer hover:opacity-80" onClick={() => setKscoreHistoryModal(false)}>
@@ -464,7 +481,7 @@ export default function personalInfo() {
               kscoreHistory.map((item, index) => (
                 <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3">
                   <div className="w-1/3">{formatDate(item?.createdAt)}</div>
-                  <div className="w-1/3">{(item?.type == 'mint' ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
+                  <div className="w-1/3 px-2">{(item?.type == 'mint' ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
                   <div className="w-1/3 capitalize">{item?.type}</div>
                 </div>
               ))
@@ -485,7 +502,7 @@ export default function personalInfo() {
         shouldCloseOnOverlayClick={true}
         className=""
       >
-        <div className="w-9/10 md:w-[600px] text-center bg-[#101014] rounded-[20px] overflow-hidden">
+        <div className="w-9/10 lg:w-[800px] text-center bg-[#101014] rounded-[20px] overflow-hidden">
           <div className="bg-[#201E2A] relative py-3 text-center text-[22px] text-white">
             <span className="">{t('personalInfo.mintHistory')}</span>
             <button className="absolute top-1/2 right-6 -translate-y-1/2 cursor-pointer hover:opacity-80" onClick={() => setMintHistoryModal(false)}>
@@ -495,9 +512,9 @@ export default function personalInfo() {
           <div className="max-h-[400px] min-h-[300px] overflow-y-auto text-[18px]">
             <div className="p-6">
               <div className="flex border-b border-[#8A84A3] text-[#8A84A3] text-center">
-                <div className="w-1/3">{t('personalInfo.date')}</div>
-                <div className="w-1/3">{t('personalInfo.mint')}</div>
-                <div className="w-1/3">{t('personalInfo.cost')}</div>
+                <div className="w-3/10">{t('personalInfo.date')}</div>
+                <div className="w-1/2 px-2">{t('personalInfo.mint')}</div>
+                <div className="w-1/5">{t('personalInfo.cost')}</div>
               </div>
               {mintHistoryLoading ?
                 <div className="animate-pulse">
@@ -508,10 +525,14 @@ export default function personalInfo() {
               :
               mintHistory?.length > 0 ?
               mintHistory.map((item, index) => (
-                <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3">
-                  <div className="w-1/3">{formatDate(item?.createdAt)}</div>
-                  <div className="w-1/3"></div>
-                  <div className="w-1/3 text-[#F6465D]"></div>
+                <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3 items-center">
+                  <div className="w-3/10">{formatDate(item?.createdAt)}</div>
+                  <div className="w-1/2 px-2">
+                    {item?.item?.map((item2:any) => (
+                      <div key={item2?.id}>{item2?.name}</div>
+                    ))}
+                  </div>
+                  <div className="w-1/5 text-[#F6465D]">-{item?.cost}</div>
                 </div>
               ))
               :
