@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 aws s3 cp . s3://www.kapkap.io --recursive --profile dfun
 
 
-aws s3 cp . s3://gamix.miniapp.mobi --recursive --profile dfun
+aws s3 cp . s3://test.kapkap.io --recursive --profile dfun  
