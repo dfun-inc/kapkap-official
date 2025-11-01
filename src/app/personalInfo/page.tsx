@@ -17,7 +17,7 @@ import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
 import NFT1155ABI from "@/config/abis/NFT1155.json";
 import { getChainConfig } from "@/services/apis/config";
 import Modal from 'react-modal';
-import { formatDate } from "@/utils/time";
+import { formatDatetime } from "@/utils/time";
 
 export default function personalInfo() {
   const t = useTranslations();
@@ -485,7 +485,7 @@ export default function personalInfo() {
               kscoreHistory?.length > 0 ?
               kscoreHistory.map((item, index) => (
                 <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3">
-                  <div className="w-1/3">{formatDate(item?.createdAt)}</div>
+                  <div className="w-1/3">{formatDatetime(item?.createdAt)}</div>
                   <div className="w-1/3 px-2">{(item?.type == 'mint' ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
                   <div className="w-1/3 capitalize">{item?.type}</div>
                 </div>
@@ -517,9 +517,10 @@ export default function personalInfo() {
           <div className="max-h-[400px] min-h-[300px] overflow-y-auto text-[18px]">
             <div className="p-6">
               <div className="flex border-b border-[#8A84A3] text-[#8A84A3] text-center">
-                <div className="w-3/10">{t('personalInfo.date')}</div>
-                <div className="w-1/2 px-2">{t('personalInfo.mint')}</div>
+                <div className="w-1/5">{t('personalInfo.date')}</div>
+                <div className="w-2/5 px-2">{t('personalInfo.mint')}</div>
                 <div className="w-1/5">{t('personalInfo.cost')}</div>
+                <div className="w-1/5">{t('personalInfo.hash')}</div>
               </div>
               {mintHistoryLoading ?
                 <div className="animate-pulse">
@@ -530,14 +531,15 @@ export default function personalInfo() {
               :
               mintHistory?.length > 0 ?
               mintHistory.map((item, index) => (
-                <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3 items-center">
-                  <div className="w-3/10">{formatDate(item?.createdAt)}</div>
-                  <div className="w-1/2 px-2">
+                <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3 items-center text-[12px] md:text-[16px]">
+                  <div className="w-1/5">{formatDatetime(item?.createdAt)}</div>
+                  <div className="w-2/5 px-2">
                     {item?.item?.map((item2:any) => (
-                      <div key={item2?.id}>{item2?.name}</div>
+                      <div key={item2?.id}>{item2?.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
                     ))}
                   </div>
                   <div className="w-1/5 text-[#F6465D]">-{item?.cost}</div>
+                  <div className="w-1/5">{chainConfig && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={chainConfig?.scan + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>
                 </div>
               ))
               :

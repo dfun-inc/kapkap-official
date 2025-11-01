@@ -175,7 +175,7 @@ export default function ConnectBtn() {
       const data = res?.data;
       if(data.status == 10000) {
         handleSetUserInfo(data?.data);
-        setWalletAddr(data?.data.account || data?.data.tgAccount);
+        setWalletAddr(localStorage.getItem('kkAddress'));
       }
       else {
         errCodeHandler(data.status, data.msg)

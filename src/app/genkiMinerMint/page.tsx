@@ -107,6 +107,10 @@ export default function YourNFTs() {
 
   const handleToMint = () => {
     reconnectForce.current = false;
+    if(choosed?.length == 0) {
+      toast.error(t('error.pleaseChooseNFT'));
+      return;
+    }
     if(!isConnected) {
       openConnectModal?.();
       toast.error(t('error.connectWalletFirst'));
@@ -454,7 +458,7 @@ export default function YourNFTs() {
                 style={{"width": (choosedScore/kscore > 1 ? 1 : choosedScore/kscore) * 100 + "%"}}></div>}
               </div>
               <div className="text-center mt-12">
-                <Button className={"text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 " + (choosed?.length > 0 ? '' : 'cursor-not-allowed')} onClick={choosed?.length > 0 ? handleToMint : () => {}}>
+                <Button className={"text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 " + (choosed?.length > 0 ? '' : 'cursor-not-allowed')} onClick={handleToMint}>
                   {t('genkiMint.mint')}
                   {mintLoading && <span className="animate-spin inline-block w-5 h-5 border-2 border-t-white border-b-white/10 ml-2"></span>}
                 </Button>

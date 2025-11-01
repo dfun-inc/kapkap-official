@@ -11,7 +11,8 @@
     "notBindEvmAccount": "Please bind your EVM account first",
     "notBindTgAccount": "Please bind your Telegram account first",
     "connectWalletFirst": "Please connect your wallet first",
-    "connectBindingWallet": "Please connect your bound wallet"
+    "connectBindingWallet": "Please connect your bound wallet first",
+    "pleaseChooseNFT": "Please choose the NFT to mint"
   },
 
   "menu": {
@@ -319,7 +320,9 @@
     "type": "Type",
     "mint": "Mint",
     "mintHistory": "Mint History",
-    "cost": "Cost"
+    "cost": "Cost",
+    "hash": "Hash",
+    "viewHash": "View Hash"
   },
 
   "genkiMint": {
