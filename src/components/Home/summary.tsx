@@ -29,26 +29,42 @@ export default function Summary() {
         },
       }); 
 
-      gsap.to('.summary-content-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".summary-section",
-          start: 'top+=50% top',
-          end: 'top+=80% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.summary-content-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".summary-section",
+            start: 'top+=50% top',
+            end: 'top+=80% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.summary-title', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".summary-section",
-          start: 'top-=10% top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
+        gsap.to('.summary-content-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".summary-section",
+            start: 'top+=50% top',
+            end: 'top+=80% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
+
+        gsap.to('.summary-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".summary-section",
+            start: 'top-=10% top',
+            end: 'top+=20% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
       })
     }
     else {

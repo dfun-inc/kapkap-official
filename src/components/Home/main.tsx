@@ -11,38 +11,45 @@ export default function Main() {
   const t = useTranslations();
 
   useEffect(() => {
-    gsap.to('.main-logo', {
-      opacity: 0.2,
-      y: -50,
-      scrollTrigger: {
-        trigger:".main-section",
-        start: '5% top',
-        end: '35% top',
-        scrub: true,
-      },
-    })
+    const ctx = gsap.context(() => {
+      gsap.to('.main-logo', {
+        opacity: 0.2,
+        y: -50,
+        scrollTrigger: {
+          trigger:".main-section",
+          start: '5% top',
+          end: '35% top',
+          scrub: 0.5,              // 稍微延迟跟随
+          invalidateOnRefresh: true,
+        },
+      })
 
-    gsap.to('.title-text-bottom', {
-      opacity: 0.2,
-      y: -50,
-      scrollTrigger: {
-        trigger:".main-section",
-        start: '10% top',
-        end: '40% top',
-        scrub: true,
-      },
-    })
+      gsap.to('.title-text-bottom', {
+        opacity: 0.2,
+        y: -50,
+        scrollTrigger: {
+          trigger:".main-section",
+          start: '10% top',
+          end: '40% top',
+          scrub: 0.5,              // 稍微延迟跟随
+          invalidateOnRefresh: true,
+        },
+      })
 
-    gsap.to('.main-desc', {
-      opacity: 0.2,
-      y: -50,
-      scrollTrigger: {
-        trigger:".main-section",
-        start: '30% top',
-        end: '60% top',
-        scrub: true,
-      },
-    })
+      gsap.to('.main-desc', {
+        opacity: 0.2,
+        y: -50,
+        scrollTrigger: {
+          trigger:".main-section",
+          start: '30% top',
+          end: '60% top',
+          scrub: 0.5,              // 稍微延迟跟随
+          invalidateOnRefresh: true,
+        },
+      })
+    });
+
+    return () => ctx?.revert();
   })
 
   return (

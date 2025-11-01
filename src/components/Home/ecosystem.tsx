@@ -31,37 +31,42 @@ export default function Ecosystem() {
         },
       }); 
 
-      gsap.to('.eco-desc-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".eco-section",
-          start: 'top+=20% top',
-          end: 'top+=50% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.eco-desc-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".eco-section",
+            start: 'top+=20% top',
+            end: 'top+=50% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.eco-title', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".eco-section",
-          start: 'top-=10% top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.eco-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".eco-section",
+            start: 'top-=10% top',
+            end: 'top+=20% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.eco-item-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".eco-section",
-          start: 'top+=50% top',
-          end: 'top+=70% top',
-          scrub: true,
-        },
+        gsap.to('.eco-item-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".eco-section",
+            start: 'top+=50% top',
+            end: 'top+=70% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          }
+        });
       })
     }
     else {

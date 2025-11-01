@@ -29,38 +29,43 @@ export default function Core() {
         },
       }); 
 
-      gsap.to('.core-content-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".core-section",
-          start: 'top+=40% top',
-          end: 'top+=60% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.core-content-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".core-section",
+            start: 'top+=40% top',
+            end: 'top+=60% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.core-title', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".core-section",
-          start: 'top-=10% top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.core-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".core-section",
+            start: 'top-=10% top',
+            end: 'top+=20% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.core-btn-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".core-section",
-          start: 'top+=70% top',
-          end: 'top+=90% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.core-btn-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".core-section",
+            start: 'top+=70% top',
+            end: 'top+=90% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
+      });
     }
     else {
       setAniTitle("animate__fadeInUp");

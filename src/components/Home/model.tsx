@@ -28,37 +28,42 @@ export default function Model() {
         },
       }); 
 
-      gsap.to('.model-content-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".model-section",
-          start: 'top+=40% top',
-          end: 'top+=60% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.model-content-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".model-section",
+            start: 'top+=40% top',
+            end: 'top+=60% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.model-title', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".model-section",
-          start: 'top-=10% top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.model-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".model-section",
+            start: 'top-=10% top',
+            end: 'top+=20% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.model-bottom-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".model-section",
-          start: 'top+=60% top',
-          end: 'top+=80% top',
-          scrub: true,
-        },
+        gsap.to('.model-bottom-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".model-section",
+            start: 'top+=60% top',
+            end: 'top+=80% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
       })
     }
     else {

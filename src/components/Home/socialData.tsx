@@ -44,38 +44,55 @@ export default function SocialData() {
         },
       }); 
 
-      gsap.to('.social-data-item-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".social-data-section",
-          start: 'top+=40% top',
-          end: 'top+=60% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.social-data-item-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".social-data-section",
+            start: 'top+=40% top',
+            end: 'top+=60% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.social-data-title', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".social-data-section",
-          start: 'top-=10% top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.social-data-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".social-data-section",
+            start: 'top+=40% top',
+            end: 'top+=60% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.social-data-bottom-box', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".social-data-section",
-          start: 'top+=60% top',
-          end: 'top+=80% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.social-data-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".social-data-section",
+            start: 'top-=10% top',
+            end: 'top+=20% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
+
+        gsap.to('.social-data-bottom-box', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".social-data-section",
+            start: 'top+=60% top',
+            end: 'top+=80% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
+      });
     }
     else {
       setAniTitle("animate__fadeInUp");

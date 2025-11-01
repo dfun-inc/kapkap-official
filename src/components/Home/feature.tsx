@@ -28,27 +28,31 @@ export default function feature() {
         },
       }); 
 
-      gsap.to('.feature-title', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".feature-section",
-          start: 'top top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.feature-title', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".feature-section",
+            start: 'top top',
+            end: 'top+=20% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.feature-item-top', {
-        opacity: 0.2,
-        y: -60,
-        scrollTrigger: {
-          trigger:".feature-section",
-          start: 'top+=30% top',
-          end: 'top+=50% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.feature-item-top', {
+          opacity: 0.2,
+          y: -60,
+          scrollTrigger: {
+            trigger:".feature-section",
+            start: 'top+=30% top',
+            end: 'top+=50% top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        })
+      });
     }
     else {
       setAniClassLeft("animate__fadeInLeft");

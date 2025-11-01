@@ -26,27 +26,31 @@ export default function IP() {
         },
       }); 
       
-      gsap.to('.ip-title', {
-        opacity: 0.2,
-        y: -50,
-        scrollTrigger: {
-          trigger:".ip-section",
-          start: 'top-=10% top',
-          end: 'top+=20% top',
-          scrub: true,
-        },
-      })
+      ctx = gsap.context(() => {
+        gsap.to('.ip-title', {
+          opacity: 0.2,
+          y: -50,
+          scrollTrigger: {
+            trigger:".ip-section",
+            start: 'top-=10% top',
+            end: 'top+=20% top',
+            scrub: 0.5,              // 稍微延迟跟随
+            invalidateOnRefresh: true,
+          },
+        })
 
-      gsap.to('.ip-desc', {
-        opacity: 0.2,
-        y: -50,
-        scrollTrigger: {
-          trigger:".ip-section",
-          start: 'top+=60% top',
-          end: 'top+=90% top',
-          scrub: true,
-        },
-      })
+        gsap.to('.ip-desc', {
+          opacity: 0.2,
+          y: -50,
+          scrollTrigger: {
+            trigger:".ip-section",
+            start: 'top+=60% top',
+            end: 'top+=90% top',
+            scrub: 0.5,              // 稍微延迟跟随
+            invalidateOnRefresh: true,  
+          },
+        })
+      });
     }
     else {
       setAniTitle("animate__fadeInUp");
