@@ -32,11 +32,11 @@ export default function Kscore() {
                 <div className="">{t('kscore.advantage')}: {t('kscore.item1Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item1Coop')}</div>
               </div>
-              <div className="flex justify-end space-x-6 mt-6">
-                <Button className="px-10 py-4" target="_blank" href="https://t.me/GenkiMinerBot/GenkiMiner?startapp=tBkdxxEA">
+              <div className="flex justify-end space-x-3 md:space-x-6 mt-6">
+                <Button className="px-8 md:px-10 py-4" target="_blank" href="https://t.me/GenkiMinerBot/GenkiMiner?startapp=tBkdxxEA">
                   {t('kscore.playGame')}
                 </Button>
-                <Button href="/genkiMinerMint" className="px-10 py-4">
+                <Button href="/genkiMinerMint" className="px-8 md:px-10  py-4">
                   {t('mint.mint')}
                 </Button>
               </div>
