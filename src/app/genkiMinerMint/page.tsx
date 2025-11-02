@@ -3,20 +3,20 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import Modal from "react-modal";
-import { readContract } from "@wagmi/core";
+import { readContract, signMessage, switchChain } from "@wagmi/core";
 
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
 import Button from "@/components/ui/Button";
 import { useErrCode } from "@/datas/errCode";
-import { getKScore } from "@/services/apis/user";
+import { bindEvmAccount, bindTgAccount, getKScore, getUserInfo } from "@/services/apis/user";
 import { formatNumberWithCommas } from "@/utils/number";
 import { getMintData, getNFTData, getRemintData, getRemintList } from "@/services/apis/nft";
 import { getChainConfig } from "@/services/apis/config";
 import mintNFT from "@/services/transactions/mintNFT";
-import {config as wagmiConfig} from "@/config/wagmi";
+import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
 import NFTFACTORYABI from "@/config/abis/NFTFactory.json";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 
@@ -24,7 +24,7 @@ export default function YourNFTs() {
   const t = useTranslations();
 
   const { address, isConnected } = useAccount();
-  const { userInfo, triggerModalOpen } = useAppContext();
+  const { userInfo, handleSetUserInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
   const [kscore, setKscore] = useState<number>(0);
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
@@ -50,6 +50,17 @@ export default function YourNFTs() {
 
   const reconnectForce = useRef(false);
   const { openConnectModal } = useConnectModal();
+
+  const [bindEvmAccountLoading, setBindEvmAccountLoading] = useState<boolean>(false);
+  const [bindTgAccountLoading, setBindTgAccountLoading] = useState<boolean>(false);
+  const reBindTimeout = useRef<any>(null);
+
+  const [showToTgModal, setShowToTgModal] = useState(false);
+  const [tgLink, setTgLink] = useState<string>('');
+  const [tgWebLoginToken, setTgWebLoginToken] = useState<string>('');
+
+  const { disconnect } = useDisconnect()
+  const bindEvmForce = useRef<boolean>(false);
 
   const handleToggleChoose = (item:any) => {
     if(choosed.includes(item)) {
@@ -269,6 +280,127 @@ export default function YourNFTs() {
     setMintedLoading(false);
   }
 
+  const handleBindTgAccount = async (tempToken = '', reqCount = 0) => {
+    setBindTgAccountLoading(true);
+    let reConnect = false;
+
+    await bindTgAccount(tempToken)
+    .then(async(res) => {
+      const data = res?.data;
+      if(data.status == 10000 && data?.data.botUrl) {
+        if(/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){
+          setTgLink(data?.data.botUrl);
+          setTgWebLoginToken(data?.data.webLoginToken);
+          setShowToTgModal(true);
+        }
+        else {
+          window.open(data?.data.botUrl, '_blank');
+          reConnect = true;
+          reBindTimeout.current = setTimeout(() => {
+            handleBindTgAccount(data?.data.webLoginToken, reqCount + 1);
+          }, 5000);
+        }
+      }
+      else if(data?.data?.account) {
+        clearTimeout(reBindTimeout.current);
+        reBindTimeout.current = null;
+        toast.success(t('genkiMint.bindTgAccountSuccess'));
+        handleGetUserInfo();
+      }
+      else if(reqCount < 10) {
+        if(data.status != 10002) {
+          reConnect = false;
+          clearTimeout(reBindTimeout.current);
+          reBindTimeout.current = null;
+          errCodeHandler(data.status, data.msg)
+        }
+        else {
+          reConnect = true;
+          
+          reBindTimeout.current = setTimeout(() => {
+            handleBindTgAccount(tempToken, reqCount + 1);
+          }, 5000);
+        }
+      }
+      else {
+        if(data.status != 10002) {
+          errCodeHandler(data.status, data.msg)
+        }
+        clearTimeout(reBindTimeout.current);
+        reBindTimeout.current = null;
+      }
+    })
+    if(!reConnect) {
+      setBindTgAccountLoading(false);
+    }
+  }
+
+  const handleBindEvmAccount = async() => {
+    if(!bindEvmForce.current) {
+      return;
+    }
+    bindEvmForce.current = false;
+    setBindEvmAccountLoading(true);
+
+    try {
+      const signMsgStr = 'address=' + address + ',chain_id=' + tgtChain?.id;
+      await switchChain(wagmiConfig, { chainId: tgtChain?.id });
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      const signedMessage = await signMessage(wagmiConfig, {message: signMsgStr});
+
+      await bindEvmAccount({
+        address: address,
+        sign: signedMessage.replace(/['"]+/g, ''),
+        chain_id: tgtChain?.id
+      })
+      .then(res => {
+        const data = res?.data;
+        if(data.status == 10000) {
+          toast.success(t('genkiMint.bindEvmAccountSuccess'));
+          handleGetUserInfo();
+        }
+        else {
+          handleDisconnect();
+          errCodeHandler(data.status)
+        }
+      })
+      .catch(() => {
+        handleDisconnect();
+      })
+    }
+    catch(err) {
+      handleDisconnect();
+    }
+    setBindEvmAccountLoading(false);
+  }
+
+  const handleGetUserInfo = async() => {
+    await getUserInfo().then((res) => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        handleSetUserInfo(data?.data);
+      }
+      else {
+        errCodeHandler(data.status, data.msg)
+      }
+    })
+  }
+
+  const handleDisconnect = async() => {
+    localStorage.removeItem('wagmi.wallet');
+    localStorage.removeItem('wagmi.connected')
+    localStorage.removeItem('wagmi.store')
+    localStorage.removeItem('wagmi.metaMask')
+    sessionStorage.clear()
+    await disconnect();
+  }
+
+  const handleOpenEvmConnectModal = () => {
+    bindEvmForce.current = true;
+    handleDisconnect();
+    openConnectModal?.();
+  }
+
   useEffect(() => {
     setChoosed([]);
   }, [menuIdx])
@@ -448,7 +580,7 @@ export default function YourNFTs() {
             </div>
           </div>
           
-          <div className="mt-10 bg-black/50 rounded-[20px] px-12 py-8">
+          <div className="mt-10 bg-black/50 rounded-[20px] md:px-12 py-8">
           {addr || userInfo ?
             <>
               <div className="text-[20px] text-[#FEBD32]">{t('genkiMint.needKScore')}</div>
@@ -456,14 +588,30 @@ export default function YourNFTs() {
                 <div className="text-center text-[20px] leading-none w-full relative z-2 ">
                   {choosedScore} / {kscoreLoading ? '-' : kscore}
                 </div>
-                {kscore > 0 && <div className={"absolute top-0 left-0 h-full rounded-[10px] z-1 " + (choosedScore <= kscore || kscoreLoading ? 'bg-[#9358ff]' : 'bg-[#dc4a4a]')}
-                style={{"width": (choosedScore/kscore > 1 ? 1 : choosedScore/kscore) * 100 + "%"}}></div>}
+                {<div className={"absolute top-0 left-0 h-full rounded-[10px] z-1 " + (choosedScore <= kscore || kscoreLoading ? 'bg-[#9358ff]' : 'bg-[#dc4a4a]')}
+                style={{"width": (kscore > 0 ? (choosedScore/kscore > 1 ? 1 : choosedScore/kscore) * 100 + "%" : (choosedScore > 0 ? '100%' : '0%'))}}></div>}
               </div>
               <div className="text-center mt-12">
-                <Button className={"text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 " + (choosed?.length > 0 ? '' : 'cursor-not-allowed')} onClick={handleToMint}>
-                  {t('genkiMint.mint')}
-                  {mintLoading && <span className="animate-spin inline-block w-5 h-5 border-2 border-t-white border-b-white/10 ml-2"></span>}
-                </Button>
+                {!userInfo?.account &&
+                  <Button className="text-xl font-light text-white w-90 text-center py-3 md:py-4" onClick={handleOpenEvmConnectModal}>
+                    {t('genkiMint.bindEvmAccountToMint')}
+                    {bindEvmAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
+                  </Button>
+                }
+
+                {!userInfo?.tgAccount &&
+                  <Button className="text-xl font-light text-white text-[14px] w-86 text-center py-3 md:py-4" onClick={() => handleBindTgAccount()}>
+                    {t('genkiMint.bindTgAccountToGetKscore')}
+                    {bindTgAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
+                  </Button>
+                }
+
+                {userInfo?.account && userInfo?.tgAccount &&
+                  <Button className={"text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 " + (choosed?.length > 0 ? '' : 'cursor-not-allowed')} onClick={handleToMint}>
+                    {t('genkiMint.mint')}
+                    {mintLoading && <span className="animate-spin inline-block w-5 h-5 border-2 border-t-white border-b-white/10 ml-2"></span>}
+                  </Button>
+                }
               </div>
               <div className="text-right mt-12 text-[#4E436A]">{t('genkiMint.costHint')}</div>
             </>
@@ -499,6 +647,26 @@ export default function YourNFTs() {
             {t('genkiMint.goToBind')}
           </Button>
         </div>
+      </Modal>
+      <Modal
+          isOpen={showToTgModal}
+          onRequestClose={() => setShowToTgModal(false)}
+          shouldCloseOnOverlayClick={true}
+          className=""
+        >
+          <div className="w-80 text-center p-6 bg-black rounded-lg">
+            <div className="text-white text-center text-[20px]">{t('menu.tgLogin')}</div>
+            <button id="open-tg-link" className="open-tg-link w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 bg-[#6E4DFF] mt-6 rounded-lg"
+            onClick={() => {
+              window.open(tgLink, '_blank');
+              setShowToTgModal(false);
+              reBindTimeout.current = setTimeout(() => {
+                handleBindTgAccount(tgWebLoginToken, 1);
+              }, 5000);
+            }}>
+              <span className="text-sm md:text-base font-medium ml-2">{t('menu.openTgToLogin')}</span>
+            </button>
+          </div>
       </Modal>
     </main>
   );

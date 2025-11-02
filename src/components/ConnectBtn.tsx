@@ -32,9 +32,6 @@ export default function ConnectBtn() {
   const { openConnectModal } = useConnectModal();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const [tonConnectUI] = useTonConnectUI();
-  // const wallet = useTonWallet();
-
   const { userInfo, handleSetUserInfo, modalTrigger, handleSetUserInfoLoading } = useAppContext();  
   const reLoginTimeout = useRef<any>(null);
   const loginForceRef = useRef<any>(false);
@@ -102,14 +99,13 @@ export default function ConnectBtn() {
     localStorage.removeItem('kkAddress');
     localStorage.removeItem('kkLoginType');
     handleSetUserInfo(null);
+    
     localStorage.removeItem('wagmi.wallet');
+    localStorage.removeItem('wagmi.connected')
+    localStorage.removeItem('wagmi.store')
+    localStorage.removeItem('wagmi.metaMask')
+    sessionStorage.clear()
     await disconnect();
-    try{
-      tonConnectUI?.disconnect();
-    }
-    catch {
-      console.log('tonConnectUI.disconnect error');
-    }
   }
 
   const handleShowBscModal = async() => {

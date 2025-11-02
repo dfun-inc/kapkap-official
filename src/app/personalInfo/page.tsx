@@ -18,6 +18,7 @@ import NFT1155ABI from "@/config/abis/NFT1155.json";
 import { getChainConfig } from "@/services/apis/config";
 import Modal from 'react-modal';
 import { formatDatetime } from "@/utils/time";
+import { toast } from "react-toastify";
 
 export default function personalInfo() {
   const t = useTranslations();
@@ -50,6 +51,10 @@ export default function personalInfo() {
   const { disconnect } = useDisconnect()
   const bindEvmForce = useRef<boolean>(false);
 
+  const [showToTgModal, setShowToTgModal] = useState(false);
+  const [tgLink, setTgLink] = useState<string>('');
+  const [tgWebLoginToken, setTgWebLoginToken] = useState<string>('');
+
   const { errCodeHandler } = useErrCode();
 
   const handleGetUserInfo = async() => {
@@ -59,7 +64,7 @@ export default function personalInfo() {
         handleSetUserInfo(data?.data);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
   }
@@ -72,15 +77,30 @@ export default function personalInfo() {
     .then(async(res) => {
       const data = res?.data;
       if(data.status == 10000 && data?.data.botUrl) {
-        window.open(data?.data.botUrl, '_blank');
-        reConnect = true;
-        reBindTimeout.current = setTimeout(() => {
-          handleBindTgAccount(data?.data.webLoginToken, reqCount + 1);
-        }, 5000);
+        if(/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){
+          setTgLink(data?.data.botUrl);
+          setTgWebLoginToken(data?.data.webLoginToken);
+          setShowToTgModal(true);
+          /*
+          const a = document.createElement('a');
+          a.href = data?.data.botUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.click();
+          */
+        }
+        else {
+          window.open(data?.data.botUrl, '_blank');
+          reConnect = true;
+          reBindTimeout.current = setTimeout(() => {
+            handleBindTgAccount(data?.data.webLoginToken, reqCount + 1);
+          }, 5000);
+        }
       }
       else if(data?.data?.account) {
         clearTimeout(reBindTimeout.current);
         reBindTimeout.current = null;
+        toast.success(t('genkiMint.bindTgAccountSuccess'));
         handleGetUserInfo();
       }
       else if(reqCount < 10) {
@@ -88,7 +108,7 @@ export default function personalInfo() {
           reConnect = false;
           clearTimeout(reBindTimeout.current);
           reBindTimeout.current = null;
-          errCodeHandler(data.status);
+          errCodeHandler(data.status, data.msg)
         }
         else {
           reConnect = true;
@@ -100,7 +120,7 @@ export default function personalInfo() {
       }
       else {
         if(data.status != 10002) {
-          errCodeHandler(data.status);
+          errCodeHandler(data.status, data.msg)
         }
         clearTimeout(reBindTimeout.current);
         reBindTimeout.current = null;
@@ -132,6 +152,7 @@ export default function personalInfo() {
       .then(res => {
         const data = res?.data;
         if(data.status == 10000) {
+          toast.success(t('genkiMint.bindEvmAccountSuccess'));
           handleGetUserInfo();
         }
         else {
@@ -184,6 +205,11 @@ export default function personalInfo() {
   }
 
   const handleDisconnect = async() => {
+    localStorage.removeItem('wagmi.wallet');
+    localStorage.removeItem('wagmi.connected')
+    localStorage.removeItem('wagmi.store')
+    localStorage.removeItem('wagmi.metaMask')
+    sessionStorage.clear()
     await disconnect();
   }
 
@@ -432,9 +458,25 @@ export default function personalInfo() {
                   :
                     <div className="py-16 text-center">
                       <svg className="mx-auto" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M855.6 427.2H168.5c-12.7 0-24.4 6.9-30.6 18L4.4 684.7C1.5 689.9 0 695.8 0 701.8v287.1c0 19.4 15.7 35.1 35.1 35.1H989c19.4 0 35.1-15.7 35.1-35.1V701.8c0-6-1.5-11.8-4.4-17.1L886.2 445.2c-6.2-11.1-17.9-18-30.6-18zM673.4 695.6c-16.5 0-30.8 11.5-34.3 27.7-12.7 58.5-64.8 102.3-127.2 102.3s-114.5-43.8-127.2-102.3c-3.5-16.1-17.8-27.7-34.3-27.7H119c-26.4 0-43.3-28-31.1-51.4l81.7-155.8c6.1-11.6 18-18.8 31.1-18.8h622.4c13 0 25 7.2 31.1 18.8l81.7 155.8c12.2 23.4-4.7 51.4-31.1 51.4H673.4zM819.9 209.5c-1-1.8-2.1-3.7-3.2-5.5-9.8-16.6-31.1-22.2-47.8-12.6L648.5 261c-17 9.8-22.7 31.6-12.6 48.4 0.9 1.4 1.7 2.9 2.5 4.4 9.5 17 31.2 22.8 48 13L807 257.3c16.7-9.7 22.4-31 12.9-47.8zM375.4 261.1L255 191.6c-16.7-9.6-38-4-47.8 12.6-1.1 1.8-2.1 3.6-3.2 5.5-9.5 16.8-3.8 38.1 12.9 47.8L337.3 327c16.9 9.7 38.6 4 48-13.1 0.8-1.5 1.7-2.9 2.5-4.4 10.2-16.8 4.5-38.6-12.4-48.4zM512 239.3h2.5c19.5 0.3 35.5-15.5 35.5-35.1v-139c0-19.3-15.6-34.9-34.8-35.1h-6.4C489.6 30.3 474 46 474 65.2v139c0 19.5 15.9 35.4 35.5 35.1h2.5z" fill="#757895"></path></svg>
-                      <Button href="/genkiMinerMint" className="text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4 mt-6">
-                        {t('personalInfo.goToMint')}
-                      </Button>
+                      {!userInfo?.account &&
+                        <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={handleOpenEvmConnectModal}>
+                          {t('personalInfo.bindWallet')}
+                          {bindEvmAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
+                        </Button>
+                      }
+
+                      {!userInfo?.tgAccount &&
+                        <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={() => handleBindTgAccount()}>
+                          {t('personalInfo.bindTgAccount')}
+                          {bindTgAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
+                        </Button>
+                      }
+
+                      {userInfo?.account && userInfo?.tgAccount &&
+                        <Button href="/genkiMinerMint" className="text-xl font-light text-white w-60 text-center py-3 md:py-4 mt-6">
+                          {t('personalInfo.goToMint')}
+                        </Button>
+                      }
                     </div>
                   }
                 </div>
@@ -540,7 +582,7 @@ export default function personalInfo() {
                     ))}
                   </div>
                   <div className="w-1/5 text-[#F6465D]">-{item?.cost}</div>
-                  <div className="w-1/5">{chainConfig && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={chainConfig?.scan + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>
+                  <div className="w-1/5">{chainConfig && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={chainConfig?.SCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>
                 </div>
               ))
               :
@@ -552,6 +594,26 @@ export default function personalInfo() {
           </div>
           <div className="w-full h-10 bg-[#201E2A]"></div>
         </div>
+      </Modal>
+      <Modal
+          isOpen={showToTgModal}
+          onRequestClose={() => setShowToTgModal(false)}
+          shouldCloseOnOverlayClick={true}
+          className=""
+        >
+          <div className="w-80 text-center p-6 bg-black rounded-lg">
+            <div className="text-white text-center text-[20px]">{t('menu.tgLogin')}</div>
+            <button id="open-tg-link" className="open-tg-link w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 bg-[#6E4DFF] mt-6 rounded-lg"
+            onClick={() => {
+              window.open(tgLink, '_blank');
+              setShowToTgModal(false);
+              reBindTimeout.current = setTimeout(() => {
+                handleBindTgAccount(tgWebLoginToken, 1);
+              }, 5000);
+            }}>
+              <span className="text-sm md:text-base font-medium ml-2">{t('menu.openTgToLogin')}</span>
+            </button>
+          </div>
       </Modal>
     </main>
   ); 
