@@ -39,6 +39,9 @@ export default function ConnectBtn() {
   const reLoginTimeout = useRef<any>(null);
   const loginForceRef = useRef<any>(false);
 
+  const [showToTgModal, setShowToTgModal] = useState(false);
+  const tgLinkRef = useRef<any>(null);
+
   const handleConnectBsc = async() => {
     if(userInfo) {
       return;
@@ -134,11 +137,22 @@ export default function ConnectBtn() {
     .then(async(res) => {
       const data = res?.data;
       if(data.status == 10000 && data?.data.botUrl) {
-        window.open(data?.data.botUrl, '_blank');
-        reConnect = true;
-        reLoginTimeout.current = setTimeout(() => {
-          handleTgLogin(data?.data.webLoginToken, reqCount + 1);
-        }, 5000);
+        if(/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){
+          // tgLinkRef.current = data?.data.botUrl;
+          // setShowToTgModal(true);
+          const a = document.createElement('a');
+          a.href = data?.data.botUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.click();
+        }
+        else {
+          window.open(data?.data.botUrl, '_blank');
+          reConnect = true;
+          reLoginTimeout.current = setTimeout(() => {
+            handleTgLogin(data?.data.webLoginToken, reqCount + 1);
+          }, 5000);
+        }
       }
       else if(data?.data?.tgAccount) {
         clearTimeout(reLoginTimeout.current);
@@ -235,6 +249,17 @@ export default function ConnectBtn() {
       localStorage.setItem('kkRefCode', refcode)
     }
 
+    document.querySelector('#open-tg-link')?.addEventListener('click', (e) => {
+      console.log(e);
+      if(tgLinkRef.current) {
+        window.open(tgLinkRef.current, '_blank');
+        setShowToTgModal(false);
+        reLoginTimeout.current = setTimeout(() => {
+          handleTgLogin(tgLinkRef.current, 1);
+        }, 5000);
+      }
+    })
+
     return () => {
       clearTimeout(reLoginTimeout.current);
       reLoginTimeout.current = null;
@@ -243,7 +268,7 @@ export default function ConnectBtn() {
 
   return (
     <>
-    <div className="w-full md:w-auto relative md:ml-12" onMouseOver={() => setWalletDropdown(true)} onMouseOut={() => setWalletDropdown(false)}>
+    <div className="w-full md:w-auto relative md:ml-12 h-[50vh] md:h-auto" onMouseOver={() => setWalletDropdown(true)} onMouseOut={() => setWalletDropdown(false)}>
       <div className="hidden md:flex bg-black hover:bg-black/80 block p-[6px] h-8 md:h-9 items-center justify-center rounded-full">
         <div className="w-48 flex items-center justify-center text-sm md:text-base">
           {walletAddr ? 
@@ -326,6 +351,19 @@ export default function ConnectBtn() {
               <span className="text-sm md:text-base font-medium ml-2">{t('menu.tgLogin')}</span>
             </Button>
           </div>
+        </div>
+    </Modal>
+    <Modal
+        isOpen={showToTgModal}
+        onRequestClose={() => setShowToTgModal(false)}
+        shouldCloseOnOverlayClick={true}
+        className=""
+      >
+        <div className="w-80 text-center p-6 bg-black rounded-lg">
+          <div className="text-white text-center text-[20px]">{t('menu.tgLogin')}</div>
+          <button id="open-tg-link" className="open-tg-link w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 bg-[#6E4DFF] mt-6 rounded-lg">
+            <span className="text-sm md:text-base font-medium ml-2">{t('menu.openTgToLogin')}</span>
+          </button>
         </div>
     </Modal>
     </>

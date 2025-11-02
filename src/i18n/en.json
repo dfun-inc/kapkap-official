@@ -33,7 +33,8 @@
     "bscWallets": "BSC Wallets",
     "tgLogin": "TG Login",
     "profile": "Profile",
-    "personalInfo": "Personal information"
+    "personalInfo": "Personal information",
+    "openTgToLogin": "Open Telegram to Login"
   },
 
   "main": {
