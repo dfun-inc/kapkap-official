@@ -323,7 +323,8 @@
     "mintHistory": "Mint History",
     "cost": "Cost",
     "hash": "Hash",
-    "viewHash": "View Hash"
+    "viewHash": "View Hash",
+    "kscoreDesc": "You can get K-score by playing KAPKAP's games"
   },
 
   "genkiMint": {

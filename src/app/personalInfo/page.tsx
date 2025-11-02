@@ -396,6 +396,7 @@ export default function personalInfo() {
                             <div className="text-[#FEBD32] text-[30px]">{formatNumberWithCommas(kscore)}</div>
                           }
                         </div>
+                        <div className="mt-1 text-[14px] text-[#8A84A3]">{t('personalInfo.kscoreDesc')}</div>
                       </div>
                     </div>
                   </div>
