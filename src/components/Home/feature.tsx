@@ -66,15 +66,15 @@ export default function feature() {
   return (
     <section id="home-section-1" className="home-section-1 feature-section bg-[#121212]">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16">
-        <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
+        <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
           <div className="feature-title mx-auto inline-block border-b border-[#FEBD32]">{t('feature.title')}</div>
         </div>
         <div className="flex flex-wrap items-center justify-between mt-12 feature-item-top">
           <div className={aniClassLeft + " animate__animated animate__delay-500 w-full md:w-3/5 md:max-w-[820px] md:w-2/3"}>
             <div className="text-[18px] xl:text-[24px] text-[#8D73FF]">{t('feature.subTitle')}</div>
-            <div className="text-[16px] text-[#DDD5FF] mt-10 leading-[30px]">{t('feature.desc1')}</div>
-            <div className="text-[16px] text-[#DDD5FF] leading-[30px]">{t('feature.desc2')}</div>
-            <div className="text-[16px] text-[#DDD5FF] leading-[30px]">{t('feature.desc3')}</div>
+            <div className=" text-[#DDD5FF] mt-10 leading-[30px]">{t('feature.desc1')}</div>
+            <div className=" text-[#DDD5FF] leading-[30px]">{t('feature.desc2')}</div>
+            <div className=" text-[#DDD5FF] leading-[30px]">{t('feature.desc3')}</div>
           </div>
           <div className={aniClassRight + " animate__animated animate__delay-500 mt-12 md:mt-0 md:flex-1 w-full md:w-auto relative"}>
             <div className="relative w-3/5 max-w-[376px] mx-auto">

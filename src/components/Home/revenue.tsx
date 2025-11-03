@@ -76,7 +76,7 @@ export default function Revenue() {
     <section className="revenue-section bg-[#121212] relative z-2">
       <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-16">
         <div className="revenue-title">
-          <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('revenue.title')}
           </div>
         </div>
@@ -85,31 +85,31 @@ export default function Revenue() {
             <div className="revenue-item revenue-item-1 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle1')}</div>
-                <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent1')}</div>
+                <div className="w-full  text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent1')}</div>
               </div>
             </div>
             <div className="revenue-item revenue-item-2 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle2')}</div>
-                <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent2')}</div>
+                <div className="w-full  text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent2')}</div>
               </div>
             </div>
             <div className="revenue-item revenue-item-3 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle3')}</div>
-                <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent3')}</div>
+                <div className="w-full  text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent3')}</div>
               </div>
             </div>
             <div className="revenue-item revenue-item-4 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle4')}</div>
-                <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent4')}</div>
+                <div className="w-full  text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent4')}</div>
               </div>
             </div>
             <div className="revenue-item revenue-item-5 aspect-[3/2] rounded-[20px] w-full md:w-[450px] mt-15">
               <div className="px-8 pt-[40%]">
                 <div className="w-full text-[18px] text-[#8D73FF] text-center">{t('revenue.itemTitle5')}</div>
-                <div className="w-full text-[16px] text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent5')}</div>
+                <div className="w-full  text-[#DDD5FF] mt-3 leading-[24px] text-center">{t('revenue.itemContent5')}</div>
               </div>
             </div>
           </div>

@@ -431,7 +431,7 @@ export default function personalInfo() {
 
               <div className="mt-14">
                 <div className="flex justify-center">
-                  <div className="text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight">
+                  <div className="text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight">
                     {t('personalInfo.title')}
                   </div>
                 </div>
@@ -527,7 +527,7 @@ export default function personalInfo() {
               :
               kscoreHistory?.length > 0 ?
               kscoreHistory.map((item, index) => (
-                <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3">
+                <div key={index} className="flex text-[#8A84A3] text-center text-white mt-3 text-[12px] md:text-[16px]">
                   <div className="w-1/3">{formatDatetime(item?.createdAt)}</div>
                   <div className="w-1/3 px-2">{(item?.type == 'mint' ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
                   <div className="w-1/3 capitalize">{item?.type}</div>

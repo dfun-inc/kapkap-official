@@ -28,7 +28,7 @@ export default function Kscore() {
             <div className="w-full md:flex-1 mt-6 md:mt-0 md:pl-5">
               <div className="text-[24px] 2xl:text-[30px] text-[#FEBD32]">{t('kscore.item1Name')}</div>
               <div className="text-[18px] text-[#8D73FF] leading-tight">{t('kscore.item1Type')}</div>
-              <div className="mt-3 text-[16px] 2xl:text-[18px] text-[#DDD5FF]">
+              <div className="mt-3 2xl:text-[18px] text-[#DDD5FF]">
                 <div className="">{t('kscore.advantage')}: {t('kscore.item1Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item1Coop')}</div>
               </div>
@@ -52,7 +52,7 @@ export default function Kscore() {
             <div className="w-full md:flex-1 mt-6 md:mt-0 md:pl-5">
               <div className="text-[24px] 2xl:text-[30px] text-[#FEBD32]">{t('kscore.item2Name')}</div>
               <div className="text-[18px] text-[#8D73FF] leading-tight">{t('kscore.item2Type')}</div>
-              <div className="mt-3 text-[16px] 2xl:text-[18px] text-[#DDD5FF]">
+              <div className="mt-3 2xl:text-[18px] text-[#DDD5FF]">
                 <div className="">{t('kscore.advantage')}: {t('kscore.item2Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item2Coop')}</div>
               </div>
@@ -69,7 +69,7 @@ export default function Kscore() {
             <div className="w-full md:flex-1 mt-6 md:mt-0 md:pl-5">
               <div className="text-[24px] 2xl:text-[30px] text-[#FEBD32]">{t('kscore.item3Name')}</div>
               <div className="text-[18px] text-[#8D73FF] leading-tight">{t('kscore.item3Type')}</div>
-              <div className="mt-3 text-[16px] 2xl:text-[18px] text-[#DDD5FF]">
+              <div className="mt-3 2xl:text-[18px] text-[#DDD5FF]">
                 <div className="">{t('kscore.advantage')}: {t('kscore.item3Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item3Coop')}</div>
               </div>

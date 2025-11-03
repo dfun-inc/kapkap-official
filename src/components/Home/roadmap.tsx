@@ -118,7 +118,7 @@ export default function Roadmap() {
           <div className={aniTitleClass + " animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
             <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('roadmap.title')}</div>
           </div>
-          <div className="roadmap-list mt-15 text-[16px]">
+          <div className="roadmap-list mt-15 ">
             {roadMapData != null && Object.keys(roadMapData).map((key:string, i) => (
               <div key={i} className="relative z-1 pb-6">
                 {i < (Object.keys(roadMapData).length - 1) && <div className={"absolute top-0 left-[9px] w-[2px] h-full z-0 " + 

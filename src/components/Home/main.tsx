@@ -149,7 +149,7 @@ export default function Main() {
                 </svg>
               </div>
               <div className="title-text-bottom mt-7">
-                <span className="inline-block animate__animated animate__fadeInUp text-[#8A84A3] text-[16px] md:text-[18px]">{t('main.desc')}</span>
+                <span className="inline-block animate__animated animate__fadeInUp text-[#8A84A3]  md:text-[18px]">{t('main.desc')}</span>
               </div>
             </div>
           </div>
@@ -166,18 +166,18 @@ export default function Main() {
                 </div>
                 <div className="w-full md:w-auto ml-0 md:ml-4 mt-6 md:mt-0">
                   <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.kol')}</div>
-                  <div className="text-[#8A84A3] text-[16px] mt-3">Beanie</div>
+                  <div className="text-[#8A84A3]  mt-3">Beanie</div>
                 </div>
               </div>
               <div className="mt-6 md:mt-4">
                 <div className="text-[#8A84A3] text-[12px] uppercase">{t('main.investors')}</div>
                 <div className="flex flex-wrap lg:flex-no-wrap items-center space-x-5 space-y-3 lg:space-y-0 lg:space-x-8 justify-start mt-2">
-                  <img className="w-auto h-[19px]" src="/images/investors/inv_ShiMa.png" alt="" />
-                  <img className="w-auto h-[33px]" src="/images/investors/inv_Animoca.png" alt="" />
-                  <img className="w-auto h-[32px]" src="/images/investors/inv_Mechanism.png" alt="" />
-                  <img className="w-auto h-[34px]" src="/images/investors/inv_BigBrain.png" alt="" />
-                  <img className="w-auto h-[22px]" src="/images/investors/inv_Klaytn.png" alt="" />
-                  <img className="w-auto h-[31px]" src="/images/investors/inv_UnicornVerse.png" alt="" />
+                  <img className="w-auto h-[17px] md:h-[19px]" src="/images/investors/inv_ShiMa.png" alt="" />
+                  <img className="w-auto h-[30px] md:h-[33px]" src="/images/investors/inv_Animoca.png" alt="" />
+                  <img className="w-auto h-[29px] md:h-[32px]" src="/images/investors/inv_Mechanism.png" alt="" />
+                  <img className="w-auto h-[30px] md:h-[34px]" src="/images/investors/inv_BigBrain.png" alt="" />
+                  <img className="w-auto h-[19px] md:h-[22px]" src="/images/investors/inv_Klaytn.png" alt="" />
+                  <img className="w-auto h-[27px] md:h-[31px] mb-3 lg:mt-0" src="/images/investors/inv_UnicornVerse.png" alt="" />
                 </div>
               </div>
             </div>

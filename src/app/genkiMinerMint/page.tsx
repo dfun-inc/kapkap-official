@@ -466,8 +466,8 @@ export default function YourNFTs() {
           <div className="flex flex-col md:flex-row bg-black/50 rounded-[20px] overflow-hidden">
             <img className="w-full md:w-[280px]" src="/images/games/genkiminer2.jpg" alt="genki miner" />
             <div className="w-full md:w-auto md:flex-1">
-              <div className="px-7 py-9">
-                <div className="text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight">
+              <div className="px-3 md:px-7 py-9">
+                <div className="text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight">
                   {t('genkiMint.title')}
                 </div>
                 <div className="text-[18px] text-[#8D73FF] mt-3">
@@ -489,8 +489,8 @@ export default function YourNFTs() {
               </div>
             </div>
             <div className="overflow-x-auto">
-              <div className="min-w-[960px]">
-                <div className="flex bg-black/50 rounded-[20px] text-center text-[#DDD5FF] py-2 text-[20px] mt-6">
+              <div className="min-w-[800px]">
+                <div className="flex bg-black/50 rounded-[20px] text-center text-[#DDD5FF] py-2 md:text-[20px] mt-6">
                   <div className="w-[80px] md:w-[100px] border-r-[2px] border-zinc-600/30 py-2">NFT</div>
                   <div className="w-1/5 xl:min-w-[300px] border-r-[2px] border-zinc-600/30 py-2">{t('genkiMint.name')}</div>
                   <div className="flex-1 border-r-[2px] border-zinc-600/30 py-2">{t('genkiMint.NFTPrivilege')}</div>
@@ -500,7 +500,7 @@ export default function YourNFTs() {
 
                 {NFTListLoading ?
                   Array.from({ length: 5 }).map((_, index) => (
-                    <div key={index} className="animate-pulse mt-5 flex items-center bg-black/50 rounded-[20px] text-[20px]">
+                    <div key={index} className="animate-pulse mt-5 flex items-center bg-black/50 rounded-[20px] md:text-[20px]">
                       <div className="w-[80px] md:w-[100px] py-2">
                         <div className="rounded-[10px] bg-gray-500 w-full aspect-[1/1.25]"></div>
                       </div>

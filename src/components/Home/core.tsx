@@ -88,7 +88,7 @@ export default function Core() {
       </div>
       <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-16">
         <div className="core-title">
-          <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('core.title')}
           </div>
         </div>
