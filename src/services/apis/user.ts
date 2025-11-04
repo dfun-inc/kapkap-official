@@ -53,6 +53,19 @@ export async function bindTgAccount(bindToken: string) {
   });
 }
 
+export async function bindTonAccount(address: string) {
+  return request({
+    method: 'post',
+    url: '/api/v1/user/bindTonWallet',
+    data: {
+      address
+    },
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}
+
 export async function submitMsg(data:any) {
   return request({
     method: 'post',

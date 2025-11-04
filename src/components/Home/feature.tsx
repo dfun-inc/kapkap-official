@@ -66,7 +66,7 @@ export default function feature() {
   return (
     <section id="home-section-1" className="home-section-1 feature-section bg-[#121212]">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16">
-        <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
+        <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
           <div className="feature-title mx-auto inline-block border-b border-[#FEBD32]">{t('feature.title')}</div>
         </div>
         <div className="flex flex-wrap items-center justify-between mt-12 feature-item-top">

@@ -83,7 +83,7 @@ export default function Ecosystem() {
     <section className="eco-section bg-[#121212]">
       <div className="eco-container max-w-[1920px] mx-auto pt-16 pb-48 px-5 lg:px-18 2xl:px-24">
         <div className="eco-title">
-          <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('ecosystem.title')}
           </div>
         </div>

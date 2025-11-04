@@ -80,7 +80,7 @@ export default function Summary() {
     <section className="summary-section bg-[#121212] relative z-2">
       <div className="max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 py-16">
         <div className="summary-title">
-          <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('summary.title')}
           </div>
         </div>

@@ -72,7 +72,7 @@ export default function IP() {
           <div className="absolute z-1 top-0 right-full w-0 h-0 border-b-0 border-r-0 border-t-[#121212] border-l-transparent border-t-[44px] border-l-[60px] lg:border-t-[55px] lg:border-l-[75px]"></div>
         </div>
         <div className="ip-title md:absolute top-2 md:top-12 left-3 md:left-18 z-1 mb-6 md:mb-0 px-3 md:px-0">
-          <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('ip.title')}
           </div>
         </div>

@@ -79,7 +79,7 @@ export default function Model() {
     <section className="model-section bg-[#121212] relative z-1">
       <div className="model-section-container max-w-[1920px] mx-auto px-3 md:px-18 2xl:px-24 pt-32 pb-16">
         <div className="model-title">
-          <div className={aniTitle + " animate__animated text-[16px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
+          <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white inline-block border-b border-[#FEBD32] leading-tight"}>
             {t('model.title')}
           </div>
         </div>

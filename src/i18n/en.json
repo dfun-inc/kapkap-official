@@ -309,9 +309,11 @@
     "viewHistory": "View History",
     "yourTgAccount": "Your Telegram Account",
     "yourWallet": "Your Wallet",
+    "yourTonWallet": "Your TON Wallet",
     "none": "None",
     "bindWallet": "Bind Wallet",
     "bindTgAccount": "Bind Telegram Account",
+    "bindTonWallet": "Bind TON Wallet",
     "yourKScore": "Your K-Score",
     "goToMint": "Go to Mint",
     "kscoreHistory": "K-Score History",
@@ -322,11 +324,17 @@
     "mint": "Mint",
     "mintHistory": "Mint History",
     "cost": "Cost",
+    "status": "Status",
+    "pending": "Pending",
+    "success": "Success",
     "hash": "Hash",
     "viewHash": "View Hash",
     "kscoreDesc": "You can get K-score by playing KAPKAP's games",
     "bindTgAccountSuccess": "Bind Telegram Account Success",
-    "bindEvmAccountSuccess": "Bind Wallet Success"
+    "bindEvmAccountSuccess": "Bind Wallet Success",
+    "bindTonWalletSuccess": "Bind TON Wallet Success",
+    "game": "Game",
+    "minting": "Minting"
   },
 
   "genkiMint": {
@@ -342,7 +350,23 @@
     "goToBind": "Go to Bind",
     "minting": "Minting",
     "mintSuccess": "Mint Success",
+    "mappingSuccess": "Mapping Suucess",
     "bindEvmAccountToMint": "Bind Wallet to Mint",
-    "bindTgAccountToGetKscore": "Bind Telegram Account to Get K-Score"
+    "bindTgAccountToGetKscore": "Bind Telegram Account to Get K-Score",
+    "mapToBscChain": "Map to BSC Chain",
+    "step": "step",
+    "step1": "Please bind the Telegram account associated with your game account (binding is irreversible).",
+    "step2": "Click the button to check if your game account meets the minting requirements.",
+    "step3": "Bind your TON Chain wallet to receive the NFT airdrop (binding is irreversible).",
+    "step4": "Bind your BSC Chain wallet to receive the NFT airdrop (binding is irreversible).",
+    "step5": "Mint your exclusive NFT, which will provide generous bonuses to your game account.",
+    "check": "check",
+    "mintNFT": "mint NFT"
+  },
+
+  "nft": {
+    "airdrop": "airdrop",
+    "airdropBenefits": "Airdrop Benefits",
+    "benefits": "Benefits"
   }
 }

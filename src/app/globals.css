@@ -289,7 +289,8 @@ body {
 
 .k-score-page,
 .your-nfts-page,
-.mint-page {
+.mint-page,
+.bind-step-modal {
   background-image: url('/images/bg_kscore_page.png');
   background-size: 100% auto;
   background-position: top center;
@@ -306,5 +307,12 @@ body {
   .roadmap-section {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
             url('/images/bg_roadmap.jpg') center top;
+  }
+
+  .k-score-page,
+  .your-nfts-page,
+  .mint-page,
+  .bind-step-modal {
+    background-size: auto 100%;
   }
 }

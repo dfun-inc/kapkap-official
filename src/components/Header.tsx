@@ -145,7 +145,7 @@ export default function Header(props:Props) {
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
 
-    // handleGetConfig();
+    handleGetConfig();
     // handleGetAppData();
 
     return () => {
