@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@orbs-network/ton-access": "^2.3.3",
     "@rainbow-me/rainbowkit": "^2.2.9",
     "@react-three/drei": "^10.6.0",
     "@react-three/fiber": "^9.2.0",

@@ -379,7 +379,7 @@ export default function YourNFTs() {
   }, [userInfo])
 
   useEffect(() => {
-    if(userInfo?.account && userInfo?.tgAccount && userInfo?.tonWallet && NFTData) {
+    if(userInfo && NFTData) {
       handleGetRemintList();
     }
   }, [userInfo, NFTData])
@@ -459,7 +459,7 @@ export default function YourNFTs() {
             <div key={index} className="">
               <div key={index} className="mt-5 flex flex-wrap bg-black/50 rounded-[20px] md:text-[20px] p-3">
                 <div className="w-1/3 md:w-[130px] 2xl:w-[168px]">
-                  {configData != null && <img className="w-full" src={configData?.IPFSTON + NFTData[10000].project + '/image/' +  NFTData[10000].project + '-Advanced.png'} alt="" />}
+                  {configData != null && <img className="w-full" src={configData?.IPFSTON + NFTData[10000].project + '/image/' +  value?.name.replace(' ', '-') + '.png'} alt="" />}
                 </div>
                 <div className="w-2/3 md:w-auto md:flex-1 px-3">
                   <div className="text-[#DDD5FF] text-[20px] md:text-[30px]">{value?.name} <span className="text-[#8D73FF]">(Lv.{value.level})</span></div>
@@ -473,29 +473,37 @@ export default function YourNFTs() {
                   </div>
                 }
                 {userInfo != null && !mintedLoading && reMintList != null && reMintList[key] !== undefined && !kscoreLoading &&
-                  reMintList[key] == 0 ?
-                  <>
-                    <div className="w-full flex items-center justify-center space-x-3">
-                      <img className="w-[38px]" src="/images/kscore.png" />
-                      <div className="md:text-[20px]">{value.kscore}/{kscore}</div>
-                    </div>
-                    <Button className={"text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (value.kscore > kscore ? "cursor-not-allowed" : "")} 
-                      onClick={value.kscore > kscore ?() => {} : () => handleMint(Number(key), 10000)} disabled={value.kscore > kscore}>
+                  <> {
+                    userInfo?.account && userInfo?.tgAccount && userInfo?.tonWallet ?
+                      reMintList[key] == 0 ?
+                        <>
+                        <div className="w-full flex items-center justify-center space-x-3">
+                          <img className="w-[38px]" src="/images/kscore.png" />
+                          <div className="md:text-[20px]">{value.kscore}/{kscore}</div>
+                        </div>
+                        <Button className={"text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (value.kscore > kscore ? "cursor-not-allowed" : "")} 
+                          onClick={value.kscore > kscore ?() => {} : () => handleMint(Number(key), 10000)} disabled={value.kscore > kscore}>
+                          {t('genkiMint.mint')}
+                          {mintLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                        </Button>
+                      </>
+                      :
+                      (reMintList[key] == 1 || reMintList[key] == 2) && <>
+                        {value?.airdropBoost > 0 && <div className="w-full text-center">
+                          <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}</span>
+                        </div>}
+                        {reMintList[key] == 1 &&
+                          <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
+                          {t('genkiMint.mapToBscChain')}
+                          {mappingLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                        </Button>}
+                      </> 
+                    :
+                    <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3"
+                      onClick={() => setShowBindModal(true)}>
                       {t('genkiMint.mint')}
-                      {mintLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                     </Button>
-                  </>
-                  :
-                  (reMintList[key] == 1 || reMintList[key] == 2) && <>
-                    {value?.airdropBoost > 0 && <div className="w-full text-center">
-                      <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}</span>
-                    </div>}
-                    {reMintList[key] == 1 &&
-                      <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
-                      {t('genkiMint.mapToBscChain')}
-                      {mappingLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                    </Button>}
-                  </>
+                  }</>
                 }
                 </div>
               </div>
@@ -529,11 +537,11 @@ export default function YourNFTs() {
             <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
               <div className="w-full md:flex-1 md:w-auto">
                 <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 1</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-3">{t('genkiMint.step1')}</div>
+                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step1')}</div>
               </div>
-              <div className="w-full md:w-50 text-center py-6 md:py-2 flex items-center justify-center">
+              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                 {stepIdx == 0 ?
-                  <Button className="w-50 text-[20px] font-light text-white text-center py-3" onClick={() => handleBindTgAccount()}>
+                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTgAccount()}>
                     {t('personalInfo.bindTgAccount')}
                     {bindTgAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                   </Button>
@@ -548,16 +556,16 @@ export default function YourNFTs() {
             <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
               <div className="w-full md:flex-1 md:w-auto">
                 <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 2</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-3">{t('genkiMint.step2')}</div>
+                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step2')}</div>
               </div>
-              <div className="w-full md:w-50 text-center py-6 md:py-2 flex items-center justify-center">
+              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                 {stepIdx == 1 ?
-                  <Button className="w-50 text-[20px] font-light text-white text-center py-3" onClick={() => handleUpdateStep(true)}>
+                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleUpdateStep(true)}>
                     {t('genkiMint.check')}
                   </Button>
                   :
                   stepIdx < 1 ?
-                    <Button className="w-50 text-[20px] font-light text-white text-center py-3" disabled={true}>
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
                       {t('genkiMint.check')}
                     </Button>
                     :
@@ -571,17 +579,17 @@ export default function YourNFTs() {
             <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
               <div className="w-full md:flex-1 md:w-auto">
                 <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 3</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-3">{t('genkiMint.step3')}</div>
+                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step3')}</div>
               </div>
-              <div className="w-full md:w-50 text-center py-6 md:py-2 flex items-center justify-center">
+              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                 {stepIdx == 2 ?
-                  <Button className="w-50 text-[20px] font-light text-white text-center py-3" onClick={() => handleBindTon()}>
+                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTon()}>
                     {t('personalInfo.bindTonWallet')}
                     {bindTonAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                   </Button>
                   :
                   stepIdx < 2 ?
-                    <Button className="w-50 text-[20px] font-light text-white text-center py-3" disabled={true}>
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
                       {t('personalInfo.bindTonWallet')}
                     </Button>
                     :
@@ -595,17 +603,17 @@ export default function YourNFTs() {
             <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
               <div className="w-full md:flex-1 md:w-auto">
                 <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 4</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-3">{t('genkiMint.step4')}</div>
+                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step4')}</div>
               </div>
-              <div className="w-full md:w-50 text-center py-6 md:py-2 flex items-center justify-center">
+              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                 {stepIdx == 3 ?
-                  <Button className="w-50 text-[20px] font-light text-white text-center py-3" onClick={() => handleOpenEvmConnectModal()}>
+                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleOpenEvmConnectModal()}>
                     {t('personalInfo.bindWallet')}
                     {bindEvmAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                   </Button>
                   :
                   stepIdx < 3 ?
-                    <Button className="w-50 text-[20px] font-light text-white text-center py-3" disabled={true}>
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
                       {t('personalInfo.bindTonWallet')}
                     </Button>
                     :
@@ -619,15 +627,15 @@ export default function YourNFTs() {
             <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
               <div className="w-full md:flex-1 md:w-auto">
                 <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 5</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-3">{t('genkiMint.step5')}</div>
+                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step5')}</div>
               </div>
-              <div className="w-full md:w-50 text-center py-6 md:py-2 flex items-center justify-center">
+              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                 {stepIdx == 4 ?
-                  <Button className="w-50 text-[20px] font-light text-white text-center py-3" onClick={() => setShowBindModal(false)}>
+                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => setShowBindModal(false)}>
                     {t('genkiMint.mintNFT')}
                   </Button>
                   :
-                  <Button className="w-50 text-[20px] font-light text-white text-center py-3" disabled={true}>
+                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
                     {t('genkiMint.mintNFT')}
                   </Button>
                 }

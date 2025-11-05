@@ -20,6 +20,7 @@ import { formatDatetime } from "@/utils/time";
 import { toast } from "react-toastify";
 // import { tonConnectUI } from "@/config/ton";
 import { toUserFriendlyAddress, useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
+import { getUserNftsInCollection } from "@/services/helpers/ton";
 
 export default function personalInfo() {
   const t = useTranslations();
@@ -338,6 +339,7 @@ export default function personalInfo() {
       })) || [];
 
       console.log(nftList)
+      await getUserNftsInCollection(nftList)
       // setNfts(nftList);
     } catch (err) {
       console.error("获取 NFT 失败:", err);
@@ -721,7 +723,7 @@ export default function personalInfo() {
               kscoreHistory.map((item, index) => (
                 <div key={index} className="flex text-[#CFC4FF] text-center text-white mt-3">
                   <div className="w-1/3">{formatDatetime(item?.createdAt)}</div>
-                  <div className="w-1/3 px-2">{(item?.type == 'mint' ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
+                  <div className="w-1/3 px-2">{(item?.type?.indexOf('mint') >= 0 ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
                   <div className="w-1/3 capitalize">{item?.type}</div>
                 </div>
               ))
@@ -760,7 +762,7 @@ export default function personalInfo() {
               <div className="flex border-b border-[#8A84A3] text-[#8A84A3] text-center">
                 <div className="w-1/5">{t('personalInfo.date')}</div>
                 <div className="flex-1">{t('personalInfo.mint')}</div>
-                <div className="w-1/6">{t('personalInfo.cost')}</div>
+                {historyTabIdx == 0 && <div className="w-1/6">{t('personalInfo.cost')}</div>}
                 <div className="w-1/6">{t('personalInfo.status')}</div>
                 {historyTabIdx == 1 && <div className="w-1/6">{t('personalInfo.hash')}</div>}
               </div>
@@ -778,7 +780,7 @@ export default function personalInfo() {
                   <div className="flex-1">
                     <div>{item?.item.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
                   </div>
-                  <div className="w-1/6 text-[#F6465D]">-{item?.item.kscore}</div>
+                  {historyTabIdx == 0 && <div className="w-1/6 text-[#F6465D]">-{item?.item.kscore}</div>}
                   <div className="w-1/6">
                     {item?.state == 3 ? 
                       <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
