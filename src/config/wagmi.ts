@@ -1,12 +1,35 @@
 // wagmi.ts
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { http } from 'wagmi';
+import { connectorsForWallets, getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { createConfig, http } from 'wagmi';
 import { bsc, bscTestnet } from 'wagmi/chains'
+import {
+  okxWallet,
+  binanceWallet,
+  metaMaskWallet,
+  walletConnectWallet
+} from '@rainbow-me/rainbowkit/wallets';
 
 export const projectId = 'e29dd843efef3adfe3d1cbda24d21e51'
 
 // export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
 export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
+
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommend',
+    wallets: [
+      okxWallet,
+      binanceWallet,
+      metaMaskWallet,
+      walletConnectWallet
+    ],
+  },
+  ],
+  {
+    appName: 'KapKap',
+    projectId: projectId,
+  }
+);
 
 /*
 export const config = createConfig({
@@ -17,9 +40,8 @@ export const config = createConfig({
 })
 */
 
-export const config = getDefaultConfig({
-  appName: 'KapKap',
-  projectId: projectId,
+export const config = createConfig({
+  connectors,
   chains: [tgtChain],
   transports: {
     [tgtChain?.id]: http(),
