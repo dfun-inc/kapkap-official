@@ -454,9 +454,9 @@ export default function YourNFTs() {
                 </div>
               ))
             :
-            <>
+            <div className="flex flex-wrap">
             {Object.entries(NFTData[10000]?.ids)?.map(([key, value]:[string, any], index:number) => (
-            <div key={index} className="">
+            <div key={index} className={"w-full " + (reMintList && reMintList[key] && reMintList[key] == 2 ? 'order-2 opacity-50' : '')}>
               <div key={index} className="mt-5 flex flex-wrap bg-black/50 rounded-[20px] md:text-[20px] p-3">
                 <div className="w-1/3 md:w-[130px] 2xl:w-[168px]">
                   {configData != null && <img className="w-full" src={configData?.IPFSTON + NFTData[10000].project + '/image/' +  value?.name.replace(' ', '-') + '.png'} alt="" />}
@@ -464,9 +464,9 @@ export default function YourNFTs() {
                 <div className="w-2/3 md:w-auto md:flex-1 px-3">
                   <div className="text-[#DDD5FF] text-[20px] md:text-[30px]">{value?.name} <span className="text-[#8D73FF]">(Lv.{value.level})</span></div>
                   <div className="text-[#8A84A3]">{value?.desc}</div>
-                  {value?.airdropBoost > 0 && <div className="text-[#FEBD32] mt-3">{t('nft.airdropBenefits')}</div>}
+                  {value?.airdropBoost > 0 && <div className="text-[#FEBD32] mt-3">{t('nft.inGameBenefits')}</div>}
                 </div>
-                <div className="w-1/5 md:w-[300px] flex flex-col justify-end items-end pt-6">
+                <div className="w-full md:w-[300px] flex flex-col justify-center md:justify-end items-center md:items-end pt-6">
                 {userInfo != null && (mintedLoading || kscoreLoading) && 
                   <div className="flex justify-center w-full">
                     <span className="animate-spin w-8 h-8 border-3 border-b-white/50 border-t-transparent rounded-full"></span>
@@ -490,7 +490,7 @@ export default function YourNFTs() {
                       :
                       (reMintList[key] == 1 || reMintList[key] == 2) && <>
                         {value?.airdropBoost > 0 && <div className="w-full text-center">
-                          <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}</span>
+                          <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}%</span>
                         </div>}
                         {reMintList[key] == 1 &&
                           <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
@@ -509,7 +509,7 @@ export default function YourNFTs() {
               </div>
             </div>
             ))}
-            </>
+            </div>
             }
           </div>
         </div>

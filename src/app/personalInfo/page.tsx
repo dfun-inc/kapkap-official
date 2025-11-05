@@ -20,7 +20,6 @@ import { formatDatetime } from "@/utils/time";
 import { toast } from "react-toastify";
 // import { tonConnectUI } from "@/config/ton";
 import { toUserFriendlyAddress, useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
-import { getUserNftsInCollection } from "@/services/helpers/ton";
 
 export default function personalInfo() {
   const t = useTranslations();
@@ -311,7 +310,7 @@ export default function personalInfo() {
                     tempItem = {id:key, ...value}
                   }
                 });
-                tempArr.push({originalTokenId: token, project: NFTData[item.project].project, item: tempItem})
+                tempArr.push({originalTokenId: token, project: NFTData[item.project].project, item: {project: NFTData[item.project].project, ...tempItem}})
               }
             })
           });
@@ -324,37 +323,40 @@ export default function personalInfo() {
   }
 
   const handleGetTonNFTList = async() => {
+    setNFTListLoading(true);
     try {
       const res = await fetch(
         'https://tonapi.io/v2/accounts/' + userInfo.tonWallet + '/nfts?collection=' + NFTData[10000].tonNftContract
       );
       const data = await res.json();
-      console.log("NFT 数据：", data);
 
       // 过滤并提取需要的信息
-      const nftList = data.nft_items?.map((item:any) => ({
-        address: item.address,
-        name: item.metadata?.name,
-        image: normalizeIpfsUrl(item.metadata?.image),
-      })) || [];
+      let tempList:any[] = [];
+      data.nft_items?.map((item:any) => {
+        let tempLevel = '';
+        item.metadata?.attributes.map((attr:any) => {
+          if(attr.trait_type == 'level') {
+            tempLevel = attr.value;
+          }
+        })
+        tempList.push({
+          name: item.metadata?.name,
+          image: item.metadata?.image,
+          desc: item.metadata?.description,
+          project: item.collection?.name,
+          level: tempLevel
+        })
+      });
 
-      console.log(nftList)
-      await getUserNftsInCollection(nftList)
+      console.log(tempList)
+      setNFTList(tempList);
       // setNfts(nftList);
     } catch (err) {
       console.error("获取 NFT 失败:", err);
     } finally {
       // setLoading(false);
     }
-  }
-
-  // 处理 IPFS 链接
-  const normalizeIpfsUrl = (url:string) => {
-    if (!url) return "";
-    if (url.startsWith("ipfs://")) {
-      return url.replace("ipfs://", "https://ipfs.io/ipfs/");
-    }
-    return url;
+    setNFTListLoading(false);
   }
 
   const handleGetKscoreHistory = async () => {
@@ -401,15 +403,8 @@ export default function personalInfo() {
     setMintHistoryLoading(false);
   }
 
-  const handleShowNFTDetailModal = (id:any) => {
-    setCurNFTItem(null);
-    Object.entries(NFTData).find(([key, value]:any) => {
-      Object.entries(value?.ids)?.map(([key2, value2]:any) => {
-        if(key2 == id) {
-          setCurNFTItem({id: key2, project: value.project, ...value2});
-        }
-      })
-    });
+  const handleShowNFTDetailModal = (item:any) => {
+    setCurNFTItem(item);
     setShowNFTDetailModal(true);
   }
 
@@ -618,9 +613,9 @@ export default function personalInfo() {
                     NFTlist?.length > 0 ?
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 lg:gap-15 mt-12">
                       {configData != null && NFTlist.map((item, index) => (
-                        <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300" onClick={item.item ? () => handleShowNFTDetailModal(item?.item?.id) : () => {}}>
+                        <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300" onClick={() => handleShowNFTDetailModal(ownIdx == 0 ? item : item?.item)}>
                           {ownIdx == 0 ?
-                          <></>
+                            <img className="w-full rounded-lg" src={item.image} alt={item?.name} />
                           :
                           item?.item ? 
                             <img className="w-full rounded-lg" src={configData.IPFS721 + item?.project + '/image/' + item.originalTokenId + '.png'} alt={item?.id} />
@@ -838,7 +833,7 @@ export default function personalInfo() {
               <div className="text-white text-[20px]">{curNFTItem?.name}</div>
               <div className="text-[#FEBD32] mt-6">Lv. {curNFTItem?.level}</div>
               <div className="text-[#CFC4FF] mt-3">{t('personalInfo.game')}: {curNFTItem?.project}</div>
-              <div className="text-[#2EBD85] mt-3">{curNFTItem?.airdropBoost && <span>{t('nft.airdrop')}: +{curNFTItem?.airdropBoost}%</span>}</div>
+              {curNFTItem?.airdropBoost &&<div className="text-[#2EBD85] mt-3"><span>{t('nft.airdrop')}: +{curNFTItem?.airdropBoost}%</span></div>}
               <div className="text-[#8A84A3] mt-3">{curNFTItem?.desc}</div>
             </div>
           )}

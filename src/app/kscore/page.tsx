@@ -6,21 +6,21 @@ import 'swiper/css';
 import { useEffect } from 'react';
 import Footer from '@/components/Footer';
 import Button from '@/components/ui/Button';
-import Link from 'next/link';
 
 export default function Kscore() {
   const t = useTranslations();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
   }, [])
 
   return (
-    <main className="k-score-page min-h-screen bg-[#121212] relative">
+    <main className="k-score-page md:min-h-screen bg-[#121212] relative">
       <div className="max-w-[1920px] mx-auto relative px-5 lg:px-18 2xl:px-24 pt-28 pb-20">
-        <div className="animate__fadeInUp animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight">
+        <div className="animate__fadeInUp md:animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight">
           <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('kscore.title')}</div>
         </div>
-        <div className="mt-12 animate__fadeInUp animate__animated animate__delay-500 bg-black/50 rounded-[20px] p-5">
+        <div className="mt-12 animate__fadeInUp md:animate__animated animate__delay-500 bg-black/50 rounded-[20px] p-5">
           <div className="flex flex-wrap">
             <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px]">
               <img className="w-full rounded-[20px]" src="/images/games/genkiminer.jpg" alt="genkiminer" />
@@ -44,7 +44,7 @@ export default function Kscore() {
           </div>
         </div>
 
-        <div className="animate__fadeInUp animate__animated animate__delay-1000 bg-black/50 rounded-[20px] p-5 mt-8">
+        <div className="animate__fadeInUp md:animate__animated animate__delay-1000 bg-black/50 rounded-[20px] p-5 mt-8">
           <div className="flex flex-wrap">
             <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px]">
               <img className="w-full rounded-[20px]" src="/images/games/idle.jpg" alt="idle" />
@@ -61,7 +61,7 @@ export default function Kscore() {
           </div>
         </div>
 
-        <div className="animate__fadeInUp animate__animated animate__delay-1500 bg-black/50 rounded-[20px] p-5 mt-8">
+        <div className="animate__fadeInUp md:animate__animated animate__delay-1500 bg-black/50 rounded-[20px] p-5 mt-8">
           <div className="flex flex-wrap">
             <div className="w-full md:w-[320px] xl:w-[420px] 2xl:w-[560px] aspect-[16/9]">
               <img className="w-full h-full object-cover rounded-[20px]" src="/images/games/SOG1.jpg" alt="SOG1" />
