@@ -18,8 +18,8 @@ const connectors = connectorsForWallets([
   {
     groupName: 'Recommend',
     wallets: [
-      okxWallet,
       binanceWallet,
+      okxWallet,
       metaMaskWallet,
       walletConnectWallet
     ],
