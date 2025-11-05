@@ -93,6 +93,7 @@ export default function ConnectBtn() {
   }
 
   const handleDisconnect = async() => {
+    await disconnect();
     setWalletDropdown(false);
     setWalletAddr(null);
     localStorage.removeItem('kkAuthToken');
@@ -104,8 +105,17 @@ export default function ConnectBtn() {
     localStorage.removeItem('wagmi.connected')
     localStorage.removeItem('wagmi.store')
     localStorage.removeItem('wagmi.metaMask')
+    localStorage.removeItem('walletconnect')
+    localStorage.removeItem('wc@2:client:0.3') // 旧版 WalletConnect v2
+
+    Object.keys(localStorage).forEach(k => {
+      if (k.includes('wagmi') || k.includes('walletconnect') || k.includes('wc@2')) {
+        localStorage.removeItem(k);
+      }
+    });
     sessionStorage.clear()
-    await disconnect();
+    localStorage.clear()
+    await new Promise(r => setTimeout(r, 300));
   }
 
   const handleShowBscModal = async() => {
@@ -114,9 +124,10 @@ export default function ConnectBtn() {
       await handleDisconnect();
       setTimeout(() => {
         openConnectModal?.();
-      }, 2000);
+      }, 500);
     }
     else {
+      await handleDisconnect();
       openConnectModal?.();
     }
   }
