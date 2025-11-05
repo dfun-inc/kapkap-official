@@ -17,6 +17,7 @@ import { getNFTData, getRemintList, mappingBscChain, mintTonNFT } from "@/servic
 import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { toUserFriendlyAddress, useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
+import History from "@/components/GenkiMinerMint/history";
 
 export default function YourNFTs() {
   const t = useTranslations();
@@ -59,6 +60,8 @@ export default function YourNFTs() {
 
   const { disconnect } = useDisconnect()
   const bindEvmForce = useRef<boolean>(false);
+
+  const historyRef = useRef<any>(null);
 
   const handleGetKscore = async () => {
     setKscoreLoading(true);
@@ -362,6 +365,10 @@ export default function YourNFTs() {
     openConnectModal?.();
   }
 
+  const handleShowHistoryModal = () => {
+    historyRef.current?.handleShowModal();
+  }
+
   useEffect(() => {
     if(userInfo) {
       handleGetKscore();
@@ -436,6 +443,11 @@ export default function YourNFTs() {
           </div>
           
           <div className="mt-10">
+            {userInfo != null && 
+              <div className="flex justify-end px-3">
+                <button className="text-[#8D73FF] cursor-pointer hover:underline" onClick={handleShowHistoryModal}>{t('personalInfo.viewHistory')}</button>
+              </div>
+            }
             {NFTListLoading ?
               Array.from({ length: 5 }).map((_, index) => (
                 <div key={index} className="animate-pulse mt-5 flex flex-wrap bg-black/50 rounded-[20px] md:text-[20px] p-3">
@@ -664,6 +676,7 @@ export default function YourNFTs() {
             </button>
           </div>
       </Modal>
+      <History ref={historyRef} NFTData={NFTData} />
     </main>
   );
 }
