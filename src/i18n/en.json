@@ -4,14 +4,16 @@
     "getFailed": "Get Data Failed, Please Try Later",
     "submitFailed": "Submit Failed, Please Try Later",
     "submitSuccess": "Submit Success",
-    "error": "Something went wrong, please try later"
+    "error": "Something went wrong, please try later",
+    "showMore": "Show More",
+    "hide": "Hide"
   },
 
   "error": {
     "notBindEvmAccount": "Please bind your EVM account first",
     "notBindTgAccount": "Please bind your Telegram account first",
     "connectWalletFirst": "Please connect your wallet first",
-    "connectBindingWallet": "Please connect your bound wallet first",
+    "connectBindingWallet": "Please reconnect your bound wallet",
     "pleaseChooseNFT": "Please choose the NFT to mint"
   },
 
@@ -29,6 +31,7 @@
     "connectWallet": "Connect Wallet",
     "yourKapILE": "Your KapKap ILE",
     "disconnect": "Disconnect",
+    "logout": "Logout",
     "myAccount": "My Account",
     "bscWallets": "BSC Wallets",
     "tgLogin": "TG Login",
@@ -361,7 +364,8 @@
     "step4": "Bind your BSC Chain wallet to receive the NFT airdrop (binding is irreversible).",
     "step5": "Mint your exclusive NFT, which will provide generous bonuses to your game account.",
     "check": "check",
-    "mintNFT": "mint NFT"
+    "mintNFT": "mint NFT",
+    "mappingHint": "You must bridge your NFTs to the BSC chain to be eligible for the airdrop rewards."
   },
 
   "nft": {

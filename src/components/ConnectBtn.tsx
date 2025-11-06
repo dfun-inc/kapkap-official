@@ -270,10 +270,10 @@ export default function ConnectBtn() {
     <>
     <div className="w-full md:w-auto relative md:ml-12 h-[50vh] md:h-auto" onMouseOver={() => setWalletDropdown(true)} onMouseOut={() => setWalletDropdown(false)}>
       <div className="hidden md:flex bg-black hover:bg-black/80 block p-[6px] h-8 md:h-9 items-center justify-center rounded-full">
-        <div className="w-48 flex items-center justify-center text-sm md:text-base">
+        <div className="w-42 flex items-center justify-center text-sm md:text-base">
           {walletAddr ? 
             <>
-            <div className="w-32 flex items-center justify-center md:text-lg">
+            <div className="w-34 flex items-center justify-center md:text-lg">
               {walletAddr.length > 4 ? walletAddr?.substring(0, 4) + '...' + walletAddr?.substring(walletAddr?.length - 4, walletAddr?.length) : walletAddr}
             </div>
             {/*
@@ -285,7 +285,7 @@ export default function ConnectBtn() {
             </>
             :
             <>
-            <div className="w-32 flex items-center justify-center md:text-lg">
+            <div className="w-34 flex items-center justify-center md:text-lg">
               {t('menu.connectWallet')}
             </div>
             {/*
@@ -310,11 +310,11 @@ export default function ConnectBtn() {
             {walletAddr ? (
               <>
                 <Link href="/personalInfo" className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white">
-                  <div className="w-full flex items-center justify-center">{t('menu.personalInfo')}</div>
+                  <div className="w-full flex items-center justify-center">{t('menu.profile')}</div>
                 </Link>
                 
                 <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleDisconnect()}>
-                  <div className="w-full flex items-center justify-center">{t('menu.disconnect')}</div>
+                  <div className="w-full flex items-center justify-center">{t('menu.logout')}</div>
                 </button>
               </>
             ) : (

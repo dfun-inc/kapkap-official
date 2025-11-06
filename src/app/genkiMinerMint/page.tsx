@@ -468,7 +468,7 @@ export default function YourNFTs() {
             :
             <div className="flex flex-wrap">
             {Object.entries(NFTData[10000]?.ids)?.map(([key, value]:[string, any], index:number) => (
-            <div key={index} className={"w-full " + (reMintList && reMintList[key] && reMintList[key] == 2 ? 'order-2 opacity-50' : '')}>
+            <div key={index} className={"w-full " + (reMintList && reMintList[key] ? (reMintList[key] == 2 ? 'order-3 opacity-50' : (reMintList[key] == 1 ? 'order-1' : 'order-2')) : 'order-2')}>
               <div key={index} className="mt-5 flex flex-wrap bg-black/50 rounded-[20px] md:text-[20px] p-3">
                 <div className="w-1/3 md:w-[130px] 2xl:w-[168px]">
                   {configData != null && <img className="w-full" src={configData?.IPFSTON + NFTData[10000].project + '/image/' +  value?.name.replace(' ', '-') + '.png'} alt="" />}
@@ -493,6 +493,9 @@ export default function YourNFTs() {
                           <img className="w-[38px]" src="/images/kscore.png" />
                           <div className="md:text-[20px]">{value.kscore}/{kscore}</div>
                         </div>
+                        {value?.airdropBoost > 0 && <div className="w-full text-center">
+                          <span className="text-[#69FFD3] mt-1">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}%</span>
+                        </div>}
                         <Button className={"text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (value.kscore > kscore ? "cursor-not-allowed" : "")} 
                           onClick={value.kscore > kscore ?() => {} : () => handleMint(Number(key), 10000)} disabled={value.kscore > kscore}>
                           {t('genkiMint.mint')}
@@ -505,10 +508,13 @@ export default function YourNFTs() {
                           <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}%</span>
                         </div>}
                         {reMintList[key] == 1 &&
+                        <>
                           <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
                           {t('genkiMint.mapToBscChain')}
                           {mappingLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                        </Button>}
+                        </Button>
+                        <div className="text-center text-[14px] text-[#8A84A3]">{t('genkiMint.mappingHint')}</div>
+                        </>}
                       </> 
                     :
                     <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3"

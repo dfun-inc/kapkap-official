@@ -435,7 +435,7 @@ export default function personalInfo() {
   }, [userInfo, NFTData, ownIdx])
 
   useEffect(() => {
-    if(userInfo) {
+    if(userInfo && userInfo.tgAccount) {
       handleGetKscore();
 
       if(!userInfo?.account) {
@@ -598,8 +598,11 @@ export default function personalInfo() {
                 </div>
                 <div className="flex justify-center py-3 mt-3">
                   <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
-                    <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setOwnIdx(0)}>TON</button>
-                    <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setOwnIdx(1)}>BSC</button>
+                    <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>TON</button>
+                    <button className={"relative w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(1)}>
+                      BSC
+                      <span className="text-[11px] text-zinc-200 bg-[#2EBD85] p-1 rounded-lg absolute bottom-full translate-y-1/2 -right-2">{t('nft.airdrop')}</span>
+                    </button>
                   </div>
                 </div>
                 <div className="">
@@ -610,10 +613,11 @@ export default function personalInfo() {
                       ))}
                     </div>
                   :
+                    <>{
                     NFTlist?.length > 0 ?
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 lg:gap-15 mt-12">
                       {configData != null && NFTlist.map((item, index) => (
-                        <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300" onClick={() => handleShowNFTDetailModal(ownIdx == 0 ? item : item?.item)}>
+                        <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300 rounded-[20px]" onClick={() => handleShowNFTDetailModal(ownIdx == 0 ? item : item?.item)}>
                           {ownIdx == 0 ?
                             <img className="w-full rounded-lg" src={item.image} alt={item?.name} />
                           :
@@ -624,21 +628,22 @@ export default function personalInfo() {
                               <div className="absolute w-full h-full flex items-center justify-center z-2">
                                 <div className="text-center">
                                   <img className="animate-spin w-8 h-8" src="/images/image_loading.png" />
-                                  <div className="md:text-[20px]">{(t('personalInfo.minting'))}</div>
+                                  <div className="md:text-[20px]">{t('personalInfo.minting')}</div>
                                 </div>
                               </div>
                               <img className="w-full opacity-50" src={configData?.IPFSTON + item?.project + '/image/' +  NFTData[10000].project + '-Advanced.png'} />
                             </div>
                           }
+                          <div className="text-white truncate text-center">{ownIdx == 0 ? item?.name : item?.item?.name}</div>
                         </div>
                       ))}
                     </div>
-                  :
+                    :
                     <div className="py-16 text-center">
                       <div className="w-full">
                         <svg className="mx-auto" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M855.6 427.2H168.5c-12.7 0-24.4 6.9-30.6 18L4.4 684.7C1.5 689.9 0 695.8 0 701.8v287.1c0 19.4 15.7 35.1 35.1 35.1H989c19.4 0 35.1-15.7 35.1-35.1V701.8c0-6-1.5-11.8-4.4-17.1L886.2 445.2c-6.2-11.1-17.9-18-30.6-18zM673.4 695.6c-16.5 0-30.8 11.5-34.3 27.7-12.7 58.5-64.8 102.3-127.2 102.3s-114.5-43.8-127.2-102.3c-3.5-16.1-17.8-27.7-34.3-27.7H119c-26.4 0-43.3-28-31.1-51.4l81.7-155.8c6.1-11.6 18-18.8 31.1-18.8h622.4c13 0 25 7.2 31.1 18.8l81.7 155.8c12.2 23.4-4.7 51.4-31.1 51.4H673.4zM819.9 209.5c-1-1.8-2.1-3.7-3.2-5.5-9.8-16.6-31.1-22.2-47.8-12.6L648.5 261c-17 9.8-22.7 31.6-12.6 48.4 0.9 1.4 1.7 2.9 2.5 4.4 9.5 17 31.2 22.8 48 13L807 257.3c16.7-9.7 22.4-31 12.9-47.8zM375.4 261.1L255 191.6c-16.7-9.6-38-4-47.8 12.6-1.1 1.8-2.1 3.6-3.2 5.5-9.5 16.8-3.8 38.1 12.9 47.8L337.3 327c16.9 9.7 38.6 4 48-13.1 0.8-1.5 1.7-2.9 2.5-4.4 10.2-16.8 4.5-38.6-12.4-48.4zM512 239.3h2.5c19.5 0.3 35.5-15.5 35.5-35.1v-139c0-19.3-15.6-34.9-34.8-35.1h-6.4C489.6 30.3 474 46 474 65.2v139c0 19.5 15.9 35.4 35.5 35.1h2.5z" fill="#757895"></path></svg>
                       </div>
-                      <div className="flex flex-wrap items-center space-x-6 justify-center">
+                      <div className="flex flex-wrap items-center md:space-x-6 justify-center">
                         {!userInfo?.account &&
                           <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={handleOpenEvmConnectModal}>
                             {t('personalInfo.bindWallet')}
@@ -646,27 +651,30 @@ export default function personalInfo() {
                           </Button>
                         }
 
-                        {!userInfo?.tgAccount &&
+                        {!Boolean(userInfo?.tgAccount) &&
                           <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={() => handleBindTgAccount()}>
                             {t('personalInfo.bindTgAccount')}
                             {bindTgAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
                           </Button>
                         }
 
-                        {!userInfo?.tonWallet &&
+                        {!Boolean(userInfo?.tonWallet) &&
                           <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={() => handleBindTon()}>
                             {t('personalInfo.bindTonWallet')}
                             {bindTonAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
                           </Button>
                         }
-
-                        {userInfo?.account && userInfo?.tgAccount && userInfo?.tonWallet &&
-                          <Button href="/genkiMinerMint" className="text-xl font-light text-white w-60 text-center py-3 md:py-4 mt-6">
-                            {t('personalInfo.goToMint')}
-                          </Button>
-                        }
                       </div>
                     </div>
+                    }
+                    {Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) && Boolean(userInfo?.tonWallet) &&
+                      <div className="text-center mt-6">
+                        <Button href="/genkiMinerMint" className="text-xl font-light text-white w-60 text-center py-3 md:py-4">
+                          {t('personalInfo.goToMint')}
+                        </Button>
+                      </div>
+                    }
+                    </>
                   }
                 </div>
               </div>
