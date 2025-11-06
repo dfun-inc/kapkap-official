@@ -546,117 +546,119 @@ export default function YourNFTs() {
         className="w-9/10! xl:w-[1000px]!"
       >
         <div className="w-full rounded-[20px] bg-black">
-          <div className="w-full p-6 bind-step-modal">
-            <div className="relative text-white text-right">
+          <div className="w-full bind-step-modal">
+            <div className="relative text-white text-right p-6 ">
               <button className="cursor-pointer hover:opacity-80" onClick={() => setShowBindModal(false)}>
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22"><path d="M431.559111 512L149.959111 230.4a56.888889 56.888889 0 0 1 80.440889-80.440889L512 431.559111l281.6-281.6a56.888889 56.888889 0 0 1 80.440889 80.440889L592.440889 512l281.6 281.6a56.888889 56.888889 0 1 1-80.440889 80.440889L512 592.440889 230.4 874.040889a56.888889 56.888889 0 1 1-80.440889-80.440889L431.559111 512z" fill="#ffffff"></path></svg>
               </button>
             </div>
-            <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
-              <div className="w-full md:flex-1 md:w-auto">
-                <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 1</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step1')}</div>
+            <div className="max-h-[85vh] overflow-y-auto p-6">
+              <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
+                <div className="w-full md:flex-1 md:w-auto">
+                  <div className="text-[#FEBD32] text-[18px] md:text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 1</div>
+                  <div className="text-[#DDD5FF] 2xl:text-[20px] mt-1">{t('genkiMint.step1')}</div>
+                </div>
+                <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
+                  {stepIdx == 0 ?
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTgAccount()}>
+                      {t('personalInfo.bindTgAccount')}
+                      {bindTgAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                    </Button>
+                    :
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
+                      <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
+                    </div>
+                  }
+                </div>
               </div>
-              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
-                {stepIdx == 0 ?
-                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTgAccount()}>
-                    {t('personalInfo.bindTgAccount')}
-                    {bindTgAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                  </Button>
-                  :
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
-                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
-                  </div>
-                }
-              </div>
-            </div>
 
-            <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
-              <div className="w-full md:flex-1 md:w-auto">
-                <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 2</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step2')}</div>
-              </div>
-              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
-                {stepIdx == 1 ?
-                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleUpdateStep(true)}>
-                    {t('genkiMint.check')}
-                  </Button>
-                  :
-                  stepIdx < 1 ?
-                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
+              <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
+                <div className="w-full md:flex-1 md:w-auto">
+                  <div className="text-[#FEBD32] text-[18px] md:text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 2</div>
+                  <div className="text-[#DDD5FF] 2xl:text-[20px] mt-1">{t('genkiMint.step2')}</div>
+                </div>
+                <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
+                  {stepIdx == 1 ?
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleUpdateStep(true)}>
                       {t('genkiMint.check')}
                     </Button>
                     :
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
-                      <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
-                    </div>
-                }
+                    stepIdx < 1 ?
+                      <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
+                        {t('genkiMint.check')}
+                      </Button>
+                      :
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
+                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
+                      </div>
+                  }
+                </div>
               </div>
-            </div>
 
-            <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
-              <div className="w-full md:flex-1 md:w-auto">
-                <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 3</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step3')}</div>
-              </div>
-              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
-                {stepIdx == 2 ?
-                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTon()}>
-                    {t('personalInfo.bindTonWallet')}
-                    {bindTonAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                  </Button>
-                  :
-                  stepIdx < 2 ?
-                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
+              <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
+                <div className="w-full md:flex-1 md:w-auto">
+                  <div className="text-[#FEBD32] text-[18px] md:text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 3</div>
+                  <div className="text-[#DDD5FF] 2xl:text-[20px] mt-1">{t('genkiMint.step3')}</div>
+                </div>
+                <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
+                  {stepIdx == 2 ?
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTon()}>
                       {t('personalInfo.bindTonWallet')}
+                      {bindTonAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                     </Button>
                     :
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
-                      <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
-                    </div>
-                }
+                    stepIdx < 2 ?
+                      <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
+                        {t('personalInfo.bindTonWallet')}
+                      </Button>
+                      :
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
+                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
+                      </div>
+                  }
+                </div>
               </div>
-            </div>
 
-            <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
-              <div className="w-full md:flex-1 md:w-auto">
-                <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 4</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step4')}</div>
-              </div>
-              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
-                {stepIdx == 3 ?
-                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleOpenEvmConnectModal()}>
-                    {t('personalInfo.bindWallet')}
-                    {bindEvmAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                  </Button>
-                  :
-                  stepIdx < 3 ?
-                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
-                      {t('personalInfo.bindTonWallet')}
+              <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
+                <div className="w-full md:flex-1 md:w-auto">
+                  <div className="text-[#FEBD32] text-[18px] md:text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 4</div>
+                  <div className="text-[#DDD5FF] 2xl:text-[20px] mt-1">{t('genkiMint.step4')}</div>
+                </div>
+                <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
+                  {stepIdx == 3 ?
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleOpenEvmConnectModal()}>
+                      {t('personalInfo.bindWallet')}
+                      {bindEvmAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                     </Button>
                     :
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
-                      <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
-                    </div>
-                }
+                    stepIdx < 3 ?
+                      <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
+                        {t('personalInfo.bindTonWallet')}
+                      </Button>
+                      :
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
+                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
+                      </div>
+                  }
+                </div>
               </div>
-            </div>
 
-            <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
-              <div className="w-full md:flex-1 md:w-auto">
-                <div className="text-[#FEBD32] text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 5</div>
-                <div className="text-[#DDD5FF] md:text-[20px] mt-1">{t('genkiMint.step5')}</div>
-              </div>
-              <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
-                {stepIdx == 4 ?
-                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => setShowBindModal(false)}>
-                    {t('genkiMint.mintNFT')}
-                  </Button>
-                  :
-                  <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
-                    {t('genkiMint.mintNFT')}
-                  </Button>
-                }
+              <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
+                <div className="w-full md:flex-1 md:w-auto">
+                  <div className="text-[#FEBD32] text-[18px] md:text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 5</div>
+                  <div className="text-[#DDD5FF] 2xl:text-[20px] mt-1">{t('genkiMint.step5')}</div>
+                </div>
+                <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
+                  {stepIdx == 4 ?
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => setShowBindModal(false)}>
+                      {t('genkiMint.mintNFT')}
+                    </Button>
+                    :
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
+                      {t('genkiMint.mintNFT')}
+                    </Button>
+                  }
+                </div>
               </div>
             </div>
           </div>
