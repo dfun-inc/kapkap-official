@@ -105,16 +105,6 @@ export default function YourNFTs() {
       setShowBindModal(true);
       return;
     }
-    if(!isConnected) {
-      openConnectModal?.();
-      toast.error(t('error.connectWalletFirst'));
-      reconnectForce.current = true;
-      return;
-    }
-    if(userInfo?.account != address) {
-      toast.error(t('error.connectBindingWallet'));
-      return;
-    }
     if(mintLoading.length) {
       return;
     }
@@ -496,10 +486,11 @@ export default function YourNFTs() {
                         {value?.airdropBoost > 0 && <div className="w-full text-center">
                           <span className="text-[#69FFD3] mt-1">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}%</span>
                         </div>}
-                        <Button className={"text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (value.kscore > kscore ? "cursor-not-allowed" : "")} 
+                        <Button className={"relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (value.kscore > kscore ? "cursor-not-allowed" : "")} 
                           onClick={value.kscore > kscore ?() => {} : () => handleMint(Number(key), 10000)} disabled={value.kscore > kscore}>
                           {t('genkiMint.mint')}
                           {mintLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                          <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(0/2)</span>
                         </Button>
                       </>
                       :
@@ -509,17 +500,19 @@ export default function YourNFTs() {
                         </div>}
                         {reMintList[key] == 1 &&
                         <>
-                          <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
+                          <Button className="relativetext-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
                           {t('genkiMint.mapToBscChain')}
                           {mappingLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                          <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(1/2)</span>
                         </Button>
                         <div className="text-center text-[14px] text-[#8A84A3]">{t('genkiMint.mappingHint')}</div>
                         </>}
                       </> 
                     :
-                    <Button className="text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3"
+                    <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3"
                       onClick={() => setShowBindModal(true)}>
                       {t('genkiMint.mint')}
+                      <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(0/2)</span>
                     </Button>
                   }</>
                 }
