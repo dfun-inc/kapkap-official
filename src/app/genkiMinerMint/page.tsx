@@ -16,7 +16,6 @@ import { formatNumberWithCommas } from "@/utils/number";
 import { getNFTData, getRemintList, mappingBscChain, mintTonNFT } from "@/services/apis/nft";
 import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { toUserFriendlyAddress, useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
 import History from "@/components/GenkiMinerMint/history";
 
 export default function YourNFTs() {
@@ -50,9 +49,6 @@ export default function YourNFTs() {
   const [bindTgAccountLoading, setBindTgAccountLoading] = useState<boolean>(false);
   const [bindTonAccountLoading, setBindTonAccountLoading] = useState<boolean>(false);
   const reBindTimeout = useRef<any>(null);
-  const [tonConnectUI] = useTonConnectUI();
-  const userFriendlyAddress = useTonAddress();
-  const firstTonForce = useRef(true);
 
   const [showToTgModal, setShowToTgModal] = useState(false);
   const [tgLink, setTgLink] = useState<string>('');
@@ -101,7 +97,7 @@ export default function YourNFTs() {
       triggerModalOpen();
       return;
     }
-    if(!userInfo?.account || !userInfo?.tgAccount || !userInfo?.tonWallet) {
+    if(!userInfo?.account || !userInfo?.tgAccount) {
       setShowBindModal(true);
       return;
     }
@@ -260,54 +256,6 @@ export default function YourNFTs() {
     setBindEvmAccountLoading(false);
   }
 
-
-  const handleBindTon = async() => {
-    try {
-      if(userFriendlyAddress) {
-        await tonConnectUI.disconnect();
-      }
-
-      // Step 2️⃣ 调用连接钱包
-      await tonConnectUI.openModal();
-
-      // Step 3️⃣ 监听 wallet 变化
-      const unsubscribe = tonConnectUI.onStatusChange(async (wallet) => {
-        if (wallet && wallet.account) {
-          // ✅ 获取钱包地址
-          const address = wallet.account.address;
-          const friendlyAddr = toUserFriendlyAddress(address);
-          console.log(friendlyAddr)
-
-          setBindTonAccountLoading(true);
-          await bindTonAccount(friendlyAddr)
-          .then(res => {
-            const data = res?.data;
-            if(data.status == 10000) {
-              toast.success(t('personalInfo.bindTonWalletSuccess'));
-              handleGetUserInfo();
-            }
-            else {
-              errCodeHandler(data.status)
-            }
-          })
-          setBindTonAccountLoading(false);
-
-
-          // Step 4️⃣ 调用你的绑定接口
-          // await bindAddressToServer(address);
-
-          // 解绑监听（避免多次触发）
-          unsubscribe();
-        } else {
-          console.log("钱包未连接");
-        }
-      });
-
-    } catch (err) {
-      console.error("绑定过程中出错:", err);
-    }
-  }
-
   const handleGetUserInfo = async() => {
     await getUserInfo().then((res) => {
       const data = res?.data;
@@ -333,7 +281,7 @@ export default function YourNFTs() {
     if(!userInfo.tgAccount) {
       setstepIdx(0);
     }
-    else if(!userInfo.tonWallet) {
+    else if(!userInfo.account) {
       if(skipCheck) {
         setstepIdx(1);
       }
@@ -341,11 +289,8 @@ export default function YourNFTs() {
         setstepIdx(2);
       }
     }
-    else if(!userInfo.account) {
-      setstepIdx(3);
-    }
     else {
-      setstepIdx(4);
+      setstepIdx(3);
     }
   }
 
@@ -394,14 +339,6 @@ export default function YourNFTs() {
       reconnectForce.current = false;
     }
   }, [isConnected, address]);
-
-  useEffect(() => {
-    if(userFriendlyAddress && firstTonForce.current) {
-      tonConnectUI.disconnect();
-      firstTonForce.current = false;
-    }
-
-  }, [userFriendlyAddress])
 
   useEffect(() => {
     handleGetNFTData();
@@ -476,7 +413,7 @@ export default function YourNFTs() {
                 }
                 {userInfo != null && !mintedLoading && reMintList != null && reMintList[key] !== undefined && !kscoreLoading &&
                   <> {
-                    userInfo?.account && userInfo?.tgAccount && userInfo?.tonWallet ?
+                    userInfo?.account && userInfo?.tgAccount ?
                       reMintList[key] == 0 ?
                         <>
                         <div className="w-full flex items-center justify-center space-x-3">
@@ -595,14 +532,14 @@ export default function YourNFTs() {
                 </div>
                 <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                   {stepIdx == 2 ?
-                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleBindTon()}>
-                      {t('personalInfo.bindTonWallet')}
-                      {bindTonAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleOpenEvmConnectModal()}>
+                      {t('personalInfo.bindWallet')}
+                      {bindEvmAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                     </Button>
                     :
                     stepIdx < 2 ?
                       <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
-                        {t('personalInfo.bindTonWallet')}
+                        {t('personalInfo.bindWallet')}
                       </Button>
                       :
                       <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
@@ -619,30 +556,6 @@ export default function YourNFTs() {
                 </div>
                 <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
                   {stepIdx == 3 ?
-                    <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => handleOpenEvmConnectModal()}>
-                      {t('personalInfo.bindWallet')}
-                      {bindEvmAccountLoading && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                    </Button>
-                    :
-                    stepIdx < 3 ?
-                      <Button className="w-60 text-[18px] font-light text-white text-center py-3" disabled={true}>
-                        {t('personalInfo.bindTonWallet')}
-                      </Button>
-                      :
-                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#06bf7c]">
-                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M913.017 237.02c-25.311-25.312-66.349-25.312-91.66 0l-412.475 412.474-206.237-206.237c-25.312-25.312-66.35-25.312-91.661 0s-25.312 66.35 0 91.66l252.067 252.067c0.729 0.73 1.439 1.402 2.134 2.029 25.434 23.257 64.913 22.585 89.527-2.029l458.303-458.303c25.313-25.312 25.313-66.35 0.001-91.661z" fill="#ffffff"></path></svg>
-                      </div>
-                  }
-                </div>
-              </div>
-
-              <div className="bg-black/50 rounded-[20px] p-3 flex flex-wrap items-end jsutify-between mt-3">
-                <div className="w-full md:flex-1 md:w-auto">
-                  <div className="text-[#FEBD32] text-[18px] md:text-[24px] font-ethnocentric-rg">{t('genkiMint.step')}: 5</div>
-                  <div className="text-[#DDD5FF] 2xl:text-[20px] mt-1">{t('genkiMint.step5')}</div>
-                </div>
-                <div className="w-full md:w-60 text-center py-6 md:py-2 flex items-center justify-center">
-                  {stepIdx == 4 ?
                     <Button className="w-60 text-[18px] font-light text-white text-center py-3" onClick={() => setShowBindModal(false)}>
                       {t('genkiMint.mintNFT')}
                     </Button>

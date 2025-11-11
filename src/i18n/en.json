@@ -360,9 +360,8 @@
     "step": "step",
     "step1": "Please bind the Telegram account associated with your game account (binding is irreversible).",
     "step2": "Click the button to check if your game account meets the minting requirements.",
-    "step3": "Bind your TON Chain wallet to receive the NFT airdrop (binding is irreversible).",
-    "step4": "Bind your BSC Chain wallet to receive the NFT airdrop (binding is irreversible).",
-    "step5": "Mint your exclusive NFT, which will provide generous bonuses to your game account.",
+    "step3": "Bind your BSC Chain wallet to receive the NFT airdrop (binding is irreversible).",
+    "step4": "Mint your exclusive NFT, which will provide generous bonuses to your game account.",
     "check": "check",
     "mintNFT": "mint NFT",
     "mappingHint": "You must bridge your NFTs to the BSC chain to be eligible for the airdrop rewards."

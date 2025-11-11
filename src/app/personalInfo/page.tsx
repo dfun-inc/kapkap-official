@@ -19,14 +19,13 @@ import Modal from 'react-modal';
 import { formatDatetime } from "@/utils/time";
 import { toast } from "react-toastify";
 // import { tonConnectUI } from "@/config/ton";
-import { toUserFriendlyAddress, useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
 
 export default function personalInfo() {
   const t = useTranslations();
   const { configData, userInfo, handleSetUserInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
   const [kscore, setKscore] = useState<number>(0);
-  const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
+  const [kscoreLoading, setKscoreLoading] = useState<boolean>(false);
 
   const [NFTlist, setNFTList] = useState<any[]>([]);
   const [NFTlistLoading, setNFTListLoading] = useState<boolean>(false);
@@ -57,10 +56,6 @@ export default function personalInfo() {
   const [tgWebLoginToken, setTgWebLoginToken] = useState<string>('');
 
   const { errCodeHandler } = useErrCode();
-
-  const [tonConnectUI] = useTonConnectUI();
-  const userFriendlyAddress = useTonAddress();
-  const firstTonForce = useRef(true);
 
   const [curNFTItem, setCurNFTItem] = useState<any>(null);
   const [showNFTDetailModal, setShowNFTDetailModal] = useState<boolean>(false);
@@ -180,53 +175,6 @@ export default function personalInfo() {
     setBindEvmAccountLoading(false);
   }
 
-  const handleBindTon = async() => {
-    try {
-      if(userFriendlyAddress) {
-        await tonConnectUI.disconnect();
-      }
-
-      // Step 2️⃣ 调用连接钱包
-      await tonConnectUI.openModal();
-
-      // Step 3️⃣ 监听 wallet 变化
-      const unsubscribe = tonConnectUI.onStatusChange(async (wallet) => {
-        if (wallet && wallet.account) {
-          // ✅ 获取钱包地址
-          const address = wallet.account.address;
-          const friendlyAddr = toUserFriendlyAddress(address);
-          console.log(friendlyAddr)
-
-          setBindTonAccountLoading(true);
-          await bindTonAccount(friendlyAddr)
-          .then(res => {
-            const data = res?.data;
-            if(data.status == 10000) {
-              toast.success(t('personalInfo.bindTonWalletSuccess'));
-              handleGetUserInfo();
-            }
-            else {
-              errCodeHandler(data.status)
-            }
-          })
-          setBindTonAccountLoading(false);
-
-
-          // Step 4️⃣ 调用你的绑定接口
-          // await bindAddressToServer(address);
-
-          // 解绑监听（避免多次触发）
-          unsubscribe();
-        } else {
-          console.log("钱包未连接");
-        }
-      });
-
-    } catch (err) {
-      console.error("绑定过程中出错:", err);
-    }
-  }
-
   const handleGetNFTData = async () => {
     await getNFTData()
     .then((res) => {
@@ -324,38 +272,26 @@ export default function personalInfo() {
 
   const handleGetTonNFTList = async() => {
     setNFTListLoading(true);
-    try {
-      const res = await fetch(
-        'https://tonapi.io/v2/accounts/' + userInfo.tonWallet + '/nfts?collection=' + NFTData[10000].tonNftContract
-      );
-      const data = await res.json();
 
-      // 过滤并提取需要的信息
-      let tempList:any[] = [];
-      data.nft_items?.map((item:any) => {
-        let tempLevel = '';
-        item.metadata?.attributes.map((attr:any) => {
-          if(attr.trait_type == 'level') {
-            tempLevel = attr.value;
-          }
+    await getTonMint721History()
+    .then(res => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        let temp:any[] = [];
+        data?.data.forEach((item:any) => {
+          Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
+            if(key == item.resId) {
+              temp.push({...item, originalTokenId: item.id, project: NFTData[item.project].project, item: {project: item.project, ...value}});
+            }
+          });
         })
-        tempList.push({
-          name: item.metadata?.name,
-          image: item.metadata?.image,
-          desc: item.metadata?.description,
-          project: item.collection?.name,
-          level: tempLevel
-        })
-      });
-
-      console.log(tempList)
-      setNFTList(tempList);
-      // setNfts(nftList);
-    } catch (err) {
-      console.error("获取 NFT 失败:", err);
-    } finally {
-      // setLoading(false);
-    }
+        console.log(temp)
+        setNFTList(temp);
+      }
+      else {
+        errCodeHandler(data.status)
+      }
+    })
     setNFTListLoading(false);
   }
 
@@ -424,7 +360,7 @@ export default function personalInfo() {
   }, [mintHistoryModal, historyTabIdx])
 
   useEffect(() => {
-    if(userInfo?.account && userInfo?.tonWallet &&  userInfo?.tgAccount && NFTData) {
+    if(userInfo?.account &&  userInfo?.tgAccount && NFTData) {
       if(ownIdx) {
         handleGetBscNFTList();
       }
@@ -459,14 +395,6 @@ export default function personalInfo() {
   }, [isConnected, address]);
 
   useEffect(() => {
-    if(userFriendlyAddress && firstTonForce.current) {
-      tonConnectUI.disconnect();
-      firstTonForce.current = false;
-    }
-
-  }, [userFriendlyAddress])
-
-  useEffect(() => {
     handleGetNFTData();
     const addr = localStorage.getItem('kkAddress');
     setAddr(addr || '');
@@ -490,8 +418,8 @@ export default function personalInfo() {
                   <button className="text-[#8D73FF] cursor-pointer hover:underline" onClick={() => setKscoreHistoryModal(true)}>{t('personalInfo.viewHistory')}</button>
                 </div>
                 <div className="flex flex-wrap">
-                  <div className="flex flex-wrap w-full md:w-2/3 md:border-r md:border-[#241E33] px-6 md:px-12 2xl:px-20 py-3 justify-between">
-                    <div className="w-full md:w-auto">
+                  <div className="flex flex-wrap w-full md:w-3/5 md:border-r md:border-[#241E33] px-6 md:px-12 2xl:px-20 py-3 justify-between">
+                    <div className="w-full md:w-1/2">
                       <div className="text-[#8D73FF] text-[18px]">{t('personalInfo.yourTgAccount')}</div>
                       <div className="mt-2 leading-none">
                       {userInfo ? 
@@ -513,7 +441,7 @@ export default function personalInfo() {
                       }
                       </div>
                     </div>
-                    <div className="w-full md:w-auto mt-12 md:mt-0">
+                    <div className="w-full md:w-1/2 mt-12 md:mt-0">
                       <div className="text-[#8D73FF] text-[18px] pl-10">{t('personalInfo.yourWallet')}</div>
                       <div className="mt-2 leading-none flex items-center space-x-3">
                         <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M0 512a512 512 0 1 0 1024 0A512 512 0 0 0 0 512z" fill="#F3BA2F" p-id="5546"></path><path d="M379.448889 432.924444L512 300.202667l132.721778 132.664889 77.141333-77.141334L512 145.863111 302.250667 355.783111l77.141333 77.141333m-208.839111 54.499556L247.694222 410.168889l77.198222 77.198222-77.198222 77.141333-77.141333-77.141333z m208.839111 54.442667L512 674.474667l132.721778-132.721778 77.198222 77.141333L512 828.814222 302.250667 618.951111l-0.113778-0.113778 77.255111-77.084444m319.715556-54.385778l77.198222-77.198222 77.141333 77.198222-77.141333 77.141333-77.198222-77.141333z" fill="#FFFFFF" p-id="5547"></path><path d="M590.279111 487.310222L512 409.031111 454.144 466.887111l-6.656 6.656-13.710222 13.710222-0.113778 0.113778 0.113778 0.113778L512 565.703111l78.279111-78.279111 0.056889-0.056889-0.056889-0.056889" fill="#FFFFFF"></path></svg>
@@ -538,37 +466,8 @@ export default function personalInfo() {
                         }
                       </div>
                     </div>
-
-                    <div className="w-full md:w-auto mt-12 md:mt-0">
-                      <div className="text-[#8D73FF] text-[18px] pl-10">{t('personalInfo.yourTonWallet')}</div>
-                      <div className="mt-2 leading-none flex items-center space-x-3">
-                        <svg width="28" height="28" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z" fill="#0098EA"/>
-                          <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z" fill="white"/>
-                        </svg>
-                        {userInfo ? 
-                          <>
-                          {userInfo?.tonWallet ? 
-                            <div className="text-[#FEBD32] text-[24px]">
-                              {userInfo?.tonWallet?.length > 4 ? userInfo?.tonWallet?.substring(0, 4) + '...' + userInfo?.tonWallet?.substring(userInfo?.tonWallet?.length - 4, userInfo?.tonWallet?.length) : userInfo?.tonWallet}
-                            </div>
-                          :
-                          bindTonAccountLoading ?
-                            <div className="animate-spin w-7 h-7 border-2 border-[#8D73FF] border-t-transparent rounded-full"></div>
-                          :
-                            <button className="text-[#757895] flex items-end border-b border-b-transparent hover:border-b-[#757895]" onClick={handleBindTon}>
-                              <div className="text-[24px]">{t('personalInfo.none')}</div>
-                              <div className="text-[18px] ml-1 pb-1">({t('personalInfo.bindTonWallet')})&gt;</div>
-                            </button>
-                          }
-                          </>
-                          :
-                          <div className="animate-pulse w-40 h-[30px] bg-gray-500 rounded-lg"></div>
-                        }
-                      </div>
-                    </div>
                   </div>
-                  <div className="w-full md:w-1/3 px-6 md:px-12 2xl:px-20 py-3 mt-12 md:mt-0">
+                  <div className="w-full md:w-2/5 px-6 md:px-12 2xl:px-20 py-3 mt-12 md:mt-0">
                     <div className="flex items-center space-x-8">
                       <img className="w-12 md:w-18" src="/images/kscore.png" alt="kscore" />
                       <div>
@@ -617,9 +516,9 @@ export default function personalInfo() {
                     NFTlist?.length > 0 ?
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 lg:gap-15 mt-12">
                       {configData != null && NFTlist.map((item, index) => (
-                        <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300 rounded-[20px]" onClick={() => handleShowNFTDetailModal(ownIdx == 0 ? item : item?.item)}>
+                        <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300 rounded-[20px]" onClick={() => handleShowNFTDetailModal(item?.item)}>
                           {ownIdx == 0 ?
-                            <img className="w-full rounded-lg" src={item.image} alt={item?.name} />
+                            <img className="w-full" src={configData?.IPFSTON + item?.project + '/image/' +  item?.item.name.replace(' ', '-') + '.png'} alt="" />
                           :
                           item?.item ? 
                             <img className="w-full rounded-lg" src={configData.IPFS721 + item?.project + '/image/' + item.originalTokenId + '.png'} alt={item?.id} />
@@ -634,7 +533,7 @@ export default function personalInfo() {
                               <img className="w-full opacity-50" src={configData?.IPFSTON + item?.project + '/image/' +  NFTData[10000].project + '-Advanced.png'} />
                             </div>
                           }
-                          <div className="text-white truncate text-center">{ownIdx == 0 ? item?.name : item?.item?.name}</div>
+                          <div className="text-white truncate text-center">{item?.item?.name}</div>
                         </div>
                       ))}
                     </div>
@@ -657,17 +556,10 @@ export default function personalInfo() {
                             {bindTgAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
                           </Button>
                         }
-
-                        {!Boolean(userInfo?.tonWallet) &&
-                          <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={() => handleBindTon()}>
-                            {t('personalInfo.bindTonWallet')}
-                            {bindTonAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
-                          </Button>
-                        }
                       </div>
                     </div>
                     }
-                    {Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) && Boolean(userInfo?.tonWallet) &&
+                    {Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) &&
                       <div className="text-center mt-6">
                         <Button href="/genkiMinerMint" className="text-xl font-light text-white w-60 text-center py-3 md:py-4">
                           {t('personalInfo.goToMint')}
@@ -791,7 +683,7 @@ export default function personalInfo() {
                       <span className="text-white/80">{t('personalInfo.pending')}</span>
                     }
                   </div>
-                  {historyTabIdx == 1 && <div className="w-1/6">{configData && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.SCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
+                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.SCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
                 </div>
               ))
               :
