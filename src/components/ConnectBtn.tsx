@@ -39,6 +39,8 @@ export default function ConnectBtn() {
   const [showToTgModal, setShowToTgModal] = useState(false);
   const [tgLink, setTgLink] = useState<string>('');
   const [tgWebLoginToken, setTgWebLoginToken] = useState<string>('');
+  
+  const connectForceRef = useRef(false);
 
   const handleConnectBsc = async() => {
     if(userInfo) {
@@ -88,6 +90,15 @@ export default function ConnectBtn() {
       setConnecting(false);
       handleDisconnect();
     }
+
+    // test 
+    localStorage.removeItem('wagmi.wallet');
+    localStorage.removeItem('wagmi.connected')
+    localStorage.removeItem('wagmi.store')
+    localStorage.removeItem('wagmi.metaMask')
+    localStorage.removeItem('walletconnect')
+    localStorage.removeItem('wc@2:client:0.3') // 旧版 WalletConnect v2
+    
     setShowLoginModal(false)
     setConnecting(false);
   }
@@ -120,6 +131,7 @@ export default function ConnectBtn() {
 
   const handleShowBscModal = async() => {
     console.log('handleConnectBsc');
+    connectForceRef.current = true;
     if(isConnected) {
       await handleDisconnect();
       setTimeout(() => {
@@ -210,8 +222,9 @@ export default function ConnectBtn() {
   }
 
   useEffect(() => {
-    if (isConnected && address) {
+    if (isConnected && address && connectForceRef.current) {
       if(!localStorage.getItem('kkAddress') || localStorage.getItem('kkAddress') != address)  {
+        connectForceRef.current = false;
         handleConnectBsc();
       }
     }
