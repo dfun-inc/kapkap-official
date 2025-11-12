@@ -98,7 +98,8 @@ export default function ConnectBtn() {
     localStorage.removeItem('wagmi.metaMask')
     localStorage.removeItem('walletconnect')
     localStorage.removeItem('wc@2:client:0.3') // 旧版 WalletConnect v2
-    
+    disconnect();
+
     setShowLoginModal(false)
     setConnecting(false);
   }
