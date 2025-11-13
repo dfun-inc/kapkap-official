@@ -371,7 +371,7 @@ export default function personalInfo() {
   }, [userInfo, NFTData, ownIdx])
 
   useEffect(() => {
-    if(userInfo && userInfo.tgAccount) {
+    if(userInfo && userInfo?.tgAccount) {
       handleGetKscore();
 
       if(!userInfo?.account) {
