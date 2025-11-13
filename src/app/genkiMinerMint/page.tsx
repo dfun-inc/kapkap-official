@@ -27,6 +27,7 @@ export default function YourNFTs() {
   const [kscore, setKscore] = useState<number>(0);
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
   const [NFTData, setNFTData] = useState<any>(null);
+  const [NFTList, setNFTList] = useState<any[]>([]);
 
   const [NFTListLoading, setNFTListLoading] = useState<boolean>(true);
 
@@ -59,6 +60,8 @@ export default function YourNFTs() {
 
   const historyRef = useRef<any>(null);
 
+  const [firstSortList, setFirstSortList] = useState<boolean>(true);
+
   const handleGetKscore = async () => {
     setKscoreLoading(true);
     await getKScore(10000)
@@ -82,6 +85,12 @@ export default function YourNFTs() {
       const data = res?.data;
       if(data.status == 10000) {
         setNFTData(data?.data);
+        let temp:any[] = []
+        Object.entries(data?.data[10000].ids).map(([key, value]) => {
+          temp.push({project:data?.data[10000].project, id: Number(key), ...(value as any)})
+        });
+        console.log(temp)
+        setNFTList(temp);
       }
       else {
         errCodeHandler(data.status, data.msg)
@@ -305,6 +314,26 @@ export default function YourNFTs() {
   }
 
   useEffect(() => {
+    if(reMintList && Object.keys(reMintList).length > 0 && NFTList?.length) {
+      if(firstSortList) {
+        setFirstSortList(false);
+
+        let temp = [...NFTList];
+        const getRank = (t:number) => {
+          if (t == 1) return 0; // 最前
+          if (t == 2) return 2; // 最后
+          return 1;              // 中间
+        };
+
+        temp.sort((a, b) => {
+          return getRank(reMintList[a.id]) - getRank(reMintList[b.id]);
+        })
+        setNFTList(temp);
+      }
+    }
+  }, [reMintList, NFTList])
+
+  useEffect(() => {
     if(userInfo) {
       handleGetKscore();
       handleUpdateStep();
@@ -394,16 +423,16 @@ export default function YourNFTs() {
               ))
             :
             <div className="flex flex-wrap">
-            {Object.entries(NFTData[10000]?.ids)?.map(([key, value]:[string, any], index:number) => (
-            <div key={index} className={"w-full " + (reMintList && reMintList[key] ? (reMintList[key] == 2 ? 'order-3 opacity-50' : (reMintList[key] == 1 ? 'order-1' : 'order-2')) : 'order-2')}>
+            {NFTList?.map((item:any, index:number) => (
+            <div key={index} className={"w-full " + (reMintList && reMintList[item.id] ? (reMintList[item.id] == 2 ? 'order-2 opacity-50' : 'order-1') : 'order-1')}>
               <div key={index} className="mt-5 flex flex-wrap bg-black/50 rounded-[20px] md:text-[20px] p-3">
                 <div className="w-1/3 md:w-[130px] 2xl:w-[168px]">
-                  {configData != null && <img className="w-full" src={configData?.IPFSTON + NFTData[10000].project + '/image/' +  value?.name.replace(' ', '-') + '.png'} alt="" />}
+                  {configData != null && <img className="w-full" src={configData?.IPFSTON + item?.project + '/image/' +  item?.name.replace(' ', '-') + '.png'} alt="" />}
                 </div>
                 <div className="w-2/3 md:w-auto md:flex-1 px-3">
-                  <div className="text-[#DDD5FF] text-[20px] md:text-[30px]">{value?.name} <span className="text-[#8D73FF]">(Lv.{value.level})</span></div>
-                  <div className="text-[#8A84A3]">{value?.desc}</div>
-                  {value?.airdropBoost > 0 && <div className="text-[#FEBD32] mt-3">{t('nft.inGameBenefits')}</div>}
+                  <div className="text-[#DDD5FF] text-[20px] md:text-[30px]">{item?.name} <span className="text-[#8D73FF]">(Lv.{item.level})</span></div>
+                  <div className="text-[#8A84A3]">{item?.desc}</div>
+                  {item?.airdropBoost > 0 && <div className="text-[#FEBD32] mt-3">{t('nft.inGameBenefits')}</div>}
                 </div>
                 <div className="w-full md:w-[300px] flex flex-col justify-center md:justify-end items-center md:items-end pt-6">
                 {userInfo != null && (mintedLoading || kscoreLoading) && 
@@ -411,35 +440,35 @@ export default function YourNFTs() {
                     <span className="animate-spin w-8 h-8 border-3 border-b-white/50 border-t-transparent rounded-full"></span>
                   </div>
                 }
-                {userInfo != null && !mintedLoading && reMintList != null && reMintList[key] !== undefined && !kscoreLoading &&
+                {userInfo != null && !mintedLoading && reMintList != null && reMintList[item.id] !== undefined && !kscoreLoading &&
                   <> {
                     userInfo?.account && userInfo?.tgAccount ?
-                      reMintList[key] == 0 ?
+                      reMintList[item.id] == 0 ?
                         <>
                         <div className="w-full flex items-center justify-center space-x-3">
                           <img className="w-[38px]" src="/images/kscore.png" />
-                          <div className="md:text-[20px]">{value.kscore}/{kscore}</div>
+                          <div className="md:text-[20px]">{item.kscore}/{kscore}</div>
                         </div>
-                        {value?.airdropBoost > 0 && <div className="w-full text-center">
-                          <span className="text-[#69FFD3] mt-1">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}%</span>
+                        {item?.airdropBoost > 0 && <div className="w-full text-center">
+                          <span className="text-[#69FFD3] mt-1">{t('nft.benefits')}: {t('nft.airdrop')} +{item?.airdropBoost}%</span>
                         </div>}
-                        <Button className={"relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (value.kscore > kscore ? "cursor-not-allowed" : "")} 
-                          onClick={value.kscore > kscore ?() => {} : () => handleMint(Number(key), 10000)} disabled={value.kscore > kscore}>
+                        <Button className={"relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (item.kscore > kscore ? "cursor-not-allowed" : "")} 
+                          onClick={item.kscore > kscore ?() => {} : () => handleMint(Number(item.id), 10000)} disabled={item.kscore > kscore}>
                           {t('genkiMint.mint')}
-                          {mintLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                          {mintLoading.includes(Number(item.id)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                           <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(0/2)</span>
                         </Button>
                       </>
                       :
-                      (reMintList[key] == 1 || reMintList[key] == 2) && <>
-                        {value?.airdropBoost > 0 && <div className="w-full text-center">
-                          <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{value?.airdropBoost}%</span>
+                      (reMintList[item.id] == 1 || reMintList[item.id] == 2) && <>
+                        {item?.airdropBoost > 0 && <div className="w-full text-center">
+                          <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{item?.airdropBoost}%</span>
                         </div>}
-                        {reMintList[key] == 1 &&
+                        {reMintList[item.id] == 1 &&
                         <>
-                          <Button className="relativetext-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(key), 10000)}>
+                          <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(item.id), 10000)}>
                           {t('genkiMint.mapToBscChain')}
-                          {mappingLoading.includes(Number(key)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                          {mappingLoading.includes(Number(item.id)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                           <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(1/2)</span>
                         </Button>
                         <div className="text-center text-[14px] text-[#8A84A3]">{t('genkiMint.mappingHint')}</div>
