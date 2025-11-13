@@ -380,6 +380,9 @@ export default function personalInfo() {
     }
     else {
       setAddr('');
+    }
+
+    if(!userInfo) {
       setKscore(0);
       setNFTList([]);
     }
