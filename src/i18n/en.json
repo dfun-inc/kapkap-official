@@ -338,7 +338,8 @@
     "bindTonWalletSuccess": "Bind TON Wallet Success",
     "game": "Game",
     "minting": "Minting",
-    "inGame": "In-Game"
+    "inGame": "In-Game",
+    "bscListHint": "On-chain data may take a moment to sync--hang tight!"
   },
 
   "genkiMint": {

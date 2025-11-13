@@ -500,14 +500,17 @@ export default function personalInfo() {
                 <div className="flex justify-end mt-3 md:mt-0 md:px-3">
                   <button className="text-[#8D73FF] cursor-pointer hover:underline" onClick={() => setMintHistoryModal(true)}>{t('personalInfo.viewHistory')}</button>
                 </div>
-                <div className="flex justify-center py-3 mt-3">
-                  <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
-                    <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>{t('personalInfo.inGame')}</button>
-                    <button className={"relative w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(1)}>
-                      BSC
-                      <span className="text-[11px] text-zinc-200 bg-[#2EBD85] p-1 rounded-lg absolute bottom-full translate-y-1/2 -right-2">{t('nft.airdrop')}</span>
-                    </button>
+                <div className="relative">
+                  <div className="flex justify-center py-3 mt-3">
+                    <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
+                      <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>{t('personalInfo.inGame')}</button>
+                      <button className={"relative w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(1)}>
+                        BSC
+                        <span className="text-[11px] text-zinc-200 bg-[#2EBD85] p-1 rounded-lg absolute bottom-full translate-y-1/2 -right-2">{t('nft.airdrop')}</span>
+                      </button>
+                    </div>
                   </div>
+                  {ownIdx == 1 && <div className="absolute left-0 top-full w-full text-center text-[14px] text-[#8A84A3]">{t('personalInfo.bscListHint')}</div>}
                 </div>
                 <div className="">
                   {NFTlistLoading ? 
