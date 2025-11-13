@@ -32,7 +32,7 @@ export default function ConnectBtn() {
   const { openConnectModal } = useConnectModal();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const { userInfo, handleSetUserInfo, modalTrigger, handleSetUserInfoLoading } = useAppContext();  
+  const { userInfo, handleSetUserInfo, modalTrigger, handleSetUserInfoLoading, triggerSetLogout, logoutTrigger } = useAppContext();  
   const reLoginTimeout = useRef<any>(null);
   const loginForceRef = useRef<any>(false);
 
@@ -68,10 +68,10 @@ export default function ConnectBtn() {
         const data = res?.data;
         if(data.status == 10000) {
           await localStorage.setItem('kkAuthToken', data?.data.token);
-          await localStorage.setItem('kkAddress', address as any);
+          await localStorage.setItem('kkAddress', data?.data.account);
           await localStorage.setItem('kkLoginType', 'bsc');
           await localStorage.setItem('kkGuid', data?.data.guid);
-          setWalletAddr((_a: any) => address)
+          setWalletAddr((_a: any) => data?.data.account)
           await new Promise(resolve => setTimeout(resolve, 500));
           handleGetUserInfo();
           isConnect = true;
@@ -252,6 +252,13 @@ export default function ConnectBtn() {
     }
   }, [wallet]);
   */
+
+  useEffect(() => {
+    if(logoutTrigger) {
+      triggerSetLogout(false);
+      handleDisconnect();
+    }
+  }, [logoutTrigger]);
   
   useEffect(() => {
     const addr = localStorage.getItem('kkAddress');

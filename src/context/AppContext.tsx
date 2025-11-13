@@ -15,6 +15,8 @@ interface AppContextType {
   handleSetAppData: (data: any) => void,
   ileData: any,
   handleSetIleData: (data: any) => void,
+  triggerSetLogout: (data: boolean) => void,
+  logoutTrigger: boolean,
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -32,6 +34,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [configData, setConfigData] = useState<any>(null);
   const [appData, setAppData] = useState<any>(null);
   const [ileData, setIleData] = useState<any>(null);
+  const [logoutTrigger, setLogoutTrigger] = useState<boolean>(false);
 
   const triggerModalOpen = () => {
     setModerTrigger(prev => prev + 1);
@@ -57,6 +60,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setIleData(data);
   }
 
+  const triggerSetLogout = (data: boolean) => {
+    setLogoutTrigger(data);
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -72,6 +79,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         handleSetAppData,
         ileData,
         handleSetIleData,
+        triggerSetLogout,
+        logoutTrigger,
       }}
     >
       {children}
