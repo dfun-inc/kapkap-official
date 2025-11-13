@@ -88,7 +88,7 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData}, ref) => {
           </div>
           <div className="flex justify-center py-3">
             <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
-              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>TON</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>{t('personalInfo.inGame')}</button>
               <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>BSC</button>
             </div>
           </div>

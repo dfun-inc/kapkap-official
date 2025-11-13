@@ -502,7 +502,7 @@ export default function personalInfo() {
                 </div>
                 <div className="flex justify-center py-3 mt-3">
                   <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
-                    <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>TON</button>
+                    <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>{t('personalInfo.inGame')}</button>
                     <button className={"relative w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(1)}>
                       BSC
                       <span className="text-[11px] text-zinc-200 bg-[#2EBD85] p-1 rounded-lg absolute bottom-full translate-y-1/2 -right-2">{t('nft.airdrop')}</span>
@@ -653,7 +653,7 @@ export default function personalInfo() {
           </div>
           <div className="flex justify-center py-3">
             <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
-              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>TON</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>{t('personalInfo.inGame')}</button>
               <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>BSC</button>
             </div>
           </div>

@@ -337,7 +337,8 @@
     "bindEvmAccountSuccess": "Bind Wallet Success",
     "bindTonWalletSuccess": "Bind TON Wallet Success",
     "game": "Game",
-    "minting": "Minting"
+    "minting": "Minting",
+    "inGame": "In-Game"
   },
 
   "genkiMint": {
