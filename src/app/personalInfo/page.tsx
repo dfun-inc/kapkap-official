@@ -161,16 +161,16 @@ export default function personalInfo() {
           handleGetUserInfo();
         }
         else {
-          handleDisconnect();
+          handleWalletDisconnect();
           errCodeHandler(data.status)
         }
       })
       .catch(() => {
-        handleDisconnect();
+        handleWalletDisconnect();
       })
     }
     catch(err) {
-      handleDisconnect();
+      handleWalletDisconnect();
     }
     setBindEvmAccountLoading(false);
   }
@@ -190,7 +190,7 @@ export default function personalInfo() {
 
   const handleOpenEvmConnectModal = () => {
     bindEvmForce.current = true;
-    handleDisconnect();
+    handleWalletDisconnect();
     openConnectModal?.();
   }
 
@@ -209,7 +209,7 @@ export default function personalInfo() {
     setKscoreLoading(false);
   }
 
-  const handleDisconnect = async() => {
+  const handleWalletDisconnect = async() => {
     localStorage.removeItem('wagmi.wallet');
     localStorage.removeItem('wagmi.connected')
     localStorage.removeItem('wagmi.store')
@@ -375,11 +375,13 @@ export default function personalInfo() {
       handleGetKscore();
 
       if(!userInfo?.account) {
-        handleDisconnect();
+        handleWalletDisconnect();
       }
     }
     else {
       setAddr('');
+      setKscore(0);
+      setNFTList([]);
     }
   }, [userInfo])
 
