@@ -243,7 +243,7 @@ export default function YourNFTs() {
         }
         else {
           handleDisconnect();
-          errCodeHandler(data.status)
+          errCodeHandler(data.status, data.msg)
         }
       })
       .catch(() => {

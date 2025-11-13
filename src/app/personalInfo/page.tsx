@@ -162,7 +162,7 @@ export default function personalInfo() {
         }
         else {
           handleWalletDisconnect();
-          errCodeHandler(data.status)
+          errCodeHandler(data.status, data.msg)
         }
       })
       .catch(() => {
@@ -183,7 +183,7 @@ export default function personalInfo() {
         setNFTData(data?.data);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
   }
@@ -203,7 +203,7 @@ export default function personalInfo() {
         setKscore(data?.data || 0);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     setKscoreLoading(false);
@@ -289,7 +289,7 @@ export default function personalInfo() {
         setNFTList(temp);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     setNFTListLoading(false);
@@ -304,7 +304,7 @@ export default function personalInfo() {
         setKscoreHistory(data?.data || []);
       }
       else {
-        errCodeHandler(data.status)
+        errCodeHandler(data.status, data.msg)
       }
     })
     setKscoreHistoryLoading(false);
@@ -331,7 +331,7 @@ export default function personalInfo() {
           setMintHistory(temp);
         }
         else {
-          errCodeHandler(data.status)
+          errCodeHandler(data.status, data.msg)
         }
       }
     }
