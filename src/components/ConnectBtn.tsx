@@ -214,6 +214,7 @@ export default function ConnectBtn() {
       if(data.status == 10000) {
         if(loginByToen) {
           await localStorage.setItem('kkAddress', data?.data.tgAccount || data?.data.account);
+          await localStorage.setItem('kkLoginType', 'tg');
           await localStorage.setItem('kGuid', data?.data.guid);
         }
         handleSetUserInfo(data?.data);
