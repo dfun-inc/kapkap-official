@@ -219,6 +219,10 @@ export default function personalInfo() {
   }
 
   const handleGetBscNFTList = async() => {
+    if(!userInfo?.account) {
+      setNFTList([])
+      return;
+    }
     setNFTListLoading(true);
 
     let _addr:any = '';
