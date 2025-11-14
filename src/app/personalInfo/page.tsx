@@ -360,7 +360,7 @@ export default function personalInfo() {
   }, [mintHistoryModal, historyTabIdx])
 
   useEffect(() => {
-    if(userInfo?.account &&  userInfo?.tgAccount && NFTData) {
+    if(userInfo?.tgAccount && NFTData) {
       if(ownIdx) {
         handleGetBscNFTList();
       }
