@@ -89,7 +89,6 @@ export default function YourNFTs() {
         Object.entries(data?.data[10000].ids).map(([key, value]) => {
           temp.push({project:data?.data[10000].project, id: Number(key), ...(value as any)})
         });
-        console.log(temp)
         setNFTList(temp);
       }
       else {

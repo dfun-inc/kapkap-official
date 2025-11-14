@@ -207,11 +207,15 @@ export default function ConnectBtn() {
     }
   }
 
-  const handleGetUserInfo = async() => {
+  const handleGetUserInfo = async(loginByToen = false) => {
     handleSetUserInfoLoading(true);
-    await getUserInfo().then((res) => {
+    await getUserInfo().then(async(res) => {
       const data = res?.data;
       if(data.status == 10000) {
+        if(loginByToen) {
+          await localStorage.setItem('kkAddress', data?.data.tgAccount || data?.data.account);
+          await localStorage.setItem('kGuid', data?.data.guid);
+        }
         handleSetUserInfo(data?.data);
         setWalletAddr(localStorage.getItem('kkAddress'));
       }
@@ -262,9 +266,14 @@ export default function ConnectBtn() {
   
   useEffect(() => {
     const addr = localStorage.getItem('kkAddress');
+    const token = getUrlParamsByName("token");
     console.log(addr)
     if(addr) {
       handleGetUserInfo();
+    }
+    else if(token) {
+      localStorage.setItem('kkAuthToken', decodeURIComponent(token));
+      handleGetUserInfo(true);
     }
     else {
       handleDisconnect();
