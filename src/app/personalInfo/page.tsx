@@ -571,13 +571,13 @@ export default function personalInfo() {
                       </div>
                     </div>
                     }
-                    {Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) &&
+                    {/*Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) &&
                       <div className="text-center mt-6">
                         <Button href="/genkiMinerMint" className="text-xl font-light text-white w-60 text-center py-3 md:py-4">
                           {t('personalInfo.goToMint')}
                         </Button>
                       </div>
-                    }
+                    */}
                     </>
                   }
                 </div>
