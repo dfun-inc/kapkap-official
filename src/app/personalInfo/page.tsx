@@ -715,7 +715,7 @@ export default function personalInfo() {
           className=""
         >
           <div className="w-80 text-center p-6 bg-black rounded-lg">
-            <div className="text-white text-center text-[20px]">{t('menu.tgLogin')}</div>
+            <div className="text-white text-center text-[20px] mb-6">{t('menu.tgLogin')}</div>
             <a id="open-tg-link" className="open-tg-link w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 bg-[#6E4DFF] mt-6 rounded-lg"
             href={tgLink}
             target="_blank"
