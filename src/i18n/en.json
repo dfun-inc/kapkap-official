@@ -6,7 +6,8 @@
     "submitSuccess": "Submit Success",
     "error": "Something went wrong, please try later",
     "showMore": "Show More",
-    "hide": "Hide"
+    "hide": "Hide",
+    "openTgHint": "Can't redirect in iOS MetaMask browser? Please open this page in a standard browser."
   },
 
   "error": {

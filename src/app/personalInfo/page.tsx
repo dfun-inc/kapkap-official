@@ -727,6 +727,7 @@ export default function personalInfo() {
             }}>
               <span className="text-sm md:text-base font-medium ml-2">{t('menu.openTgToLogin')}</span>
             </a>
+            <div className="text-center text-white/60 text-[12px] mt-6">{t('common.openTgHint')}</div>
           </div>
       </Modal>
       <Modal
