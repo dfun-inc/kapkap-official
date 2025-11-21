@@ -392,16 +392,17 @@ export default function ConnectBtn() {
       >
         <div className="w-80 text-center p-6 bg-black rounded-lg">
           <div className="text-white text-center text-[20px]">{t('menu.tgLogin')}</div>
-          <button id="open-tg-link" className="open-tg-link w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 bg-[#6E4DFF] mt-6 rounded-lg"
-          onClick={() => {
-            window.open(tgLink, '_blank');
+          <a id="open-tg-link" className="open-tg-link w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 bg-[#6E4DFF] mt-6 rounded-lg"
+            href={tgLink}
+            target="_blank"
+            onClick={() => {
             setShowToTgModal(false);
             reLoginTimeout.current = setTimeout(() => {
               handleTgLogin(tgWebLoginToken, 1);
             }, 5000);
           }}>
             <span className="text-sm md:text-base font-medium ml-2">{t('menu.openTgToLogin')}</span>
-          </button>
+          </a>
         </div>
     </Modal>
     </>
