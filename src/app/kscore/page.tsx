@@ -39,11 +39,9 @@ export default function Kscore() {
                 <Button className="px-8 md:px-10 py-4" target="_blank" href="https://t.me/GenkiMinerBot/GenkiMiner?startapp=tBkdxxEA">
                   {t('kscore.playGame')}
                 </Button>
-                {/*
                 <Button href="/genkiMinerMint" className="px-8 md:px-10  py-4">
                   {t('mint.mint')}
                 </Button>
-                */}
               </div>
             </div>
           </div>
