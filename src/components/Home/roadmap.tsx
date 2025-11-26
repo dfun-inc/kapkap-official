@@ -130,7 +130,7 @@ export default function Roadmap() {
                   <div className={aniItemClass + " animate__animated ml-2 md:ml-4 leading-none flex-1 "}
                     style={{animationDelay: i * 0.5 + 's'}}>
                       <div className={(currentProcess[0] >= i ? 'text-[#FEBD32]' : 'text-[#665228]')}>{roadMapData[key].title}</div>
-                      <div className={"leading-[1.25] mt-3 " + (currentProcess[0] >= i ? 'text-[#8D73FF]' : 'text-[#443977]')}>{roadMapData[key].desc}</div>
+                      {roadMapData[key]?.desc && <div className={"leading-[1.25] mt-3 " + (currentProcess[0] >= i ? 'text-[#8D73FF]' : 'text-[#443977]')}>{roadMapData[key].desc}</div>}
                   </div>
                 </div>
                 <div className={aniItemClass + " pl-6 animate__animated "} style={{animationDelay: i * 0.5 + 's'}}>
