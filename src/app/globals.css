@@ -321,6 +321,19 @@ body {
   background-repeat: no-repeat;
 }
 
+.airdrop-box {
+  animation: floatEffect 3s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
 
 @media (max-width: 768px) {
   body {

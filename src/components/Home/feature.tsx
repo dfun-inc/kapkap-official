@@ -23,7 +23,6 @@ export default function feature() {
     blindboxRulesRef.current.showModal();
   }
 
-
   useEffect(() => {
     const winW = window.innerWidth;
     let ctx:any = null;
