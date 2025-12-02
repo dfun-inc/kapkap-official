@@ -22,7 +22,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
 
   const { triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
-  const [kscore, setKscore] = useState<any>({});
+  const [kscore, setKscore] = useState<number>(0);
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
   const [shopModalOpen, setShopModalOpen] = useState<boolean>(false);
   const [buyAmount, setBuyAmount] = useState(1);
@@ -36,7 +36,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
     .then((res) => {
       const data = res?.data;
       if(data.status == 10000 || data.status == 30082) {
-        setKscore(data?.data || 0);
+        setKscore(data?.data?.have || 0);
       }
       else {
         errCodeHandler(data.status, data.msg)
@@ -55,7 +55,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
   }
 
   const handleBuy = async () => {
-    if(buyLoading || kscoreLoading || buyAmount * 10 > kscore?.have) {
+    if(buyLoading || kscoreLoading || buyAmount * 10 > kscore) {
       return;
     }
 
@@ -146,7 +146,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
                 {kscoreLoading ? 
                   <span className="animate-spin w-5 h-5 border-[3px]"></span>
                   :
-                  <span>{kscore?.have}</span>
+                  <span>{kscore}</span>
                 }
               </div>
             </div>
@@ -158,7 +158,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
           </div>
           <div className="px-12 py-5 mt-6 bg-[#1d1b27]">
             <Button className="text-[24px] text-[30px] py-3 md:py-5 capitalize flex items-center justify-center" 
-              fullWidth={true} onClick={handleBuy} disabled={kscoreLoading || buyAmount * 10 > kscore?.have}>
+              fullWidth={true} onClick={handleBuy} disabled={kscoreLoading || buyAmount * 10 > kscore}>
               <span className="mr-2">{t('blindbox.buy')}</span>
               {buyLoading && <span className="w-5 h-5 border-[3px] border-white animate-spin ml-2"></span>}
             </Button>

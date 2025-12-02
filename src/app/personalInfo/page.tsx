@@ -26,7 +26,7 @@ export default function personalInfo() {
   const t = useTranslations();
   const { configData, userInfo, handleSetUserInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
-  const [kscore, setKscore] = useState<any>({});
+  const [kscore, setKscore] = useState<number>(0);
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(false);
 
   const [NFTlist, setNFTList] = useState<any[]>([]);
@@ -204,7 +204,7 @@ export default function personalInfo() {
     .then((res) => {
       const data = res?.data;
       if(data.status == 10000 || data.status == 30082) {
-        setKscore(data?.data || 0);
+        setKscore(data?.data?.have || 0);
       }
       else {
         errCodeHandler(data.status, data.msg)
@@ -524,7 +524,7 @@ export default function personalInfo() {
                           {kscoreLoading ? 
                             <div className="animate-pulse w-40 h-[30px] bg-gray-500 rounded-lg"></div>
                           :
-                            <div className="text-[#FEBD32] text-[24px]">{kscore?.have ? formatNumberWithCommas(kscore?.have) : 0}</div>
+                            <div className="text-[#FEBD32] text-[24px]">{kscore ? formatNumberWithCommas(kscore) : 0}</div>
                           }
                         </div>
                         <div className="mt-1 text-[14px] text-[#8A84A3]">{t('personalInfo.kscoreDesc')}</div>

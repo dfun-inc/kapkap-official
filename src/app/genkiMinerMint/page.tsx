@@ -68,7 +68,7 @@ export default function YourNFTs() {
     .then((res) => {
       const data = res?.data;
       if(data.status == 10000 || data.status == 30082) {
-        setKscore(data?.data || 0);
+        setKscore(data?.data?.have || 0);
       }
       else {
         errCodeHandler(data.status, data.msg)
