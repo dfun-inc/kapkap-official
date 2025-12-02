@@ -402,6 +402,8 @@
     "bonusType": "Bonus Type",
     "drawTime": "Draw Time",
     "status": "Status",
+    "issued": "issued",
+    "issuing": "issuing",
     "rule": "rule",
     "rule1": "1. Blind boxes can be obtained through mystery stores, tasks, events, and invitations. After opening, you can receive BNB, NFT, K-score, and more advanced blind boxes.",
     "rule2": "2. Advanced NFTs are limited release options, and as the number of prize pools decreases, the lottery version rate decreases. Advanced NFTs are an important way to obtain airdrops in the future.",

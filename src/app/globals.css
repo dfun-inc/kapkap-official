@@ -50,6 +50,8 @@ textarea {
   opacity: 0;
   transition: opacity 300ms ease-in-out;
   z-index: 80;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
 }
 
 .ReactModal__Overlay--after-open {
@@ -70,7 +72,7 @@ textarea {
 
 .ReactModal__Content {
   inset: auto !important;
-  max-height: 95vh;
+  max-height: 90vh;
   border: none !important;
   background-color: transparent !important;
   padding: 0 !important;
@@ -81,6 +83,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
 .ReactModal__Overlay--after-open .ReactModal__Content {

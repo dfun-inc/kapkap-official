@@ -55,26 +55,26 @@ export default function RootLayout({
           <EvmProvider>
             <TonConnectUIProvider manifestUrl="https://cdn.kapkap.io/mainifest.json">
               <NextIntlClientProvider locale={locale} messages={messages[locale]} timeZone="America/New_York">
-                <ReactLenis className="" root options={{ lerp: 0.08, smoothWheel: true }}>
+                {/*<ReactLenis className="" root options={{ lerp: 0.08 }}>*/}
                   <ToastContainer
-                      position="top-center"
-                      autoClose={5000}
-                      hideProgressBar
-                      newestOnTop={false}
-                      closeOnClick={false}
-                      rtl={false}
-                      pauseOnFocusLoss
-                      draggable={false}
-                      pauseOnHover
-                      theme="dark"
-                      transition={Bounce}
-                      toastClassName="custom-toast"
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable={false}
+                    pauseOnHover
+                    theme="dark"
+                    transition={Bounce}
+                    toastClassName="custom-toast"
                   />  
                   <div className="relative">
                     <Header locale={locale} handleChangeLang={handleChangeLanguage} />
                     {children}
                   </div>
-                </ReactLenis>
+                {/*</ReactLenis>*/}
               </NextIntlClientProvider> 
             </TonConnectUIProvider>
           </EvmProvider>

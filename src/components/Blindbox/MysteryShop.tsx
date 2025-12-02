@@ -25,7 +25,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
   const [kscore, setKscore] = useState<number>(0);
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
   const [shopModalOpen, setShopModalOpen] = useState<boolean>(false);
-  const [buyAmount, setBuyAmount] = useState(1);
+  const [buyAmount, setBuyAmount] = useState<string|number>(1);
   const [buyLoading, setBuyLoading] = useState<boolean>(false);
 
   const { errCodeHandler } = useErrCode();
@@ -47,15 +47,23 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
 
   const handleBuyAmountChange = (e: any) => {
     const value = e.target.value;
-    if(value <= 0) {
+    if(value == '') {
+      setBuyAmount('');
+    }
+    else if(value <= 0) {
       setBuyAmount(1);
       return;
     }
-    setBuyAmount(parseInt(value));
+    else {
+      setBuyAmount(parseInt(value));
+    }
   }
 
   const handleBuy = async () => {
-    if(buyLoading || kscoreLoading || buyAmount * 10 > kscore) {
+    if(!buyAmount) {
+      return
+    }
+    if(buyLoading || kscoreLoading || Number(buyAmount) * onSaleBlindbox?.price > kscore) {
       return;
     }
 
@@ -141,7 +149,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
             <div className="mt-9 flex justify-center items-center">
               <img className="block w-9" src="/images/kscore.png" />
               <div className="flex items-center justify-center ml-1 text-[#FEED32] font-univia-pro-bold text-[20px]">
-                <span>{10 * buyAmount}</span>
+                <span>{ onSaleBlindbox?.price && Boolean(buyAmount) ? onSaleBlindbox?.price * Number(buyAmount) : '0'}</span>
                 <span>/</span>
                 {kscoreLoading ? 
                   <span className="animate-spin w-5 h-5 border-[3px]"></span>
@@ -151,14 +159,14 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
               </div>
             </div>
             <div className="mt-1 flex items-center justify-between space-x-2 px-6">
-              <Button className="w-15 h-15 flex items-center justify-center text-[24px] md:text-[30px]" outerClassName="w-15 h-16 shrink-0" onClick={() => setBuyAmount(buyAmount > 1 ? buyAmount - 1 : 1)}>-</Button>
-              <div className="flex-1 shrink-1 h-15 flex items-center justify-center text-white bg-[#1a1a1a] text-[20px] rounded-[10px]">{buyAmount}</div>
-              <Button className="w-15 h-15 flex items-center justify-center text-[24px] md:text-[30px]" outerClassName="w-15 h-16 shrink-0" onClick={() => setBuyAmount(buyAmount + 1)} disabled={buyLoading}>+</Button>
+              <Button className="w-15 h-15 flex items-center justify-center text-[24px] md:text-[30px]" outerClassName="w-15 h-16 shrink-0" onClick={() => setBuyAmount(Number(buyAmount) > 1 ? Number(buyAmount) - 1 : 1)}>-</Button>
+              <input className="flex-1 shrink-1 h-15 text-center text-white bg-[#1a1a1a] text-[20px] rounded-[10px]" value={buyAmount} onChange={handleBuyAmountChange} />
+              <Button className="w-15 h-15 flex items-center justify-center text-[24px] md:text-[30px]" outerClassName="w-15 h-16 shrink-0" onClick={() => setBuyAmount(Number(buyAmount) + 1)} disabled={buyLoading}>+</Button>
             </div>
           </div>
           <div className="px-12 py-5 mt-6 bg-[#1d1b27]">
             <Button className="text-[24px] text-[30px] py-3 md:py-5 capitalize flex items-center justify-center" 
-              fullWidth={true} onClick={handleBuy} disabled={kscoreLoading || buyAmount * 10 > kscore}>
+              fullWidth={true} onClick={handleBuy} disabled={!Boolean(buyAmount) || kscoreLoading || Number(buyAmount) * onSaleBlindbox?.price > kscore}>
               <span className="mr-2">{t('blindbox.buy')}</span>
               {buyLoading && <span className="w-5 h-5 border-[3px] border-white animate-spin ml-2"></span>}
             </Button>

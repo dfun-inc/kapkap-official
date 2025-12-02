@@ -41,3 +41,13 @@ export async function getMyBoxList() {
     }
   });
 }
+
+export async function getBoxOpenHistory() {
+  return request({
+    method: 'get',
+    url: '/api/v1/user/boxOpenHistory',
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    }
+  });
+}

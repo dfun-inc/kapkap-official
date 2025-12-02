@@ -67,7 +67,6 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
             })
           }
         })
-        console.log(temp)
         setDrawResultList(temp);
         setResultModalOpen(true);
         handleGetMyBoxList();
@@ -203,7 +202,7 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
               <div className="w-full text-[12px] md:text-[14px] text-center text-[#DDD5FF]">
                 {item.type?.toLowerCase() == 'item' && item.item?.name}
                 {item.type?.toLowerCase() == 'nft' && 
-                  <><span className="text-[#FEBD32]">Lv.{item.item?.level}</span>{item.item?.name}</>}
+                  <><span className="text-[#FEBD32] mr-1">Lv.{item.item?.level}</span> {item.item?.name}</>}
               </div>
               <div className="flex justify-center mt-3 w-full">
                 {item.type?.toLowerCase() == 'kscore' && <img className="h-[80px] block" src="/images/kscore.png" />}

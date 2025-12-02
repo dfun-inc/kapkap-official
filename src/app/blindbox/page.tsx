@@ -124,7 +124,7 @@ export default function Blindbox() {
         <div className="mt-18 md:mx-10 pb-9 border-b-[2px] border-[#4C4081]">
           <div className="mt-18 flex items-center justify-between text-[#DDD5FF] text-[20px]">
             <div className="capitalize">{t('blindbox.rule')}:</div>
-            {userInfo != null && <LooteryRecord />}
+            {userInfo != null && <LooteryRecord userInfo={userInfo} blindboxConfig={blindboxConfig} NftData={NftData}  />}
           </div>
           <div className="mt-6 text-[#DDD5FF] text-[20px]">
             <div className="">{t('blindbox.rule1')}</div>

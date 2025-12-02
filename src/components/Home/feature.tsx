@@ -77,6 +77,10 @@ export default function feature() {
 
   return (
     <section id="home-section-1" className="home-section-1 feature-section bg-[#121212]">
+      <div className="airdrop-box fixed z-[10] right-3 md:right-9 top-24 w-[100px] cursor-pointer" onClick={handleShowBlindboxRulesModal}>
+        <img className="w-full" src="/images/icon_airdropAD.png" />
+        <div className="absolute leading-none w-full bottom-1 left-0 text-center text-white text-[16px] pr-2">{t('blindbox.airdropRules')}</div>
+      </div>
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16">
         <div className={aniBanner + " animate__animated blind-box-banner-big rounded-[20px] overflow-hidden px-6 md:px-18 py-6 md:py-12"}>
           <div className="font-univia-pro-bold text-[20px] md:text-[60px] 2xl:text-[70px] leading-none">{t('blindbox.bannerTitle')}</div>

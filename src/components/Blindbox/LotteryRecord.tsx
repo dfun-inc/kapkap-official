@@ -7,17 +7,60 @@ import Modal from "react-modal";
 
 import { useAppContext } from "@/context/AppContext";
 import { useErrCode } from "@/datas/errCode";
+import { getBoxOpenHistory } from "@/services/apis/blindbox";
+import { formatDatetime } from "@/utils/time";
 
-export default function LooteryRecord() {
+type Props = {
+  userInfo: any;
+  blindboxConfig: any;
+  NftData: any;
+};
+
+export default function LooteryRecord({ userInfo, blindboxConfig, NftData }: Props) {
   const t = useTranslations();
 
-  const [addr, setAddr] = useState<string>('');
+  const { configData } = useAppContext();
+
   const [recordModalOpen, setRecordModalOpen] = useState<boolean>(false);
   const [recordList, setRecordList] = useState<any[]>([]);
   const [recordListLoading, setRecordListLoading] = useState<boolean>(true);
 
-  const handleGetRecordList = async() => {
+  const { errCodeHandler } = useErrCode();
 
+  const handleGetRecordList = async() => {
+    setRecordListLoading(true);
+    await getBoxOpenHistory()
+    .then(res => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        let temp:any[] = [];
+        data.data?.map((item:any) => {
+          if(item?.type.toLowerCase() == 'item') {
+            temp.push({
+              ...item,
+              item: blindboxConfig[item.itemId]
+            })
+          }
+          else if(item?.type.toLowerCase() == 'nft') {
+            temp.push({
+              ...item,
+              item: NftData[item.itemId]
+            })
+          }
+          else {
+            temp.push({
+              ...item
+            })
+          }
+        })
+        setRecordList(temp);
+      }
+      else {
+        errCodeHandler(data.status);
+      }
+    })
+
+    setRecordListLoading(false);
   }
 
   useEffect(() => {
@@ -28,18 +71,15 @@ export default function LooteryRecord() {
     }
   }, [recordModalOpen])
 
-  useEffect(() => {
-    const addr = localStorage.getItem('kkAddress');
-    setAddr(addr || '');
-  }, [])
-
   return (
     <>
       <button className="text-[#8D73FF] cursor-pointer underline hover:text-[#6E4DFF] text-[20px] uppercase" onClick={() => setRecordModalOpen(true)}>{t('blindbox.lotteryRecord')}</button>
       <Modal 
         isOpen={recordModalOpen}
+        ariaHideApp={false}
         onRequestClose={() => setRecordModalOpen(false)}
-        shouldCloseOnOverlayClick={true}
+        preventScroll={false}
+        htmlOpenClassName="overflow-hidden"
         className="w-9/10! xl:w-[1000px]! 2xl:w-[1200px]!"
       >
         <div className="w-full bg-[#101014] rounded-[20px] overflow-hidden">
@@ -49,37 +89,56 @@ export default function LooteryRecord() {
               <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="30" height="30"><path d="M431.559111 512L149.959111 230.4a56.888889 56.888889 0 0 1 80.440889-80.440889L512 431.559111l281.6-281.6a56.888889 56.888889 0 0 1 80.440889 80.440889L592.440889 512l281.6 281.6a56.888889 56.888889 0 1 1-80.440889 80.440889L512 592.440889 230.4 874.040889a56.888889 56.888889 0 1 1-80.440889-80.440889L431.559111 512z" fill="#ffffff"></path></svg>
             </button>
           </div>
-          <div className="p-6">
-            <div className="w-full overflow-x-auto">
-              <div className="min-w-[600px]">
-                <div className="flex text-center text-[#8A84A3] text-[18px] md:text-[20px] py-2 border-b-[2px] border-[#211c33]">
-                  <div className="w-[28%] px-1">{t('blindbox.bonusName')}</div>
-                  <div className="w-[28%] px-1">{t('blindbox.bonusType')}</div>
-                  <div className="w-[28%] px-1">{t('blindbox.drawTime')}</div>
-                  <div className="flex px-1">{t('blindbox.status')}</div>
-                </div>
-                {recordListLoading ? 
-                  Array.from({ length: 4 }).map((_, index) => (
-                    <div key={index} className="py-2 border-b-[2px] border-[#211c33]">
-                      <div className="bg-gray-500 animate-pulse rounded-lg h-6"></div>
+          <div className="p-6 max-h-[70vh] overflow-y-auto">
+            <div className="w-full">
+              <div className="flex text-center text-[#8A84A3] text-[14px] md:text-[20px] py-2 border-b-[2px] border-[#211c33]">
+                <div className="w-[35%] px-1">{t('blindbox.bonusName')}</div>
+                <div className="w-2/5 px-1">{t('blindbox.bonusType')}</div>
+                <div className="w-1/4 px-1">{t('blindbox.drawTime')}</div>
+              </div>
+              {recordListLoading ? 
+                Array.from({ length: 4 }).map((_, index) => (
+                  <div key={index} className="py-2 border-b-[2px] border-[#211c33]">
+                    <div className="bg-gray-500 animate-pulse rounded-lg h-6"></div>
+                  </div>
+                ))
+                :
+                <>
+                {recordList.length == 0 ?
+                  <div className="py-16 text-center">
+                    <svg className="mx-auto" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M855.6 427.2H168.5c-12.7 0-24.4 6.9-30.6 18L4.4 684.7C1.5 689.9 0 695.8 0 701.8v287.1c0 19.4 15.7 35.1 35.1 35.1H989c19.4 0 35.1-15.7 35.1-35.1V701.8c0-6-1.5-11.8-4.4-17.1L886.2 445.2c-6.2-11.1-17.9-18-30.6-18zM673.4 695.6c-16.5 0-30.8 11.5-34.3 27.7-12.7 58.5-64.8 102.3-127.2 102.3s-114.5-43.8-127.2-102.3c-3.5-16.1-17.8-27.7-34.3-27.7H119c-26.4 0-43.3-28-31.1-51.4l81.7-155.8c6.1-11.6 18-18.8 31.1-18.8h622.4c13 0 25 7.2 31.1 18.8l81.7 155.8c12.2 23.4-4.7 51.4-31.1 51.4H673.4zM819.9 209.5c-1-1.8-2.1-3.7-3.2-5.5-9.8-16.6-31.1-22.2-47.8-12.6L648.5 261c-17 9.8-22.7 31.6-12.6 48.4 0.9 1.4 1.7 2.9 2.5 4.4 9.5 17 31.2 22.8 48 13L807 257.3c16.7-9.7 22.4-31 12.9-47.8zM375.4 261.1L255 191.6c-16.7-9.6-38-4-47.8 12.6-1.1 1.8-2.1 3.6-3.2 5.5-9.5 16.8-3.8 38.1 12.9 47.8L337.3 327c16.9 9.7 38.6 4 48-13.1 0.8-1.5 1.7-2.9 2.5-4.4 10.2-16.8 4.5-38.6-12.4-48.4zM512 239.3h2.5c19.5 0.3 35.5-15.5 35.5-35.1v-139c0-19.3-15.6-34.9-34.8-35.1h-6.4C489.6 30.3 474 46 474 65.2v139c0 19.5 15.9 35.4 35.5 35.1h2.5z" fill="#757895"></path></svg>
+                  </div>
+                  :
+                  recordList.map((item, index) => (
+                    <div key={index} className="flex items-center text-[#8A84A3] text-[18px] md:text-[20px] py-1 border-b-[2px] border-[#211c33]">
+                      <div className="w-[35%] flex items-center px-2">
+                        {item.type?.toLowerCase() == 'item' && <>{
+                          item.item?.type == 'asset' ?
+                            <img className="w-[15px] md:w-[30px] block" src="/images/kscore.png" alt="" />
+                            :
+                            <img className="w-[15px] md:w-[30px] block rounded-[5px]" src={'/images/blindbox/' + item.item?.img + '.jpg'} alt="" />
+                        }</>}
+                        {item.type?.toLowerCase() == 'nft' && <img className="w-[15px] md:w-[30px] block rounded-[5px]" src={configData?.IPFSTON + item.item?.project + '/image/' +  item.item?.name.replace(' ', '-') + '.png'} alt="" />}
+                        
+                        <div className="pl-2">
+                          <div className="w-full text-[10px] md:text-[14px] text-[#DDD5FF]">
+                            {item.type?.toLowerCase() == 'item' && item.item?.name}
+                            {item.type?.toLowerCase() == 'nft' && 
+                              <><span className="text-[#FEBD32] mr-1">Lv.{item.item?.level}</span>{item.item?.name}</>}
+                          </div>
+                          <div className="text-[16px] md:text-[18px] text-[#FEED32]">x{item.amount}</div>
+                        </div>
+                      </div>
+                      <div className="w-2/5 px-2 text-[#DDD5FF] text-[10px] md:text-[20px]">
+                        <img className="w-[15px] md:w-[30px] inline-block rounded-[10px] pr-2" src={'/images/blindbox/' + blindboxConfig[item.boxId]?.img + '.jpg'} alt="" />
+                        {blindboxConfig[item.boxId]?.name}
+                      </div>
+                      <div className="w-1/4 px-2 text-[#DDD5FF] text-[10px] md:text-[18px] text-center">{formatDatetime(item.createdAt)}</div>
                     </div>
                   ))
-                  :
-                  <>
-                  {recordList.length == 0 ?
-                    <div className="py-16 text-center">
-                      <svg className="mx-auto" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M855.6 427.2H168.5c-12.7 0-24.4 6.9-30.6 18L4.4 684.7C1.5 689.9 0 695.8 0 701.8v287.1c0 19.4 15.7 35.1 35.1 35.1H989c19.4 0 35.1-15.7 35.1-35.1V701.8c0-6-1.5-11.8-4.4-17.1L886.2 445.2c-6.2-11.1-17.9-18-30.6-18zM673.4 695.6c-16.5 0-30.8 11.5-34.3 27.7-12.7 58.5-64.8 102.3-127.2 102.3s-114.5-43.8-127.2-102.3c-3.5-16.1-17.8-27.7-34.3-27.7H119c-26.4 0-43.3-28-31.1-51.4l81.7-155.8c6.1-11.6 18-18.8 31.1-18.8h622.4c13 0 25 7.2 31.1 18.8l81.7 155.8c12.2 23.4-4.7 51.4-31.1 51.4H673.4zM819.9 209.5c-1-1.8-2.1-3.7-3.2-5.5-9.8-16.6-31.1-22.2-47.8-12.6L648.5 261c-17 9.8-22.7 31.6-12.6 48.4 0.9 1.4 1.7 2.9 2.5 4.4 9.5 17 31.2 22.8 48 13L807 257.3c16.7-9.7 22.4-31 12.9-47.8zM375.4 261.1L255 191.6c-16.7-9.6-38-4-47.8 12.6-1.1 1.8-2.1 3.6-3.2 5.5-9.5 16.8-3.8 38.1 12.9 47.8L337.3 327c16.9 9.7 38.6 4 48-13.1 0.8-1.5 1.7-2.9 2.5-4.4 10.2-16.8 4.5-38.6-12.4-48.4zM512 239.3h2.5c19.5 0.3 35.5-15.5 35.5-35.1v-139c0-19.3-15.6-34.9-34.8-35.1h-6.4C489.6 30.3 474 46 474 65.2v139c0 19.5 15.9 35.4 35.5 35.1h2.5z" fill="#757895"></path></svg>
-                    </div>
-                    :
-                    recordList.map((item, index) => (
-                      <div key={index} className="flex text-center text-[#8A84A3] text-[18px] md:text-[20px] py-2 border-b-[2px] border-[#211c33]">
-
-                      </div>
-                    ))
-                  }
-                  </>
                 }
-              </div>
+                </>
+              }
             </div>
           </div>
         </div>

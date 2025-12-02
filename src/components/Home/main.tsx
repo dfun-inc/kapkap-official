@@ -4,19 +4,12 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import BlindboxRulesModal from '@/components/BlindboxRulesModal';
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Main() {
   const t = useTranslations();
   const [videoClass, setVideoClass] = useState('md:-translate-x-1/3 ');
-
-  const blindboxRulesRef = useRef<any>(null);
-
-  const handleShowBlindboxRulesModal = () => {
-    blindboxRulesRef.current.showModal();
-  }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -84,10 +77,6 @@ export default function Main() {
         </div>
       </div>
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 h-full relative z-2 border-b border-[#201e2a]">
-        <div className="airdrop-box absolute z-5 right-3 md:right-9 top-24 w-[100px] cursor-pointer" onClick={handleShowBlindboxRulesModal}>
-          <img className="w-full" src="/images/icon_airdropAD.png" />
-          <div className="absolute leading-none w-full bottom-1 left-0 text-center text-white text-[16px] pr-2">{t('blindbox.airdropRules')}</div>
-        </div>
         <div className="w-full flex flex-col h-full">
           <div className="w-full flex-1 min-h-[300px] flex items-center">
             <div className="w-full pt-12">
@@ -200,8 +189,6 @@ export default function Main() {
         <div className="absolute z-0 top-0 right-0 w-0 h-0 border-t-0 border-l-0 border-b-[#201e2a] border-r-transparent border-b-[44px] border-r-[60px] lg:border-b-[55px] lg:border-r-[75px]"></div>
         <div className="absolute z-1 top-[1px] right-[1px] w-0 h-0 border-t-0 border-l-0 border-b-[#121212] border-r-transparent border-b-[43px] border-r-[59px] lg:border-b-[54px] lg:border-r-[74px]"></div>
       </div>
-
-      <BlindboxRulesModal ref={blindboxRulesRef} />
     </section>
   );
 }

@@ -3,14 +3,22 @@
 import { useTranslations } from 'next-intl';
 
 import 'swiper/css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Footer from '@/components/Footer';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
+import BlindboxRulesModal from '@/components/BlindboxRulesModal';
 
 export default function Kscore() {
   const t = useTranslations();
 
   const [toggleContent, setToggleContent] = useState([0, 0, 0]);
+
+  const blindboxRulesRef = useRef<any>(null);
+
+  const handleShowBlindboxRulesModal = () => {
+    blindboxRulesRef.current.showModal();
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,7 +27,22 @@ export default function Kscore() {
   return (
     <main className="k-score-page md:min-h-screen bg-[#121212] relative">
       <div className="max-w-[1920px] mx-auto relative px-5 lg:px-18 2xl:px-24 pt-28 pb-20">
-        <div className="animate__fadeInUp md:animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight">
+        <div className="blind-box-banner-sm animate__fadeInUp md:animate__animated  rounded-[20px] overflow-hidden px-6 md:px-18 py-6 md:py-12">
+          <div className="font-univia-pro-bold text-[20px] md:text-[60px] 2xl:text-[70px] leading-none">{t('blindbox.bannerTitle')}</div>
+          <div className="text-[16px] md:text-[40px] 2xl:text-[50px] text-[#FEBD32] leading-none mt-6">{t('blindbox.bannerDesc')}</div>
+          <div className="mt-9 flex justify-between md:justify-start">
+            <Link href="/blindbox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
+              <div className="btn-common-box py-2 md:py-4 text-[20px] md:text-[30px] text-center rounded-lg z-1 transition-all duration-200 bg-[#8FC31F] relative z-1">
+                {t('blindbox.joinNow')}
+              </div>
+              <div className="absolute bottom-0 left-0 w-full h-2 z-0 bg-[#638C0B]"></div>
+            </Link>
+            <Button className="w-[160px] md:w-[260px] py-2 md:py-4 text-[20px] md:text-[30px]" onClick={handleShowBlindboxRulesModal}>
+              {t('blindbox.airdropRules')}
+            </Button>
+          </div>
+        </div>
+        <div className="animate__fadeInUp md:animate__animated text-[20px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight mt-24">
           <div className="roadmap-title mx-auto inline-block border-b border-[#FEBD32]">{t('kscore.title')}</div>
         </div>
         <div className="mt-12 animate__fadeInUp md:animate__animated animate__delay-500 bg-black/50 rounded-[20px] p-5">
@@ -88,6 +111,8 @@ export default function Kscore() {
           <Footer />
         </div>
       </div>
+
+      <BlindboxRulesModal ref={blindboxRulesRef} />
     </main>
   );
 }
