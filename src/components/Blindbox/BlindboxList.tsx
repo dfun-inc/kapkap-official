@@ -188,6 +188,7 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
         isOpen={resultModalOpen}
         onRequestClose={() => setResultModalOpen(false)}
         shouldCloseOnOverlayClick={true}
+        preventScroll={true}
         className={"w-9/10! " + (drawResultList.length > 1 ? "xl:w-[1000px]!" : "xl:w-[800px]!")}
       >
         <div className="draw-result-modal w-full bg-black rounded-[20px] overflow-hidden">
@@ -196,25 +197,25 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
               {drawResultList.length} {drawResultList.length > 1 ? t('blindbox.drawResults') : t('blindbox.drawResult')}
             </div>
           </div>
-          <div className={"px-6 max-h-[60vh] overflow-y-auto flex flex-wrap items-stretch " + (drawResultList.length > 1 ? "justify-between" : "justify-center")}>
+          <div className={"px-6 max-h-[70vh] overflow-y-auto flex flex-wrap items-stretch " + (drawResultList.length > 1 ? "justify-between" : "justify-center")}>
           {drawResultList?.map((item: any, index: number) => (
-            <div key={index} className={"my-6 flex flex-wrap flex-col items-stretch justify-between " + (drawResultList.length > 1 ? "w-[45%] lg:w-[18%]" : "w-[50%] md:w-[200px]")}>
+            <div key={index} className={"my-5 flex flex-wrap flex-col items-stretch justify-between " + (drawResultList.length > 1 ? "w-[45%] lg:w-[18%]" : "w-[50%] md:w-[200px]")}>
               <div className="w-full text-[12px] md:text-[14px] text-center text-[#DDD5FF]">
                 {item.type?.toLowerCase() == 'item' && item.item?.name}
                 {item.type?.toLowerCase() == 'nft' && 
                   <><span className="text-[#FEBD32]">Lv.{item.item?.level}</span>{item.item?.name}</>}
               </div>
               <div className="flex justify-center mt-3 w-full">
-                {item.type?.toLowerCase() == 'kscore' && <img className="h-[96px] block" src="/images/kscore.png" />}
+                {item.type?.toLowerCase() == 'kscore' && <img className="h-[80px] block" src="/images/kscore.png" />}
                 {item.type?.toLowerCase() == 'item' && <>{
                   item.item?.type == 'asset' ?
-                    <img className="h-[96px] block" src="/images/kscore.png" alt="" />
+                    <img className="h-[80px] block" src="/images/kscore.png" alt="" />
                     :
-                    <img className="h-[96px] block rounded-[20px]" src={'/images/blindbox/' + item.item?.img + '.jpg'} alt="" />
+                    <img className="h-[80px] block rounded-[20px]" src={'/images/blindbox/' + item.item?.img + '.jpg'} alt="" />
                 }</>}
-                {item.type?.toLowerCase() == 'nft' && <img className="h-[96px] block rounded-[20px]" src={configData?.IPFSTON + item.item?.project + '/image/' +  item.item?.name.replace(' ', '-') + '.png'} alt="" />}
+                {item.type?.toLowerCase() == 'nft' && <img className="h-[80px] block rounded-[20px]" src={configData?.IPFSTON + item.item?.project + '/image/' +  item.item?.name.replace(' ', '-') + '.png'} alt="" />}
               </div>
-              <div className="w-full text-center mt-6 text-[#FEED32] text-[20px] md:text-[26px]">x{item?.amount}</div>
+              <div className="w-full text-center mt-4 text-[#FEED32] text-[20px] md:text-[26px]">x{item?.amount}</div>
             </div>
           ))}
           </div>

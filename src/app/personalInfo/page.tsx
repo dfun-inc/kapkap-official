@@ -26,7 +26,7 @@ export default function personalInfo() {
   const t = useTranslations();
   const { configData, userInfo, handleSetUserInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
-  const [kscore, setKscore] = useState<number>(0);
+  const [kscore, setKscore] = useState<any>({});
   const [kscoreLoading, setKscoreLoading] = useState<boolean>(false);
 
   const [NFTlist, setNFTList] = useState<any[]>([]);
@@ -450,8 +450,8 @@ export default function personalInfo() {
                   <button className="text-[#8D73FF] cursor-pointer hover:underline" onClick={() => setKscoreHistoryModal(true)}>{t('personalInfo.viewHistory')}</button>
                 </div>
                 <div className="flex flex-wrap">
-                  <div className="flex flex-wrap w-full md:w-3/5 md:border-r md:border-[#241E33] px-6 md:px-12 2xl:px-20 py-3 justify-between">
-                    <div className="w-full md:w-[40%]">
+                  <div className="flex flex-wrap w-full md:w-[65%] md:border-r md:border-[#241E33] px-6 md:px-9 2xl:px-15 py-3 justify-between">
+                    <div className="w-full md:w-[37.5%]">
                       <div className="text-[#8D73FF] text-[18px]">{t('personalInfo.yourTgAccount')}</div>
                       <div className="mt-2 leading-none">
                       {userInfo ? 
@@ -473,7 +473,7 @@ export default function personalInfo() {
                       }
                       </div>
                     </div>
-                    <div className="w-full md:w-[40%] mt-12 md:mt-0">
+                    <div className="w-full md:w-[37.5%] mt-12 md:mt-0">
                       <div className="text-[#8D73FF] text-[18px] md:pl-10">{t('personalInfo.yourWallet')}</div>
                       <div className="mt-1 leading-none flex items-center space-x-3">
                         <svg className="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M0 512a512 512 0 1 0 1024 0A512 512 0 0 0 0 512z" fill="#F3BA2F" p-id="5546"></path><path d="M379.448889 432.924444L512 300.202667l132.721778 132.664889 77.141333-77.141334L512 145.863111 302.250667 355.783111l77.141333 77.141333m-208.839111 54.499556L247.694222 410.168889l77.198222 77.198222-77.198222 77.141333-77.141333-77.141333z m208.839111 54.442667L512 674.474667l132.721778-132.721778 77.198222 77.141333L512 828.814222 302.250667 618.951111l-0.113778-0.113778 77.255111-77.084444m319.715556-54.385778l77.198222-77.198222 77.141333 77.198222-77.141333 77.141333-77.198222-77.141333z" fill="#FFFFFF" p-id="5547"></path><path d="M590.279111 487.310222L512 409.031111 454.144 466.887111l-6.656 6.656-13.710222 13.710222-0.113778 0.113778 0.113778 0.113778L512 565.703111l78.279111-78.279111 0.056889-0.056889-0.056889-0.056889" fill="#FFFFFF"></path></svg>
@@ -498,7 +498,7 @@ export default function personalInfo() {
                         }
                       </div>
                     </div>
-                    <div className="w-full md:w-[20%] mt-12 md:mt-0">
+                    <div className="w-full md:w-[25%] mt-12 md:mt-0">
                       <div className="text-[#8D73FF] text-[18px]">{t('personalInfo.custodialWallet')}</div>
                       <div className="mt-2 leading-none">
                         {userInfo ? 
@@ -515,7 +515,7 @@ export default function personalInfo() {
                       </div>
                     </div>
                   </div>
-                  <div className="w-full md:w-2/5 px-6 md:px-12 2xl:px-20 py-3 mt-12 md:mt-0">
+                  <div className="w-full md:w-[35%] px-6 md:px-12 2xl:px-20 py-3 mt-12 md:mt-0">
                     <div className="flex items-center space-x-8">
                       <img className="w-12 md:w-18" src="/images/kscore.png" alt="kscore" />
                       <div>
@@ -524,7 +524,7 @@ export default function personalInfo() {
                           {kscoreLoading ? 
                             <div className="animate-pulse w-40 h-[30px] bg-gray-500 rounded-lg"></div>
                           :
-                            <div className="text-[#FEBD32] text-[24px]">{formatNumberWithCommas(kscore)}</div>
+                            <div className="text-[#FEBD32] text-[24px]">{kscore?.have ? formatNumberWithCommas(kscore?.have) : 0}</div>
                           }
                         </div>
                         <div className="mt-1 text-[14px] text-[#8A84A3]">{t('personalInfo.kscoreDesc')}</div>
@@ -548,7 +548,7 @@ export default function personalInfo() {
                     <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
                       <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>{t('personalInfo.inGame')}</button>
                       <button className={"relative w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(1)}>
-                        BSC
+                        OP-BNB
                         <span className="text-[11px] text-zinc-200 bg-[#2EBD85] p-1 rounded-lg absolute bottom-full translate-y-1/2 -right-2">{t('nft.airdrop')}</span>
                       </button>
                     </div>
