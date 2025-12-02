@@ -1,9 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Link from 'next/link';
+import Button from '@/components/ui/Button';
+import BlindboxRulesModal from '../BlindboxRulesModal';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,6 +15,14 @@ export default function feature() {
   const [aniClassLeft, setAniClassLeft] = useState<string>("opacity-0");
   const [aniClassRight, setAniClassRight] = useState<string>("opacity-0");
   const [aniTitle, setAniTitle] = useState<string>("opacity-0");
+  const [aniBanner, setAniBanner] = useState<string>("opacity-0");
+
+  const blindboxRulesRef = useRef<any>(null);
+
+  const handleShowBlindboxRulesModal = () => {
+    blindboxRulesRef.current.showModal();
+  }
+
 
   useEffect(() => {
     const winW = window.innerWidth;
@@ -25,6 +36,7 @@ export default function feature() {
           setAniClassLeft("animate__fadeInLeft");
           setAniClassRight("animate__fadeInRight");
           setAniTitle("animate__fadeInUp");
+          setAniBanner("animate__fadeInUp");
         },
       }); 
 
@@ -34,8 +46,8 @@ export default function feature() {
           y: -60,
           scrollTrigger: {
             trigger:".feature-section",
-            start: 'top top',
-            end: 'top+=20% top',
+            start: 'top+=50% top',
+            end: 'top+=80% top',
             scrub: 0.5,
             invalidateOnRefresh: true,
           },
@@ -46,8 +58,8 @@ export default function feature() {
           y: -60,
           scrollTrigger: {
             trigger:".feature-section",
-            start: 'top+=30% top',
-            end: 'top+=50% top',
+            start: 'top+=60% top',
+            end: 'top+=90% top',
             scrub: 0.5,
             invalidateOnRefresh: true,
           },
@@ -58,6 +70,7 @@ export default function feature() {
       setAniClassLeft("animate__fadeInLeft");
       setAniClassRight("animate__fadeInRight");
       setAniTitle("animate__fadeInUp");
+      setAniBanner("animate__fadeInUp");
     }
 
     return () => ctx?.revert();
@@ -66,7 +79,36 @@ export default function feature() {
   return (
     <section id="home-section-1" className="home-section-1 feature-section bg-[#121212]">
       <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24 py-16">
-        <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight"}>
+        <div className={aniBanner + " animate__animated blind-box-banner-big rounded-[20px] overflow-hidden px-6 md:px-18 py-6 md:py-12"}>
+          <div className="font-univia-pro-bold text-[20px] md:text-[60px] 2xl:text-[70px] leading-none">{t('blindbox.bannerTitle')}</div>
+          <div className="text-[16px] md:text-[40px] 2xl:text-[50px] text-[#FEBD32] leading-none mt-6">{t('blindbox.bannerDesc')}</div>
+          <div className="mt-4 text-[#DDD5FF] text-[18px]">
+            <div className="flex items-start">
+              <div className="w-[6px] h-[6px] bg-[#DDD5FF] rounded-full mr-3 mt-[10px]"></div>
+              <div className="flex-1 shrink-0">{t('blindbox.bannerContent1')}</div>
+            </div>
+            <div className="flex items-start mt-2">
+              <div className="w-[6px] h-[6px] bg-[#DDD5FF] rounded-full mr-3 mt-[10px]"></div>
+              <div className="flex-1 shrink-0">{t('blindbox.bannerContent2')}</div>
+            </div>
+            <div className="flex items-start mt-2">
+              <div className="w-[6px] h-[6px] bg-[#DDD5FF] rounded-full mr-3 mt-[10px]"></div>
+              <div className="flex-1 shrink-0">{t('blindbox.bannerContent2')}</div>
+            </div>
+          </div>
+          <div className="mt-9 flex justify-between md:justify-center">
+            <Link href="/blindbox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
+              <div className="btn-common-box py-2 md:py-4 text-[20px] md:text-[30px] text-center rounded-lg z-1 transition-all duration-200 bg-[#8FC31F] relative z-1">
+                {t('blindbox.joinNow')}
+              </div>
+              <div className="absolute bottom-0 left-0 w-full h-2 z-0 bg-[#638C0B]"></div>
+            </Link>
+            <Button className="w-[160px] md:w-[260px] py-2 md:py-4 text-[20px] md:text-[30px]" onClick={handleShowBlindboxRulesModal}>
+              {t('blindbox.airdropRules')}
+            </Button>
+          </div>
+        </div>
+        <div className={aniTitle + " animate__animated text-[20px] xl:text-[30px] font-ethnocentric-rg text-white leading-tight mt-18"}>
           <div className="feature-title mx-auto inline-block border-b border-[#FEBD32]">{t('feature.title')}</div>
         </div>
         <div className="flex flex-wrap items-center justify-between mt-12 feature-item-top">
@@ -86,6 +128,7 @@ export default function feature() {
           </div>
         </div>
       </div>
+      <BlindboxRulesModal ref={blindboxRulesRef} />
     </section>
   );
 }

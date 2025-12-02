@@ -7,16 +7,20 @@ export default function Button({
   type,
   disabled = false,
   children,
+  fullWidth = false,
+  outerClassName = "",
   ...props
 }: React.ComponentProps<"button"> & {
     href?: string,
     target?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    fullWidth?: boolean,
+    outerClassName?: string
   }) {
   return (
     <>
     {props.href ? (
-      <Link href={props.href} target={props.target} className="btn-common cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block">
+      <Link href={props.href} target={props.target} className={"btn-common cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block " + (fullWidth ? " w-full " : "") + outerClassName}>
         <div className={"btn-common-box relative rounded-lg z-1 transition-all duration-200 " + className + (disabled ? " cursor-not-allowed bg-[#767676]" : " bg-[#6E4DFF] ")}>
           {children}
         </div>
@@ -25,7 +29,7 @@ export default function Button({
     ) : (
       <button
         data-slot="button"
-        className="btn-common cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block"
+        className={"btn-common cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block " + (fullWidth ? " w-full " : "") + outerClassName}
         onClick={onClick}
         type={type?type:"button"}
       >

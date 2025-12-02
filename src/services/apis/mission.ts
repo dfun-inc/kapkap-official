@@ -1,6 +1,6 @@
 import { request } from "@/utils/request";
 
-export async function getMissionConfig(projectId: string) {
+export async function getMissionConfig(projectId: string = '') {
   return request({
     method: 'get',
     url: '/api/v1/mission/missionConfig',
@@ -39,6 +39,20 @@ export async function checkMissionProcess(projectId: string, missionId: string) 
       Authorization: localStorage.getItem('kkAuthToken')
     },
   });
+}
+
+export async function claimMissionReward(projectId: string, missionId: string) {
+  return request({
+    method: 'post',
+    url: '/api/v1/mission/getMissionReward',
+    data: {
+      projectId: projectId,
+      missionId: missionId
+    },
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  })
 }
 
 export async function bindTgAccount(bindToken: string) {

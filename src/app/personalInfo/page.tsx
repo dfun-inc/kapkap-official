@@ -18,6 +18,8 @@ import { getChainConfig } from "@/services/apis/config";
 import Modal from 'react-modal';
 import { formatDatetime } from "@/utils/time";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import BlindboxRulesModal from "@/components/BlindboxRulesModal";
 // import { tonConnectUI } from "@/config/ton";
 
 export default function personalInfo() {
@@ -61,6 +63,8 @@ export default function personalInfo() {
   const [showNFTDetailModal, setShowNFTDetailModal] = useState<boolean>(false);
 
   const [ownIdx, setOwnIdx] = useState(0);
+
+  const blindboxRulesRef = useRef<any>(null);
 
   const handleGetUserInfo = async() => {
     await getUserInfo().then((res) => {
@@ -348,6 +352,10 @@ export default function personalInfo() {
     setShowNFTDetailModal(true);
   }
 
+  const handleShowBlindboxRulesModal = () => {
+    blindboxRulesRef.current.showModal();
+  }
+
   useEffect(() => {
     if(kscoreHistoryModal) {
       handleGetKscoreHistory();
@@ -420,28 +428,43 @@ export default function personalInfo() {
     <main className="your-nfts-page min-h-screen overflow-hidden relative pt-[72px] flex flex-col">
       <div className="w-full flex-1 mt-9 relative z-2">
         <div className="max-w-[1920px] mx-auto px-5 lg:px-18 2xl:px-24">
-        {addr || userInfo ?
+          <div className="blind-box-banner-sm rounded-[20px] overflow-hidden px-6 md:px-18 py-6 md:py-12">
+            <div className="font-univia-pro-bold text-[20px] md:text-[60px] 2xl:text-[70px] leading-none">{t('blindbox.bannerTitle')}</div>
+            <div className="text-[16px] md:text-[40px] 2xl:text-[50px] text-[#FEBD32] leading-none mt-6">{t('blindbox.bannerDesc')}</div>
+            <div className="mt-9 flex justify-between md:justify-start">
+              <Link href="/blindbox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
+                <div className="btn-common-box py-2 md:py-4 text-[20px] md:text-[30px] text-center rounded-lg z-1 transition-all duration-200 bg-[#8FC31F] relative z-1">
+                  {t('blindbox.joinNow')}
+                </div>
+                <div className="absolute bottom-0 left-0 w-full h-2 z-0 bg-[#638C0B]"></div>
+              </Link>
+              <Button className="w-[160px] md:w-[260px] py-2 md:py-4 text-[20px] md:text-[30px]" onClick={handleShowBlindboxRulesModal}>
+                {t('blindbox.airdropRules')}
+              </Button>
+            </div>
+          </div>
+          {addr || userInfo ?
             <>
-              <div className="bg-black/50 relative px-4 py-6 rounded-[20px]">
+              <div className="bg-black/50 relative px-4 py-6 rounded-[20px] mt-9">
                 <div className="flex justify-end">
                   <button className="text-[#8D73FF] cursor-pointer hover:underline" onClick={() => setKscoreHistoryModal(true)}>{t('personalInfo.viewHistory')}</button>
                 </div>
                 <div className="flex flex-wrap">
                   <div className="flex flex-wrap w-full md:w-3/5 md:border-r md:border-[#241E33] px-6 md:px-12 2xl:px-20 py-3 justify-between">
-                    <div className="w-full md:w-1/2">
+                    <div className="w-full md:w-[40%]">
                       <div className="text-[#8D73FF] text-[18px]">{t('personalInfo.yourTgAccount')}</div>
                       <div className="mt-2 leading-none">
                       {userInfo ? 
                         <>
                         {userInfo?.tgAccount ? 
-                          <div className="text-[#FEBD32] text-[24px]">{userInfo?.tgAccount}</div>
+                          <div className="text-[#FEBD32] text-[20px]">{userInfo?.tgAccount}</div>
                         :
                           bindTgAccountLoading ?
                             <div className="animate-spin w-7 h-7 border-2 border-[#8D73FF] border-t-transparent rounded-full"></div>
                           :
                           <button className="text-[#757895] flex items-end border-b border-b-transparent hover:border-b-[#757895]" onClick={() => handleBindTgAccount()}>
-                            <div className="text-[24px]">{t('personalInfo.none')}</div>
-                            <div className="text-[18px] ml-1 pb-1">({t('personalInfo.bindTgAccount')})&gt;</div>
+                            <div className="text-[20px]">{t('personalInfo.none')}</div>
+                            <div className="text-[16px] ml-1 pb-1">({t('personalInfo.bindTgAccount')})&gt;</div>
                           </button>
                         }
                         </>
@@ -450,14 +473,14 @@ export default function personalInfo() {
                       }
                       </div>
                     </div>
-                    <div className="w-full md:w-1/2 mt-12 md:mt-0">
-                      <div className="text-[#8D73FF] text-[18px] pl-10">{t('personalInfo.yourWallet')}</div>
-                      <div className="mt-2 leading-none flex items-center space-x-3">
-                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M0 512a512 512 0 1 0 1024 0A512 512 0 0 0 0 512z" fill="#F3BA2F" p-id="5546"></path><path d="M379.448889 432.924444L512 300.202667l132.721778 132.664889 77.141333-77.141334L512 145.863111 302.250667 355.783111l77.141333 77.141333m-208.839111 54.499556L247.694222 410.168889l77.198222 77.198222-77.198222 77.141333-77.141333-77.141333z m208.839111 54.442667L512 674.474667l132.721778-132.721778 77.198222 77.141333L512 828.814222 302.250667 618.951111l-0.113778-0.113778 77.255111-77.084444m319.715556-54.385778l77.198222-77.198222 77.141333 77.198222-77.141333 77.141333-77.198222-77.141333z" fill="#FFFFFF" p-id="5547"></path><path d="M590.279111 487.310222L512 409.031111 454.144 466.887111l-6.656 6.656-13.710222 13.710222-0.113778 0.113778 0.113778 0.113778L512 565.703111l78.279111-78.279111 0.056889-0.056889-0.056889-0.056889" fill="#FFFFFF"></path></svg>
+                    <div className="w-full md:w-[40%] mt-12 md:mt-0">
+                      <div className="text-[#8D73FF] text-[18px] md:pl-10">{t('personalInfo.yourWallet')}</div>
+                      <div className="mt-1 leading-none flex items-center space-x-3">
+                        <svg className="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M0 512a512 512 0 1 0 1024 0A512 512 0 0 0 0 512z" fill="#F3BA2F" p-id="5546"></path><path d="M379.448889 432.924444L512 300.202667l132.721778 132.664889 77.141333-77.141334L512 145.863111 302.250667 355.783111l77.141333 77.141333m-208.839111 54.499556L247.694222 410.168889l77.198222 77.198222-77.198222 77.141333-77.141333-77.141333z m208.839111 54.442667L512 674.474667l132.721778-132.721778 77.198222 77.141333L512 828.814222 302.250667 618.951111l-0.113778-0.113778 77.255111-77.084444m319.715556-54.385778l77.198222-77.198222 77.141333 77.198222-77.141333 77.141333-77.198222-77.141333z" fill="#FFFFFF" p-id="5547"></path><path d="M590.279111 487.310222L512 409.031111 454.144 466.887111l-6.656 6.656-13.710222 13.710222-0.113778 0.113778 0.113778 0.113778L512 565.703111l78.279111-78.279111 0.056889-0.056889-0.056889-0.056889" fill="#FFFFFF"></path></svg>
                         {userInfo ? 
                           <>
                           {userInfo?.account ? 
-                            <div className="text-[#FEBD32] text-[24px]">
+                            <div className="text-[#FEBD32] text-[20px]">
                               {userInfo?.account?.length > 4 ? userInfo?.account?.substring(0, 4) + '...' + userInfo?.account?.substring(userInfo?.account?.length - 4, userInfo?.account?.length) : userInfo?.account}
                             </div>
                           :
@@ -465,9 +488,25 @@ export default function personalInfo() {
                             <div className="animate-spin w-7 h-7 border-2 border-[#8D73FF] border-t-transparent rounded-full"></div>
                           :
                             <button className="text-[#757895] flex items-end border-b border-b-transparent hover:border-b-[#757895]" onClick={handleOpenEvmConnectModal}>
-                              <div className="text-[24px]">{t('personalInfo.none')}</div>
-                              <div className="text-[18px] ml-1 pb-1">({t('personalInfo.bindWallet')})&gt;</div>
+                              <div className="text-[20px]">{t('personalInfo.none')}</div>
+                              <div className="text-[16px] ml-1 pb-1">({t('personalInfo.bindWallet')})&gt;</div>
                             </button>
+                          }
+                          </>
+                          :
+                          <div className="animate-pulse w-40 h-[30px] bg-gray-500 rounded-lg"></div>
+                        }
+                      </div>
+                    </div>
+                    <div className="w-full md:w-[20%] mt-12 md:mt-0">
+                      <div className="text-[#8D73FF] text-[18px]">{t('personalInfo.custodialWallet')}</div>
+                      <div className="mt-2 leading-none">
+                        {userInfo ? 
+                          <>
+                          {userInfo?.mpcAccount && 
+                            <div className="text-[#FEBD32] text-[20px]">
+                              {userInfo?.mpcAccount?.length > 4 ? userInfo?.mpcAccount?.substring(0, 4) + '...' + userInfo?.mpcAccount?.substring(userInfo?.mpcAccount?.length - 4, userInfo?.mpcAccount?.length) : userInfo?.mpcAccount}
+                            </div>
                           }
                           </>
                           :
@@ -583,13 +622,13 @@ export default function personalInfo() {
                 </div>
               </div>
             </>
-          :
-          <div className="py-24 flex min-h-[60vh] items-center justify-center">
-            <Button className="text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4" onClick={() => triggerModalOpen()}>
-              {t('menu.login')}
-            </Button>
-          </div>
-        }
+            :
+            <div className="py-24 flex min-h-[60vh] items-center justify-center">
+              <Button className="text-xl font-light text-white w-40 md:w-60 text-center py-3 md:py-4" onClick={() => triggerModalOpen()}>
+                {t('menu.login')}
+              </Button>
+            </div>
+          }
         </div>
       </div>
         
@@ -753,6 +792,7 @@ export default function personalInfo() {
           )}
         </div>
       </Modal>
+      <BlindboxRulesModal ref={blindboxRulesRef} />
     </main>
   ); 
 }

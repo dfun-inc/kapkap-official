@@ -372,12 +372,12 @@ export default function ConnectBtn() {
       >
         <div className="w-80 text-center p-6 bg-black rounded-lg">
           <h2 className="text-2xl font-bold mb-9 text-white">Connect to Wallet</h2>
-          <Button className="w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 flex items-center" onClick={() => handleShowBscModal()}>
+          <Button className="w-60 text-white md:text-[20px] px-6 py-2 md:px-9 md:py-3 flex items-center" onClick={() => handleShowBscModal()}>
             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M509.1328 11.8784A502.852267 502.852267 0 1 1 6.826667 514.730667C6.826667 237.07648 231.87456 11.96032 509.5424 11.8784" fill="#F0B90B" p-id="6463"></path><path d="M379.016533 460.663467l76.049067-75.912534 16.110933-15.9744 38.0928-38.0928 129.4336 129.979734 75.502934-75.912534L509.269333 179.541333 303.650133 384.750933z" fill="#FFFFFF" p-id="6464"></path><path d="M433.670827 514.648747l75.680426-75.680427 75.69408 75.680427-75.69408 75.69408z" fill="#FFFFFF" p-id="6465"></path><path d="M638.702933 568.797867l-129.570133 129.570133-45.4656-45.4656-8.328533-8.328533-76.322134-75.776-75.3664 75.502933L509.269333 849.5104l204.936534-205.2096zM173.943467 514.730667l75.69408-75.680427 75.69408 75.680427-75.69408 75.69408zM692.87936 514.771627l75.680427-75.680427 75.69408 75.680427-75.69408 75.69408z" fill="#FFFFFF"></path></svg>
             <span className="text-sm md:text-base font-medium ml-2">{t('menu.bscWallets')}</span>
           </Button>
           <div className="mt-6">
-            <Button className="w-60 text-white md:text-[20px] px-6 py-2 md:px-12 md:py-3 flex items-center" onClick={() => handleTgLogin()}>
+            <Button className="w-60 text-white md:text-[20px] px-6 py-2 md:px-9 md:py-3 flex items-center" onClick={() => handleTgLogin()}>
               <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7640" width="26" height="26"><path d="M0 512c0 282.624 229.376 512 512 512s512-229.376 512-512S794.624 0 512 0 0 229.376 0 512z" fill="#1196db" p-id="7641"></path><path d="M216.576 481.792S467.968 378.88 555.008 342.528c33.28-14.336 146.944-60.928 146.944-60.928s52.224-20.48 48.128 29.184c-1.536 20.48-13.312 91.648-24.576 168.448-17.408 109.056-36.352 228.352-36.352 228.352s-3.072 33.28-27.648 39.424-65.536-20.48-72.704-26.112c-5.632-4.608-109.056-69.632-146.944-101.888-10.24-8.704-22.016-26.112 1.536-46.592 52.224-48.128 114.688-107.52 152.576-145.408 17.408-17.408 34.816-58.368-37.888-8.704-102.912 71.168-204.8 138.24-204.8 138.24s-23.04 14.336-67.072 1.536c-43.52-13.312-94.208-30.72-94.208-30.72s-34.816-22.016 24.576-45.056z" fill="#FFFFFF" p-id="7642"></path></svg>
               <span className="text-sm md:text-base font-medium ml-2">{t('menu.tgLogin')}</span>
             </Button>

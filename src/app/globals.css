@@ -290,12 +290,35 @@ body {
 .k-score-page,
 .your-nfts-page,
 .mint-page,
-.bind-step-modal {
+.bind-step-modal,
+.blindbox-page {
   background-image: url('/images/bg_kscore_page.png');
   background-size: 100% auto;
   background-position: top center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.draw-result-modal {
+  background-image: url('/images/blindbox/bgArea_glow.png');
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.blind-box-banner-sm {
+  background-image: url('/images/blindbox/bg_blindBox.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.blind-box-banner-big {
+  background-image: url('/images/blindbox/bg_blindBox_big.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 
@@ -312,7 +335,8 @@ body {
   .k-score-page,
   .your-nfts-page,
   .mint-page,
-  .bind-step-modal {
+  .bind-step-modal,
+  .blindbox-page {
     background-size: auto 100%;
   }
 }
