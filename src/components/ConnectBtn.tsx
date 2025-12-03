@@ -301,10 +301,10 @@ export default function ConnectBtn() {
     <>
     <div className="w-full md:w-auto relative md:ml-12 h-[50vh] md:h-auto" onMouseOver={() => setWalletDropdown(true)} onMouseOut={() => setWalletDropdown(false)}>
       <div className="hidden md:flex bg-black hover:bg-black/80 block p-[6px] h-8 md:h-9 items-center justify-center rounded-full">
-        <div className="w-42 flex items-center justify-center text-sm md:text-base">
+        <div className="w-46 flex items-center justify-center text-sm md:text-base">
           {walletAddr ? 
             <>
-            <div className="w-34 flex items-center justify-center md:text-lg">
+            <div className="w-38 flex items-center justify-center md:text-lg">
               {walletAddr.length > 4 ? walletAddr?.substring(0, 4) + '...' + walletAddr?.substring(walletAddr?.length - 4, walletAddr?.length) : walletAddr}
             </div>
             {/*
@@ -316,7 +316,7 @@ export default function ConnectBtn() {
             </>
             :
             <>
-            <div className="w-34 flex items-center justify-center md:text-lg">
+            <div className="w-38 flex items-center justify-center md:text-lg">
               {t('menu.connectWallet')}
             </div>
             {/*
@@ -351,7 +351,7 @@ export default function ConnectBtn() {
             ) : (
             <>
               <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white" onClick={() => handleShowBscModal()}>
-                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M509.1328 11.8784A502.852267 502.852267 0 1 1 6.826667 514.730667C6.826667 237.07648 231.87456 11.96032 509.5424 11.8784" fill="#F0B90B" p-id="6463"></path><path d="M379.016533 460.663467l76.049067-75.912534 16.110933-15.9744 38.0928-38.0928 129.4336 129.979734 75.502934-75.912534L509.269333 179.541333 303.650133 384.750933z" fill="#FFFFFF" p-id="6464"></path><path d="M433.670827 514.648747l75.680426-75.680427 75.69408 75.680427-75.69408 75.69408z" fill="#FFFFFF" p-id="6465"></path><path d="M638.702933 568.797867l-129.570133 129.570133-45.4656-45.4656-8.328533-8.328533-76.322134-75.776-75.3664 75.502933L509.269333 849.5104l204.936534-205.2096zM173.943467 514.730667l75.69408-75.680427 75.69408 75.680427-75.69408 75.69408zM692.87936 514.771627l75.680427-75.680427 75.69408 75.680427-75.69408 75.69408z" fill="#FFFFFF"></path></svg>
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M234.837333 156.842667L506.581333 0l271.701334 156.842667L678.4 214.784l-171.818667-98.901333-171.861333 98.901333-99.882667-57.941333zM778.24 354.645333L678.4 296.704l-171.818667 98.901333-171.861333-98.901333-99.882667 57.941333v115.882667l171.818667 98.901333v197.802667l99.925333 57.941333 99.882667-57.941333v-197.802667l171.818667-98.901333V354.645333z m0 313.685334v-115.882667L678.4 610.389333v115.882667l99.882667-57.941333z m70.954667 40.96l-171.818667 98.901333v115.882667l271.701333-156.842667V453.546667l-99.882666 57.941333v197.802667z m-99.882667-453.546667l99.84 57.941333v115.882667l99.925333-57.941333V255.744l-99.882666-57.941333-99.882667 57.941333zM406.613333 850.176v115.882667L506.581333 1024l99.882667-57.941333v-115.882667l-99.882667 57.941333-99.925333-57.941333z m-171.818666-181.845333l99.882666 57.941333v-115.882667l-99.882666-57.941333v115.882667z m171.818666-412.586667l99.925334 57.941333 99.882666-57.941333-99.882666-57.941333L406.613333 255.744z m-242.773333 57.941333l99.925333-57.941333L163.84 197.802667 64 255.744V371.626667l99.882667 57.941333V313.685333z m0 197.802667L64 453.546667v313.685333l271.744 156.885333v-115.925333L163.84 709.290667v-197.802667z" fill="#F0B90B"></path></svg>
                 <span className="text-sm md:text-base font-medium ml-2">{t('menu.bscWallets')}</span>
               </button>
               <button className="bg-white/10 md:bg-transparent rounded-lg md:rounded-none w-full px-4 py-2 text-center hover:bg-white/10 flex items-center md:text-white mt-6 md:mt-0" onClick={() => handleTgLogin()}>
@@ -373,7 +373,7 @@ export default function ConnectBtn() {
         <div className="w-80 text-center p-6 bg-black rounded-lg">
           <h2 className="text-2xl font-bold mb-9 text-white">Connect to Wallet</h2>
           <Button className="w-60 text-white md:text-[20px] px-6 py-2 md:px-9 md:py-3 flex items-center" onClick={() => handleShowBscModal()}>
-            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M509.1328 11.8784A502.852267 502.852267 0 1 1 6.826667 514.730667C6.826667 237.07648 231.87456 11.96032 509.5424 11.8784" fill="#F0B90B" p-id="6463"></path><path d="M379.016533 460.663467l76.049067-75.912534 16.110933-15.9744 38.0928-38.0928 129.4336 129.979734 75.502934-75.912534L509.269333 179.541333 303.650133 384.750933z" fill="#FFFFFF" p-id="6464"></path><path d="M433.670827 514.648747l75.680426-75.680427 75.69408 75.680427-75.69408 75.69408z" fill="#FFFFFF" p-id="6465"></path><path d="M638.702933 568.797867l-129.570133 129.570133-45.4656-45.4656-8.328533-8.328533-76.322134-75.776-75.3664 75.502933L509.269333 849.5104l204.936534-205.2096zM173.943467 514.730667l75.69408-75.680427 75.69408 75.680427-75.69408 75.69408zM692.87936 514.771627l75.680427-75.680427 75.69408 75.680427-75.69408 75.69408z" fill="#FFFFFF"></path></svg>
+            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M234.837333 156.842667L506.581333 0l271.701334 156.842667L678.4 214.784l-171.818667-98.901333-171.861333 98.901333-99.882667-57.941333zM778.24 354.645333L678.4 296.704l-171.818667 98.901333-171.861333-98.901333-99.882667 57.941333v115.882667l171.818667 98.901333v197.802667l99.925333 57.941333 99.882667-57.941333v-197.802667l171.818667-98.901333V354.645333z m0 313.685334v-115.882667L678.4 610.389333v115.882667l99.882667-57.941333z m70.954667 40.96l-171.818667 98.901333v115.882667l271.701333-156.842667V453.546667l-99.882666 57.941333v197.802667z m-99.882667-453.546667l99.84 57.941333v115.882667l99.925333-57.941333V255.744l-99.882666-57.941333-99.882667 57.941333zM406.613333 850.176v115.882667L506.581333 1024l99.882667-57.941333v-115.882667l-99.882667 57.941333-99.925333-57.941333z m-171.818666-181.845333l99.882666 57.941333v-115.882667l-99.882666-57.941333v115.882667z m171.818666-412.586667l99.925334 57.941333 99.882666-57.941333-99.882666-57.941333L406.613333 255.744z m-242.773333 57.941333l99.925333-57.941333L163.84 197.802667 64 255.744V371.626667l99.882667 57.941333V313.685333z m0 197.802667L64 453.546667v313.685333l271.744 156.885333v-115.925333L163.84 709.290667v-197.802667z" fill="#F0B90B"></path></svg>
             <span className="text-sm md:text-base font-medium ml-2">{t('menu.bscWallets')}</span>
           </Button>
           <div className="mt-6">

@@ -8,12 +8,12 @@ import Button from "@/components/ui/Button";
 import { useErrCode } from "@/datas/errCode";
 import { bindEvmAccount, bindTgAccount, bindTonAccount, getKScore, getKScoreHistory, getUserInfo } from "@/services/apis/user";
 import { formatNumberWithCommas } from "@/utils/number";
-import { getEvmMint721History, getTonMint721History, getNFTData } from "@/services/apis/nft";
+import { getEvmMint721History, getTonMint721History, getNFTData, getEvmMint1155History, getNFT1155Data } from "@/services/apis/nft";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount, useDisconnect } from "wagmi";
 import { readContract, signMessage, switchChain } from "@wagmi/core";
 import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
-import NFT721ABI from "@/config/abis/NFT721.json";
+import NFT1155ABI from "@/config/abis/NFT1155.json";
 import { getChainConfig } from "@/services/apis/config";
 import Modal from 'react-modal';
 import { formatDatetime } from "@/utils/time";
@@ -63,6 +63,8 @@ export default function personalInfo() {
   const [showNFTDetailModal, setShowNFTDetailModal] = useState<boolean>(false);
 
   const [ownIdx, setOwnIdx] = useState(0);
+
+  const [NFT1155Data, setNFT1155Data] = useState<any>(null);
 
   const blindboxRulesRef = useRef<any>(null);
 
@@ -192,6 +194,19 @@ export default function personalInfo() {
     })
   }
 
+  const handleGetNFT1155Data = async () => {
+    await getNFT1155Data()
+    .then((res) => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        setNFT1155Data(data?.data);
+      }
+      else {
+        errCodeHandler(data.status, data.msg)
+      }
+    })
+  }
+
   const handleOpenEvmConnectModal = () => {
     bindEvmForce.current = true;
     handleWalletDisconnect();
@@ -222,51 +237,52 @@ export default function personalInfo() {
     await disconnect();
   }
 
-  const handleGetBscNFTList = async() => {
-    if(!userInfo?.account) {
+  const handleGetOpbnbNFTList = async() => {
+    if(!userInfo?.mpcAccount) {
       setNFTList([])
       return;
     }
     setNFTListLoading(true);
 
     let _addr:any = '';
-    Object.entries(NFTData).find(([key, value]:any) => {
-      if(value?.type == '721' && value?.nftContract) {
-        _addr = value?.nftContract;
-      }
-    })
+    if(NFT1155Data?.nftContract) {
+      _addr = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? NFT1155Data?.nftContract.test : NFT1155Data?.nftContract.prod;
+    }
 
     let tokenIds:number[] = [];
     await readContract(wagmiConfig, {
       address: _addr,
-      abi: NFT721ABI,
-      functionName: 'walletOfOwner',
-      args: [userInfo?.account],
+      abi: NFT1155ABI,
+      functionName: 'tokensOfOwner',
+      args: [userInfo?.mpcAccount, 0, 1000],
     })
     .then((res:any) => {
       console.log(res)
       res.forEach((item:any) => {
-        tokenIds.push(Number(item));
+        if(Number(item?.amount) > 0) {
+          tokenIds.push(Number(item?.id));
+        }
       })
     })
 
     let tempArr: any[] = [];
     console.log(tokenIds)
     if(tokenIds.length) {
-      await getEvmMint721History()
+      await getEvmMint1155History()
       .then(res => {
         const data = res?.data;
         if(data.status == 10000) {
           tokenIds.map((token) => {
             data?.data.forEach((item:any) => {
-              if(token == item.tokenId && item.state >= 2) {
-                let tempItem:any = {originalTokenId: token, project: NFTData[item.project].project};
-                Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
-                  if(key == item?.resId) {
+              const ids = item?.ids.split(',');
+              if(ids.includes(token?.toString())) {
+                let tempItem:any = { originalTokenId: token };
+                Object.entries(NFT1155Data['ids']).find(([key, value]:any) => {
+                  if(key == token) {
                     tempItem = {id:key, ...value}
                   }
                 });
-                tempArr.push({originalTokenId: token, project: NFTData[item.project].project, item: {project: NFTData[item.project].project, ...tempItem}})
+                tempArr.push({originalTokenId: token, item: tempItem})
               }
             })
           });
@@ -320,20 +336,35 @@ export default function personalInfo() {
 
   const handleGetMintHistory = async (tab: number) => {
     setMintHistoryLoading(true);
+    setMintHistory([])
 
     try {
-      const res = tab ? await getEvmMint721History() : await getTonMint721History();
+      const res = tab ? await getEvmMint1155History() : await getTonMint721History();
 
       if(res) {
         const data = res?.data;
         if(data.status == 10000) {
           let temp:any[] = [];
           data?.data.forEach((item:any) => {
-            Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
-              if(key == item.resId) {
-                temp.push({...item, item: value});
-              }
-            });
+            if(tab == 0) {
+              Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
+                if(key == item.resId) {
+                  temp.push({...item, item: value});
+                }
+              });
+            }
+            else {
+              const ids = item?.ids.split(',');
+              const amounts = item?.amounts.split(',');
+              let items:any[]= [];
+              Object.entries(NFT1155Data['ids']).find(([key, value]:any) => {
+                if(ids.includes(key)) {
+                  items.push({amount: amounts[ids.indexOf(key)], item: value});
+                }
+              });
+              console.log(items)
+              temp.push({...item, items});
+            }
           })
           console.log(temp)
           setMintHistory(temp);
@@ -374,7 +405,7 @@ export default function personalInfo() {
   useEffect(() => {
     if(userInfo?.tgAccount && NFTData) {
       if(ownIdx) {
-        handleGetBscNFTList();
+        handleGetOpbnbNFTList();
       }
       else {
         handleGetTonNFTList();
@@ -413,6 +444,7 @@ export default function personalInfo() {
 
   useEffect(() => {
     handleGetNFTData();
+    handleGetNFT1155Data();
     const addr = localStorage.getItem('kkAddress');
     setAddr(addr || '');
 
@@ -572,7 +604,7 @@ export default function personalInfo() {
                             <img className="w-full" src={configData?.IPFSTON + item?.project + '/image/' +  item?.item.name.replace(' ', '-') + '.png'} alt="" />
                           :
                           item?.item ? 
-                            <img className="w-full rounded-lg" src={configData.IPFS721 + item?.project + '/image/' + item.originalTokenId + '.png'} alt={item?.id} />
+                            <img className="w-full rounded-lg" src={configData.IPFS1155 + 'image/' + item.originalTokenId + '.png'} alt={item?.id} />
                             :
                             <div className="w-full relaitve overflow-hidden">
                               <div className="absolute w-full h-full flex items-center justify-center z-2">
@@ -700,7 +732,7 @@ export default function personalInfo() {
           <div className="flex justify-center py-3">
             <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
               <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>{t('personalInfo.inGame')}</button>
-              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>BSC</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>OP-BNB</button>
             </div>
           </div>
           <div className="max-h-[400px] min-h-[300px] overflow-y-auto text-[18px]">
@@ -724,17 +756,19 @@ export default function personalInfo() {
                 <div key={index} className="flex text-[#CFC4FF] text-center text-white mt-3 items-center text-[12px] md:text-[16px]">
                   <div className="w-1/5">{formatDatetime(item?.createdAt)}</div>
                   <div className="flex-1">
-                    <div>{item?.item.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
-                  </div>
-                  {historyTabIdx == 0 && <div className="w-1/6 text-[#F6465D]">-{item?.item.kscore}</div>}
-                  <div className="w-1/6">
-                    {item?.state == 3 ? 
-                      <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
-                      :
-                      <span className="text-white/80">{t('personalInfo.pending')}</span>
+                    {historyTabIdx == 0 ?
+                      <div>{item?.item?.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
+                    :
+                      item?.items?.map((item:any, index:number) => (
+                        <div key={index} className="">{item?.item?.name} <span className='text-[#2EBD85] ml-2'>x{item?.amount}</span></div>
+                      ))
                     }
                   </div>
-                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.SCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
+                  {historyTabIdx == 0 && <div className="w-1/6 text-[#F6465D]">-{item?.item?.kscore}</div>}
+                  <div className="w-1/6">
+                    <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
+                  </div>
+                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
                 </div>
               ))
               :
@@ -786,7 +820,7 @@ export default function personalInfo() {
               <div className="text-white text-[20px]">{curNFTItem?.name}</div>
               <div className="text-[#FEBD32] mt-6">Lv. {curNFTItem?.level}</div>
               <div className="text-[#CFC4FF] mt-3">{t('personalInfo.game')}: {curNFTItem?.project}</div>
-              {curNFTItem?.airdropBoost &&<div className="text-[#2EBD85] mt-3"><span>{t('nft.airdrop')}: +{curNFTItem?.airdropBoost}%</span></div>}
+              <div className="text-[#2EBD85] mt-3"><span>{t('nft.airdropBonusLevel')}: +{curNFTItem?.level}%</span></div>
               <div className="text-[#8A84A3] mt-3">{curNFTItem?.desc}</div>
             </div>
           )}

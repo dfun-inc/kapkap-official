@@ -13,7 +13,7 @@ import Button from "@/components/ui/Button";
 import { useErrCode } from "@/datas/errCode";
 import { bindEvmAccount, bindTgAccount, bindTonAccount, getKScore, getUserInfo } from "@/services/apis/user";
 import { formatNumberWithCommas } from "@/utils/number";
-import { getNFTData, getRemintList, mappingBscChain, mintTonNFT } from "@/services/apis/nft";
+import { getNFT1155Data, getNFTData, getRemintList, mappingBscChain, mappingEvm1155, mintTonNFT } from "@/services/apis/nft";
 import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import History from "@/components/GenkiMinerMint/history";
@@ -60,6 +60,9 @@ export default function YourNFTs() {
 
   const historyRef = useRef<any>(null);
 
+
+  const [NFT1155Data, setNFT1155Data] = useState<any>(null);
+
   const [firstSortList, setFirstSortList] = useState<boolean>(true);
 
   const handleGetKscore = async () => {
@@ -99,6 +102,19 @@ export default function YourNFTs() {
     setNFTListLoading(false);
   }
 
+  const handleGetNFT1155Data = async () => {
+    await getNFT1155Data()
+    .then((res) => {
+      const data = res?.data;
+      if(data.status == 10000) {
+        setNFT1155Data(data?.data);
+      }
+      else {
+        errCodeHandler(data.status, data.msg)
+      }
+    })
+  }
+
   const handleMint = async(id:number, project:number) => {
     reconnectForce.current = false;
     if(!userInfo) {
@@ -133,13 +149,13 @@ export default function YourNFTs() {
     setMintLoading([]);
   }
 
-  const handleMapping = async(id:number, project:number) => {
+  const handleMapping = async(id:number) => {
     if(mappingLoading.length) {
       return;
     }
     setMappingLoading([id]);
 
-    await mappingBscChain({resId: id, project})
+    await mappingEvm1155({resId: id})
     .then((res) => {
       const data = res?.data;
       if(data.status == 10000) {
@@ -372,6 +388,7 @@ export default function YourNFTs() {
 
   useEffect(() => {
     handleGetNFTData();
+    handleGetNFT1155Data();
     const addr = localStorage.getItem('kkAddress');
     setAddr(addr || '');
 
@@ -466,7 +483,7 @@ export default function YourNFTs() {
                         </div>}
                         {reMintList[item.id] == 1 &&
                         <>
-                          <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(item.id), 10000)}>
+                          <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(item.id))}>
                           {t('genkiMint.mapToBscChain')}
                           {mappingLoading.includes(Number(item.id)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
                           <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(1/2)</span>
@@ -615,7 +632,7 @@ export default function YourNFTs() {
             <div className="text-center text-white/60 text-[12px] mt-6">{t('common.openTgHint')}</div>
           </div>
       </Modal>
-      <History ref={historyRef} NFTData={NFTData} />
+      <History ref={historyRef} NFT1155Data={NFT1155Data} NFTData={NFTData} />
     </main>
   );
 }

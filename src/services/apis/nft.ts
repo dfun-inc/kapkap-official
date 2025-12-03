@@ -7,6 +7,13 @@ export async function getNFTData() {
   });
 }
 
+export async function getNFT1155Data() {
+  return request({
+    method: 'get',
+    url: '/api/v1/public/NFT1155Data'
+  });
+}
+
 export async function getMintData(data:any) {
   return request({
     method: 'post',
@@ -86,6 +93,17 @@ export async function mappingBscChain(data:any) {
   return request({
     method: 'post',
     url: '/api/v1/nft/mappingEvm721',
+    data,
+    headers: {
+      Authorization: localStorage.getItem('kkAuthToken')
+    },
+  });
+}
+
+export async function mappingEvm1155(data:any) {
+  return request({
+    method: 'post',
+    url: '/api/v1/nft/mappingEvm1155',
     data,
     headers: {
       Authorization: localStorage.getItem('kkAuthToken')

@@ -34,7 +34,7 @@
     "disconnect": "Disconnect",
     "logout": "Logout",
     "myAccount": "My Account",
-    "bscWallets": "BSC Wallets",
+    "bscWallets": "OP-BNB Wallets",
     "tgLogin": "TG Login",
     "profile": "Profile",
     "personalInfo": "Personal information",
@@ -384,6 +384,7 @@
   "nft": {
     "airdrop": "airdrop",
     "airdropBenefits": "Airdrop Benefits",
+    "airdropBonusLevel": "Airdrop Bonus Level",
     "benefits": "Benefits",
     "inGameBenefits": "In-game Benefits Enhancement"
   },

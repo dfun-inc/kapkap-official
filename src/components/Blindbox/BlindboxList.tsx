@@ -17,6 +17,7 @@ type Props = {
   NftData: any;
   triggerKscore: (val: number) => void;
 };
+
 export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoading, myListTrigger, NftData, triggerKscore }: Props) {
   const t = useTranslations();
 

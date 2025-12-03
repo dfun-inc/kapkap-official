@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/context/AppContext';
 import { useErrCode } from '@/datas/errCode';
-import { getEvmMint721History, getTonMint721History } from '@/services/apis/nft';
+import { getEvmMint1155History, getTonMint721History } from '@/services/apis/nft';
 import { formatDatetime } from '@/utils/time';
 import { useTranslations } from 'next-intl';
 import { forwardRef, useImperativeHandle, useEffect, useState } from 'react';
@@ -10,13 +10,14 @@ import Modal from 'react-modal';
 
 type Props = {
   NFTData: any;
+  NFT1155Data: any;
 };
 
 type HistoryHandle = {
   handleShowModal: () => void;
 };
 
-const History = forwardRef<HistoryHandle, Props>(({NFTData}, ref) => {
+const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) => {
   const t = useTranslations();
   const [mintHistoryModal, setMintHistoryModal] = useState(false);
   const [historyTabIdx, setHistoryTabIdx] = useState(0);
@@ -29,20 +30,35 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData}, ref) => {
 
   const handleGetMintHistory = async (tab: number) => {
     setMintHistoryLoading(true);
+    setMintHistory([]);
 
     try {
-      const res = tab ? await getEvmMint721History() : await getTonMint721History();
+      const res = tab ? await getEvmMint1155History() : await getTonMint721History();
 
       if(res) {
         const data = res?.data;
         if(data.status == 10000) {
           let temp:any[] = [];
           data?.data.forEach((item:any) => {
-            Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
-              if(key == item.resId) {
-                temp.push({...item, item: value});
-              }
-            });
+            if(tab == 0) {
+              Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
+                if(key == item.resId) {
+                  temp.push({...item, item: value});
+                }
+              });
+            }
+            else {
+              const ids = item?.ids.split(',');
+              const amounts = item?.amounts.split(',');
+              let items:any[]= [];
+              Object.entries(NFT1155Data['ids']).find(([key, value]:any) => {
+                if(ids.includes(key)) {
+                  items.push({amount: amounts[ids.indexOf(key)], item: value});
+                }
+              });
+              console.log(items)
+              temp.push({...item, items});
+            }
           })
           console.log(temp)
           setMintHistory(temp);
@@ -89,7 +105,7 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData}, ref) => {
           <div className="flex justify-center py-3">
             <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
               <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>{t('personalInfo.inGame')}</button>
-              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>BSC</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>OP-BNB</button>
             </div>
           </div>
           <div className="max-h-[400px] min-h-[300px] overflow-y-auto text-[18px]">
@@ -113,17 +129,19 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData}, ref) => {
                 <div key={index} className="flex text-[#CFC4FF] text-center text-white mt-3 items-center text-[12px] md:text-[16px]">
                   <div className="w-1/5">{formatDatetime(item?.createdAt)}</div>
                   <div className="flex-1">
-                    <div>{item?.item.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
-                  </div>
-                  {historyTabIdx == 0 && <div className="w-1/6 text-[#F6465D]">-{item?.item.kscore}</div>}
-                  <div className="w-1/6">
-                    {item?.state == 3 ? 
-                      <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
-                      :
-                      <span className="text-white/80">{t('personalInfo.pending')}</span>
+                    {historyTabIdx == 0 ?
+                      <div>{item?.item?.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
+                    :
+                      item?.items?.map((item:any, index:number) => (
+                        <div key={index} className="">{item?.item?.name} <span className='text-[#2EBD85] ml-2'>x{item?.amount}</span></div>
+                      ))
                     }
                   </div>
-                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.SCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
+                  {historyTabIdx == 0 && <div className="w-1/6 text-[#F6465D]">-{item?.item?.kscore}</div>}
+                  <div className="w-1/6">
+                    <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
+                  </div>
+                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
                 </div>
               ))
               :
