@@ -16,9 +16,10 @@ type Props = {
   myListTrigger: number;
   NftData: any;
   triggerKscore: (val: number) => void;
+  triggerTaskStatus: (val: number) => void;
 };
 
-export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoading, myListTrigger, NftData, triggerKscore }: Props) {
+export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoading, myListTrigger, NftData, triggerKscore, triggerTaskStatus }: Props) {
   const t = useTranslations();
 
   const { configData, triggerModalOpen } = useAppContext();
@@ -75,6 +76,7 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
         setResultModalOpen(true);
         handleGetMyBoxList();
         triggerKscore(Date.now())
+        triggerTaskStatus(Date.now());
       }
       else {
         errCodeHandler(data.status);

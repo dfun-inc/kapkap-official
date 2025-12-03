@@ -468,7 +468,7 @@ export default function YourNFTs() {
                           <div className="md:text-[20px]">{item.kscore}/{kscore}</div>
                         </div>
                         {item?.airdropBoost > 0 && <div className="w-full text-center">
-                          <span className="text-[#69FFD3] mt-1">{t('nft.benefits')}: {t('nft.airdrop')} +{item?.airdropBoost}%</span>
+                          <span className="text-[#69FFD3] mt-1">{t('nft.airdropBonusLevel')}: {item?.level}</span>
                         </div>}
                         <Button className={"relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (item.kscore > kscore ? "cursor-not-allowed" : "")} 
                           onClick={item.kscore > kscore ?() => {} : () => handleMint(Number(item.id), 10000)} disabled={item.kscore > kscore}>

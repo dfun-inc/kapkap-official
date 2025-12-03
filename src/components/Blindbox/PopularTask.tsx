@@ -17,8 +17,9 @@ type Props = {
   blindboxConfig: any;
   triggerMyList: (val: number) => void;
   triggerKscore: (val: number) => void;
+  taskStatusTrigger: number;
 };
-export default function PopularTask({ userInfo, blindboxConfig, triggerMyList, triggerKscore }: Props) {
+export default function PopularTask({ userInfo, blindboxConfig, triggerMyList, triggerKscore, taskStatusTrigger }: Props) {
   const t = useTranslations();
 
   const { triggerModalOpen } = useAppContext();
@@ -138,6 +139,12 @@ export default function PopularTask({ userInfo, blindboxConfig, triggerMyList, t
     })
     setTaskClaimIds(taskClaimIds.filter((id) => id !== Number(task.id)));
   }
+
+  useEffect(() => {
+    if(taskStatusTrigger) {
+      handleGetMissionProcess();
+    }
+  }, [taskStatusTrigger])
 
   useEffect(() => {
     if(missionConfig && blindboxConfig) {

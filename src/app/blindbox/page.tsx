@@ -30,6 +30,7 @@ export default function Blindbox() {
 
   const [myListTrigger, setMyListTrigger] = useState<number>(0);
   const [kscoreTrigger, setKscoreTrigger] = useState<number>(0);
+  const [taskStatusTrigger, setTaskStatusTrigger] = useState<number>(0);
 
   const { errCodeHandler } = useErrCode();
 
@@ -119,12 +120,12 @@ export default function Blindbox() {
         <div className="animate__fadeInUp md:animate__animated text-[17px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight">
           <div className="mx-auto inline-block border-b border-[#FEBD32]">{t('blindbox.title')}</div>
         </div>
-        <BlindboxList userInfo={userInfo} blindboxConfig={blindboxConfig} boxConfigLoading={boxConfigLoading} 
+        <BlindboxList userInfo={userInfo} blindboxConfig={blindboxConfig} boxConfigLoading={boxConfigLoading} triggerTaskStatus={setTaskStatusTrigger}
           myListTrigger={myListTrigger} triggerKscore={setKscoreTrigger} NftData={NftData} />
         <div className="mt-18 md:mx-10 pb-9 border-b-[2px] border-[#4C4081]">
           <div className="mt-18 flex items-center justify-between text-[#DDD5FF] text-[20px]">
             <div className="capitalize">{t('blindbox.rule')}:</div>
-            {userInfo != null && <LooteryRecord userInfo={userInfo} blindboxConfig={blindboxConfig} NftData={NftData}  />}
+            {userInfo != null && <LooteryRecord userInfo={userInfo} blindboxConfig={blindboxConfig} NftData={NftData} />}
           </div>
           <div className="mt-6 text-[#DDD5FF] text-[20px]">
             <div className="">{t('blindbox.rule1')}</div>
@@ -135,7 +136,7 @@ export default function Blindbox() {
 
         <div className="mt-12 flex flex-wrap justify-between md:space-x-12 2xl:space-x-15">
           <MysteryShop userInfo={userInfo} onSaleBlindbox={onSaleBlindbox} kscoreTrigger={kscoreTrigger} triggerMyList={setMyListTrigger} />
-          <PopularTask userInfo={userInfo} blindboxConfig={blindboxConfig} triggerKscore={setKscoreTrigger} triggerMyList={setMyListTrigger} />
+          <PopularTask userInfo={userInfo} blindboxConfig={blindboxConfig} taskStatusTrigger={taskStatusTrigger} triggerKscore={setKscoreTrigger} triggerMyList={setMyListTrigger} />
         </div>
       </div>
         
