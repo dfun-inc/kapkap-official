@@ -105,10 +105,12 @@ export default function YourNFTs() {
       triggerModalOpen();
       return;
     }
+    /*
     if(!userInfo?.account || !userInfo?.tgAccount) {
       setShowBindModal(true);
       return;
     }
+    */
     if(mintLoading.length) {
       return;
     }
@@ -441,7 +443,6 @@ export default function YourNFTs() {
                 }
                 {userInfo != null && !mintedLoading && reMintList != null && reMintList[item.id] !== undefined && !kscoreLoading &&
                   <> {
-                    userInfo?.account && userInfo?.tgAccount ?
                       reMintList[item.id] == 0 ?
                         <>
                         <div className="w-full flex items-center justify-center space-x-3">
@@ -473,12 +474,6 @@ export default function YourNFTs() {
                         <div className="text-center text-[14px] text-[#8A84A3]">{t('genkiMint.mappingHint')}</div>
                         </>}
                       </> 
-                    :
-                    <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3"
-                      onClick={() => setShowBindModal(true)}>
-                      {t('genkiMint.mint')}
-                      <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(0/2)</span>
-                    </Button>
                   }</>
                 }
                 </div>
