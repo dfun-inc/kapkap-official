@@ -458,7 +458,8 @@ export default function YourNFTs() {
                     <span className="animate-spin w-8 h-8 border-3 border-b-white/50 border-t-transparent rounded-full"></span>
                   </div>
                 }
-                {userInfo != null && !mintedLoading && reMintList != null && reMintList[item.id] !== undefined && !kscoreLoading &&
+                {userInfo != null ?
+                  !mintedLoading && reMintList != null && reMintList[item.id] !== undefined && !kscoreLoading &&
                   <> {
                       reMintList[item.id] == 0 ?
                         <>
@@ -484,14 +485,19 @@ export default function YourNFTs() {
                         {reMintList[item.id] == 1 &&
                         <>
                           <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(item.id))}>
-                          {t('genkiMint.mapToBscChain')}
-                          {mappingLoading.includes(Number(item.id)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
-                          <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(1/2)</span>
-                        </Button>
+                            {t('genkiMint.mapToBscChain')}
+                            {mappingLoading.includes(Number(item.id)) && <span className="ml-2 animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full"></span>}
+                            <span className="absolute left-1/2 -translate-x-1/2 bottom-[2px] text-[12px] text-white">(1/2)</span>
+                          </Button>
                         <div className="text-center text-[14px] text-[#8A84A3]">{t('genkiMint.mappingHint')}</div>
                         </>}
                       </> 
-                  }</>
+                  }
+                  </>
+                  :
+                  <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => triggerModalOpen()}>
+                    {t('menu.login')}
+                  </Button>
                 }
                 </div>
               </div>

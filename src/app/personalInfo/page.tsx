@@ -387,6 +387,28 @@ export default function personalInfo() {
     blindboxRulesRef.current.showModal();
   }
 
+  const handleCopyMpcAccount = (text: string) => {
+    navigator.clipboard.writeText(text)
+    .then(() => {;
+      toast.success(t('other.copySuccess'))
+    })
+    .catch((err) => {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      
+      try {
+        document.execCommand("copy");
+        toast.success(t('other.copySuccess'))
+      } catch (err) {
+        console.log(err)
+      }
+      
+      document.body.removeChild(textarea);
+    })
+  }
+
   useEffect(() => {
     if(kscoreHistoryModal) {
       handleGetKscoreHistory();
@@ -508,7 +530,7 @@ export default function personalInfo() {
                     <div className="w-full md:w-[37.5%] mt-12 md:mt-0">
                       <div className="text-[#8D73FF] text-[18px] md:pl-10">{t('personalInfo.yourWallet')}</div>
                       <div className="mt-1 leading-none flex items-center space-x-3">
-                        <svg className="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M0 512a512 512 0 1 0 1024 0A512 512 0 0 0 0 512z" fill="#F3BA2F" p-id="5546"></path><path d="M379.448889 432.924444L512 300.202667l132.721778 132.664889 77.141333-77.141334L512 145.863111 302.250667 355.783111l77.141333 77.141333m-208.839111 54.499556L247.694222 410.168889l77.198222 77.198222-77.198222 77.141333-77.141333-77.141333z m208.839111 54.442667L512 674.474667l132.721778-132.721778 77.198222 77.141333L512 828.814222 302.250667 618.951111l-0.113778-0.113778 77.255111-77.084444m319.715556-54.385778l77.198222-77.198222 77.141333 77.198222-77.141333 77.141333-77.198222-77.141333z" fill="#FFFFFF" p-id="5547"></path><path d="M590.279111 487.310222L512 409.031111 454.144 466.887111l-6.656 6.656-13.710222 13.710222-0.113778 0.113778 0.113778 0.113778L512 565.703111l78.279111-78.279111 0.056889-0.056889-0.056889-0.056889" fill="#FFFFFF"></path></svg>
+                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M234.837333 156.842667L506.581333 0l271.701334 156.842667L678.4 214.784l-171.818667-98.901333-171.861333 98.901333-99.882667-57.941333zM778.24 354.645333L678.4 296.704l-171.818667 98.901333-171.861333-98.901333-99.882667 57.941333v115.882667l171.818667 98.901333v197.802667l99.925333 57.941333 99.882667-57.941333v-197.802667l171.818667-98.901333V354.645333z m0 313.685334v-115.882667L678.4 610.389333v115.882667l99.882667-57.941333z m70.954667 40.96l-171.818667 98.901333v115.882667l271.701333-156.842667V453.546667l-99.882666 57.941333v197.802667z m-99.882667-453.546667l99.84 57.941333v115.882667l99.925333-57.941333V255.744l-99.882666-57.941333-99.882667 57.941333zM406.613333 850.176v115.882667L506.581333 1024l99.882667-57.941333v-115.882667l-99.882667 57.941333-99.925333-57.941333z m-171.818666-181.845333l99.882666 57.941333v-115.882667l-99.882666-57.941333v115.882667z m171.818666-412.586667l99.925334 57.941333 99.882666-57.941333-99.882666-57.941333L406.613333 255.744z m-242.773333 57.941333l99.925333-57.941333L163.84 197.802667 64 255.744V371.626667l99.882667 57.941333V313.685333z m0 197.802667L64 453.546667v313.685333l271.744 156.885333v-115.925333L163.84 709.290667v-197.802667z" fill="#F0B90B"></path></svg>
                         {userInfo ? 
                           <>
                           {userInfo?.account ? 
@@ -536,7 +558,7 @@ export default function personalInfo() {
                         {userInfo ? 
                           <>
                           {userInfo?.mpcAccount && 
-                            <div className="text-[#FEBD32] text-[20px]">
+                            <div className="text-[#FEBD32] text-[20px] cursor-pointer underline" onClick={() => handleCopyMpcAccount(userInfo?.mpcAccount)}>
                               {userInfo?.mpcAccount?.length > 4 ? userInfo?.mpcAccount?.substring(0, 4) + '...' + userInfo?.mpcAccount?.substring(userInfo?.mpcAccount?.length - 4, userInfo?.mpcAccount?.length) : userInfo?.mpcAccount}
                             </div>
                           }
@@ -625,7 +647,7 @@ export default function personalInfo() {
                       <div className="w-full">
                         <svg className="mx-auto" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M855.6 427.2H168.5c-12.7 0-24.4 6.9-30.6 18L4.4 684.7C1.5 689.9 0 695.8 0 701.8v287.1c0 19.4 15.7 35.1 35.1 35.1H989c19.4 0 35.1-15.7 35.1-35.1V701.8c0-6-1.5-11.8-4.4-17.1L886.2 445.2c-6.2-11.1-17.9-18-30.6-18zM673.4 695.6c-16.5 0-30.8 11.5-34.3 27.7-12.7 58.5-64.8 102.3-127.2 102.3s-114.5-43.8-127.2-102.3c-3.5-16.1-17.8-27.7-34.3-27.7H119c-26.4 0-43.3-28-31.1-51.4l81.7-155.8c6.1-11.6 18-18.8 31.1-18.8h622.4c13 0 25 7.2 31.1 18.8l81.7 155.8c12.2 23.4-4.7 51.4-31.1 51.4H673.4zM819.9 209.5c-1-1.8-2.1-3.7-3.2-5.5-9.8-16.6-31.1-22.2-47.8-12.6L648.5 261c-17 9.8-22.7 31.6-12.6 48.4 0.9 1.4 1.7 2.9 2.5 4.4 9.5 17 31.2 22.8 48 13L807 257.3c16.7-9.7 22.4-31 12.9-47.8zM375.4 261.1L255 191.6c-16.7-9.6-38-4-47.8 12.6-1.1 1.8-2.1 3.6-3.2 5.5-9.5 16.8-3.8 38.1 12.9 47.8L337.3 327c16.9 9.7 38.6 4 48-13.1 0.8-1.5 1.7-2.9 2.5-4.4 10.2-16.8 4.5-38.6-12.4-48.4zM512 239.3h2.5c19.5 0.3 35.5-15.5 35.5-35.1v-139c0-19.3-15.6-34.9-34.8-35.1h-6.4C489.6 30.3 474 46 474 65.2v139c0 19.5 15.9 35.4 35.5 35.1h2.5z" fill="#757895"></path></svg>
                       </div>
-                      <div className="flex flex-wrap items-center md:space-x-6 justify-center">
+                      {/*<div className="flex flex-wrap items-center md:space-x-6 justify-center">
                         {!userInfo?.account &&
                           <Button className="text-xl font-light text-white w-80 text-center py-3 md:py-4 mt-6" onClick={handleOpenEvmConnectModal}>
                             {t('personalInfo.bindWallet')}
@@ -639,16 +661,16 @@ export default function personalInfo() {
                             {bindTgAccountLoading && <div className="animate-spin w-5 h-5 border-2 border-[#8D73FF] border-t-transparent rounded-full ml-2"></div>}
                           </Button>
                         }
-                      </div>
+                      </div>*/}
                     </div>
                     }
-                    {Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) &&
+                    {/*Boolean(userInfo?.account) && Boolean(userInfo?.tgAccount) &&
                       <div className="text-center mt-6">
                         <Button href="/genkiMinerMint" className="text-xl font-light text-white w-60 text-center py-3 md:py-4">
                           {t('personalInfo.goToMint')}
                         </Button>
                       </div>
-                    }
+                    */}
                     </>
                   }
                 </div>
@@ -820,7 +842,7 @@ export default function personalInfo() {
               <div className="text-white text-[20px]">{curNFTItem?.name}</div>
               <div className="text-[#FEBD32] mt-6">Lv. {curNFTItem?.level}</div>
               <div className="text-[#CFC4FF] mt-3">{t('personalInfo.game')}: {curNFTItem?.project}</div>
-              <div className="text-[#2EBD85] mt-3"><span>{t('nft.airdropBonusLevel')}: +{curNFTItem?.level}%</span></div>
+              <div className="text-[#2EBD85] mt-3"><span>{t('nft.airdropBonusLevel')}: {curNFTItem?.level}</span></div>
               <div className="text-[#8A84A3] mt-3">{curNFTItem?.desc}</div>
             </div>
           )}

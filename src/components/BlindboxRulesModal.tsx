@@ -102,7 +102,7 @@ const BlindboxRulesModal = forwardRef<BlindboxRulesModalRef>((props, ref) => {
               <span className="ml-2">{t('blindbox.modalItem2_1')}</span>
             </div>
             <div className="w-full md:w-auto mt-3 md:mt-0 flex justify-end">
-              <Button href="/personalInfo" className="w-30 py-3 text-[16px] text-white text-center">{t('blindbox.joinNow')}</Button>
+              <Button href="/genkiMinerMint" className="w-30 py-3 text-[16px] text-white text-center">{t('blindbox.joinNow')}</Button>
             </div>
           </div><div className="flex flex-wrap mt-1 md:mt-3 items-center">
             <div className="w-full md:w-auto md:flex-1">

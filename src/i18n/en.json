@@ -204,7 +204,8 @@
 
   "other": {
     "gamePartners": "PARTNERS",
-    "adPartners": "AD PARTNERS"
+    "adPartners": "AD PARTNERS",
+    "copySuccess": "Copy Success"
   },
 
   "qa": {
