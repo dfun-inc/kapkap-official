@@ -29,6 +29,9 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
   const [resultModalOpen, setResultModalOpen] = useState<boolean>(false);
   const [blindBoxConfigList, setBlindboxConfigList] = useState<any[]>([]);
 
+  const [showBlindboxDetailModal, setShowBlindboxDetailModal] = useState<boolean>(false);
+  const [blindboxDetail, setBlindboxDetail] = useState<any>(null);
+
   const { errCodeHandler } = useErrCode();
 
   const handleOpenBox = async (boxId: string, amount: number) => {
@@ -100,6 +103,11 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
     setMyBoxLoading(false);
   }
 
+  const handleShowBlindboxDetailModal = (item:any) => {
+    setBlindboxDetail(item);
+    setShowBlindboxDetailModal(true);
+  }
+
   useEffect(() => {
     if(blindboxConfig != null && Object.keys(blindboxConfig).length) {
       let temp:any[] = [];
@@ -145,7 +153,7 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
       blindBoxConfigList?.map((item: any, index: number) => (
         <div key={index} className="w-[46%] md:w-[22%] mb-12">
           <div className="text-center text-[#FEBD32] text-[12px] md:text-[16px]">{item?.name}</div>
-          <img className="w-full mt-3 rounded-[20px]" src={'/images/blindbox/' + item?.img + '.jpg'} alt="" />
+          <img className="w-full mt-3 rounded-[20px] cursor-pointer hover:scale-[105%] transition-all duration-300" src={'/images/blindbox/' + item?.img + '.jpg'} alt="" onClick={() => handleShowBlindboxDetailModal(item)} />
           {addr != '' || userInfo ? 
             <>
               {userInfo &&
@@ -221,6 +229,27 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
           <div className="px-12 py-5 mt-6 bg-[#1d1b27] flex justify-center">
             <Button className="text-[24px] text-[30px] py-3 md:py-5 px-[80px] md:px-[150px]" onClick={() => setResultModalOpen(false)}>OK</Button>
           </div>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={showBlindboxDetailModal}
+        onRequestClose={() => setShowBlindboxDetailModal(false)}
+        shouldCloseOnOverlayClick={true}
+        className="w-9/10! lg:w-[400px]!"
+      >
+        <div className="w-full p-6 bg-black rounded-lg">
+          <div className="relative text-white">
+            <button className="absolute top-1/2 right-0 -translate-y-1/2 cursor-pointer hover:opacity-80" onClick={() => setShowBlindboxDetailModal(false)}>
+              <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22"><path d="M431.559111 512L149.959111 230.4a56.888889 56.888889 0 0 1 80.440889-80.440889L512 431.559111l281.6-281.6a56.888889 56.888889 0 0 1 80.440889 80.440889L592.440889 512l281.6 281.6a56.888889 56.888889 0 1 1-80.440889 80.440889L512 592.440889 230.4 874.040889a56.888889 56.888889 0 1 1-80.440889-80.440889L431.559111 512z" fill="#ffffff"></path></svg>
+            </button>
+          </div>
+          {blindboxDetail != null && (
+            <div className="mt-6">
+              <div className="text-white text-[20px] text-center">{blindboxDetail?.name}</div>
+              <img className="w-1/2 mx-auto block rounded-[20px] mt-6" src={'/images/blindbox/' + blindboxDetail?.img + '.jpg'} alt="" />
+              <div className="text-[#8A84A3] mt-3">{blindboxDetail?.desc}</div>
+            </div>
+          )}
         </div>
       </Modal>
     </div>
