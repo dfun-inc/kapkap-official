@@ -81,9 +81,6 @@ export async function getKScore(projectId: number) {
   return request({
     method: 'get',
     url: '/api/v1/user/getKScore',
-    params: {
-      projectId
-    },
     headers: {
       Authorization: localStorage.getItem('kkAuthToken')
     },
