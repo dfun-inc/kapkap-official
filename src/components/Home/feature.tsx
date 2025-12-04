@@ -100,7 +100,7 @@ export default function feature() {
             </div>
           </div>
           <div className="mt-9 flex justify-between md:justify-center">
-            <Link href="/blindbox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
+            <Link href="/mysteryBox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
               <div className="btn-common-box py-2 md:py-4 text-[20px] md:text-[30px] text-center rounded-lg z-1 transition-all duration-200 bg-[#8FC31F] relative z-1">
                 {t('blindbox.joinNow')}
               </div>

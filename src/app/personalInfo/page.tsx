@@ -486,7 +486,7 @@ export default function personalInfo() {
             <div className="font-univia-pro-bold text-[20px] md:text-[60px] 2xl:text-[70px] leading-none">{t('blindbox.bannerTitle')}</div>
             <div className="text-[16px] md:text-[40px] 2xl:text-[50px] text-[#FEBD32] leading-none mt-6">{t('blindbox.bannerDesc')}</div>
             <div className="mt-9 flex justify-between md:justify-start">
-              <Link href="/blindbox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
+              <Link href="/mysteryBox" className="btn-common w-[160px] md:w-[260px] cursor-pointer relative rounded-lg overflow-hidden pb-1 inline-block md:mr-15">
                 <div className="btn-common-box py-2 md:py-4 text-[20px] md:text-[30px] text-center rounded-lg z-1 transition-all duration-200 bg-[#8FC31F] relative z-1">
                   {t('blindbox.joinNow')}
                 </div>
@@ -723,7 +723,7 @@ export default function personalInfo() {
               kscoreHistory.map((item, index) => (
                 <div key={index} className="flex text-[#CFC4FF] text-center text-white mt-3">
                   <div className="w-1/3">{formatDatetime(item?.createdAt)}</div>
-                  <div className="w-1/3 px-2">{(item?.type?.indexOf('mint') >= 0 ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
+                  <div className="w-1/3 px-2">{(item?.type?.indexOf('mint') >= 0 || (item?.type?.indexOf('buy') >= 0) ? <span className='text-[#F6465D]'>-{item?.amount}</span> : <span className='text-[#2EBD85]'>+{item?.amount}</span>)}</div>
                   <div className="w-1/3 capitalize">{item?.type}</div>
                 </div>
               ))

@@ -187,6 +187,9 @@ export default function Header(props:Props) {
               <Link href="/kscore" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
                   <span className="text-xl">{t('menu.kscore')}</span>
               </Link>
+              <Link href="/mysteryBox" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
+                  <span className="text-xl">{t('menu.mysteryBox')}</span>
+              </Link>
               {/*
               <Link href="/explore" className='block md:inline text-xl mr-8 cursor-pointertext-white hover:text-[#8D73FF] mt-6 md:mt-0'>
                   <span className="text-xl">{t('menu.explore')}</span>

@@ -15,6 +15,7 @@ import MysteryShop from "@/components/Blindbox/MysteryShop";
 import PopularTask from "@/components/Blindbox/PopularTask";
 import LooteryRecord from "@/components/Blindbox/LotteryRecord";
 import { getNFTData } from "@/services/apis/nft";
+import { formatNumberWithCommas } from "@/utils/number";
 
 export default function Blindbox() {
   const t = useTranslations();
@@ -31,6 +32,8 @@ export default function Blindbox() {
   const [myListTrigger, setMyListTrigger] = useState<number>(0);
   const [kscoreTrigger, setKscoreTrigger] = useState<number>(0);
   const [taskStatusTrigger, setTaskStatusTrigger] = useState<number>(0);
+  const [kscore, setKscore] = useState<number>(0);
+  const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
 
   const { errCodeHandler } = useErrCode();
 
@@ -97,11 +100,29 @@ export default function Blindbox() {
     })
   }
 
+  const handleGetKscore = async () => {
+    setKscoreLoading(true);
+    await getKScore(10000)
+    .then((res) => {
+      const data = res?.data;
+      if(data.status == 10000 || data.status == 30082) {
+        setKscore(data?.data?.have || 0);
+      }
+      else {
+        errCodeHandler(data.status, data.msg)
+      }
+    })
+    setKscoreLoading(false);
+  }
+
   useEffect(() => {
-    if(!userInfo) {
+    if(userInfo) {
+      handleGetKscore();
+    }
+    else {
       setAddr('');
     }
-  }, [userInfo])
+  }, [userInfo, kscoreTrigger])
 
   useEffect(() => {
     handleGetConfig();
@@ -117,8 +138,14 @@ export default function Blindbox() {
   return (
     <main className="blindbox-page min-h-screen overflow-hidden relative">
       <div className="max-w-[1920px] mx-auto relative px-5 lg:px-18 2xl:px-24 pt-28 pb-20">
-        <div className="animate__fadeInUp md:animate__animated text-[17px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight">
-          <div className="mx-auto inline-block border-b border-[#FEBD32]">{t('blindbox.title')}</div>
+        <div className="flex flex-wrap justify-between items-center">
+          <div className="w-full md:w-auto animate__fadeInUp md:animate__animated text-[17px] lg:text-[30px] font-ethnocentric-rg text-white leading-tight">
+            <div className="mx-auto inline-block border-b border-[#FEBD32]">{t('blindbox.title')}</div>
+          </div>
+          {userInfo != null &&<div className="w-full md:w-auto flex items-center animate__fadeInUp md:animate__animated mt-3 md:mt-0">
+            <div className="text-[#8D73FF] text-[18px]">{t('personalInfo.yourKScore')}:</div>
+            <div className="text-[#FEBD32] text-[24px] ml-2">{kscore ? formatNumberWithCommas(kscore) : 0}</div>
+          </div>}
         </div>
         <BlindboxList userInfo={userInfo} blindboxConfig={blindboxConfig} boxConfigLoading={boxConfigLoading} triggerTaskStatus={setTaskStatusTrigger}
           myListTrigger={myListTrigger} triggerKscore={setKscoreTrigger} NftData={NftData} />
@@ -135,7 +162,7 @@ export default function Blindbox() {
         </div>
 
         <div className="mt-12 flex flex-wrap justify-between md:space-x-12 2xl:space-x-15">
-          <MysteryShop userInfo={userInfo} onSaleBlindbox={onSaleBlindbox} kscoreTrigger={kscoreTrigger} triggerMyList={setMyListTrigger} />
+          <MysteryShop userInfo={userInfo} onSaleBlindbox={onSaleBlindbox} triggerKscore={setKscoreTrigger} kscoreLoading={kscoreLoading} kscore={kscore} triggerMyList={setMyListTrigger} />
           <PopularTask userInfo={userInfo} blindboxConfig={blindboxConfig} taskStatusTrigger={taskStatusTrigger} triggerKscore={setKscoreTrigger} triggerMyList={setMyListTrigger} />
         </div>
       </div>

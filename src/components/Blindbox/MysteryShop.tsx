@@ -8,42 +8,26 @@ import Modal from "react-modal";
 import { useAppContext } from "@/context/AppContext";
 import Button from "@/components/ui/Button";
 import { useErrCode } from "@/datas/errCode";
-import { getKScore } from "@/services/apis/user";
 import { exchangeBox } from "@/services/apis/blindbox";
 
 type Props = {
   userInfo: any;
   onSaleBlindbox: any;
   triggerMyList: (val: number) => void;
-  kscoreTrigger: number;
+  triggerKscore: (val: number) => void;
+  kscoreLoading: boolean
+  kscore: number;
 };
-export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, kscoreTrigger }: Props) {
+export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, triggerKscore, kscoreLoading, kscore }: Props) {
   const t = useTranslations();
 
   const { triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
-  const [kscore, setKscore] = useState<number>(0);
-  const [kscoreLoading, setKscoreLoading] = useState<boolean>(true);
   const [shopModalOpen, setShopModalOpen] = useState<boolean>(false);
   const [buyAmount, setBuyAmount] = useState<string|number>(1);
   const [buyLoading, setBuyLoading] = useState<boolean>(false);
 
   const { errCodeHandler } = useErrCode();
-
-  const handleGetKscore = async () => {
-    setKscoreLoading(true);
-    await getKScore(10000)
-    .then((res) => {
-      const data = res?.data;
-      if(data.status == 10000 || data.status == 30082) {
-        setKscore(data?.data?.have || 0);
-      }
-      else {
-        errCodeHandler(data.status, data.msg)
-      }
-    })
-    setKscoreLoading(false);
-  }
 
   const handleBuyAmountChange = (e: any) => {
     const value = e.target.value;
@@ -77,7 +61,7 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
       const data = res?.data;
       if(data.status == 10000) {
         toast.success(t('blindbox.buySuccess'));
-        handleGetKscore();
+        triggerKscore(Date.now());
         triggerMyList(Date.now());
       }
       else {
@@ -89,14 +73,10 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, k
   }
 
   useEffect(() => {
-    if(userInfo) {
-      handleGetKscore();
-    }
-    else {
+    if(!userInfo) {
       setAddr('');
-      setKscore(0);
     }
-  }, [userInfo, kscoreTrigger])
+  }, [userInfo])
 
   useEffect(() => {
     const addr = localStorage.getItem('kkAddress');
