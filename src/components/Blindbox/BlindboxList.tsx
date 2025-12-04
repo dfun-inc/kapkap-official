@@ -155,7 +155,7 @@ export default function BlindboxList({ userInfo, blindboxConfig, boxConfigLoadin
       :
       blindBoxConfigList?.map((item: any, index: number) => (
         <div key={index} className="w-[46%] md:w-[22%] mb-12">
-          <div className="text-center text-[#FEBD32] text-[12px] md:text-[16px]">{item?.name}</div>
+          <div className="text-center text-[#FEBD32] text-[11px] md:text-[13px] 2xl:text-[16px] truncate">{item?.name}</div>
           <img className="w-full mt-3 rounded-[20px] cursor-pointer hover:scale-[105%] transition-all duration-300" src={'/images/blindbox/' + item?.img + '.jpg'} alt="" onClick={() => handleShowBlindboxDetailModal(item)} />
           {addr != '' || userInfo ? 
             <>
