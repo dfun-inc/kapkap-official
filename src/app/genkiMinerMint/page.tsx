@@ -480,7 +480,7 @@ export default function YourNFTs() {
                       :
                       (reMintList[item.id] == 1 || reMintList[item.id] == 2) && <>
                         {item?.airdropBoost > 0 && <div className="w-full text-center">
-                          <span className="text-[#69FFD3]">{t('nft.benefits')}: {t('nft.airdrop')} +{item?.airdropBoost}%</span>
+                          <span className="text-[#69FFD3]">{t('nft.airdropBonusLevel')}: {item?.level}</span>
                         </div>}
                         {reMintList[item.id] == 1 &&
                         <>
