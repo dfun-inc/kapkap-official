@@ -353,7 +353,8 @@
     "game": "Game",
     "minting": "Minting",
     "inGame": "In-Game",
-    "bscListHint": "On-chain data may take a moment to sync--hang tight!"
+    "bscListHint": "On-chain data may take a moment to sync--hang tight!",
+    "confirmAirdropEntitlements": "Confirm valid airdrop entitlements"
   },
 
   "genkiMint": {

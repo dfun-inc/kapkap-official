@@ -141,7 +141,7 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
                   <div className="w-1/6">
                     <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
                   </div>
-                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
+                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + 'tx/' + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
                 </div>
               ))
               :

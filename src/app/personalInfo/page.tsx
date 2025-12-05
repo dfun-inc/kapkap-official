@@ -558,9 +558,9 @@ export default function personalInfo() {
                         {userInfo ? 
                           <>
                           {userInfo?.mpcAccount && 
-                            <div className="text-[#FEBD32] text-[20px] cursor-pointer underline" onClick={() => handleCopyMpcAccount(userInfo?.mpcAccount)}>
+                            <a className="text-[#FEBD32] text-[20px] cursor-pointer underline" href={configData?.OPBNBSCAN + 'address/' + userInfo?.mpcAccount} target="_blank">
                               {userInfo?.mpcAccount?.length > 4 ? userInfo?.mpcAccount?.substring(0, 4) + '...' + userInfo?.mpcAccount?.substring(userInfo?.mpcAccount?.length - 4, userInfo?.mpcAccount?.length) : userInfo?.mpcAccount}
-                            </div>
+                            </a>
                           }
                           </>
                           :
@@ -603,7 +603,7 @@ export default function personalInfo() {
                       <button className={"w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(0)}>{t('personalInfo.inGame')}</button>
                       <button className={"relative w-30 text-[20px] text-white py-2 rounded-[10px] " + (ownIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32] bg-black/20')} onClick={() => setOwnIdx(1)}>
                         OP-BNB
-                        <span className="text-[11px] text-zinc-200 bg-[#2EBD85] p-1 rounded-lg absolute bottom-full translate-y-1/2 -right-2">{t('nft.airdrop')}</span>
+                        <span className="text-[10px] text-zinc-200 text-center bg-[#2EBD85] w-[105px] py-1 rounded-lg absolute -top-5 right-0 translate-x-1/2 leading-[10px]">{t('personalInfo.confirmAirdropEntitlements')}</span>
                       </button>
                     </div>
                   </div>
@@ -790,7 +790,7 @@ export default function personalInfo() {
                   <div className="w-1/6">
                     <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
                   </div>
-                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
+                  {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + 'tx/' + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
                 </div>
               ))
               :
