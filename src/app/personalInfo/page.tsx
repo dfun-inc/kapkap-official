@@ -425,7 +425,7 @@ export default function personalInfo() {
   }, [mintHistoryModal, historyTabIdx])
 
   useEffect(() => {
-    if(userInfo?.tgAccount && NFTData) {
+    if(userInfo && NFTData) {
       if(ownIdx) {
         handleGetOpbnbNFTList();
       }
