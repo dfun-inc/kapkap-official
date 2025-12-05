@@ -354,7 +354,8 @@
     "minting": "Minting",
     "inGame": "In-Game",
     "bscListHint": "On-chain data may take a moment to sync--hang tight!",
-    "confirmAirdropEntitlements": "Confirm valid airdrop entitlements"
+    "confirmAirdropEntitlements": "Confirm valid airdrop entitlements",
+    "bscEmptyHint": "NFT exclusive to early OG users – minting has concluded."
   },
 
   "genkiMint": {

@@ -16,7 +16,7 @@ import { formatNumberWithCommas } from "@/utils/number";
 import { getNFT1155Data, getNFTData, getRemintList, mappingBscChain, mappingEvm1155, mintTonNFT } from "@/services/apis/nft";
 import {tgtChain, config as wagmiConfig} from "@/config/wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import History from "@/components/GenkiMinerMint/history";
+import History from "@/components/PersonalInfo/history";
 
 export default function YourNFTs() {
   const t = useTranslations();

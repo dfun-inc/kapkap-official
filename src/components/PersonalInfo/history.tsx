@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/context/AppContext';
 import { useErrCode } from '@/datas/errCode';
-import { getEvmMint1155History, getTonMint721History } from '@/services/apis/nft';
+import { getEvmMint1155History, getEvmMint721History, getTonMint721History } from '@/services/apis/nft';
 import { formatDatetime } from '@/utils/time';
 import { useTranslations } from 'next-intl';
 import { forwardRef, useImperativeHandle, useEffect, useState } from 'react';
@@ -33,14 +33,17 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
     setMintHistory([]);
 
     try {
-      const res = tab ? await getEvmMint1155History() : await getTonMint721History();
+      const res = tab == 2 ? 
+        await getEvmMint721History() : 
+        tab == 1 ? 
+          await getEvmMint1155History() : await getTonMint721History();
 
       if(res) {
         const data = res?.data;
         if(data.status == 10000) {
           let temp:any[] = [];
           data?.data.forEach((item:any) => {
-            if(tab == 0) {
+            if(tab == 0 || tab == 2) {
               Object.entries(NFTData[item.project]['ids']).find(([key, value]:any) => {
                 if(key == item.resId) {
                   temp.push({...item, item: value});
@@ -70,6 +73,11 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
     }
     catch{}
     setMintHistoryLoading(false);
+  }
+
+  const handleChangeTab = (tab: number) => {
+    if(mintHistoryLoading) return;
+    setHistoryTabIdx(tab);
   }
 
   useImperativeHandle(ref, () => ({
@@ -104,8 +112,9 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
           </div>
           <div className="flex justify-center py-3">
             <div className="flex bg-[#201E2A] rounded-[10px] p-2 justify-center space-x-3">
-              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(0)}>{t('personalInfo.inGame')}</button>
-              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => setHistoryTabIdx(1)}>OP-BNB</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 0 ? 'bg-[#FEBD32]' : 'hover:bg-[#FEBD32]')} onClick={() => handleChangeTab(0)}>{t('personalInfo.inGame')}</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 1 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => handleChangeTab(1)}>OP-BNB</button>
+              <button className={"w-20 text-[16px] text-white py-1 rounded-[10px] " + (historyTabIdx == 2 ? 'bg-[#FEBD32] ' : 'hover:bg-[#FEBD32]')} onClick={() => handleChangeTab(2)}>BSC</button>
             </div>
           </div>
           <div className="max-h-[400px] min-h-[300px] overflow-y-auto text-[18px]">
@@ -129,7 +138,7 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
                 <div key={index} className="flex text-[#CFC4FF] text-center text-white mt-3 items-center text-[12px] md:text-[16px]">
                   <div className="w-1/5">{formatDatetime(item?.createdAt)}</div>
                   <div className="flex-1">
-                    {historyTabIdx == 0 ?
+                    {historyTabIdx == 0 || historyTabIdx == 2 ?
                       <div>{item?.item?.name} <span className='text-[#2EBD85] ml-2'>x1</span></div>
                     :
                       item?.items?.map((item:any, index:number) => (

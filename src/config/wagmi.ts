@@ -1,7 +1,7 @@
 // wagmi.ts
 import { connectorsForWallets, getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { createConfig, http } from 'wagmi';
-import { opBNB, opBNBTestnet } from 'wagmi/chains'
+import { bsc, bscTestnet, opBNB, opBNBTestnet } from 'wagmi/chains'
 import {
   okxWallet,
   binanceWallet,
@@ -13,6 +13,7 @@ export const projectId = 'e29dd843efef3adfe3d1cbda24d21e51'
 
 // export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
 export const tgtChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? opBNBTestnet: opBNB;
+export const tgtBscChain:any = process.env.NEXT_PUBLIC_BUILD_ENV == 'dev' ? bscTestnet: bsc;
 
 const connectors = connectorsForWallets([
   {
@@ -48,3 +49,10 @@ export const config = createConfig({
   },
 });
 
+export const bscWagmiConfig = createConfig({
+  connectors,
+  chains: [tgtBscChain],
+  transports: {
+    [tgtBscChain?.id]: http(),
+  },
+});
