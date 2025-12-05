@@ -467,9 +467,9 @@ export default function YourNFTs() {
                           <img className="w-[38px]" src="/images/kscore.png" />
                           <div className="md:text-[20px]">{item.kscore}/{kscore}</div>
                         </div>
-                        {item?.airdropBoost > 0 && <div className="w-full text-center">
+                        <div className="w-full text-center">
                           <span className="text-[#69FFD3] mt-1">{t('nft.airdropBonusLevel')}: {item?.level}</span>
-                        </div>}
+                        </div>
                         <Button className={"relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3 " + (item.kscore > kscore ? "cursor-not-allowed" : "")} 
                           onClick={item.kscore > kscore ?() => {} : () => handleMint(Number(item.id), 10000)} disabled={item.kscore > kscore}>
                           {t('genkiMint.mint')}
@@ -479,9 +479,9 @@ export default function YourNFTs() {
                       </>
                       :
                       (reMintList[item.id] == 1 || reMintList[item.id] == 2) && <>
-                        {item?.airdropBoost > 0 && <div className="w-full text-center">
+                        <div className="w-full text-center">
                           <span className="text-[#69FFD3]">{t('nft.airdropBonusLevel')}: {item?.level}</span>
-                        </div>}
+                        </div>
                         {reMintList[item.id] == 1 &&
                         <>
                           <Button className="relative text-[20px] font-light text-white w-[300px] text-center py-3 md:py-4 mt-3" onClick={() => handleMapping(Number(item.id))}>
