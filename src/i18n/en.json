@@ -374,7 +374,7 @@
     "mappingSuccess": "Mapping Suucess",
     "bindEvmAccountToMint": "Bind Wallet to Mint",
     "bindTgAccountToGetKscore": "Bind Telegram Account to Get K-Score",
-    "mapToBscChain": "Map to BSC Chain",
+    "mapToBscChain": "Map to OP-BNB Chain",
     "step": "step",
     "step1": "Please bind the Telegram account associated with your game account (binding is irreversible).",
     "step2": "Click the button to check if your game account meets the minting requirements.",
@@ -382,7 +382,7 @@
     "step4": "Mint your exclusive NFT, which will provide generous bonuses to your game account.",
     "check": "check",
     "mintNFT": "mint NFT",
-    "mappingHint": "You must bridge your NFTs to the BSC chain to be eligible for the airdrop rewards."
+    "mappingHint": "You must bridge your NFTs to the OP-BNB chain to be eligible for the airdrop rewards."
   },
 
   "nft": {
