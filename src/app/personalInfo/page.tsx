@@ -646,6 +646,8 @@ export default function personalInfo() {
                         <div key={index} className="w-full relative hover:scale-105 transition-transform duration-300 rounded-[20px]" onClick={() => handleShowNFTDetailModal(item?.item)}>
                           {ownIdx == 0 ?
                             <img className="w-full" src={configData?.IPFSTON + item?.project + '/image/' +  item?.item.name.replace(' ', '-') + '.png'} alt="" />
+                          : ownIdx == 2 ? 
+                            <img className="w-full rounded-lg" src={configData.IPFS721 + item?.project + '/image/' + item.originalTokenId + '.png'} alt={item?.id} />
                           :
                           item?.item ? 
                             <img className="w-full rounded-lg" src={configData.IPFS1155 + 'image/' + item.originalTokenId + '.png'} alt={item?.id} />
