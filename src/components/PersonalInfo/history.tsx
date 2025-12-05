@@ -124,7 +124,7 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
                 <div className="flex-1">{t('personalInfo.mint')}</div>
                 {historyTabIdx == 0 && <div className="w-1/6">{t('personalInfo.cost')}</div>}
                 <div className="w-1/6">{t('personalInfo.status')}</div>
-                {historyTabIdx == 1 && <div className="w-1/6">{t('personalInfo.hash')}</div>}
+                {(historyTabIdx == 1 || historyTabIdx == 2) && <div className="w-1/6">{t('personalInfo.hash')}</div>}
               </div>
               {mintHistoryLoading ?
                 <div className="animate-pulse">
@@ -151,6 +151,7 @@ const History = forwardRef<HistoryHandle, Props>(({NFTData, NFT1155Data}, ref) =
                     <span className="text-[#2EBD85]">{t('personalInfo.success')}</span>
                   </div>
                   {historyTabIdx == 1 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.OPBNBSCAN + 'tx/' + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
+                  {historyTabIdx == 2 && <div className="w-1/6">{configData && item?.txHash && <a className="text-[#757895] underline text-[12px] md:text-[16px]" href={configData?.SCAN + 'tx/' + item?.txHash} target="_blank">{t('personalInfo.viewHash')}</a>}</div>}
                 </div>
               ))
               :
