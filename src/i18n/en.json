@@ -440,6 +440,31 @@
     "modalItem1_2": "Participating in mystery box draws offers a chance to obtain more K-Scores.",
     "modalItem2": "2. Holding more and higher-level NFTs will significantly amplify your airdrop benefits (higher-level NFTs have higher value).",
     "modalItem2_1": "Consuming K-Scores for minting.",
-    "modalItem2_2": "Level 3 or above mystery boxes yield additional NFTs."
+    "modalItem2_2": "Level 3 or above mystery boxes yield additional NFTs.",
+    "inviteBonus": "Invite Bonus",
+    "avaiableQuantity": "Available Quantity",
+    "inviteUsers": "Invite Users",
+    "validUsers": "Valid Users",
+    "inviteContent1": "1. New users who enter the official website through your invitation link will become your downline users.",
+    "inviteContent2": "2. Invited users must meet one of the following conditions:",
+    "inviteContent2Item1": "a. Linked Telegram account",
+    "inviteContent2Item2": "b. Possess any token in their wallet or have on-chain interaction activity",
+    "inviteContent3": "3. Each valid user receives a Level 1 blind box upon opening it for the first time.",
+    "inviteContent4": "4. The leaderboard is ranked based on the number of valid users among your downline who have opened blind boxes. This ranking will be used for promotional activities; please pay close attention to our relevant social media.",
+    "invitationRank": "Invitation Rank",
+    "rank": "Rank",
+    "user": "User",
+    "copyInvitationLink": "Copy Invitation Link",
+    "invitationHistory": "Invitation History",
+    "userName": "User Name",
+    "type": "type",
+    "bonus": "Bonus"
+  },
+
+  "dailyCheckIn": {
+    "title": "Daily Check-in",
+    "desc": "You've completed the daily sign-in task, please claim your reward.",
+    "claim": "Claim",
+    "claimSuccess": "Claim Success"
   }
 }

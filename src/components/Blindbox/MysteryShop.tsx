@@ -117,13 +117,13 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, t
         isOpen={shopModalOpen}
         onRequestClose={() => setShopModalOpen(false)}
         shouldCloseOnOverlayClick={true}
-        className="w-9/10! lg:w-[440px]!"
+        className="w-9/10! lg:w-[460px]!"
       >
         <div className="w-full bg-black rounded-[20px] overflow-hidden">
           <div className="p-6">
             {onSaleBlindbox != null &&
             <>
-              <div className="text-[18px] md:text-[20px] font-ethnocentric-rg text-[#FEBD32] text-center uppercase pb-6 border-b border-[#FEBD32]">{onSaleBlindbox?.name}</div>
+              <div className="text-[16px] md:text-[18px] font-ethnocentric-rg text-[#FEBD32] text-center uppercase pb-6 border-b border-[#FEBD32]">{onSaleBlindbox?.name}</div>
               <img className="mt-9 w-[240px] rounded-[20px] mx-auto block" src={"/images/blindbox/" + onSaleBlindbox?.img + ".jpg"} alt="" />
             </>}
             <div className="mt-9 flex justify-center items-center">

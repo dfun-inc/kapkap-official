@@ -16,6 +16,7 @@ import { evmLogin, getUserInfo, tgLogin } from '@/services/apis/user';
 import { getUrlParamsByName } from '@/utils/url';
 import Button from '@/components/ui/Button';
 import { useErrCode } from '@/datas/errCode';
+import DailyCheckIn from './DailyCheckIn';
 
 export default function ConnectBtn() {
   const t = useTranslations();
@@ -52,7 +53,7 @@ export default function ConnectBtn() {
     
     try {
       const signMsgStr = 'address=' + address + ',chain_id=' + chainId;
-      const refCode = localStorage.getItem('kkRefCode') ? localStorage.getItem('kkRefCode') : '';
+      const refCode = await localStorage.getItem('kkRefCode') || '';
       await switchChain(config, { chainId: tgtChain?.id });
       await new Promise(resolve => setTimeout(resolve, 1500));
       const signedMessage = await signMessage(config, {message: signMsgStr});
@@ -126,7 +127,6 @@ export default function ConnectBtn() {
       }
     });
     sessionStorage.clear()
-    localStorage.clear()
     await new Promise(r => setTimeout(r, 300));
   }
 
@@ -406,6 +406,7 @@ export default function ConnectBtn() {
           <div className="text-center text-white/60 text-[12px] mt-6">{t('common.openTgHint')}</div>
         </div>
     </Modal>
+    <DailyCheckIn />
     </>
   );
 }

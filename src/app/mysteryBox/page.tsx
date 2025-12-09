@@ -7,20 +7,21 @@ import { getBlindboxConfig } from "@/services/apis/blindbox";
 
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
-import Button from "@/components/ui/Button";
 import { useErrCode } from "@/datas/errCode";
-import { getKScore, getUserInfo } from "@/services/apis/user";
+import { getKScore } from "@/services/apis/user";
 import BlindboxList from "@/components/Blindbox/BlindboxList";
 import MysteryShop from "@/components/Blindbox/MysteryShop";
 import PopularTask from "@/components/Blindbox/PopularTask";
 import LooteryRecord from "@/components/Blindbox/LotteryRecord";
 import { getNFTData } from "@/services/apis/nft";
 import { formatNumberWithCommas } from "@/utils/number";
+import Invite from "@/components/Blindbox/Invite";
+import eventBus from "@/utils/eventBus";
 
 export default function Blindbox() {
   const t = useTranslations();
 
-  const { configData, userInfo, handleSetUserInfo, triggerModalOpen } = useAppContext();
+  const { configData, userInfo, triggerModalOpen } = useAppContext();
   const [addr, setAddr] = useState<string>('');
   const [lotteryRecordOpen, setLotteryRecordOpen] = useState<boolean>(false);
 
@@ -38,18 +39,6 @@ export default function Blindbox() {
   const { errCodeHandler } = useErrCode();
 
   const historyRef = useRef<any>(null);
-
-  const handleGetUserInfo = async() => {
-    await getUserInfo().then((res) => {
-      const data = res?.data;
-      if(data.status == 10000) {
-        handleSetUserInfo(data?.data);
-      }
-      else {
-        errCodeHandler(data.status, data.msg)
-      }
-    })
-  }
 
   const handleGetConfig = async() => {
     await getBlindboxConfig().then((res) => {
@@ -115,6 +104,10 @@ export default function Blindbox() {
     setKscoreLoading(false);
   }
 
+  const handleUpdateMysteryBoxList = () => {
+    setMyListTrigger(Date.now());
+  }
+
   useEffect(() => {
     if(userInfo) {
       handleGetKscore();
@@ -129,10 +122,13 @@ export default function Blindbox() {
     handleGetNftData();
 
     const addr = localStorage.getItem('kkAddress');
-    if(addr) {
-      handleGetUserInfo();
-    }
     setAddr(addr || '');
+
+    eventBus.addEventListener("updateMysteryBoxList", handleUpdateMysteryBoxList);
+
+    return () => {
+      eventBus.removeEventListener("updateMysteryBoxList", handleUpdateMysteryBoxList);
+    }
   }, [])
 
   return (
@@ -165,6 +161,8 @@ export default function Blindbox() {
           <MysteryShop userInfo={userInfo} onSaleBlindbox={onSaleBlindbox} triggerKscore={setKscoreTrigger} kscoreLoading={kscoreLoading} kscore={kscore} triggerMyList={setMyListTrigger} />
           <PopularTask userInfo={userInfo} blindboxConfig={blindboxConfig} taskStatusTrigger={taskStatusTrigger} triggerKscore={setKscoreTrigger} triggerMyList={setMyListTrigger} />
         </div>
+
+        <Invite userInfo={userInfo} rewardBlindbox={onSaleBlindbox} blindboxConfig={blindboxConfig} triggerMyList={setMyListTrigger} />
       </div>
         
       <div className="w-full flex-shrink-0 bg-[#090909] py-6 relative z-1 mt-12">
@@ -172,8 +170,6 @@ export default function Blindbox() {
           <Footer />
         </div>
       </div>
-
-      <div className=""></div>
     </main>
   );
 }
