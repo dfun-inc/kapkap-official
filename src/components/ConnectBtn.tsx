@@ -406,7 +406,7 @@ export default function ConnectBtn() {
           <div className="text-center text-white/60 text-[12px] mt-6">{t('common.openTgHint')}</div>
         </div>
     </Modal>
-    <DailyCheckIn />
+    {/*<DailyCheckIn />*/}
     </>
   );
 }

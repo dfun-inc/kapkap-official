@@ -162,7 +162,7 @@ export default function Blindbox() {
           <PopularTask userInfo={userInfo} blindboxConfig={blindboxConfig} taskStatusTrigger={taskStatusTrigger} triggerKscore={setKscoreTrigger} triggerMyList={setMyListTrigger} />
         </div>
 
-        <Invite userInfo={userInfo} rewardBlindbox={onSaleBlindbox} blindboxConfig={blindboxConfig} triggerMyList={setMyListTrigger} />
+        {/*<Invite userInfo={userInfo} rewardBlindbox={onSaleBlindbox} blindboxConfig={blindboxConfig} triggerMyList={setMyListTrigger} />*/}
       </div>
         
       <div className="w-full flex-shrink-0 bg-[#090909] py-6 relative z-1 mt-12">
