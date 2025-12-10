@@ -457,7 +457,9 @@
     "invitationHistory": "Invitation History",
     "userName": "User Name",
     "type": "type",
-    "bonus": "Bonus"
+    "bonus": "Bonus",
+    "invitationSuccessful": "Invitation Successful",
+    "onChainInteraction": "On-chain Interaction"
   },
 
   "dailyCheckIn": {

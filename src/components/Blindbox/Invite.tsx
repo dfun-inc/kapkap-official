@@ -338,10 +338,10 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
           <div className="p-6 max-h-[70vh] overflow-y-auto">
             <div className="w-full">
               <div className="flex text-center text-[#8A84A3] text-[14px] md:text-[20px] py-2 border-b-[2px] border-[#211c33] capitalize">
-                <div className="w-1/4 px-1">{t('blindbox.userName')}</div>
+                <div className="w-1/5 px-1">{t('blindbox.userName')}</div>
                 <div className="w-1/4 px-1">{t('blindbox.type')}</div>
-                <div className="w-1/4 px-1">{t('blindbox.drawTime')}</div>
-                <div className="w-1/4 px-1">{t('blindbox.bonus')}</div>
+                <div className="flex-1 px-1">{t('blindbox.drawTime')}</div>
+                <div className="w-1/3 px-1">{t('blindbox.bonus')}</div>
               </div>
               {historyLoading ? 
                 Array.from({ length: 4 }).map((_, index) => (
@@ -357,11 +357,22 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
                   </div>
                   :
                   historyList.map((item, index) => (
-                    <div key={index} className="flex items-center text-[#8A84A3] text-[18px] md:text-[20px] py-1 border-b-[2px] border-[#211c33]">
-                      <div className="w-1/4 text-[#DDD5FF] px-1 text-center">{item?.account.length > 0 && item.account?.substring(0, 4) + '...' + item.account?.substring(item.account?.length - 4, item.account?.length) }</div>
-                      <div className="w-1/4 px-2 text-[#DDD5FF] text-[10px] md:text-[20px] px-1"></div>
-                      <div className="w-1/4 px-2 text-[#DDD5FF] text-[10px] md:text-[20px] px-1"></div>
-                      <div className="w-1/4 px-2 text-[#DDD5FF] text-[10px] md:text-[18px] text-center px-1"></div>
+                    <div key={index} className="flex items-center text-center text-[#DDD5FF] text-[12px] md:text-[20px] py-2 border-b-[2px] border-[#211c33]">
+                      <div className="w-1/5 px-1">{item?.accountName.length > 0 && item.accountName?.substring(0, 4) + '...' + item.accountName?.substring(item.accountName?.length - 4, item.accountName?.length) }</div>
+                      <div className="w-1/4 px-1 text-[#2EBD85]">
+                        {item.fromType == 'invite' && t('blindbox.invitationSuccessful')}
+                        {item.fromType == 'valid' && t('blindbox.onChainInteraction')}
+                      </div>
+                      <div className="flex-1 px-1 text-[#8A84A3]">{formatDatetime(item.createdAt)}</div>
+                      <div className="w-1/3 px-1">
+                        {item.fromType == 'valid' && blindboxConfig != null && blindboxConfig[item.itemId] != undefined &&
+                        <div className="flex flex-wrap items-center truncate">
+                          <img className="w-[20px] md:w-[30px] inline-block rounded-[10px] pr-2" src={'/images/blindbox/' + blindboxConfig[item.itemId]?.img + '.jpg'} alt="" />
+                          <span className="mr-2">x{item.count}</span> 
+                          <span className="text-[#8A84A3] truncate">{blindboxConfig[item.itemId]?.name}</span>
+                        </div>
+                        }
+                      </div>
                     </div>
                   ))
                 }
