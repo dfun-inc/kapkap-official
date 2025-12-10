@@ -122,7 +122,7 @@ export default function DailyCheckIn() {
 
   useEffect(() => {
     if(checkInMission && missionProcess && missionProcess?.[checkInMission.id]) {
-      if(missionProcess?.[checkInMission.id]?.status != 0) {
+      if(missionProcess?.[checkInMission.id]?.status == 2) {
         setShowModal(true);
       }
     }
