@@ -138,9 +138,9 @@ export default function MysteryShop({ userInfo, onSaleBlindbox, triggerMyList, t
                 }
               </div>
             </div>
-            <div className="mt-1 flex items-center justify-between space-x-2 px-6">
+            <div className="mt-1 flex items-center justify-center md:justify-between space-x-2 px-6">
               <Button className="w-15 h-15 flex items-center justify-center text-[24px] md:text-[30px]" outerClassName="w-15 h-16 shrink-0" onClick={() => setBuyAmount(Number(buyAmount) > 1 ? Number(buyAmount) - 1 : 1)}>-</Button>
-              <input className="flex-1 shrink-1 h-15 text-center text-white bg-[#1a1a1a] text-[20px] rounded-[10px]" value={buyAmount} onChange={handleBuyAmountChange} />
+              <input className="max-w-[180px] md:max-w-[220px] md:flex-1 shrink-1 h-15 text-center text-white bg-[#1a1a1a] text-[20px] rounded-[10px]" value={buyAmount} onChange={handleBuyAmountChange} />
               <Button className="w-15 h-15 flex items-center justify-center text-[24px] md:text-[30px]" outerClassName="w-15 h-16 shrink-0" onClick={() => setBuyAmount(Number(buyAmount) + 1)} disabled={buyLoading}>+</Button>
             </div>
           </div>
