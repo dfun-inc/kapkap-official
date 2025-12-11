@@ -11,7 +11,7 @@ import {
 const queryClient = new QueryClient()
 function EvmProvider({ children }: { children: ReactNode }) {
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={config} reconnectOnMount={false}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider modalSize="compact">
           {children}

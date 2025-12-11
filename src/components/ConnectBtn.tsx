@@ -25,7 +25,7 @@ export default function ConnectBtn() {
 
   const { address, isConnected, connector, isDisconnected } = useAccount();
   const { connectors: installedConnectors } = useConnect();
-  const { disconnect } = useDisconnect()
+  const { disconnect, disconnectAsync } = useDisconnect()
   const [connectors, setConnecotrs] = useState<any[]>([])
   const [walletAddr, setWalletAddr] = useState<any>(null);
   const [connecting, setConnecting] = useState(false);
@@ -106,6 +106,7 @@ export default function ConnectBtn() {
   }
 
   const handleDisconnect = async() => {
+    console.log('disconnect')
     await disconnect();
     setWalletDropdown(false);
     setWalletAddr(null);
@@ -127,15 +128,25 @@ export default function ConnectBtn() {
       }
     });
     sessionStorage.clear()
-    await new Promise(r => setTimeout(r, 200));
   }
 
   const handleShowBscModal = async() => {
     console.log('handleConnectBsc');
     connectForceRef.current = true;
+
     await handleDisconnect();
-    setTimeout(() => {
-      openConnectModal?.();
+    setTimeout(async() => {
+      if(isConnected) {
+        handleDisconnect();
+        disconnect();
+        await disconnectAsync();
+        setTimeout(() => {
+          openConnectModal?.();
+        }, 1000);
+      }
+      else {
+        openConnectModal?.();
+      }
     }, 500);
   }
 
@@ -271,7 +282,9 @@ export default function ConnectBtn() {
       handleGetUserInfo(true);
     }
     else {
-      handleDisconnect();
+      setTimeout(() => {
+        handleDisconnect();
+      }, 1000);
     }
     
     let temp:any[] = [...installedConnectors, walletConnect({ projectId, showQrModal: true })];
