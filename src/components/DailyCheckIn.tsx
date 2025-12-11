@@ -92,11 +92,14 @@ export default function DailyCheckIn() {
         toast.success(t('dailyCheckIn.claimSuccess'));
         setClaimLoading(false);
         setShowModal(false);
-        eventBus.dispatchEvent(new CustomEvent("updateMysteryBoxList"));
-        if (pathname !== "/mysteryBox") {
+        if (pathname.indexOf("/mysteryBox") < 0) {
           setTimeout(() => {
             router.push('/mysteryBox');
           }, 500);
+        }
+        else {
+          eventBus.dispatchEvent(new CustomEvent("updateMysteryBoxList"));
+          eventBus.dispatchEvent(new CustomEvent("updatePopularTaskList"));
         }
       }
       else {

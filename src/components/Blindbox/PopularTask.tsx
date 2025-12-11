@@ -11,6 +11,7 @@ import { useErrCode } from "@/datas/errCode";
 import { getKScore, getUserInfo } from "@/services/apis/user";
 import { getUrlParamsByName } from "@/utils/url";
 import { checkMissionProcess, claimMissionReward, getMissionConfig, getMissionProcess } from "@/services/apis/mission";
+import eventBus from "@/utils/eventBus";
 
 type Props = {
   userInfo: any;
@@ -140,6 +141,11 @@ export default function PopularTask({ userInfo, blindboxConfig, triggerMyList, t
     setTaskClaimIds(taskClaimIds.filter((id) => id !== Number(task.id)));
   }
 
+  const handleUpdatePopularTaskList = () => {
+    console.log('event updatePopularTaskList')
+    handleGetMissionProcess();
+  }
+
   useEffect(() => {
     if(taskStatusTrigger) {
       handleGetMissionProcess();
@@ -176,7 +182,10 @@ export default function PopularTask({ userInfo, blindboxConfig, triggerMyList, t
     const addr = localStorage.getItem('kkAddress');
     setAddr(addr || '');
 
+    eventBus.addEventListener("updatePopularTaskList", handleUpdatePopularTaskList);
+
     return () => {
+      eventBus.removeEventListener("updatePopularTaskList", handleUpdatePopularTaskList);
       clearTimeout(checkMissionTimeout.current);
       checkMissionTimeout.current = null;
     }

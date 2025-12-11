@@ -127,22 +127,16 @@ export default function ConnectBtn() {
       }
     });
     sessionStorage.clear()
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 200));
   }
 
   const handleShowBscModal = async() => {
     console.log('handleConnectBsc');
     connectForceRef.current = true;
-    if(isConnected) {
-      await handleDisconnect();
-      setTimeout(() => {
-        openConnectModal?.();
-      }, 500);
-    }
-    else {
-      await handleDisconnect();
+    await handleDisconnect();
+    setTimeout(() => {
       openConnectModal?.();
-    }
+    }, 500);
   }
 
   const handleTgLogin = async(tempToken = '', reqCount = 0) => {
