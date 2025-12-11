@@ -57,7 +57,7 @@ export default function Kscore() {
                 <div className="">{t('kscore.advantage')}: {t('kscore.item1Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item1Coop')}</div>
               </div>
-              <div className="md:hidden underline text-[#8D73FF]" onClick={() => setToggleContent([toggleContent[0] == 1 ? 0 : 1, toggleContent[1], toggleContent[2]])}>{t(toggleContent[0] == 0 ? t('common.showMore') : t('common.hide'))}</div>
+              <div className="md:hidden underline text-[#8D73FF]" onClick={() => setToggleContent([toggleContent[0] == 1 ? 0 : 1, toggleContent[1], toggleContent[2]])}>{toggleContent[0] == 0 ? t('common.showMore') : t('common.hide')}</div>
               <div className="flex justify-end space-x-3 md:space-x-6 mt-6">
                 <Button className="px-8 md:px-10 py-4" target="_blank" href="https://t.me/GenkiMinerBot/GenkiMiner?startapp=tBkdxxEA">
                   {t('kscore.playGame')}
@@ -82,7 +82,7 @@ export default function Kscore() {
                 <div className="">{t('kscore.advantage')}: {t('kscore.item2Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item2Coop')}</div>
               </div>
-              <div className="md:hidden underline text-[#8D73FF]" onClick={() => setToggleContent([toggleContent[0], toggleContent[1] == 1 ? 0 : 1, toggleContent[2]])}>{t(toggleContent[1] == 0 ? t('common.showMore') : t('common.hide'))}</div>
+              <div className="md:hidden underline text-[#8D73FF]" onClick={() => setToggleContent([toggleContent[0], toggleContent[1] == 1 ? 0 : 1, toggleContent[2]])}>{toggleContent[1] == 0 ? t('common.showMore') : t('common.hide')}</div>
               <div className="text-right text-[30px] mt-12 text-[#8D73FF]">{t('kscore.comingSoon')}</div>
             </div>
           </div>
@@ -100,7 +100,7 @@ export default function Kscore() {
                 <div className="">{t('kscore.advantage')}: {t('kscore.item3Advantage')}</div>
                 <div className="">{t('kscore.cooperationValue')}: {t('kscore.item3Coop')}</div>
               </div>
-              <div className="md:hidden underline text-[#8D73FF]" onClick={() => setToggleContent([toggleContent[0], toggleContent[1], toggleContent[2] == 1 ? 0 : 1])}>{t(toggleContent[2] == 0 ? t('common.showMore') : t('common.hide'))}</div>
+              <div className="md:hidden underline text-[#8D73FF]" onClick={() => setToggleContent([toggleContent[0], toggleContent[1], toggleContent[2] == 1 ? 0 : 1])}>{toggleContent[2] == 0 ? t('common.showMore') : t('common.hide')}</div>
               <div className="text-right text-[30px] mt-12 text-[#8D73FF]">{t('kscore.comingSoon')}</div>
             </div>
           </div>

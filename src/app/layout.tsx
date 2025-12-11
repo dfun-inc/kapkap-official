@@ -35,7 +35,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang={locale == 'en' ? 'en' : 'zh-CN'}>
+    <html lang='en'>
       <head>
         <title>KapKap - Al-driven Web3 Attention Economy and Value Distribution Platform</title>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-W2W6D5TFRQ" />

@@ -4,7 +4,8 @@
     "getFailed": "获取数据失败，请稍后重试",
     "submitFailed": "提交失败，请稍后重试",
     "submitSuccess": "提交成功",
-    "error": "发生未知错误，请稍后重试"
+    "error": "发生未知错误，请稍后重试",
+    "showMore": "查看更多"
   },
 
   "menu": {
