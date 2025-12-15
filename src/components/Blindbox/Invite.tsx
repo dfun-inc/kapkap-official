@@ -149,6 +149,11 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
     })
   }
 
+  const updateHeight = () => {
+    const height = leftBoxRef.current.offsetHeight;
+    setLeftBoxHeight(height > 120 ? height - 120 : 0);
+  };
+
   useEffect(() => {
     if(referralInfo && rankList.length) {
       const myRank = rankList.find((item:any) => item.guid == referralInfo.guid);
@@ -183,13 +188,11 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
     handleGetRankList();
     if (!leftBoxRef.current) return;
 
-    const updateHeight = () => {
-      const height = leftBoxRef.current.offsetHeight;
-      setLeftBoxHeight(height > 100 ? height - 100 : 0);
-    };
-
     // 初始化
-    updateHeight();
+
+    setTimeout(() => {
+      updateHeight();
+    }, 2000);
 
     // 如果左侧高度会变化，监听 resize
     window.addEventListener("resize", updateHeight);
@@ -247,7 +250,7 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
               </div>
               </>
               :
-              <div className="w-full flex justify-center">
+              <div className="w-full flex justify-center py-9">
                 <Button className="w-[180px] py-3 text-[16px]" onClick={() => triggerModalOpen()}>
                   {t('menu.login')}
                 </Button>
@@ -263,14 +266,14 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
               <div className="mt-5">{t('blindbox.inviteContent4')}</div>
             </div>
           </div>
-          <div className="w-full md:w-auto md:flex-1 mt-12 md:mt-0">
+          <div className="w-full md:w-auto md:flex-1 mt-12 md:mt-0 relative pb-12">
             <div className="w-full text-[20px] md:text-[22px] 2xl:text-[24px] font-ethnocentric-rg text-[#FEBD32] text-center uppercase pb-3 border-b border-[#FEBD32]">{t('blindbox.invitationRank')}</div>
             <div className="w-full bg-black flex items-center p-3 text-[#8A84A3] capitalize">
               <div className="w-[50px] text-center">{t('blindbox.rank')}</div>
               <div className="w-1/2 text-center">{t('blindbox.user')}</div>
               <div className="flex-1 text-center">{t('blindbox.validUsers')}</div>
             </div>
-            <div className="rank-list overflow-auto max-h-[400px] pb-12 relative" style={{maxHeight: leftBoxHeight + 'px'}}>
+            <div className="rank-list overflow-auto max-h-[400px] relative" style={{maxHeight: leftBoxHeight + 'px'}}>
             { rankListLoading ?
               Array.from({ length: 5 }).map((_, index) => (
                 <div className="bg-gray-500 animate-pulse h-6 rounded-[10px] mt-3" key={index}></div>
@@ -285,6 +288,7 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
                 </div>
               ))
             }
+            </div>
             {myRankInfo != null &&
               <div className="absolute w-full bg-black py-1 px-3 left-0 bottom-0">
                 <div className="flex items-center text-[#8D73FF]">
@@ -294,7 +298,6 @@ export default function Invite({ userInfo, blindboxConfig, triggerMyList, reward
                 </div>
               </div>
             }
-            </div>
           </div>
         </div>
         <div className="mt-18 flex flex-wrap items-center justify-center">

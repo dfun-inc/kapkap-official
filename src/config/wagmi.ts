@@ -46,7 +46,8 @@ export const config = createConfig({
   chains: [tgtChain],
   transports: {
     [tgtChain?.id]: http(),
-  }
+  },
+  storage: null, 
 });
 
 export const bscWagmiConfig = createConfig({
